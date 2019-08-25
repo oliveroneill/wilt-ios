@@ -1,0 +1,791 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0EE65121E9E3471A5E2F26C9 /* Pods_Wilt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C96C4D35FD3B89211A5EA4C1 /* Pods_Wilt.framework */; };
+		24AC9242CFCDDE53967CAAA6 /* Pods_WiltUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC434F58D15DA4CB45F11761 /* Pods_WiltUITests.framework */; };
+		7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */; };
+		7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */; };
+		7D47CCA722FB88C900A4D96E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D47CCA622FB88C900A4D96E /* Assets.xcassets */; };
+		7D47CCAA22FB88C900A4D96E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D47CCA822FB88C900A4D96E /* LaunchScreen.storyboard */; };
+		7D47CCC022FB88CA00A4D96E /* WiltUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCBF22FB88CA00A4D96E /* WiltUITests.swift */; };
+		7DB158592307D7FE00F86A9E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158582307D7FE00F86A9E /* Coordinator.swift */; };
+		7DB1585B2307D88200F86A9E /* WalkthroughCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */; };
+		7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */; };
+		7DB158612309658100F86A9E /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158602309658100F86A9E /* WalkthroughViewController.swift */; };
+		7DB15863230ABD8F00F86A9E /* WalkthroughPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */; };
+		7DB15866230D6BEC00F86A9E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DB15868230D6BEC00F86A9E /* Localizable.strings */; };
+		7DB1586A230D6C8700F86A9E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB15869230D6C8600F86A9E /* Utils.swift */; };
+		7DB1586C2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */; };
+		7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1586E23120F6F00F86A9E /* KIFUtil.swift */; };
+		7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */; };
+		D53A4544BB2F54445D13BC69 /* Pods_WiltTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028F419E3F49877D3B95A35B /* Pods_WiltTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7D47CCB122FB88CA00A4D96E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D47CC9122FB88C700A4D96E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D47CC9822FB88C700A4D96E;
+			remoteInfo = Wilt;
+		};
+		7D47CCBC22FB88CA00A4D96E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D47CC9122FB88C700A4D96E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D47CC9822FB88C700A4D96E;
+			remoteInfo = Wilt;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		028F419E3F49877D3B95A35B /* Pods_WiltTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WiltTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EB8A067D8F1C1DD2FC8228B /* Pods-WiltUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiltUITests.release.xcconfig"; path = "Target Support Files/Pods-WiltUITests/Pods-WiltUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1F6756815F71C7654A6921D7 /* Pods-WiltTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiltTests.release.xcconfig"; path = "Target Support Files/Pods-WiltTests/Pods-WiltTests.release.xcconfig"; sourceTree = "<group>"; };
+		7D47CC9922FB88C700A4D96E /* Wilt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wilt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7D47CCA422FB88C700A4D96E /* Wilt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wilt.xcdatamodel; sourceTree = "<group>"; };
+		7D47CCA622FB88C900A4D96E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7D47CCA922FB88C900A4D96E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7D47CCAB22FB88C900A4D96E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D47CCB022FB88CA00A4D96E /* WiltTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WiltTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D47CCB622FB88CA00A4D96E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D47CCBB22FB88CA00A4D96E /* WiltUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WiltUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D47CCBF22FB88CA00A4D96E /* WiltUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltUITests.swift; sourceTree = "<group>"; };
+		7D47CCC122FB88CA00A4D96E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7DB158582307D7FE00F86A9E /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCoordinator.swift; sourceTree = "<group>"; };
+		7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughIntroViewController.swift; sourceTree = "<group>"; };
+		7DB158602309658100F86A9E /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
+		7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPage.swift; sourceTree = "<group>"; };
+		7DB15867230D6BEC00F86A9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7DB15869230D6C8600F86A9E /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewControllerTest.swift; sourceTree = "<group>"; };
+		7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WiltTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		7DB1586E23120F6F00F86A9E /* KIFUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIFUtil.swift; sourceTree = "<group>"; };
+		7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltAppCoordinator.swift; sourceTree = "<group>"; };
+		C96C4D35FD3B89211A5EA4C1 /* Pods_Wilt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wilt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA1021B908BFC85649B8FF99 /* Pods-Wilt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wilt.release.xcconfig"; path = "Target Support Files/Pods-Wilt/Pods-Wilt.release.xcconfig"; sourceTree = "<group>"; };
+		DA8D125D59398831B02EF640 /* Pods-WiltUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiltUITests.debug.xcconfig"; path = "Target Support Files/Pods-WiltUITests/Pods-WiltUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E397C852C54CDC3EA38EABE6 /* Pods-WiltTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiltTests.debug.xcconfig"; path = "Target Support Files/Pods-WiltTests/Pods-WiltTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E64B249219B594DB002E4C6E /* Pods-Wilt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wilt.debug.xcconfig"; path = "Target Support Files/Pods-Wilt/Pods-Wilt.debug.xcconfig"; sourceTree = "<group>"; };
+		EC434F58D15DA4CB45F11761 /* Pods_WiltUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WiltUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7D47CC9622FB88C700A4D96E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0EE65121E9E3471A5E2F26C9 /* Pods_Wilt.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D47CCAD22FB88CA00A4D96E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D53A4544BB2F54445D13BC69 /* Pods_WiltTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D47CCB822FB88CA00A4D96E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24AC9242CFCDDE53967CAAA6 /* Pods_WiltUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		268B51E5434853E4B1F4342B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C96C4D35FD3B89211A5EA4C1 /* Pods_Wilt.framework */,
+				028F419E3F49877D3B95A35B /* Pods_WiltTests.framework */,
+				EC434F58D15DA4CB45F11761 /* Pods_WiltUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5824BE061D8CC815295F58D7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E64B249219B594DB002E4C6E /* Pods-Wilt.debug.xcconfig */,
+				DA1021B908BFC85649B8FF99 /* Pods-Wilt.release.xcconfig */,
+				E397C852C54CDC3EA38EABE6 /* Pods-WiltTests.debug.xcconfig */,
+				1F6756815F71C7654A6921D7 /* Pods-WiltTests.release.xcconfig */,
+				DA8D125D59398831B02EF640 /* Pods-WiltUITests.debug.xcconfig */,
+				1EB8A067D8F1C1DD2FC8228B /* Pods-WiltUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		7D47CC9022FB88C700A4D96E = {
+			isa = PBXGroup;
+			children = (
+				7D47CC9B22FB88C700A4D96E /* Wilt */,
+				7D47CCB322FB88CA00A4D96E /* WiltTests */,
+				7D47CCBE22FB88CA00A4D96E /* WiltUITests */,
+				7D47CC9A22FB88C700A4D96E /* Products */,
+				5824BE061D8CC815295F58D7 /* Pods */,
+				268B51E5434853E4B1F4342B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		7D47CC9A22FB88C700A4D96E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D47CC9922FB88C700A4D96E /* Wilt.app */,
+				7D47CCB022FB88CA00A4D96E /* WiltTests.xctest */,
+				7D47CCBB22FB88CA00A4D96E /* WiltUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7D47CC9B22FB88C700A4D96E /* Wilt */ = {
+			isa = PBXGroup;
+			children = (
+				7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */,
+				7DB158582307D7FE00F86A9E /* Coordinator.swift */,
+				7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */,
+				7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */,
+				7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */,
+				7DB158602309658100F86A9E /* WalkthroughViewController.swift */,
+				7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */,
+				7DB15869230D6C8600F86A9E /* Utils.swift */,
+				7D47CCA622FB88C900A4D96E /* Assets.xcassets */,
+				7D47CCA822FB88C900A4D96E /* LaunchScreen.storyboard */,
+				7D47CCAB22FB88C900A4D96E /* Info.plist */,
+				7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */,
+				7DB15868230D6BEC00F86A9E /* Localizable.strings */,
+			);
+			path = Wilt;
+			sourceTree = "<group>";
+		};
+		7D47CCB322FB88CA00A4D96E /* WiltTests */ = {
+			isa = PBXGroup;
+			children = (
+				7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */,
+				7DB1586E23120F6F00F86A9E /* KIFUtil.swift */,
+				7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */,
+				7D47CCB622FB88CA00A4D96E /* Info.plist */,
+			);
+			path = WiltTests;
+			sourceTree = "<group>";
+		};
+		7D47CCBE22FB88CA00A4D96E /* WiltUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7D47CCBF22FB88CA00A4D96E /* WiltUITests.swift */,
+				7D47CCC122FB88CA00A4D96E /* Info.plist */,
+			);
+			path = WiltUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7D47CC9822FB88C700A4D96E /* Wilt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D47CCC422FB88CA00A4D96E /* Build configuration list for PBXNativeTarget "Wilt" */;
+			buildPhases = (
+				8D977FAD2EA21E5E8DC9BA4C /* [CP] Check Pods Manifest.lock */,
+				7D47CC9522FB88C700A4D96E /* Sources */,
+				7D47CC9622FB88C700A4D96E /* Frameworks */,
+				7D47CC9722FB88C700A4D96E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Wilt;
+			productName = Wilt;
+			productReference = 7D47CC9922FB88C700A4D96E /* Wilt.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7D47CCAF22FB88CA00A4D96E /* WiltTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D47CCC722FB88CA00A4D96E /* Build configuration list for PBXNativeTarget "WiltTests" */;
+			buildPhases = (
+				51FD4F4F6B29B97D009240CE /* [CP] Check Pods Manifest.lock */,
+				7D47CCAC22FB88CA00A4D96E /* Sources */,
+				7D47CCAD22FB88CA00A4D96E /* Frameworks */,
+				7D47CCAE22FB88CA00A4D96E /* Resources */,
+				17CF188182207ABBC536D705 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7D47CCB222FB88CA00A4D96E /* PBXTargetDependency */,
+			);
+			name = WiltTests;
+			productName = WiltTests;
+			productReference = 7D47CCB022FB88CA00A4D96E /* WiltTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7D47CCBA22FB88CA00A4D96E /* WiltUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D47CCCA22FB88CA00A4D96E /* Build configuration list for PBXNativeTarget "WiltUITests" */;
+			buildPhases = (
+				C13601CAD7BC8D1A412807B9 /* [CP] Check Pods Manifest.lock */,
+				7D47CCB722FB88CA00A4D96E /* Sources */,
+				7D47CCB822FB88CA00A4D96E /* Frameworks */,
+				7D47CCB922FB88CA00A4D96E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7D47CCBD22FB88CA00A4D96E /* PBXTargetDependency */,
+			);
+			name = WiltUITests;
+			productName = WiltUITests;
+			productReference = 7D47CCBB22FB88CA00A4D96E /* WiltUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7D47CC9122FB88C700A4D96E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = "Oliver ONeill";
+				TargetAttributes = {
+					7D47CC9822FB88C700A4D96E = {
+						CreatedOnToolsVersion = 10.3;
+					};
+					7D47CCAF22FB88CA00A4D96E = {
+						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
+						TestTargetID = 7D47CC9822FB88C700A4D96E;
+					};
+					7D47CCBA22FB88CA00A4D96E = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = 7D47CC9822FB88C700A4D96E;
+					};
+				};
+			};
+			buildConfigurationList = 7D47CC9422FB88C700A4D96E /* Build configuration list for PBXProject "Wilt" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7D47CC9022FB88C700A4D96E;
+			productRefGroup = 7D47CC9A22FB88C700A4D96E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7D47CC9822FB88C700A4D96E /* Wilt */,
+				7D47CCAF22FB88CA00A4D96E /* WiltTests */,
+				7D47CCBA22FB88CA00A4D96E /* WiltUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7D47CC9722FB88C700A4D96E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D47CCAA22FB88C900A4D96E /* LaunchScreen.storyboard in Resources */,
+				7DB15866230D6BEC00F86A9E /* Localizable.strings in Resources */,
+				7D47CCA722FB88C900A4D96E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D47CCAE22FB88CA00A4D96E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D47CCB922FB88CA00A4D96E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17CF188182207ABBC536D705 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WiltTests/Pods-WiltTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/KIF/KIF.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble-Snapshots/Nimble_Snapshots.framework",
+				"${BUILT_PRODUCTS_DIR}/iOSSnapshotTestCase/FBSnapshotTestCase.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KIF.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble_Snapshots.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WiltTests/Pods-WiltTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		51FD4F4F6B29B97D009240CE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WiltTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D977FAD2EA21E5E8DC9BA4C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Wilt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C13601CAD7BC8D1A412807B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WiltUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7D47CC9522FB88C700A4D96E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */,
+				7DB158592307D7FE00F86A9E /* Coordinator.swift in Sources */,
+				7DB1586A230D6C8700F86A9E /* Utils.swift in Sources */,
+				7DB158612309658100F86A9E /* WalkthroughViewController.swift in Sources */,
+				7DB1585B2307D88200F86A9E /* WalkthroughCoordinator.swift in Sources */,
+				7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */,
+				7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */,
+				7DB15863230ABD8F00F86A9E /* WalkthroughPage.swift in Sources */,
+				7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D47CCAC22FB88CA00A4D96E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */,
+				7DB1586C2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D47CCB722FB88CA00A4D96E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D47CCC022FB88CA00A4D96E /* WiltUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7D47CCB222FB88CA00A4D96E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D47CC9822FB88C700A4D96E /* Wilt */;
+			targetProxy = 7D47CCB122FB88CA00A4D96E /* PBXContainerItemProxy */;
+		};
+		7D47CCBD22FB88CA00A4D96E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D47CC9822FB88C700A4D96E /* Wilt */;
+			targetProxy = 7D47CCBC22FB88CA00A4D96E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7D47CCA822FB88C900A4D96E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7D47CCA922FB88C900A4D96E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7DB15868230D6BEC00F86A9E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7DB15867230D6BEC00F86A9E /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7D47CCC222FB88CA00A4D96E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7D47CCC322FB88CA00A4D96E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7D47CCC522FB88CA00A4D96E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E64B249219B594DB002E4C6E /* Pods-Wilt.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XFH734QVLQ;
+				INFOPLIST_FILE = Wilt/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oliveroneill.Wilt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7D47CCC622FB88CA00A4D96E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA1021B908BFC85649B8FF99 /* Pods-Wilt.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XFH734QVLQ;
+				INFOPLIST_FILE = Wilt/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oliveroneill.Wilt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7D47CCC822FB88CA00A4D96E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E397C852C54CDC3EA38EABE6 /* Pods-WiltTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XFH734QVLQ;
+				INFOPLIST_FILE = WiltTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oliveroneill.WiltTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WiltTests/WiltTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wilt.app/Wilt";
+			};
+			name = Debug;
+		};
+		7D47CCC922FB88CA00A4D96E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F6756815F71C7654A6921D7 /* Pods-WiltTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XFH734QVLQ;
+				INFOPLIST_FILE = WiltTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oliveroneill.WiltTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WiltTests/WiltTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wilt.app/Wilt";
+			};
+			name = Release;
+		};
+		7D47CCCB22FB88CA00A4D96E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA8D125D59398831B02EF640 /* Pods-WiltUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XFH734QVLQ;
+				INFOPLIST_FILE = WiltUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oliveroneill.WiltUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Wilt;
+			};
+			name = Debug;
+		};
+		7D47CCCC22FB88CA00A4D96E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EB8A067D8F1C1DD2FC8228B /* Pods-WiltUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XFH734QVLQ;
+				INFOPLIST_FILE = WiltUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oliveroneill.WiltUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Wilt;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7D47CC9422FB88C700A4D96E /* Build configuration list for PBXProject "Wilt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D47CCC222FB88CA00A4D96E /* Debug */,
+				7D47CCC322FB88CA00A4D96E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D47CCC422FB88CA00A4D96E /* Build configuration list for PBXNativeTarget "Wilt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D47CCC522FB88CA00A4D96E /* Debug */,
+				7D47CCC622FB88CA00A4D96E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D47CCC722FB88CA00A4D96E /* Build configuration list for PBXNativeTarget "WiltTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D47CCC822FB88CA00A4D96E /* Debug */,
+				7D47CCC922FB88CA00A4D96E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D47CCCA22FB88CA00A4D96E /* Build configuration list for PBXNativeTarget "WiltUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D47CCCB22FB88CA00A4D96E /* Debug */,
+				7D47CCCC22FB88CA00A4D96E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7D47CCA422FB88C700A4D96E /* Wilt.xcdatamodel */,
+			);
+			currentVersion = 7D47CCA422FB88C700A4D96E /* Wilt.xcdatamodel */;
+			path = Wilt.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 7D47CC9122FB88C700A4D96E /* Project object */;
+}
