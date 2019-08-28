@@ -87,5 +87,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    internal func application(_ app: UIApplication, open url: URL,
+                              options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        appCoordinator.spotifyAuthComplete(
+            application: app,
+            url: url,
+            options: options
+        )
+        return true
+    }
 }
-

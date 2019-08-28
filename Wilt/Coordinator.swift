@@ -10,12 +10,6 @@ protocol Coordinator {
     /// to them
     var childCoordinators: [Coordinator] { get }
 
-    /// Initialise the coordinator
-    ///
-    /// - Parameter navigationController: The navigation controller to be used
-    /// for navigating between controllers
-    init(navigationController: UINavigationController)
-
     /// Called to start the coordinator. This should navigate to the
     /// first controller in this coordinator's state
     func start()

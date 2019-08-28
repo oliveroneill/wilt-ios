@@ -6,7 +6,7 @@ class WiltAppCoordinator: Coordinator {
     internal var navigationController: UINavigationController
     internal var childCoordinators = [Coordinator]()
 
-    required init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
@@ -14,11 +14,25 @@ class WiltAppCoordinator: Coordinator {
         showWalkthrough()
     }
 
-    func showContent() {
+    func spotifyAuthComplete(application: UIApplication, url: URL,
+                             options: [UIApplication.OpenURLOptionsKey : Any]) {
+        // We need to return this response back to the SpotifyAuthoriser,
+        // which should be stored in the first child coordinator in the ideal
+        // case
+        if let coordinator = childCoordinators.first as? WalkthroughCoordinator {
+            coordinator.spotifyAuthComplete(
+                application: application,
+                url: url,
+                options: options
+            )
+        }
+    }
+    
+    private func showContent() {
 
     }
 
-    func showWalkthrough() {
+    private func showWalkthrough() {
         let walkthroughCoordinator = WalkthroughCoordinator(
             navigationController: navigationController
         )

@@ -23,6 +23,9 @@
 		7DB1586A230D6C8700F86A9E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB15869230D6C8600F86A9E /* Utils.swift */; };
 		7DB1586C2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */; };
 		7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1586E23120F6F00F86A9E /* KIFUtil.swift */; };
+		7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */; };
+		7DB1587D2314028C00F86A9E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB158722312960C00F86A9E /* SpotifyiOS.framework */; };
+		7DB1587F2315EED700F86A9E /* WalkthroughCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587E2315EED700F86A9E /* WalkthroughCoordinatorTest.swift */; };
 		7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */; };
 		D53A4544BB2F54445D13BC69 /* Pods_WiltTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028F419E3F49877D3B95A35B /* Pods_WiltTests.framework */; };
 /* End PBXBuildFile section */
@@ -69,6 +72,10 @@
 		7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewControllerTest.swift; sourceTree = "<group>"; };
 		7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WiltTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7DB1586E23120F6F00F86A9E /* KIFUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIFUtil.swift; sourceTree = "<group>"; };
+		7DB158722312960C00F86A9E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
+		7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wilt-Bridging-Header.h"; sourceTree = "<group>"; };
+		7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthoriser.swift; sourceTree = "<group>"; };
+		7DB1587E2315EED700F86A9E /* WalkthroughCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCoordinatorTest.swift; sourceTree = "<group>"; };
 		7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltAppCoordinator.swift; sourceTree = "<group>"; };
 		C96C4D35FD3B89211A5EA4C1 /* Pods_Wilt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wilt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA1021B908BFC85649B8FF99 /* Pods-Wilt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wilt.release.xcconfig"; path = "Target Support Files/Pods-Wilt/Pods-Wilt.release.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +91,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EE65121E9E3471A5E2F26C9 /* Pods_Wilt.framework in Frameworks */,
+				7DB1587D2314028C00F86A9E /* SpotifyiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +140,7 @@
 		7D47CC9022FB88C700A4D96E = {
 			isa = PBXGroup;
 			children = (
+				7DB158722312960C00F86A9E /* SpotifyiOS.framework */,
 				7D47CC9B22FB88C700A4D96E /* Wilt */,
 				7D47CCB322FB88CA00A4D96E /* WiltTests */,
 				7D47CCBE22FB88CA00A4D96E /* WiltUITests */,
@@ -155,12 +164,14 @@
 			isa = PBXGroup;
 			children = (
 				7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */,
+				7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */,
 				7DB158582307D7FE00F86A9E /* Coordinator.swift */,
 				7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */,
 				7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */,
 				7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */,
 				7DB158602309658100F86A9E /* WalkthroughViewController.swift */,
 				7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */,
+				7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */,
 				7DB15869230D6C8600F86A9E /* Utils.swift */,
 				7D47CCA622FB88C900A4D96E /* Assets.xcassets */,
 				7D47CCA822FB88C900A4D96E /* LaunchScreen.storyboard */,
@@ -175,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */,
+				7DB1587E2315EED700F86A9E /* WalkthroughCoordinatorTest.swift */,
 				7DB1586E23120F6F00F86A9E /* KIFUtil.swift */,
 				7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */,
 				7D47CCB622FB88CA00A4D96E /* Info.plist */,
@@ -202,6 +214,7 @@
 				7D47CC9522FB88C700A4D96E /* Sources */,
 				7D47CC9622FB88C700A4D96E /* Frameworks */,
 				7D47CC9722FB88C700A4D96E /* Resources */,
+				BEF72C399F8DF5007723E12B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -395,6 +408,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BEF72C399F8DF5007723E12B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wilt/Pods-Wilt-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wilt/Pods-Wilt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C13601CAD7BC8D1A412807B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -430,6 +465,7 @@
 				7DB158612309658100F86A9E /* WalkthroughViewController.swift in Sources */,
 				7DB1585B2307D88200F86A9E /* WalkthroughCoordinator.swift in Sources */,
 				7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */,
+				7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */,
 				7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */,
 				7DB15863230ABD8F00F86A9E /* WalkthroughPage.swift in Sources */,
 				7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */,
@@ -442,6 +478,7 @@
 			files = (
 				7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */,
 				7DB1586C2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift in Sources */,
+				7DB1587F2315EED700F86A9E /* WalkthroughCoordinatorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,13 +648,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XFH734QVLQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Wilt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oliveroneill.Wilt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Wilt/Wilt-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -630,13 +673,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XFH734QVLQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Wilt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oliveroneill.Wilt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Wilt/Wilt-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -651,6 +700,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XFH734QVLQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WiltTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -676,6 +729,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XFH734QVLQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WiltTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -698,6 +755,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XFH734QVLQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WiltUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -719,6 +780,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XFH734QVLQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WiltUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
