@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -8,6 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        initialiseLibraries()
         window = UIWindow(frame: UIScreen.main.bounds)
         let navController = UINavigationController()
         // Initialise the app coordinator
@@ -16,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appCoordinator.start()
         window?.makeKeyAndVisible()
         return true
+    }
+
+    private func initialiseLibraries() {
+        FirebaseApp.configure()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

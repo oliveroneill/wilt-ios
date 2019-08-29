@@ -13,6 +13,9 @@ target 'Wilt' do
   use_frameworks!
 
   # Pods for Wilt
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Functions'
+  pod 'Firebase/Auth'
 
   target 'WiltTests' do
     inherit! :search_paths

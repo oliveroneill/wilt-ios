@@ -5,13 +5,18 @@ import UIKit
 class WiltAppCoordinator: Coordinator {
     internal var navigationController: UINavigationController
     internal var childCoordinators = [Coordinator]()
+    private let auth = FirebaseAuthentication()
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
     func start() {
-        showWalkthrough()
+        if let user = auth.currentUser {
+            // TODO
+        } else {
+            showWalkthrough()
+        }
     }
 
     func spotifyAuthComplete(application: UIApplication, url: URL,
@@ -34,7 +39,8 @@ class WiltAppCoordinator: Coordinator {
 
     private func showWalkthrough() {
         let walkthroughCoordinator = WalkthroughCoordinator(
-            navigationController: navigationController
+            navigationController: navigationController,
+            auth: auth
         )
         childCoordinators.append(walkthroughCoordinator)
         walkthroughCoordinator.delegate = self

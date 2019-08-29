@@ -1,15 +1,19 @@
 import UIKit
+import Keys
 
 /// Coordinating navigation for the walkthrough
 class WalkthroughCoordinator: Coordinator {
     internal var navigationController: UINavigationController
     internal var childCoordinators = [Coordinator]()
     private let spotifyAuthoriser: SpotifyAuthoriser
+    private let auth: Authenticator
     weak var delegate: WalkthroughCoordinatorDelegate?
 
     init(navigationController: UINavigationController,
+         auth: Authenticator = FirebaseAuthentication(),
          spotifyAuthoriser: SpotifyAuthoriser = SpotifyAppAuthoriser()) {
         self.navigationController = navigationController
+        self.auth = auth
         self.spotifyAuthoriser = spotifyAuthoriser
     }
 
@@ -33,9 +37,28 @@ class WalkthroughCoordinator: Coordinator {
 
 extension WalkthroughCoordinator: WalkthroughViewControllerDelegate {
     func onSignInButtonPressed() {
-        spotifyAuthoriser.authorise { _ in
-            // TODO: firebase auth but different since we already have
-            // the token and stuff
+        let redirectURI = WiltKeys().spotifyRedirectURI
+        spotifyAuthoriser.authorise { [unowned self] in
+            guard let authCode = try? $0.get() else {
+                print("Spotify error")
+                // TODO
+                return
+            }
+            self.auth.signUp(authCode: authCode, redirectURI: redirectURI) { [unowned self] in
+                guard let token = try? $0.get() else {
+                    print("Sign up error")
+                    // TODO
+                    return
+                }
+                self.auth.login(token: token) {
+                    guard let userID = try? $0.get() else {
+                        print("Login error")
+                        // TODO
+                        return
+                    }
+                    print("Logged in", userID)
+                }
+            }
         }
     }
 }

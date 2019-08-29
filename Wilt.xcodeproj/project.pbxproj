@@ -26,6 +26,9 @@
 		7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */; };
 		7DB1587D2314028C00F86A9E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB158722312960C00F86A9E /* SpotifyiOS.framework */; };
 		7DB1587F2315EED700F86A9E /* WalkthroughCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587E2315EED700F86A9E /* WalkthroughCoordinatorTest.swift */; };
+		7DB1588123169D5E00F86A9E /* FirebaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */; };
+		7DB1588323169E0D00F86A9E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1588223169E0D00F86A9E /* GoogleService-Info.plist */; };
+		7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158842316A0D900F86A9E /* FirebaseAuthentication.swift */; };
 		7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */; };
 		D53A4544BB2F54445D13BC69 /* Pods_WiltTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028F419E3F49877D3B95A35B /* Pods_WiltTests.framework */; };
 /* End PBXBuildFile section */
@@ -76,6 +79,9 @@
 		7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wilt-Bridging-Header.h"; sourceTree = "<group>"; };
 		7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthoriser.swift; sourceTree = "<group>"; };
 		7DB1587E2315EED700F86A9E /* WalkthroughCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCoordinatorTest.swift; sourceTree = "<group>"; };
+		7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAPI.swift; sourceTree = "<group>"; };
+		7DB1588223169E0D00F86A9E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7DB158842316A0D900F86A9E /* FirebaseAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthentication.swift; sourceTree = "<group>"; };
 		7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltAppCoordinator.swift; sourceTree = "<group>"; };
 		C96C4D35FD3B89211A5EA4C1 /* Pods_Wilt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wilt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA1021B908BFC85649B8FF99 /* Pods-Wilt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wilt.release.xcconfig"; path = "Target Support Files/Pods-Wilt/Pods-Wilt.release.xcconfig"; sourceTree = "<group>"; };
@@ -164,8 +170,10 @@
 			isa = PBXGroup;
 			children = (
 				7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */,
-				7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */,
 				7DB158582307D7FE00F86A9E /* Coordinator.swift */,
+				7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */,
+				7DB158842316A0D900F86A9E /* FirebaseAuthentication.swift */,
+				7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */,
 				7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */,
 				7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */,
 				7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */,
@@ -173,6 +181,7 @@
 				7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */,
 				7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */,
 				7DB15869230D6C8600F86A9E /* Utils.swift */,
+				7DB1588223169E0D00F86A9E /* GoogleService-Info.plist */,
 				7D47CCA622FB88C900A4D96E /* Assets.xcassets */,
 				7D47CCA822FB88C900A4D96E /* LaunchScreen.storyboard */,
 				7D47CCAB22FB88C900A4D96E /* Info.plist */,
@@ -314,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D47CCAA22FB88C900A4D96E /* LaunchScreen.storyboard in Resources */,
+				7DB1588323169E0D00F86A9E /* GoogleService-Info.plist in Resources */,
 				7DB15866230D6BEC00F86A9E /* Localizable.strings in Resources */,
 				7D47CCA722FB88C900A4D96E /* Assets.xcassets in Resources */,
 			);
@@ -417,13 +427,19 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Wilt/Pods-Wilt-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -467,8 +483,10 @@
 				7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */,
 				7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */,
 				7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */,
+				7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */,
 				7DB15863230ABD8F00F86A9E /* WalkthroughPage.swift in Sources */,
 				7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */,
+				7DB1588123169D5E00F86A9E /* FirebaseAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

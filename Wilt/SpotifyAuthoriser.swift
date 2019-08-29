@@ -2,7 +2,7 @@ import Keys
 
 import Foundation
 
-struct AuthInfo {
+struct SpotifyAuthInfo {
     let accessToken: String
     let refreshToken: String
     let expirationDate: Date
@@ -17,7 +17,7 @@ protocol SpotifyAuthoriser {
     /// Authorise the app to use Spotify for this user
     ///
     /// - Parameter onComplete: Called on authorisation completion
-    func authorise(onComplete: @escaping ((Result<AuthInfo, Error>) -> Void))
+    func authorise(onComplete: @escaping ((Result<String, Error>) -> Void))
 
     /// Called via the AppDelegate when the Spotify app returns the result
     /// of the authorisation flow. See AppDelegate's `application open` function
@@ -40,9 +40,9 @@ class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
         )
         return SPTSessionManager(configuration: configuration, delegate: self)
     }()
-    private var onAuthorisationComplete: ((Result<AuthInfo, Error>) -> Void)?
+    private var onAuthorisationComplete: ((Result<String, Error>) -> Void)?
 
-    func authorise(onComplete: @escaping ((Result<AuthInfo, Error>) -> Void)) {
+    func authorise(onComplete: @escaping ((Result<String, Error>) -> Void)) {
         onAuthorisationComplete = onComplete
         let requestedScopes: SPTScope = [
             .userReadEmail,
@@ -66,26 +66,14 @@ class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
 }
 
 extension SpotifyAppAuthoriser: SPTSessionManagerDelegate {
-    func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
-        print(
-            AuthInfo(
-                accessToken: session.accessToken,
-                refreshToken: session.refreshToken,
-                expirationDate: session.expirationDate
-            )
-        )
-        onAuthorisationComplete?(
-            .success(
-                AuthInfo(
-                    accessToken: session.accessToken,
-                    refreshToken: session.refreshToken,
-                    expirationDate: session.expirationDate
-                )
-            )
-        )
-    }
+    func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {}
 
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
         onAuthorisationComplete?(.failure(error))
+    }
+
+    func sessionManager(manager: SPTSessionManager, shouldRequestAccessTokenWith code: String) -> Bool {
+        onAuthorisationComplete?(.success(code))
+        return true
     }
 }
