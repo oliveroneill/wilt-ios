@@ -182,13 +182,7 @@
 				7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */,
 				7DB158582307D7FE00F86A9E /* Coordinator.swift */,
 				7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */,
-				7DB158842316A0D900F86A9E /* FirebaseAuthentication.swift */,
-				7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */,
-				7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */,
-				7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */,
-				7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */,
-				7DB158602309658100F86A9E /* WalkthroughViewController.swift */,
-				7DB158862318808800F86A9E /* WalkthroughViewModel.swift */,
+				7DB15891231A516F00F86A9E /* walkthrough */,
 				7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */,
 				7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */,
 				7DB15869230D6C8600F86A9E /* Utils.swift */,
@@ -206,9 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				7DB1588A2319ED9900F86A9E /* Mocks */,
-				7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */,
-				7DB1587E2315EED700F86A9E /* WalkthroughViewModelTest.swift */,
-				7DB158882319575C00F86A9E /* WalkthroughCoordinatorTest.swift */,
 				7DB1586E23120F6F00F86A9E /* KIFUtil.swift */,
 				7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */,
 				7D47CCB622FB88CA00A4D96E /* Info.plist */,
@@ -231,8 +222,33 @@
 				7DB1588D2319EDF000F86A9E /* FakeAuthenticator.swift */,
 				7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */,
 				7DB1588F231A4E2200F86A9E /* FakeError.swift */,
+				7DB15892231A519400F86A9E /* walkthrough */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		7DB15891231A516F00F86A9E /* walkthrough */ = {
+			isa = PBXGroup;
+			children = (
+				7DB158842316A0D900F86A9E /* FirebaseAuthentication.swift */,
+				7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */,
+				7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */,
+				7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */,
+				7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */,
+				7DB158602309658100F86A9E /* WalkthroughViewController.swift */,
+				7DB158862318808800F86A9E /* WalkthroughViewModel.swift */,
+			);
+			path = walkthrough;
+			sourceTree = "<group>";
+		};
+		7DB15892231A519400F86A9E /* walkthrough */ = {
+			isa = PBXGroup;
+			children = (
+				7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */,
+				7DB1587E2315EED700F86A9E /* WalkthroughViewModelTest.swift */,
+				7DB158882319575C00F86A9E /* WalkthroughCoordinatorTest.swift */,
+			);
+			path = walkthrough;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
