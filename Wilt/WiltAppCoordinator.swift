@@ -49,7 +49,7 @@ class WiltAppCoordinator: Coordinator {
 }
 
 extension WiltAppCoordinator: WalkthroughCoordinatorDelegate {
-    func loggedIn() {
+    func loggedIn(userID: String) {
         showContent()
     }
 }

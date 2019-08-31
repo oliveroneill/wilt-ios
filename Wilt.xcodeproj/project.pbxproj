@@ -25,10 +25,15 @@
 		7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1586E23120F6F00F86A9E /* KIFUtil.swift */; };
 		7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */; };
 		7DB1587D2314028C00F86A9E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB158722312960C00F86A9E /* SpotifyiOS.framework */; };
-		7DB1587F2315EED700F86A9E /* WalkthroughCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587E2315EED700F86A9E /* WalkthroughCoordinatorTest.swift */; };
+		7DB1587F2315EED700F86A9E /* WalkthroughViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587E2315EED700F86A9E /* WalkthroughViewModelTest.swift */; };
 		7DB1588123169D5E00F86A9E /* FirebaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */; };
 		7DB1588323169E0D00F86A9E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1588223169E0D00F86A9E /* GoogleService-Info.plist */; };
 		7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158842316A0D900F86A9E /* FirebaseAuthentication.swift */; };
+		7DB158872318808800F86A9E /* WalkthroughViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158862318808800F86A9E /* WalkthroughViewModel.swift */; };
+		7DB158892319575C00F86A9E /* WalkthroughCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158882319575C00F86A9E /* WalkthroughCoordinatorTest.swift */; };
+		7DB1588C2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */; };
+		7DB1588E2319EDF000F86A9E /* FakeAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588D2319EDF000F86A9E /* FakeAuthenticator.swift */; };
+		7DB15890231A4E2200F86A9E /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588F231A4E2200F86A9E /* FakeError.swift */; };
 		7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */; };
 		D53A4544BB2F54445D13BC69 /* Pods_WiltTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028F419E3F49877D3B95A35B /* Pods_WiltTests.framework */; };
 /* End PBXBuildFile section */
@@ -78,10 +83,15 @@
 		7DB158722312960C00F86A9E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wilt-Bridging-Header.h"; sourceTree = "<group>"; };
 		7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthoriser.swift; sourceTree = "<group>"; };
-		7DB1587E2315EED700F86A9E /* WalkthroughCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCoordinatorTest.swift; sourceTree = "<group>"; };
+		7DB1587E2315EED700F86A9E /* WalkthroughViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewModelTest.swift; sourceTree = "<group>"; };
 		7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAPI.swift; sourceTree = "<group>"; };
 		7DB1588223169E0D00F86A9E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7DB158842316A0D900F86A9E /* FirebaseAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthentication.swift; sourceTree = "<group>"; };
+		7DB158862318808800F86A9E /* WalkthroughViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewModel.swift; sourceTree = "<group>"; };
+		7DB158882319575C00F86A9E /* WalkthroughCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCoordinatorTest.swift; sourceTree = "<group>"; };
+		7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSpotifyAuthoriser.swift; sourceTree = "<group>"; };
+		7DB1588D2319EDF000F86A9E /* FakeAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAuthenticator.swift; sourceTree = "<group>"; };
+		7DB1588F231A4E2200F86A9E /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
 		7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltAppCoordinator.swift; sourceTree = "<group>"; };
 		C96C4D35FD3B89211A5EA4C1 /* Pods_Wilt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wilt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA1021B908BFC85649B8FF99 /* Pods-Wilt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wilt.release.xcconfig"; path = "Target Support Files/Pods-Wilt/Pods-Wilt.release.xcconfig"; sourceTree = "<group>"; };
@@ -178,6 +188,7 @@
 				7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */,
 				7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */,
 				7DB158602309658100F86A9E /* WalkthroughViewController.swift */,
+				7DB158862318808800F86A9E /* WalkthroughViewModel.swift */,
 				7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */,
 				7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */,
 				7DB15869230D6C8600F86A9E /* Utils.swift */,
@@ -194,8 +205,10 @@
 		7D47CCB322FB88CA00A4D96E /* WiltTests */ = {
 			isa = PBXGroup;
 			children = (
+				7DB1588A2319ED9900F86A9E /* Mocks */,
 				7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */,
-				7DB1587E2315EED700F86A9E /* WalkthroughCoordinatorTest.swift */,
+				7DB1587E2315EED700F86A9E /* WalkthroughViewModelTest.swift */,
+				7DB158882319575C00F86A9E /* WalkthroughCoordinatorTest.swift */,
 				7DB1586E23120F6F00F86A9E /* KIFUtil.swift */,
 				7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */,
 				7D47CCB622FB88CA00A4D96E /* Info.plist */,
@@ -210,6 +223,16 @@
 				7D47CCC122FB88CA00A4D96E /* Info.plist */,
 			);
 			path = WiltUITests;
+			sourceTree = "<group>";
+		};
+		7DB1588A2319ED9900F86A9E /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				7DB1588D2319EDF000F86A9E /* FakeAuthenticator.swift */,
+				7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */,
+				7DB1588F231A4E2200F86A9E /* FakeError.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -482,6 +505,7 @@
 				7DB1585B2307D88200F86A9E /* WalkthroughCoordinator.swift in Sources */,
 				7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */,
 				7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */,
+				7DB158872318808800F86A9E /* WalkthroughViewModel.swift in Sources */,
 				7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */,
 				7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */,
 				7DB15863230ABD8F00F86A9E /* WalkthroughPage.swift in Sources */,
@@ -496,7 +520,11 @@
 			files = (
 				7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */,
 				7DB1586C2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift in Sources */,
-				7DB1587F2315EED700F86A9E /* WalkthroughCoordinatorTest.swift in Sources */,
+				7DB158892319575C00F86A9E /* WalkthroughCoordinatorTest.swift in Sources */,
+				7DB1588C2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift in Sources */,
+				7DB15890231A4E2200F86A9E /* FakeError.swift in Sources */,
+				7DB1588E2319EDF000F86A9E /* FakeAuthenticator.swift in Sources */,
+				7DB1587F2315EED700F86A9E /* WalkthroughViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

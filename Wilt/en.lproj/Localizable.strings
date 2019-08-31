@@ -1,3 +1,6 @@
 "walkthrough1_text" = "Welcome to Wilt. We'll keep track of what you listen to.";
 "walkthrough2_text" = "Once you've signed up we'll start tracking your listens and new data will be available daily";
 "sign_in_text" = "Sign In With Spotify";
+"try_again_text" = "Try Logging In Again";
+"login_error_text" = "Sorry, the Spotify login failed.";
+"logging_in_text" = "Logging in...";

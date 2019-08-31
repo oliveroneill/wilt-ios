@@ -18,8 +18,12 @@ class WalkthroughCoordinator: Coordinator {
     }
 
     func start() {
-        let controller = WalkthroughViewController()
-        controller.delegate = self
+        let viewModel = WalkthroughViewModel(
+            userAuthenticator: auth,
+            spotifyAuthoriser: spotifyAuthoriser
+        )
+        let controller = WalkthroughViewController(viewModel: viewModel)
+        viewModel.delegate = self
         navigationController.pushViewController(controller, animated: false)
     }
 
@@ -35,36 +39,14 @@ class WalkthroughCoordinator: Coordinator {
     }
 }
 
-extension WalkthroughCoordinator: WalkthroughViewControllerDelegate {
-    func onSignInButtonPressed() {
-        let redirectURI = WiltKeys().spotifyRedirectURI
-        spotifyAuthoriser.authorise { [unowned self] in
-            guard let authCode = try? $0.get() else {
-                print("Spotify error")
-                // TODO
-                return
-            }
-            self.auth.signUp(authCode: authCode, redirectURI: redirectURI) { [unowned self] in
-                guard let token = try? $0.get() else {
-                    print("Sign up error")
-                    // TODO
-                    return
-                }
-                self.auth.login(token: token) {
-                    guard let userID = try? $0.get() else {
-                        print("Login error")
-                        // TODO
-                        return
-                    }
-                    print("Logged in", userID)
-                }
-            }
-        }
+extension WalkthroughCoordinator: WalkthroughViewModelDelegate {
+    func loggedIn(userID: String) {
+        delegate?.loggedIn(userID: userID)
     }
 }
 
 /// Delegate for the `WalkthroughCoordinator` for events that occur during the
 /// walkthrough
 protocol WalkthroughCoordinatorDelegate: class {
-    func loggedIn()
+    func loggedIn(userID: String)
 }

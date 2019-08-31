@@ -2,12 +2,6 @@ import Keys
 
 import Foundation
 
-struct SpotifyAuthInfo {
-    let accessToken: String
-    let refreshToken: String
-    let expirationDate: Date
-}
-
 /// Authoriser for Spotify Web API. This mostly just exists for mocking.
 /// I would have made this a more generic authorisation flow but since
 /// events are being sent all the way from the AppDelegate, it seemed
@@ -65,6 +59,14 @@ class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
     }
 }
 
+/// Custom Spotify auth errors
+///
+/// - noCodeGiven: If the Spotify auth code is empty, meaning the cancel button
+/// was pressed
+enum SpotifyAuthoriserError: Error {
+    case noCodeGiven
+}
+
 extension SpotifyAppAuthoriser: SPTSessionManagerDelegate {
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {}
 
@@ -73,6 +75,15 @@ extension SpotifyAppAuthoriser: SPTSessionManagerDelegate {
     }
 
     func sessionManager(manager: SPTSessionManager, shouldRequestAccessTokenWith code: String) -> Bool {
+        // There seems to be a bug when using Spotify with the web view,
+        // if the user presses the Cancel button then we'll receive a
+        // shouldRequestAccessToken with an empty code
+        guard code.count > 0 else {
+            onAuthorisationComplete?(
+                .failure(SpotifyAuthoriserError.noCodeGiven)
+            )
+            return false
+        }
         onAuthorisationComplete?(.success(code))
         return true
     }
