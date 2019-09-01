@@ -39,7 +39,7 @@ class WalkthroughViewController: UIViewController {
         // Hide all views until the viewModel tells us to show them
         walkthroughView.isHidden = true
         signUpButton.isHidden = true
-        loadingSpinner.isHidden = true
+        loadingSpinner.stopAnimating()
         errorView.isHidden = true
         loadingLabel.isHidden = true
     }
@@ -68,7 +68,7 @@ class WalkthroughViewController: UIViewController {
 
     private func displayWalkthrough() {
         // Hide unused views
-        loadingSpinner.isHidden = true
+        loadingSpinner.stopAnimating()
         loadingLabel.isHidden = true
         errorView.isHidden = true
         // Update visible views
@@ -79,7 +79,7 @@ class WalkthroughViewController: UIViewController {
 
     private func displayError() {
         // Hide unused views
-        loadingSpinner.isHidden = true
+        loadingSpinner.stopAnimating()
         loadingLabel.isHidden = true
         // Update visible views
         signUpButton.setTitle("try_again_text".localized, for: .normal)
@@ -94,12 +94,12 @@ class WalkthroughViewController: UIViewController {
         errorView.isHidden = true
         // Update visible views
         loadingSpinner.startAnimating()
-        loadingSpinner.isHidden = false
         loadingLabel.isHidden = false
     }
 
     private func setupLoadingSpinner() {
         loadingSpinner = UIActivityIndicatorView(frame: .zero)
+        loadingSpinner.hidesWhenStopped = true
         view.addSubview(loadingSpinner)
         loadingSpinner.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
