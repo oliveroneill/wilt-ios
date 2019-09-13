@@ -4,3 +4,4 @@
 "try_again_text" = "Try Logging In Again";
 "login_error_text" = "Sorry, the Spotify login failed.";
 "logging_in_text" = "Logging in...";
+"loading_txt" = "Loading your favourite artists...";

@@ -6,14 +6,16 @@ class WiltAppCoordinator: Coordinator {
     internal var navigationController: UINavigationController
     internal var childCoordinators = [Coordinator]()
     private let auth = FirebaseAuthentication()
+    private let api = FirebaseAPI()
+    private let database = WiltDatabase()
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
     func start() {
-        if let user = auth.currentUser {
-            // TODO
+        if let _ = auth.currentUser {
+            showContent(database: database)
         } else {
             showWalkthrough()
         }
@@ -33,8 +35,15 @@ class WiltAppCoordinator: Coordinator {
         }
     }
     
-    private func showContent() {
-
+    private func showContent(database: WiltDatabase) {
+        let loggedInCoordinator = LoggedInCoordinator(
+            navigationController: navigationController,
+            database: database,
+            api: api
+        )
+        childCoordinators.append(loggedInCoordinator)
+        loggedInCoordinator.delegate = self
+        loggedInCoordinator.start()
     }
 
     private func showWalkthrough() {
@@ -50,6 +59,12 @@ class WiltAppCoordinator: Coordinator {
 
 extension WiltAppCoordinator: WalkthroughCoordinatorDelegate {
     func loggedIn(userID: String) {
-        showContent()
+        showContent(database: database)
+    }
+}
+
+extension WiltAppCoordinator: LoggedInCoordinatorDelegate {
+    func loggedOut() {
+        showWalkthrough()
     }
 }

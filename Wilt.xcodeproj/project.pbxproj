@@ -14,6 +14,24 @@
 		7D47CCA722FB88C900A4D96E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D47CCA622FB88C900A4D96E /* Assets.xcassets */; };
 		7D47CCAA22FB88C900A4D96E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D47CCA822FB88C900A4D96E /* LaunchScreen.storyboard */; };
 		7D47CCC022FB88CA00A4D96E /* WiltUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCBF22FB88CA00A4D96E /* WiltUITests.swift */; };
+		7D5A2AF7231A554D00B56000 /* LoggedInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */; };
+		7D5A2AF9231A573800B56000 /* MainAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AF8231A573800B56000 /* MainAppViewController.swift */; };
+		7D5A2AFB231A5B1D00B56000 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AFA231A5B1D00B56000 /* FeedViewController.swift */; };
+		7D5A2AFD231E687100B56000 /* PlayHistoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AFC231E687100B56000 /* PlayHistoryCache.swift */; };
+		7D5A2AFF231E6C7600B56000 /* WiltDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AFE231E6C7600B56000 /* WiltDatabase.swift */; };
+		7D5A2B032322682F00B56000 /* FeedViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B022322682F00B56000 /* FeedViewControllerTest.swift */; };
+		7D5A2B05232371B400B56000 /* PlayHistoryPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B04232371B400B56000 /* PlayHistoryPager.swift */; };
+		7D5A2B092324B25F00B56000 /* TopArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B082324B25F00B56000 /* TopArtistCell.swift */; };
+		7D5A2B0B2324B75900B56000 /* TopArtistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B0A2324B75900B56000 /* TopArtistData.swift */; };
+		7D5A2B0F2324C24B00B56000 /* FakePlayHistoryDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B0E2324C24B00B56000 /* FakePlayHistoryDao.swift */; };
+		7D5A2B112324C25E00B56000 /* FakeWiltAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B102324C25E00B56000 /* FakeWiltAPI.swift */; };
+		7D5A2B132324DDBD00B56000 /* FakeDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B122324DDBD00B56000 /* FakeDao.swift */; };
+		7D5A2B152324E0FD00B56000 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B142324E0FD00B56000 /* FeedViewModel.swift */; };
+		7D5A2B172325169900B56000 /* FakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B162325169900B56000 /* FakeData.swift */; };
+		7D5A2B1B232A504600B56000 /* FeedViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1A232A504600B56000 /* FeedViewModelTest.swift */; };
+		7D5A2B1D232A719E00B56000 /* PlayHistoryPagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1C232A719E00B56000 /* PlayHistoryPagerTest.swift */; };
+		7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1E232A71F700B56000 /* PlayHistoryCacheTest.swift */; };
+		7D5A2B20232BB45200B56000 /* Wilt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */; };
 		7DB158592307D7FE00F86A9E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158582307D7FE00F86A9E /* Coordinator.swift */; };
 		7DB1585B2307D88200F86A9E /* WalkthroughCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */; };
 		7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */; };
@@ -70,6 +88,23 @@
 		7D47CCBB22FB88CA00A4D96E /* WiltUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WiltUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D47CCBF22FB88CA00A4D96E /* WiltUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltUITests.swift; sourceTree = "<group>"; };
 		7D47CCC122FB88CA00A4D96E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInCoordinator.swift; sourceTree = "<group>"; };
+		7D5A2AF8231A573800B56000 /* MainAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewController.swift; sourceTree = "<group>"; };
+		7D5A2AFA231A5B1D00B56000 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		7D5A2AFC231E687100B56000 /* PlayHistoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayHistoryCache.swift; sourceTree = "<group>"; };
+		7D5A2AFE231E6C7600B56000 /* WiltDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltDatabase.swift; sourceTree = "<group>"; };
+		7D5A2B022322682F00B56000 /* FeedViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewControllerTest.swift; sourceTree = "<group>"; };
+		7D5A2B04232371B400B56000 /* PlayHistoryPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayHistoryPager.swift; sourceTree = "<group>"; };
+		7D5A2B082324B25F00B56000 /* TopArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopArtistCell.swift; sourceTree = "<group>"; };
+		7D5A2B0A2324B75900B56000 /* TopArtistData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopArtistData.swift; sourceTree = "<group>"; };
+		7D5A2B0E2324C24B00B56000 /* FakePlayHistoryDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePlayHistoryDao.swift; sourceTree = "<group>"; };
+		7D5A2B102324C25E00B56000 /* FakeWiltAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeWiltAPI.swift; sourceTree = "<group>"; };
+		7D5A2B122324DDBD00B56000 /* FakeDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDao.swift; sourceTree = "<group>"; };
+		7D5A2B142324E0FD00B56000 /* FeedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		7D5A2B162325169900B56000 /* FakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeData.swift; sourceTree = "<group>"; };
+		7D5A2B1A232A504600B56000 /* FeedViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModelTest.swift; sourceTree = "<group>"; };
+		7D5A2B1C232A719E00B56000 /* PlayHistoryPagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayHistoryPagerTest.swift; sourceTree = "<group>"; };
+		7D5A2B1E232A71F700B56000 /* PlayHistoryCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayHistoryCacheTest.swift; sourceTree = "<group>"; };
 		7DB158582307D7FE00F86A9E /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCoordinator.swift; sourceTree = "<group>"; };
 		7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughIntroViewController.swift; sourceTree = "<group>"; };
@@ -182,10 +217,14 @@
 				7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */,
 				7DB158582307D7FE00F86A9E /* Coordinator.swift */,
 				7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */,
+				7D5A2B0C2324BEF700B56000 /* feed */,
 				7DB15891231A516F00F86A9E /* walkthrough */,
-				7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */,
-				7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */,
+				7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */,
+				7D5A2AF8231A573800B56000 /* MainAppViewController.swift */,
 				7DB15869230D6C8600F86A9E /* Utils.swift */,
+				7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */,
+				7D5A2AFE231E6C7600B56000 /* WiltDatabase.swift */,
+				7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */,
 				7DB1588223169E0D00F86A9E /* GoogleService-Info.plist */,
 				7D47CCA622FB88C900A4D96E /* Assets.xcassets */,
 				7D47CCA822FB88C900A4D96E /* LaunchScreen.storyboard */,
@@ -199,7 +238,9 @@
 		7D47CCB322FB88CA00A4D96E /* WiltTests */ = {
 			isa = PBXGroup;
 			children = (
-				7DB1588A2319ED9900F86A9E /* Mocks */,
+				7DB1588A2319ED9900F86A9E /* mocks */,
+				7DB15892231A519400F86A9E /* walkthrough */,
+				7D5A2B0D2324C15A00B56000 /* feed */,
 				7DB1586E23120F6F00F86A9E /* KIFUtil.swift */,
 				7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */,
 				7D47CCB622FB88CA00A4D96E /* Info.plist */,
@@ -216,15 +257,42 @@
 			path = WiltUITests;
 			sourceTree = "<group>";
 		};
-		7DB1588A2319ED9900F86A9E /* Mocks */ = {
+		7D5A2B0C2324BEF700B56000 /* feed */ = {
+			isa = PBXGroup;
+			children = (
+				7D5A2AFA231A5B1D00B56000 /* FeedViewController.swift */,
+				7D5A2B142324E0FD00B56000 /* FeedViewModel.swift */,
+				7D5A2AFC231E687100B56000 /* PlayHistoryCache.swift */,
+				7D5A2B04232371B400B56000 /* PlayHistoryPager.swift */,
+				7D5A2B082324B25F00B56000 /* TopArtistCell.swift */,
+				7D5A2B0A2324B75900B56000 /* TopArtistData.swift */,
+			);
+			path = feed;
+			sourceTree = "<group>";
+		};
+		7D5A2B0D2324C15A00B56000 /* feed */ = {
+			isa = PBXGroup;
+			children = (
+				7D5A2B022322682F00B56000 /* FeedViewControllerTest.swift */,
+				7D5A2B1A232A504600B56000 /* FeedViewModelTest.swift */,
+				7D5A2B1C232A719E00B56000 /* PlayHistoryPagerTest.swift */,
+				7D5A2B1E232A71F700B56000 /* PlayHistoryCacheTest.swift */,
+			);
+			path = feed;
+			sourceTree = "<group>";
+		};
+		7DB1588A2319ED9900F86A9E /* mocks */ = {
 			isa = PBXGroup;
 			children = (
 				7DB1588D2319EDF000F86A9E /* FakeAuthenticator.swift */,
-				7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */,
+				7D5A2B122324DDBD00B56000 /* FakeDao.swift */,
+				7D5A2B162325169900B56000 /* FakeData.swift */,
 				7DB1588F231A4E2200F86A9E /* FakeError.swift */,
-				7DB15892231A519400F86A9E /* walkthrough */,
+				7D5A2B0E2324C24B00B56000 /* FakePlayHistoryDao.swift */,
+				7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */,
+				7D5A2B102324C25E00B56000 /* FakeWiltAPI.swift */,
 			);
-			path = Mocks;
+			path = mocks;
 			sourceTree = "<group>";
 		};
 		7DB15891231A516F00F86A9E /* walkthrough */ = {
@@ -514,10 +582,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D5A2B05232371B400B56000 /* PlayHistoryPager.swift in Sources */,
 				7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */,
 				7DB158592307D7FE00F86A9E /* Coordinator.swift in Sources */,
+				7D5A2B092324B25F00B56000 /* TopArtistCell.swift in Sources */,
 				7DB1586A230D6C8700F86A9E /* Utils.swift in Sources */,
+				7D5A2B152324E0FD00B56000 /* FeedViewModel.swift in Sources */,
+				7D5A2AF7231A554D00B56000 /* LoggedInCoordinator.swift in Sources */,
+				7D5A2B0B2324B75900B56000 /* TopArtistData.swift in Sources */,
+				7D5A2AF9231A573800B56000 /* MainAppViewController.swift in Sources */,
 				7DB158612309658100F86A9E /* WalkthroughViewController.swift in Sources */,
+				7D5A2AFB231A5B1D00B56000 /* FeedViewController.swift in Sources */,
 				7DB1585B2307D88200F86A9E /* WalkthroughCoordinator.swift in Sources */,
 				7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */,
 				7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */,
@@ -525,8 +600,10 @@
 				7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */,
 				7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */,
 				7DB15863230ABD8F00F86A9E /* WalkthroughPage.swift in Sources */,
+				7D5A2AFF231E6C7600B56000 /* WiltDatabase.swift in Sources */,
 				7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */,
 				7DB1588123169D5E00F86A9E /* FirebaseAPI.swift in Sources */,
+				7D5A2AFD231E687100B56000 /* PlayHistoryCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,13 +611,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D5A2B1B232A504600B56000 /* FeedViewModelTest.swift in Sources */,
+				7D5A2B112324C25E00B56000 /* FakeWiltAPI.swift in Sources */,
 				7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */,
+				7D5A2B0F2324C24B00B56000 /* FakePlayHistoryDao.swift in Sources */,
+				7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */,
 				7DB1586C2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift in Sources */,
+				7D5A2B032322682F00B56000 /* FeedViewControllerTest.swift in Sources */,
 				7DB158892319575C00F86A9E /* WalkthroughCoordinatorTest.swift in Sources */,
+				7D5A2B172325169900B56000 /* FakeData.swift in Sources */,
+				7D5A2B20232BB45200B56000 /* Wilt.xcdatamodeld in Sources */,
 				7DB1588C2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift in Sources */,
 				7DB15890231A4E2200F86A9E /* FakeError.swift in Sources */,
 				7DB1588E2319EDF000F86A9E /* FakeAuthenticator.swift in Sources */,
 				7DB1587F2315EED700F86A9E /* WalkthroughViewModelTest.swift in Sources */,
+				7D5A2B1D232A719E00B56000 /* PlayHistoryPagerTest.swift in Sources */,
+				7D5A2B132324DDBD00B56000 /* FakeDao.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +801,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Wilt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -740,6 +827,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Wilt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
