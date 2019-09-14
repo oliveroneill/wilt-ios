@@ -26,6 +26,41 @@ class FeedViewController: UITableViewController {
         label.numberOfLines = 0
         return label
     }()
+    private lazy var errorView: UIView = {
+        let view = UIView(frame: .zero)
+        let label = UILabel(frame: .zero)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "feed_error_text".localized
+        // A light red
+        view.backgroundColor = UIColor(
+            hue: 0,
+            saturation: 0.67,
+            brightness: 1,
+            alpha: 1
+        )
+        view.addSubview(label)
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(
+                equalTo: view.topAnchor,
+                constant: 8
+            ),
+            label.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -8
+            ),
+            label.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: 8
+            ),
+            label.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -8
+            ),
+        ])
+        return view
+    }()
 
     init(viewModel: FeedViewModel) {
         self.viewModel = viewModel
@@ -58,6 +93,8 @@ class FeedViewController: UITableViewController {
             self.tableView.hideLoadingFooter()
             self.refreshControl?.stopRefreshing()
             self.tableView.backgroundView = nil
+            self.tableView.hideErrorHeader()
+            self.tableView.hideErrorFooter()
             switch state {
             case .displayingRows:
                 break
@@ -66,13 +103,13 @@ class FeedViewController: UITableViewController {
             case .loadingAtBottom:
                 self.tableView.showLoadingFooter()
             case .empty:
+                // This will hide the cell dividers when there's no data
+                self.tableView.tableFooterView = UIView(frame: .zero)
                 self.tableView.backgroundView = self.emptyDataView
             case .errorAtBottom:
-                // TODO: display message
-                break
+                self.tableView.showErrorFooter(view: self.errorView)
             case .errorAtTop:
-                // TODO: display message
-                break
+                self.tableView.showErrorHeader(view: self.errorView)
             }
         }
     }
@@ -103,9 +140,10 @@ class FeedViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == viewModel.items.count - 1 {
+        if indexPath.row == viewModel.items.count - 1 &&
+            !tableView.isErrorFooterShowing {
             viewModel.onScrolledToBottom()
-        } else if indexPath.row == 0 {
+        } else if indexPath.row == 0 && !tableView.isErrorHeaderShowing {
             viewModel.onScrolledToTop()
         }
     }
@@ -115,6 +153,30 @@ extension UITableView {
     private static let loadingFooterHeight: CGFloat = 50
     var isLoadingFooterShowing: Bool {
         return tableFooterView is UIActivityIndicatorView
+    }
+    var isErrorFooterShowing: Bool {
+        return !isLoadingFooterShowing && tableFooterView != nil
+    }
+    var isErrorHeaderShowing: Bool {
+        return tableFooterView != nil
+    }
+
+    func showErrorFooter(view: UIView) {
+        view.frame.size.height = UITableView.loadingFooterHeight
+        tableFooterView = view
+    }
+
+    func hideErrorFooter() {
+        tableFooterView = nil
+    }
+
+    func showErrorHeader(view: UIView) {
+        view.frame.size.height = UITableView.loadingFooterHeight
+        tableHeaderView = view
+    }
+
+    func hideErrorHeader() {
+        tableHeaderView = nil
     }
 
     func showLoadingFooter(){
@@ -131,11 +193,7 @@ extension UITableView {
         guard isLoadingFooterShowing else {
             return
         }
-        UIView.animate(withDuration: 0.2, animations: {
-            self.contentOffset.y -= UITableView.loadingFooterHeight
-        }, completion: { _ in
-            self.tableFooterView = nil
-        })
+        self.tableFooterView = nil
     }
 
     func showRefreshHeader() {

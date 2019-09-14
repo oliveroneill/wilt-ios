@@ -13,10 +13,6 @@ class FeedViewControllerTest: KIFTestCase {
     }
     private let error = FeedViewControllerTestError.testError
 
-    override func setUp() {
-        setupController()
-    }
-
     /// Seup the controller under test. By default these tests will have
     /// a controller that will respond to expected API calls with empty data.
     ///
@@ -43,6 +39,7 @@ class FeedViewControllerTest: KIFTestCase {
     }
 
     func testDisplayRows() {
+        setupController()
         tester().waitForAnimationsToFinish()
         controller.tableView.contentOffset = .zero
         tester().waitForAnimationsToFinish()
@@ -111,6 +108,28 @@ class FeedViewControllerTest: KIFTestCase {
         // Ensure that the table view now displays everything
         tester().waitForAnimationsToFinish()
         controller.tableView.contentOffset = .zero
+        tester().waitForAnimationsToFinish()
+        // expect(self.window).to(recordSnapshot())
+        expect(self.window).to(haveValidSnapshot())
+    }
+
+    func testErrorAtTop() {
+        setupController(apiResponse: .failure(error))
+        // expect(self.window).to(recordSnapshot())
+        expect(self.window).to(haveValidSnapshot())
+    }
+
+    func testErrorAtBottom() {
+        setupController(apiResponse: .failure(error))
+        tester().waitForAnimationsToFinish()
+        controller.tableView.scrollToRow(
+            at: IndexPath(
+                row: controller.tableView.numberOfRows(inSection: 0) - 1,
+                section: 0
+            ),
+            at: .bottom,
+            animated: false
+        )
         tester().waitForAnimationsToFinish()
         // expect(self.window).to(recordSnapshot())
         expect(self.window).to(haveValidSnapshot())
