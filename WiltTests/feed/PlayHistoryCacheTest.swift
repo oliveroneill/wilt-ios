@@ -4,13 +4,13 @@ import CoreData
 @testable import Wilt
 
 class PlayHistoryCacheTest: XCTestCase {
-    lazy var managedObjectModel: NSManagedObjectModel = {
+    private lazy var managedObjectModel: NSManagedObjectModel = {
         let managedObjectModel = NSManagedObjectModel.mergedModel(
             from: [Bundle(for: type(of: self))]
         )!
         return managedObjectModel
     }()
-    lazy var mockPersistentContainer: NSPersistentContainer = {
+    private lazy var mockPersistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(
             name: "PlayHistoryCacheTest",
             managedObjectModel: self.managedObjectModel
@@ -22,7 +22,7 @@ class PlayHistoryCacheTest: XCTestCase {
         container.loadPersistentStores {
             precondition($0.type == NSInMemoryStoreType)
             if let error = $1 {
-                fatalError("Create an in-mem coordinator failed \(error)")
+                fatalError("Create an in-memory coordinator failed \(error)")
             }
         }
         return container
@@ -31,7 +31,13 @@ class PlayHistoryCacheTest: XCTestCase {
 
     override func setUp() {
         FakeData.items.forEach {
-            let item = TopArtist(context: mockPersistentContainer.viewContext)
+            let item = TopArtist(
+                entity: NSEntityDescription.entity(
+                    forEntityName: "TopArtist",
+                    in: mockPersistentContainer.viewContext
+                )!,
+                insertInto: mockPersistentContainer.viewContext
+            )
             item.topArtist = $0.topArtist
             item.count = $0.count
             item.date = $0.date
@@ -50,12 +56,12 @@ class PlayHistoryCacheTest: XCTestCase {
     }
 
     private func clearAllData() {
-        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(
             entityName: "TopArtist"
         )
-        let objs = try! mockPersistentContainer.viewContext.fetch(fetchRequest)
-        for case let obj as NSManagedObject in objs {
-            mockPersistentContainer.viewContext.delete(obj)
+        let items = try! mockPersistentContainer.viewContext.fetch(fetchRequest)
+        for case let item as NSManagedObject in items {
+            mockPersistentContainer.viewContext.delete(item)
         }
         try! mockPersistentContainer.viewContext.save()
     }

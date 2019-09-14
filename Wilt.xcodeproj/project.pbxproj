@@ -31,7 +31,6 @@
 		7D5A2B1B232A504600B56000 /* FeedViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1A232A504600B56000 /* FeedViewModelTest.swift */; };
 		7D5A2B1D232A719E00B56000 /* PlayHistoryPagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1C232A719E00B56000 /* PlayHistoryPagerTest.swift */; };
 		7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1E232A71F700B56000 /* PlayHistoryCacheTest.swift */; };
-		7D5A2B20232BB45200B56000 /* Wilt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */; };
 		7DB158592307D7FE00F86A9E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158582307D7FE00F86A9E /* Coordinator.swift */; };
 		7DB1585B2307D88200F86A9E /* WalkthroughCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */; };
 		7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */; };
@@ -52,6 +51,7 @@
 		7DB1588C2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */; };
 		7DB1588E2319EDF000F86A9E /* FakeAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588D2319EDF000F86A9E /* FakeAuthenticator.swift */; };
 		7DB15890231A4E2200F86A9E /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588F231A4E2200F86A9E /* FakeError.swift */; };
+		7DF11A22232C803E00C1072B /* Wilt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */; };
 		7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */; };
 		D53A4544BB2F54445D13BC69 /* Pods_WiltTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028F419E3F49877D3B95A35B /* Pods_WiltTests.framework */; };
 /* End PBXBuildFile section */
@@ -620,7 +620,7 @@
 				7D5A2B032322682F00B56000 /* FeedViewControllerTest.swift in Sources */,
 				7DB158892319575C00F86A9E /* WalkthroughCoordinatorTest.swift in Sources */,
 				7D5A2B172325169900B56000 /* FakeData.swift in Sources */,
-				7D5A2B20232BB45200B56000 /* Wilt.xcdatamodeld in Sources */,
+				7DF11A22232C803E00C1072B /* Wilt.xcdatamodeld in Sources */,
 				7DB1588C2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift in Sources */,
 				7DB15890231A4E2200F86A9E /* FakeError.swift in Sources */,
 				7DB1588E2319EDF000F86A9E /* FakeAuthenticator.swift in Sources */,
