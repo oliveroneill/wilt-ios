@@ -8,6 +8,10 @@ import KIF
 class FeedViewControllerTest: KIFTestCase {
     private var window: UIWindow!
     private var controller: FeedViewController!
+    enum FeedViewControllerTestError: Error {
+        case testError
+    }
+    private let error = FeedViewControllerTestError.testError
 
     override func setUp() {
         setupController()
@@ -19,23 +23,12 @@ class FeedViewControllerTest: KIFTestCase {
     /// - Parameter apiResponds: Set this to false so that the API never
     /// responds. This is useful to avoid the loading spinners disappearing
     /// before the snapshot is taken
-    private func setupController(apiResponds: Bool = true,
-                                 dao: PlayHistoryDao = FakeDao(items: FakeData.items + FakeData.items + FakeData.items),
-                                 apiShouldRespondEmpty: Bool = false) {
-        let result: [Timespan:Result<[TopArtistData], Error>]
-        if apiResponds {
-            result = [
-                Timespan(from: 1567346400, to: 1573390800): .success([]),
-                Timespan(from: 1551013200, to: 1557064800): .success([])
-            ]
-        } else {
-            result = [:]
-        }
+    private func setupController(apiResponse: Result<[TopArtistData], Error>? = .success([]),
+                                 dao: PlayHistoryDao = FakeDao(items: FakeData.items + FakeData.items + FakeData.items)) {
         let viewModel = FeedViewModel(
             dao: dao,
             api: FakeWiltAPI(
-                topArtistPerWeekResult: result,
-                sameResponseToAnything: apiShouldRespondEmpty ? .success([]) : nil
+                sameResponseToAnything: apiResponse
             )
         )
         controller = FeedViewController(viewModel: viewModel)
@@ -58,6 +51,7 @@ class FeedViewControllerTest: KIFTestCase {
     }
 
     func testShowSpinnerAtBottom() {
+        setupController(apiResponse: nil)
         tester().waitForAnimationsToFinish()
         controller.tableView.scrollToRow(
             at: IndexPath(
@@ -75,13 +69,13 @@ class FeedViewControllerTest: KIFTestCase {
     }
 
     func testShowSpinnerAtTopOnLoad() {
-        setupController(apiResponds: false)
+        setupController(apiResponse: nil)
         // expect(self.window).to(recordSnapshot())
         expect(self.window).to(haveValidSnapshot())
     }
 
     func testShowSpinnerAtTopOnSwipeUp() {
-        setupController(apiResponds: false)
+        setupController(apiResponse: nil)
         // I attempted to use KIF's pullToRefreshView but was unable to
         // get the scroll animation to stop predictably
         controller.tableView.refreshControl?.refresh(animate: true)
@@ -91,7 +85,7 @@ class FeedViewControllerTest: KIFTestCase {
     }
 
     func testEmptyData() {
-        setupController(dao: FakeDao(items: []), apiShouldRespondEmpty: true)
+        setupController(dao: FakeDao(items: []))
         tester().waitForAnimationsToFinish()
         // expect(self.window).to(recordSnapshot())
         expect(self.window).to(haveValidSnapshot())
@@ -108,7 +102,7 @@ class FeedViewControllerTest: KIFTestCase {
         }
         let dao = ChangingItemsDao()
         // Start with an empty dataset
-        setupController(dao: dao, apiShouldRespondEmpty: true)
+        setupController(dao: dao)
         tester().waitForAnimationsToFinish()
         // Change the dao to now display some data
         dao.items = FakeData.items
@@ -121,6 +115,4 @@ class FeedViewControllerTest: KIFTestCase {
         // expect(self.window).to(recordSnapshot())
         expect(self.window).to(haveValidSnapshot())
     }
-
-    // TODO: test error
 }
