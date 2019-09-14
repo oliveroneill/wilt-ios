@@ -31,6 +31,8 @@ class FeedViewController: UITableViewController {
         }
         refreshControl = customRefreshControl
         tableView.allowsSelection = false
+        // This will hide the cell dividers when there's no data
+        tableView.tableFooterView = UIView(frame: .zero)
     }
 
     required init?(coder aDecoder: NSCoder) {
