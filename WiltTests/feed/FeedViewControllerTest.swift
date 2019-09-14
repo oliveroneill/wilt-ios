@@ -64,7 +64,7 @@ class FeedViewControllerTest: KIFTestCase {
                 section: 0
             ),
             at: .bottom,
-            animated: true
+            animated: false
         )
         tester().waitForAnimationsToFinish()
         controller.view.layoutIfNeeded()
