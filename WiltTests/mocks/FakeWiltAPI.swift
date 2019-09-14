@@ -7,24 +7,24 @@ struct Timespan: Hashable {
 
 class FakeWiltAPI: WiltAPI {
     private let topArtistPerWeekResult: [Timespan:Result<[TopArtistData], Error>]
-    private let respondEmptyToEverything: Bool
+    private let sameResponseToAnything: Result<[TopArtistData], Error>?
     var topArtistsPerWeekCalls = [(from: Int64, to: Int64)]()
 
     init(topArtistPerWeekResult: [Timespan:Result<[TopArtistData], Error>] = [:],
-         respondEmptyToEverything: Bool = false) {
+         sameResponseToAnything: Result<[TopArtistData], Error>? = nil) {
         self.topArtistPerWeekResult = topArtistPerWeekResult
-        self.respondEmptyToEverything = respondEmptyToEverything
+        self.sameResponseToAnything = sameResponseToAnything
     }
 
     func topArtistsPerWeek(from: Int64, to: Int64,
                            completion: @escaping (Result<[TopArtistData], Error>) -> Void) {
         topArtistsPerWeekCalls.append((from: from, to: to))
-        guard !respondEmptyToEverything else {
-            completion(.success([]))
+        guard let response = sameResponseToAnything else {
+            if let result = topArtistPerWeekResult[Timespan(from: from, to: to)] {
+                completion(result)
+            }
             return
         }
-        if let result = topArtistPerWeekResult[Timespan(from: from, to: to)] {
-            completion(result)
-        }
+        completion(response)
     }
 }

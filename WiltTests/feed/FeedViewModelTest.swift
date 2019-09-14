@@ -127,9 +127,7 @@ class FeedViewModelTest: XCTestCase {
     func testOnScrolledToTopEmpty() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556496000, to: 1568592000): .success([]),
-            ])
+            api: FakeWiltAPI(sameResponseToAnything: .success([]))
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -147,9 +145,7 @@ class FeedViewModelTest: XCTestCase {
     func testOnScrolledToBottomEmpty() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556496000, to: 1568592000): .success([]),
-            ])
+            api: FakeWiltAPI(sameResponseToAnything: .success([]))
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -167,9 +163,7 @@ class FeedViewModelTest: XCTestCase {
     func testOnViewAppearedEmpty() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556496000, to: 1568592000): .success([]),
-            ])
+            api: FakeWiltAPI(sameResponseToAnything: .success([]))
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -187,12 +181,28 @@ class FeedViewModelTest: XCTestCase {
     func testRefreshEmpty() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556496000, to: 1568592000): .success([]),
-            ])
+            api: FakeWiltAPI(sameResponseToAnything: .success([]))
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
+                self.exp.fulfill()
+            }
+        }
+        viewModel.refresh()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testRefreshDisplaysRowsAfterAPICall() {
+        viewModel = FeedViewModel(
+            dao: FakeDao(items: []),
+            api: FakeWiltAPI(sameResponseToAnything: .success(FakeData.items))
+        )
+        viewModel.onViewUpdate = {
+            if $0 == FeedViewState.displayingRows {
                 self.exp.fulfill()
             }
         }

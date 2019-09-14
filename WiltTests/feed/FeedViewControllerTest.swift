@@ -37,7 +37,7 @@ class FeedViewControllerTest: KIFTestCase {
             ),
             api: FakeWiltAPI(
                 topArtistPerWeekResult: result,
-                respondEmptyToEverything: apiShouldRespondEmpty
+                sameResponseToAnything: apiShouldRespondEmpty ? .success([]) : nil
             )
         )
         controller = FeedViewController(viewModel: viewModel)
