@@ -15,7 +15,6 @@ class FakeWiltAPI: WiltAPI {
 
     func topArtistsPerWeek(from: Int64, to: Int64,
                            completion: @escaping (Result<[TopArtistData], Error>) -> Void) {
-        print("OK", from, to)
         topArtistsPerWeekCalls.append((from: from, to: to))
         if let result = topArtistPerWeekResult[Timespan(from: from, to: to)] {
             completion(result)

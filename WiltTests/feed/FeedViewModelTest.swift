@@ -128,7 +128,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556460000, to: 1568556000): .success([]),
+                Timespan(from: 1556496000, to: 1568592000): .success([]),
             ])
         )
         viewModel.onViewUpdate = {
@@ -148,7 +148,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556460000, to: 1568556000): .success([]),
+                Timespan(from: 1556496000, to: 1568592000): .success([]),
             ])
         )
         viewModel.onViewUpdate = {
@@ -168,7 +168,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556460000, to: 1568556000): .success([]),
+                Timespan(from: 1556496000, to: 1568592000): .success([]),
             ])
         )
         viewModel.onViewUpdate = {
@@ -188,7 +188,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556460000, to: 1568556000): .success([]),
+                Timespan(from: 1556496000, to: 1568592000): .success([]),
             ])
         )
         viewModel.onViewUpdate = {
@@ -208,7 +208,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556460000, to: 1568556000): .failure(
+                Timespan(from: 1556496000, to: 1568592000): .failure(
                     FeedViewModelTestError.testError
                 ),
             ])
@@ -231,7 +231,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: FakeData.items),
             api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1508677200, to: 1514725200): .failure(
+                Timespan(from: 1508716800, to: 1514764800): .failure(
                     FeedViewModelTestError.testError
                 ),
             ])
@@ -253,7 +253,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556460000, to: 1568556000): .failure(
+                Timespan(from: 1556496000, to: 1568592000): .failure(
                     FeedViewModelTestError.testError
                 ),
             ])
@@ -275,7 +275,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556460000, to: 1568556000): .failure(
+                Timespan(from: 1556496000, to: 1568592000): .failure(
                     FeedViewModelTestError.testError
                 ),
             ])
@@ -297,7 +297,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: FakeData.items),
             api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1551013200, to: 1557064800): .success([]),
+                Timespan(from: 1551052800, to: 1557100800): .success([]),
             ])
         )
         viewModel.onViewUpdate = {
@@ -317,7 +317,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556460000, to: 1568556000): .failure(
+                Timespan(from: 1556496000, to: 1568592000): .failure(
                     WiltAPIError.loggedOut
                 ),
             ])
