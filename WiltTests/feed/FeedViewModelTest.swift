@@ -217,14 +217,11 @@ class FeedViewModelTest: XCTestCase {
     func testOnScrolledToTopError() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556496000, to: 1568592000): .failure(
-                    FeedViewModelTestError.testError
-                ),
-            ])
+            api: FakeWiltAPI(
+                sameResponseToAnything: .failure(FeedViewModelTestError.testError)
+            )
         )
         viewModel.onViewUpdate = {
-            print($0)
             if $0 == FeedViewState.errorAtTop {
                 self.exp.fulfill()
             }
@@ -240,11 +237,9 @@ class FeedViewModelTest: XCTestCase {
     func testOnScrolledToBottomError() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: FakeData.items),
-            api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1508716800, to: 1514764800): .failure(
-                    FeedViewModelTestError.testError
-                ),
-            ])
+            api: FakeWiltAPI(
+                sameResponseToAnything: .failure(FeedViewModelTestError.testError)
+            )
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.errorAtBottom {
@@ -262,11 +257,9 @@ class FeedViewModelTest: XCTestCase {
     func testOnViewAppearedError() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556496000, to: 1568592000): .failure(
-                    FeedViewModelTestError.testError
-                ),
-            ])
+            api: FakeWiltAPI(
+                sameResponseToAnything: .failure(FeedViewModelTestError.testError)
+            )
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.errorAtTop {
@@ -284,11 +277,9 @@ class FeedViewModelTest: XCTestCase {
     func testRefreshError() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556496000, to: 1568592000): .failure(
-                    FeedViewModelTestError.testError
-                ),
-            ])
+            api: FakeWiltAPI(
+                sameResponseToAnything: .failure(FeedViewModelTestError.testError)
+            )
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.errorAtTop {
@@ -306,9 +297,9 @@ class FeedViewModelTest: XCTestCase {
     func testOnViewAppearedDisplayingRows() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: FakeData.items),
-            api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1551052800, to: 1557100800): .success([]),
-            ])
+            api: FakeWiltAPI(
+                sameResponseToAnything: .success([])
+            )
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.displayingRows {
@@ -326,11 +317,9 @@ class FeedViewModelTest: XCTestCase {
     func testOnViewAppearedLoggedOut() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekResult: [
-                Timespan(from: 1556496000, to: 1568592000): .failure(
-                    WiltAPIError.loggedOut
-                ),
-            ])
+            api: FakeWiltAPI(
+                sameResponseToAnything: .failure(WiltAPIError.loggedOut)
+            )
         )
         class ListeningDelegate: FeedViewModelDelegate {
             private let exp: XCTestExpectation
