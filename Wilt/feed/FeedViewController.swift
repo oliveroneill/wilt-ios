@@ -16,6 +16,16 @@ class FeedViewController: UITableViewController {
         )
         return refreshControl
     }()
+    private lazy var emptyDataView: UIView = {
+        let label = UILabel(frame: .zero)
+        label.font = UIFont.systemFont(ofSize: 21)
+        label.textAlignment = .center
+        label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "empty_data_text".localized
+        label.numberOfLines = 0
+        return label
+    }()
 
     init(viewModel: FeedViewModel) {
         self.viewModel = viewModel
@@ -45,28 +55,24 @@ class FeedViewController: UITableViewController {
 
     private func onViewUpdate(state: FeedViewState) {
         DispatchQueue.main.async { [unowned self] in
+            self.tableView.hideLoadingFooter()
+            self.refreshControl?.stopRefreshing()
+            self.tableView.backgroundView = nil
             switch state {
             case .displayingRows:
-                self.tableView.hideLoadingFooter()
-                self.refreshControl?.stopRefreshing()
+                break
             case .loadingAtTop:
-                self.tableView.hideLoadingFooter()
                 self.tableView.showRefreshHeader()
             case .loadingAtBottom:
-                self.refreshControl?.stopRefreshing()
                 self.tableView.showLoadingFooter()
             case .empty:
-                // TODO: display message
-                self.tableView.hideLoadingFooter()
-                self.refreshControl?.stopRefreshing()
+                self.tableView.backgroundView = self.emptyDataView
             case .errorAtBottom:
                 // TODO: display message
-                self.tableView.hideLoadingFooter()
-                self.refreshControl?.stopRefreshing()
+                break
             case .errorAtTop:
                 // TODO: display message
-                self.tableView.hideLoadingFooter()
-                self.refreshControl?.stopRefreshing()
+                break
             }
         }
     }

@@ -19,7 +19,9 @@ class FeedViewControllerTest: KIFTestCase {
     /// - Parameter apiResponds: Set this to false so that the API never
     /// responds. This is useful to avoid the loading spinners disappearing
     /// before the snapshot is taken
-    private func setupController(apiResponds: Bool = true) {
+    private func setupController(apiResponds: Bool = true,
+                                 items: [TopArtistData] = FakeData.items + FakeData.items + FakeData.items,
+                                 apiShouldRespondEmpty: Bool = false) {
         let result: [Timespan:Result<[TopArtistData], Error>]
         if apiResponds {
             result = [
@@ -31,10 +33,11 @@ class FeedViewControllerTest: KIFTestCase {
         }
         let viewModel = FeedViewModel(
             dao: FakeDao(
-                items: FakeData.items + FakeData.items + FakeData.items
+                items: items
             ),
             api: FakeWiltAPI(
-                topArtistPerWeekResult: result
+                topArtistPerWeekResult: result,
+                respondEmptyToEverything: apiShouldRespondEmpty
             )
         )
         controller = FeedViewController(viewModel: viewModel)
@@ -89,6 +92,13 @@ class FeedViewControllerTest: KIFTestCase {
         expect(self.window).to(haveValidSnapshot())
     }
 
-    // TODO: test empty data
+    func testEmptyData() {
+        setupController(items: [], apiShouldRespondEmpty: true)
+        tester().waitForAnimationsToFinish()
+        // expect(self.window).to(recordSnapshot())
+        expect(self.window).to(haveValidSnapshot())
+    }
+
+    // TODO: test onRowsUpdated
     // TODO: test error
 }
