@@ -20,7 +20,7 @@ class FeedViewControllerTest: KIFTestCase {
     /// responds. This is useful to avoid the loading spinners disappearing
     /// before the snapshot is taken
     private func setupController(apiResponds: Bool = true,
-                                 items: [TopArtistData] = FakeData.items + FakeData.items + FakeData.items,
+                                 dao: PlayHistoryDao = FakeDao(items: FakeData.items + FakeData.items + FakeData.items),
                                  apiShouldRespondEmpty: Bool = false) {
         let result: [Timespan:Result<[TopArtistData], Error>]
         if apiResponds {
@@ -32,9 +32,7 @@ class FeedViewControllerTest: KIFTestCase {
             result = [:]
         }
         let viewModel = FeedViewModel(
-            dao: FakeDao(
-                items: items
-            ),
+            dao: dao,
             api: FakeWiltAPI(
                 topArtistPerWeekResult: result,
                 sameResponseToAnything: apiShouldRespondEmpty ? .success([]) : nil
@@ -93,12 +91,36 @@ class FeedViewControllerTest: KIFTestCase {
     }
 
     func testEmptyData() {
-        setupController(items: [], apiShouldRespondEmpty: true)
+        setupController(dao: FakeDao(items: []), apiShouldRespondEmpty: true)
         tester().waitForAnimationsToFinish()
         // expect(self.window).to(recordSnapshot())
         expect(self.window).to(haveValidSnapshot())
     }
 
-    // TODO: test onRowsUpdated
+
+    func testOnRowsUpdated() {
+        // Create a dao that we can change the underlying items and ensure
+        // the view updates
+        class ChangingItemsDao: PlayHistoryDao {
+            var items: [TopArtistData] = []
+            var onDataChange: (() -> Void)?
+            func batchUpsert(items: [TopArtistData]) throws {}
+        }
+        let dao = ChangingItemsDao()
+        // Start with an empty dataset
+        setupController(dao: dao, apiShouldRespondEmpty: true)
+        tester().waitForAnimationsToFinish()
+        // Change the dao to now display some data
+        dao.items = FakeData.items
+        // Alert the view
+        dao.onDataChange?()
+        // Ensure that the table view now displays everything
+        tester().waitForAnimationsToFinish()
+        controller.tableView.contentOffset = .zero
+        tester().waitForAnimationsToFinish()
+        // expect(self.window).to(recordSnapshot())
+        expect(self.window).to(haveValidSnapshot())
+    }
+
     // TODO: test error
 }
