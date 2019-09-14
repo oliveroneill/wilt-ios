@@ -74,6 +74,12 @@ class PlayHistoryCache: NSObject, PlayHistoryDao {
             } catch {
                 insertError = error
             }
+            // Independently save, so that this will happen regardless of errors
+            do {
+                try updateContext.save()
+            } catch {
+                insertError = error
+            }
         }
         if let error = insertError {
             throw error
@@ -108,12 +114,15 @@ class PlayHistoryCache: NSObject, PlayHistoryDao {
             found.week = $0.week
             found.imageURL = $0.imageURL
         }
-        try updateContext.save()
     }
 }
 
 extension PlayHistoryCache: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        // Persist whatever this change is
+        DispatchQueue.main.async { [unowned self] in
+            try? self.viewContext.save()
+        }
         onDataChange?()
     }
 }
