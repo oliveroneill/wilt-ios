@@ -26,40 +26,33 @@ class FeedViewController: UITableViewController {
         label.numberOfLines = 0
         return label
     }()
-    private lazy var errorView: UIView = {
-        let view = UIView(frame: .zero)
-        let label = UILabel(frame: .zero)
-        label.textAlignment = .center
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "feed_error_text".localized
-        // A light red
-        view.backgroundColor = UIColor(
+    private var errorView: UIButton {
+        let button = UIButton(frame: .zero)
+        // Used for KIF testing
+        button.accessibilityLabel = "feed_error_button"
+        button.titleLabel?.textColor = .white
+        button.setTitle("feed_error_text".localized, for: .normal)
+        let lightRed = UIColor(
             hue: 0,
             saturation: 0.67,
             brightness: 1,
             alpha: 1
         )
-        view.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(
-                equalTo: view.topAnchor,
-                constant: 8
-            ),
-            label.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor,
-                constant: -8
-            ),
-            label.leadingAnchor.constraint(
-                equalTo: view.leadingAnchor,
-                constant: 8
-            ),
-            label.trailingAnchor.constraint(
-                equalTo: view.trailingAnchor,
-                constant: -8
-            ),
-        ])
-        return view
+        let darkRed = UIColor(
+            hue: 0,
+            saturation: 0.67,
+            brightness: 0.8,
+            alpha: 1
+        )
+        button.setBackgroundColor(lightRed, for: .normal)
+        button.setBackgroundColor(darkRed, for: .highlighted)
+        return button
+    }
+    private lazy var errorFooterView: UIButton = {
+        return errorView
+    }()
+    private lazy var errorHeaderView: UIButton = {
+        return errorView
     }()
 
     init(viewModel: FeedViewModel) {
@@ -107,11 +100,29 @@ class FeedViewController: UITableViewController {
                 self.tableView.tableFooterView = UIView(frame: .zero)
                 self.tableView.backgroundView = self.emptyDataView
             case .errorAtBottom:
-                self.tableView.showErrorFooter(view: self.errorView)
+                self.tableView.showErrorFooter(view: self.errorFooterView)
+                self.errorFooterView.addTarget(
+                    self,
+                    action: #selector(self.retryLoadFromBottom),
+                    for: .touchUpInside
+                )
             case .errorAtTop:
-                self.tableView.showErrorHeader(view: self.errorView)
+                self.tableView.showErrorHeader(view: self.errorHeaderView)
+                self.errorHeaderView.addTarget(
+                    self,
+                    action: #selector(self.retryLoadFromTop),
+                    for: .touchUpInside
+                )
             }
         }
+    }
+
+    @objc func retryLoadFromBottom() {
+        viewModel.onScrolledToBottom()
+    }
+
+    @objc func retryLoadFromTop() {
+        viewModel.onScrolledToTop()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -164,6 +175,11 @@ extension UITableView {
     func showErrorFooter(view: UIView) {
         view.frame.size.height = UITableView.loadingFooterHeight
         tableFooterView = view
+        // Change offset to show footer
+        setContentOffset(
+            CGPoint(x: 0, y: contentOffset.y + UITableView.loadingFooterHeight),
+            animated: !isDragging || !isDecelerating
+        )
     }
 
     func hideErrorFooter() {
@@ -187,6 +203,11 @@ extension UITableView {
         footer.frame.size.height = UITableView.loadingFooterHeight
         footer.startAnimating()
         tableFooterView = footer
+        // Change offset to show footer
+        setContentOffset(
+            CGPoint(x: 0, y: contentOffset.y + UITableView.loadingFooterHeight),
+            animated: !isDragging || !isDecelerating
+        )
     }
 
     func hideLoadingFooter(){

@@ -8,6 +8,7 @@ import KIF
 class FeedViewControllerTest: KIFTestCase {
     private var window: UIWindow!
     private var controller: FeedViewController!
+    private var api: FakeWiltAPI!
     enum FeedViewControllerTestError: Error {
         case testError
     }
@@ -21,11 +22,10 @@ class FeedViewControllerTest: KIFTestCase {
     /// before the snapshot is taken
     private func setupController(apiResponse: Result<[TopArtistData], Error>? = .success([]),
                                  dao: PlayHistoryDao = FakeDao(items: FakeData.items + FakeData.items + FakeData.items)) {
+        api = FakeWiltAPI(sameResponseToAnything: apiResponse)
         let viewModel = FeedViewModel(
             dao: dao,
-            api: FakeWiltAPI(
-                sameResponseToAnything: apiResponse
-            )
+            api: api
         )
         controller = FeedViewController(viewModel: viewModel)
         guard let window = UIApplication.shared.keyWindow else {
@@ -115,6 +115,7 @@ class FeedViewControllerTest: KIFTestCase {
 
     func testErrorAtTop() {
         setupController(apiResponse: .failure(error))
+        tester().waitForAnimationsToFinish()
         // expect(self.window).to(recordSnapshot())
         expect(self.window).to(haveValidSnapshot())
     }
@@ -131,7 +132,34 @@ class FeedViewControllerTest: KIFTestCase {
             animated: false
         )
         tester().waitForAnimationsToFinish()
+        controller.view.layoutIfNeeded()
+        tester().waitForAnimationsToFinish()
         // expect(self.window).to(recordSnapshot())
         expect(self.window).to(haveValidSnapshot())
+    }
+
+    func testErrorAtTopRetry() {
+        setupController(apiResponse: .failure(error))
+        tester().tapView(withAccessibilityLabel: "feed_error_button")
+        XCTAssertEqual(2, api.topArtistsPerWeekCalls.count)
+    }
+
+    func testErrorAtBottomRetry() {
+        setupController(apiResponse: .failure(error))
+        tester().waitForAnimationsToFinish()
+        controller.tableView.scrollToRow(
+            at: IndexPath(
+                row: controller.tableView.numberOfRows(inSection: 0) - 1,
+                section: 0
+            ),
+            at: .bottom,
+            animated: false
+        )
+        tester().waitForAnimationsToFinish()
+        sleep(5)
+        tester().tapView(withAccessibilityLabel: "feed_error_button")
+        // It will load the top, then load the bottom and then retry. Therefore
+        // 3
+        XCTAssertEqual(3, api.topArtistsPerWeekCalls.count)
     }
 }

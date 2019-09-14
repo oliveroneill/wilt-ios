@@ -124,6 +124,8 @@ class PlayHistoryPager {
                 try self.dao.batchUpsert(items: items)
                 completionHandler(.success(items.count))
             } catch {
+                // If we failed to refresh then we should try again next time
+                self.refreshingCurrentWeek = false
                 completionHandler(.failure(error))
             }
         }
