@@ -85,6 +85,6 @@ extension SpotifyAppAuthoriser: SPTSessionManagerDelegate {
             return false
         }
         onAuthorisationComplete?(.success(code))
-        return true
+        return false
     }
 }
