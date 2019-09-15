@@ -5,6 +5,7 @@ import CoreData
 /// different tabs will be used to navigate
 class MainAppViewController: UITabBarController {
     weak var controllerDelegate: MainAppViewControllerDelegate?
+    private var tabs = [(controller: UIViewController, title: String)]()
 
     /// Create the main app controller
     ///
@@ -13,6 +14,7 @@ class MainAppViewController: UITabBarController {
     ///   - api: Where data should be requested from
     init(database: WiltDatabase, api: WiltAPI) {
         super.init(nibName: nil, bundle: nil)
+        delegate = self
         database.loadContext { [unowned self] in
             switch ($0) {
             case .success(let context):
@@ -38,8 +40,8 @@ class MainAppViewController: UITabBarController {
         }
     }
 
-    private func setupTabs(context: NSManagedObjectContext,
-                           api: WiltAPI) throws {
+    private func setupFeedController(context: NSManagedObjectContext,
+                                     api: WiltAPI) throws -> FeedViewController {
         let viewModel = FeedViewModel(
             dao: try PlayHistoryCache(viewContext: context),
             api: api
@@ -50,7 +52,19 @@ class MainAppViewController: UITabBarController {
             tabBarSystemItem: .recents,
             tag: 0
         )
-        viewControllers = [feedViewController]
+        return feedViewController
+    }
+
+    private func setupTabs(context: NSManagedObjectContext,
+                           api: WiltAPI) throws {
+        tabs = [
+            (
+                controller: try setupFeedController(context: context, api: api),
+                title: "feed_title".localized
+            )
+        ]
+        title = tabs[0].title
+        viewControllers = tabs.map { $0.controller }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -59,6 +73,16 @@ class MainAppViewController: UITabBarController {
 
     override func viewDidLoad() {
         view.backgroundColor = .white
+    }
+}
+
+extension MainAppViewController: UITabBarControllerDelegate {
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        guard item.tag < tabs.count else {
+            title = "Wilt"
+            return
+        }
+        title = tabs[item.tag].title
     }
 }
 
