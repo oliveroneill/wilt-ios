@@ -5,12 +5,24 @@ import SDWebImage
 class TopArtistCell: UITableViewCell {
     static let reuseIdentifier = "topArtistCell"
     private lazy var roundCornerTransformer: SDImageTransformer = {
-        return SDImageRoundCornerTransformer(
-            // This will ensure that the image comes out as a circle
-            radius: CGFloat.greatestFiniteMagnitude,
-            corners: .allCorners,
-            borderWidth: 0,
-            borderColor: nil
+        return SDImagePipelineTransformer(
+            transformers: [
+                SDImageCroppingTransformer(
+                    rect: CGRect(
+                        origin: .zero,
+                        // Fix the height and width since the images out of
+                        // Spotify aren't consistent sizes
+                        size: CGSize(width: 640, height: 640)
+                    )
+                ),
+                SDImageRoundCornerTransformer(
+                    // This will ensure that the image comes out as a circle
+                    radius: CGFloat.greatestFiniteMagnitude,
+                    corners: .allCorners,
+                    borderWidth: 0,
+                    borderColor: nil
+                )
+            ]
         )
     }()
     /// Set this when the view is being reused
@@ -48,6 +60,7 @@ class TopArtistCell: UITableViewCell {
         contentView.addSubview(dateLabel)
         contentView.addSubview(artistImageView)
         artistImageView.translatesAutoresizingMaskIntoConstraints = false
+        artistImageView.contentMode = .scaleAspectFill
         NSLayoutConstraint.activate([
             artistImageView.topAnchor.constraint(
                 equalTo: contentView.safeAreaLayoutGuide.topAnchor,
@@ -67,7 +80,7 @@ class TopArtistCell: UITableViewCell {
             ),
             artistImageView.widthAnchor.constraint(
                 equalTo: artistImageView.heightAnchor
-            )
+            ),
         ])
         artistLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
