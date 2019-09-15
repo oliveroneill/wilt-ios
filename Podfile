@@ -16,6 +16,7 @@ target 'Wilt' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Functions'
   pod 'Firebase/Auth'
+  pod 'SDWebImage', '~> 5.0'
 
   target 'WiltTests' do
     inherit! :search_paths

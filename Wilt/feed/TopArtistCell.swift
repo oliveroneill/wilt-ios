@@ -1,30 +1,74 @@
 import Foundation
+import SDWebImage
 
 /// A single table view for the play history feed. See `FeedViewController`
 class TopArtistCell: UITableViewCell {
     static let reuseIdentifier = "topArtistCell"
+    private lazy var roundCornerTransformer: SDImageTransformer = {
+        return SDImageRoundCornerTransformer(
+            // This will ensure that the image comes out as a circle
+            radius: CGFloat.greatestFiniteMagnitude,
+            corners: .allCorners,
+            borderWidth: 0,
+            borderColor: nil
+        )
+    }()
     /// Set this when the view is being reused
     var viewModel: FeedItemViewModel? {
         didSet {
             artistLabel.text = viewModel?.artistName ?? ""
             playsLabel.text = viewModel?.playsText ?? ""
             dateLabel.text = viewModel?.dateText ?? ""
+            if let imageURL = viewModel?.imageURL {
+                artistImageView.sd_setImage(
+                    with: imageURL,
+                    placeholderImage: nil,
+                    context: [.imageTransformer: roundCornerTransformer]
+                )
+            }
         }
     }
     private let artistLabel: UILabel
     private let playsLabel: UILabel
     private let dateLabel: UILabel
+    // I know UITableViewCell has it's own imageView property but I didn't
+    // want to have to unwrap it all the time
+    private let artistImageView: UIImageView
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         artistLabel = UILabel(frame: .zero)
         artistLabel.font = UIFont.boldSystemFont(ofSize: 16)
         playsLabel = UILabel(frame: .zero)
         dateLabel = UILabel(frame: .zero)
+        artistImageView = UIImageView(frame: .zero)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // Setup views
         contentView.addSubview(artistLabel)
         contentView.addSubview(playsLabel)
         contentView.addSubview(dateLabel)
+        contentView.addSubview(artistImageView)
+        artistImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            artistImageView.topAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.topAnchor,
+                constant: 16
+            ),
+            artistImageView.bottomAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.bottomAnchor,
+                constant: -16
+            ),
+            artistImageView.leadingAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,
+                constant: 16
+            ),
+            artistImageView.trailingAnchor.constraint(
+                equalTo: artistLabel.leadingAnchor,
+                constant: -16
+            ),
+            artistImageView.widthAnchor.constraint(
+                equalTo: artistImageView.heightAnchor
+            )
+        ])
         artistLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             artistLabel.topAnchor.constraint(
@@ -36,7 +80,7 @@ class TopArtistCell: UITableViewCell {
                 constant: -8
             ),
             artistLabel.leadingAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,
+                equalTo: artistImageView.trailingAnchor,
                 constant: 16
             ),
             artistLabel.trailingAnchor.constraint(
@@ -55,7 +99,7 @@ class TopArtistCell: UITableViewCell {
                 constant: -8
             ),
             playsLabel.leadingAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,
+                equalTo: artistImageView.trailingAnchor,
                 constant: 16
             ),
             playsLabel.trailingAnchor.constraint(
@@ -74,7 +118,7 @@ class TopArtistCell: UITableViewCell {
                 constant: -16
             ),
             dateLabel.leadingAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,
+                equalTo: artistImageView.trailingAnchor,
                 constant: 16
             ),
             dateLabel.trailingAnchor.constraint(

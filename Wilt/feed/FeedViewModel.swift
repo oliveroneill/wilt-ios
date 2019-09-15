@@ -20,6 +20,7 @@ struct FeedItemViewModel: Equatable {
     let artistName: String
     let playsText: String
     let dateText: String
+    let imageURL: URL
 }
 
 /// View model for displaying the user's music playing history in a feed
@@ -50,7 +51,8 @@ class FeedViewModel {
             FeedItemViewModel(
                 artistName: $0.topArtist,
                 playsText: "\($0.count) plays",
-                dateText: "\(dateFormatter.string(from: $0.date))"
+                dateText: "\(dateFormatter.string(from: $0.date))",
+                imageURL: $0.imageURL
             )
         }
     }

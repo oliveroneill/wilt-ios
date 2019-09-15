@@ -83,6 +83,9 @@ PODS:
   - Nimble-Snapshots/Core (7.0.0):
     - iOSSnapshotTestCase (~> 6.0)
     - Nimble (~> 8.0)
+  - SDWebImage (5.0.2):
+    - SDWebImage/Core (= 5.0.2)
+  - SDWebImage/Core (5.0.2)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -91,6 +94,7 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
   - KIF
   - Nimble-Snapshots
+  - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -109,6 +113,7 @@ SPEC REPOS:
     - nanopb
     - Nimble
     - Nimble-Snapshots
+    - SDWebImage
 
 EXTERNAL SOURCES:
   Keys:
@@ -131,7 +136,8 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
   Nimble-Snapshots: 2d6d712ceb2d1850d88f850fbd7c732618106022
+  SDWebImage: 6764b5fa0f73c203728052955dbefa2bf1f33282
 
-PODFILE CHECKSUM: 4a1fc04fee8079ba641ab11fabd1aa324049d0f9
+PODFILE CHECKSUM: 5506d6bd40a6cec070ad9837d3b68ae6a0a7014c
 
 COCOAPODS: 1.6.1

@@ -39,38 +39,41 @@ class FeedViewModelTest: XCTestCase {
                 count: 99,
                 date: FakeData.formatter.date(from: "2019-02-25")!,
                 week: "09-2019",
-                imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl1.notreal.net")!
             ),
             TopArtistData(
                 topArtist: "Bon Iver",
                 count: 12,
                 date: FakeData.formatter.date(from: "2018-12-25")!,
                 week: "52-2018",
-                imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl2.notreal.net")!
             ),
             TopArtistData(
                 topArtist: "Death Grips",
                 count: 78,
                 date: FakeData.formatter.date(from: "2018-10-21")!,
                 week: "43-2018",
-                imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl3.notreal.net")!
             ),
         ]
         let expected = [
             FeedItemViewModel(
                 artistName: "Pinegrove",
                 playsText: "99 plays",
-                dateText: "Feb 2019"
+                dateText: "Feb 2019",
+                imageURL: URL(string: "http://notarealimageurl1.notreal.net")!
             ),
             FeedItemViewModel(
                 artistName: "Bon Iver",
                 playsText: "12 plays",
-                dateText: "Dec 2018"
+                dateText: "Dec 2018",
+                imageURL: URL(string: "http://notarealimageurl2.notreal.net")!
             ),
             FeedItemViewModel(
                 artistName: "Death Grips",
                 playsText: "78 plays",
-                dateText: "Oct 2018"
+                dateText: "Oct 2018",
+                imageURL: URL(string: "http://notarealimageurl3.notreal.net")!
             ),
         ]
         viewModel = FeedViewModel(
