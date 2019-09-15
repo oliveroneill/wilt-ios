@@ -114,12 +114,12 @@ class FeedViewModelTest: XCTestCase {
         }
     }
 
-    func testOnScrolledToTop() {
+    func testonRetryHeaderPressed() {
         viewModel.onViewUpdate = {
             XCTAssertEqual(FeedViewState.loadingAtTop, $0)
             self.exp.fulfill()
         }
-        viewModel.onScrolledToTop()
+        viewModel.onRetryHeaderPressed()
         waitForExpectations(timeout: 1) {
             if let error = $0 {
                 XCTFail("Unexpected error: \(error)")
@@ -127,7 +127,20 @@ class FeedViewModelTest: XCTestCase {
         }
     }
 
-    func testOnScrolledToTopEmpty() {
+    func testOnRetryFooterPressed() {
+        viewModel.onViewUpdate = {
+            XCTAssertEqual(FeedViewState.loadingAtBottom, $0)
+            self.exp.fulfill()
+        }
+        viewModel.onRetryFooterPressed()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testonRetryHeaderPressedEmpty() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(sameResponseToAnything: .success([]))
@@ -137,7 +150,7 @@ class FeedViewModelTest: XCTestCase {
                 self.exp.fulfill()
             }
         }
-        viewModel.onScrolledToTop()
+        viewModel.onRetryHeaderPressed()
         waitForExpectations(timeout: 1) {
             if let error = $0 {
                 XCTFail("Unexpected error: \(error)")
@@ -156,6 +169,24 @@ class FeedViewModelTest: XCTestCase {
             }
         }
         viewModel.onScrolledToBottom()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnRetryFooterPressedEmpty() {
+        viewModel = FeedViewModel(
+            dao: FakeDao(items: []),
+            api: FakeWiltAPI(sameResponseToAnything: .success([]))
+        )
+        viewModel.onViewUpdate = {
+            if $0 == FeedViewState.empty {
+                self.exp.fulfill()
+            }
+        }
+        viewModel.onRetryFooterPressed()
         waitForExpectations(timeout: 1) {
             if let error = $0 {
                 XCTFail("Unexpected error: \(error)")
@@ -217,7 +248,7 @@ class FeedViewModelTest: XCTestCase {
         }
     }
 
-    func testOnScrolledToTopError() {
+    func testonRetryHeaderPressedError() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(
@@ -229,7 +260,7 @@ class FeedViewModelTest: XCTestCase {
                 self.exp.fulfill()
             }
         }
-        viewModel.onScrolledToTop()
+        viewModel.onRetryHeaderPressed()
         waitForExpectations(timeout: 1) {
             if let error = $0 {
                 XCTFail("Unexpected error: \(error)")
@@ -250,6 +281,26 @@ class FeedViewModelTest: XCTestCase {
             }
         }
         viewModel.onScrolledToBottom()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnRetryFooterPressedError() {
+        viewModel = FeedViewModel(
+            dao: FakeDao(items: FakeData.items),
+            api: FakeWiltAPI(
+                sameResponseToAnything: .failure(FeedViewModelTestError.testError)
+            )
+        )
+        viewModel.onViewUpdate = {
+            if $0 == FeedViewState.errorAtBottom {
+                self.exp.fulfill()
+            }
+        }
+        viewModel.onRetryFooterPressed()
         waitForExpectations(timeout: 1) {
             if let error = $0 {
                 XCTFail("Unexpected error: \(error)")

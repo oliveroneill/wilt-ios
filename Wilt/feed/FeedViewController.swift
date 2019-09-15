@@ -26,10 +26,8 @@ class FeedViewController: UITableViewController {
         label.numberOfLines = 0
         return label
     }()
-    private var errorView: UIButton {
+    private var errorButton: UIButton {
         let button = UIButton(frame: .zero)
-        // Used for KIF testing
-        button.accessibilityLabel = "feed_error_button"
         button.titleLabel?.textColor = .white
         button.setTitle("feed_error_text".localized, for: .normal)
         let lightRed = UIColor(
@@ -49,10 +47,16 @@ class FeedViewController: UITableViewController {
         return button
     }
     private lazy var errorFooterView: UIButton = {
-        return errorView
+        let button = errorButton
+        // Used for KIF testing
+        button.accessibilityLabel = "feed_error_footer_button"
+        return button
     }()
     private lazy var errorHeaderView: UIButton = {
-        return errorView
+        let button = errorButton
+        // Used for KIF testing
+        button.accessibilityLabel = "feed_error_header_button"
+        return button
     }()
 
     init(viewModel: FeedViewModel) {
@@ -96,18 +100,20 @@ class FeedViewController: UITableViewController {
             case .loadingAtBottom:
                 self.tableView.showLoadingFooter()
             case .empty:
-                // This will hide the cell dividers when there's no data
-                self.tableView.tableFooterView = UIView(frame: .zero)
                 self.tableView.backgroundView = self.emptyDataView
             case .errorAtBottom:
-                self.tableView.showErrorFooter(view: self.errorFooterView)
+                self.tableView.showErrorFooter(
+                    retryButton: self.errorFooterView
+                )
                 self.errorFooterView.addTarget(
                     self,
                     action: #selector(self.retryLoadFromBottom),
                     for: .touchUpInside
                 )
             case .errorAtTop:
-                self.tableView.showErrorHeader(view: self.errorHeaderView)
+                self.tableView.showErrorHeader(
+                    retryButton: self.errorHeaderView
+                )
                 self.errorHeaderView.addTarget(
                     self,
                     action: #selector(self.retryLoadFromTop),
@@ -118,11 +124,11 @@ class FeedViewController: UITableViewController {
     }
 
     @objc func retryLoadFromBottom() {
-        viewModel.onScrolledToBottom()
+        viewModel.onRetryFooterPressed()
     }
 
     @objc func retryLoadFromTop() {
-        viewModel.onScrolledToTop()
+        viewModel.onRetryHeaderPressed()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -154,8 +160,6 @@ class FeedViewController: UITableViewController {
         if indexPath.row == viewModel.items.count - 1 &&
             !tableView.isErrorFooterShowing {
             viewModel.onScrolledToBottom()
-        } else if indexPath.row == 0 && !tableView.isErrorHeaderShowing {
-            viewModel.onScrolledToTop()
         }
     }
 }
@@ -166,15 +170,15 @@ extension UITableView {
         return tableFooterView is UIActivityIndicatorView
     }
     var isErrorFooterShowing: Bool {
-        return !isLoadingFooterShowing && tableFooterView != nil
+        return tableFooterView is UIButton
     }
     var isErrorHeaderShowing: Bool {
-        return tableFooterView != nil
+        return tableHeaderView != nil
     }
 
-    func showErrorFooter(view: UIView) {
-        view.frame.size.height = UITableView.loadingFooterHeight
-        tableFooterView = view
+    func showErrorFooter(retryButton: UIButton) {
+        retryButton.frame.size.height = UITableView.loadingFooterHeight
+        tableFooterView = retryButton
         // Change offset to show footer
         setContentOffset(
             CGPoint(x: 0, y: contentOffset.y + UITableView.loadingFooterHeight),
@@ -183,15 +187,22 @@ extension UITableView {
     }
 
     func hideErrorFooter() {
-        tableFooterView = nil
+        guard isErrorFooterShowing else {
+            return
+        }
+        // This will hide the cell dividers when there's no data
+        tableFooterView = UIView(frame: .zero)
     }
 
-    func showErrorHeader(view: UIView) {
-        view.frame.size.height = UITableView.loadingFooterHeight
-        tableHeaderView = view
+    func showErrorHeader(retryButton: UIButton) {
+        retryButton.frame.size.height = UITableView.loadingFooterHeight
+        tableHeaderView = retryButton
     }
 
     func hideErrorHeader() {
+        guard isErrorHeaderShowing else {
+            return
+        }
         tableHeaderView = nil
     }
 
@@ -214,7 +225,8 @@ extension UITableView {
         guard isLoadingFooterShowing else {
             return
         }
-        self.tableFooterView = nil
+        // This will hide the cell dividers when there's no data
+        tableFooterView = UIView(frame: .zero)
     }
 
     func showRefreshHeader() {

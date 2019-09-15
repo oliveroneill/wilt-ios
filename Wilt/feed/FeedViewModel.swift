@@ -125,7 +125,11 @@ class FeedViewModel {
         loadEarlierPage()
     }
 
-    func onScrolledToTop() {
+    func onRetryFooterPressed() {
+        onScrolledToBottom()
+    }
+
+    func onRetryHeaderPressed() {
         guard state != .loadingAtTop else {
             return
         }
