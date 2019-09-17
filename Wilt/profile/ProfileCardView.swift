@@ -74,6 +74,23 @@ class ProfileCardView: MDCCardCollectionCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        resetViewsToLoadingState()
+    }
+
+    private func resetViewsToLoadingState() {
+        shimmer.isShimmering = true
+        titleLabel.backgroundColor = .lightGray
+        subtitle2Label.backgroundColor = .lightGray
+        subtitle1Label.backgroundColor = .lightGray
+        imageView.backgroundColor = .lightGray
+        imageView.image = nil
+        titleLabel.text = ""
+        subtitle1Label.text = ""
+        subtitle2Label.text = ""
+        chip.titleLabel.text = ""
+    }
+
     /// Configure this view to show the specified view model
     ///
     /// - Parameter state: The data to display
@@ -83,10 +100,7 @@ class ProfileCardView: MDCCardCollectionCell {
         setShadowColor(.black, for: .highlighted)
         switch (state) {
         case .loading(let tagTitle):
-            shimmer.isShimmering = true
-            titleLabel.backgroundColor = .lightGray
-            subtitle2Label.backgroundColor = .lightGray
-            subtitle1Label.backgroundColor = .lightGray
+            resetViewsToLoadingState()
             chip.titleLabel.text = tagTitle
             chip.sizeToFit()
         case .loaded(let tagTitle, let title, let subtitle1, let subtitle2,
