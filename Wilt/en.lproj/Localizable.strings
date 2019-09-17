@@ -14,3 +14,5 @@
 "top_track_long_term_text" = "Your favourite song ever";
 "top_track_medium_term_text" = "Your favourite song in recent months";
 "top_track_short_term_text" = "Your favourite song recently";
+"profile_card_error_text" = "An error occurred.";
+"profile_card_retry_text" = "Retry";

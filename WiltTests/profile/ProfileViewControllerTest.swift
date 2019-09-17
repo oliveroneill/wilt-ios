@@ -9,6 +9,10 @@ class ProfileViewControllerTest: KIFTestCase {
     private var window: UIWindow!
     private var controller: ProfileViewController!
     private var api: FakeWiltAPI!
+    enum ProfileViewControllerTestError: Error {
+        case testError
+    }
+    private let error = ProfileViewControllerTestError.testError
 
     private func setupController(topArtistResult: [TopSomethingRequest:Result<TopArtistInfo, Error>] = [:],
                                  topTrackResult: [TopSomethingRequest:Result<TopTrackInfo, Error>] = [:]) {
@@ -77,4 +81,28 @@ class ProfileViewControllerTest: KIFTestCase {
         expect(self.window).to(haveValidSnapshot())
     }
 
+    func testError() {
+        setupController(
+            topTrackResult: [
+                TopSomethingRequest(timeRange: "long_term", index: 0): .failure(error)
+            ]
+        )
+        tester().waitForAnimationsToFinish()
+        // expect(self.window).to(recordSnapshot())
+        expect(self.window).to(haveValidSnapshot())
+    }
+
+    func testRetries() {
+        setupController(
+            topTrackResult: [
+                TopSomethingRequest(timeRange: "long_term", index: 0): .failure(error)
+            ]
+        )
+        tester().waitForAnimationsToFinish()
+        // Stop the error from happening again
+        api.topTrackResult = [:]
+        tester().tapView(withAccessibilityLabel: "profile_retry_button")
+        // expect(self.window).to(recordSnapshot())
+        expect(self.window).to(haveValidSnapshot())
+    }
 }

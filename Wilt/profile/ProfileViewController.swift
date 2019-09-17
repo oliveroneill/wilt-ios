@@ -84,7 +84,9 @@ extension ProfileViewController: UICollectionViewDataSource {
             for: indexPath
         ) as! ProfileCardView
         // Setup the view
-        cell.configure(state: cards[indexPath.row])
+        cell.configure(state: cards[indexPath.row]) { [unowned self] in
+            self.viewModel.onRetryButtonPressed(cardIndex: indexPath.row)
+        }
         return cell
     }
 }

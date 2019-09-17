@@ -81,33 +81,43 @@ class ProfileViewModel {
         // Make a request for each card
         cards.enumerated().forEach {
             let (cardIndex, card) = $0
-            switch (card) {
-            case .topArtist(let index, let timeRange):
-                api.topArtist(timeRange: timeRange.description, index: index) { [unowned self] in
-                    do {
-                        let artist = try $0.get()
-                        self.cardStates[cardIndex] = artist.toViewModel(
-                            tagTitle: card.readableString
-                        )
-                    } catch {
-                        print("topArtist error", error)
-                        self.cardStates[cardIndex] = .error
-                    }
+            loadCard(card: card, cardIndex: cardIndex)
+        }
+    }
+
+    private func loadCard(card: ProfileCard, cardIndex: Int) {
+        switch (card) {
+        case .topArtist(let index, let timeRange):
+            api.topArtist(timeRange: timeRange.description, index: index) { [unowned self] in
+                do {
+                    let artist = try $0.get()
+                    self.cardStates[cardIndex] = artist.toViewModel(
+                        tagTitle: card.readableString
+                    )
+                } catch {
+                    print("topArtist error", error)
+                    self.cardStates[cardIndex] = .error
                 }
-            case .topTrack(let index, let timeRange):
-                api.topTrack(timeRange: timeRange.description, index: index) { [unowned self] in
-                    do {
-                        let track = try $0.get()
-                        self.cardStates[cardIndex] = track.toViewModel(
-                            tagTitle: card.readableString
-                        )
-                    } catch {
-                        print("topTrack error", error)
-                        self.cardStates[cardIndex] = .error
-                    }
+            }
+        case .topTrack(let index, let timeRange):
+            api.topTrack(timeRange: timeRange.description, index: index) { [unowned self] in
+                do {
+                    let track = try $0.get()
+                    self.cardStates[cardIndex] = track.toViewModel(
+                        tagTitle: card.readableString
+                    )
+                } catch {
+                    print("topTrack error", error)
+                    self.cardStates[cardIndex] = .error
                 }
             }
         }
+    }
+
+    func onRetryButtonPressed(cardIndex: Int) {
+        let card = cards[cardIndex]
+        cardStates[cardIndex] = .loading(tagTitle: card.readableString)
+        loadCard(card: card, cardIndex: cardIndex)
     }
 }
 

@@ -52,6 +52,31 @@ class ProfileCardView: MDCCardCollectionCell {
         return chip
     }()
 
+    private lazy var errorLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "profile_card_error_text".localized
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        return label
+    }()
+
+    private lazy var retryButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        // Used for KIF testing
+        button.accessibilityLabel = "profile_retry_button"
+        button.setTitle("profile_card_retry_text".localized, for: .normal)
+        button.titleLabel?.textColor = .white
+        let darkBlue = UIColor(red: 0, green: 0.41, blue: 0.89, alpha: 1)
+        button.setBackgroundColor(tintColor, for: .normal)
+        button.setBackgroundColor(darkBlue, for: .highlighted)
+        button.layer.cornerRadius = 4
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
+        return button
+    }()
+
     /// Everything will live in this. Only necessary for the shimmer
     private lazy var rootView: UIView = {
         let root = UIView(frame: .zero)
@@ -60,14 +85,21 @@ class ProfileCardView: MDCCardCollectionCell {
         root.addSubview(subtitle1Label)
         root.addSubview(subtitle2Label)
         root.addSubview(chip)
+        root.addSubview(errorLabel)
+        root.addSubview(retryButton)
         return root
     }()
+
+    var onRetryPressed: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         shimmer.contentView = rootView
         addSubview(shimmer)
         setupConstraints()
+        cornerRadius = 8
+        setShadowElevation(.cardPickedUp, for: .selected)
+        setShadowColor(.black, for: .highlighted)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -91,20 +123,34 @@ class ProfileCardView: MDCCardCollectionCell {
         chip.titleLabel.text = ""
     }
 
+    private func setupSuccessfulView() {
+        // Show views as needed
+        titleLabel.isHidden = false
+        subtitle1Label.isHidden = false
+        subtitle2Label.isHidden = false
+        chip.isHidden = false
+        imageView.isHidden = false
+        // Hide error views
+        errorLabel.isHidden = true
+        retryButton.isHidden = true
+    }
+
     /// Configure this view to show the specified view model
     ///
     /// - Parameter state: The data to display
-    func configure(state: CardViewModelState) {
-        cornerRadius = 8
-        setShadowElevation(.cardPickedUp, for: .selected)
-        setShadowColor(.black, for: .highlighted)
+    func configure(state: CardViewModelState,
+                   onRetryPressed: @escaping (() -> Void)) {
+        self.onRetryPressed = onRetryPressed
         switch (state) {
         case .loading(let tagTitle):
+            setupSuccessfulView()
             resetViewsToLoadingState()
             chip.titleLabel.text = tagTitle
             chip.sizeToFit()
         case .loaded(let tagTitle, let title, let subtitle1, let subtitle2,
                      let imageURL):
+            setupSuccessfulView()
+            // Update views
             shimmer.isShimmering = false
             titleLabel.backgroundColor = .white
             subtitle2Label.backgroundColor = .white
@@ -116,9 +162,24 @@ class ProfileCardView: MDCCardCollectionCell {
             subtitle2Label.text = subtitle2
             imageView.sd_setImage(with: imageURL)
         case .error:
-            // TODO
-            break
+            titleLabel.isHidden = true
+            subtitle1Label.isHidden = true
+            subtitle2Label.isHidden = true
+            chip.isHidden = true
+            imageView.isHidden = true
+            errorLabel.isHidden = false
+            retryButton.isHidden = false
+            shimmer.isShimmering = false
+            retryButton.addTarget(
+                self,
+                action: #selector(retryPressed),
+                for: .touchUpInside
+            )
         }
+    }
+
+    @objc private func retryPressed() {
+        onRetryPressed?()
     }
 
     static func register(collectionView: UICollectionView) {
@@ -230,6 +291,38 @@ class ProfileCardView: MDCCardCollectionCell {
                 constant: 8
             ),
             chip.widthAnchor.constraint(greaterThanOrEqualToConstant: 10),
+        ])
+        NSLayoutConstraint.activate([
+            errorLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            errorLabel.centerYAnchor.constraint(
+                equalTo: centerYAnchor,
+                constant: -40
+            ),
+            errorLabel.heightAnchor.constraint(equalToConstant: 20),
+            errorLabel.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: 8
+            ),
+            errorLabel.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -8
+            ),
+        ])
+        NSLayoutConstraint.activate([
+            retryButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            retryButton.topAnchor.constraint(
+                equalTo: errorLabel.bottomAnchor,
+                constant: 8
+            ),
+            retryButton.heightAnchor.constraint(equalToConstant: 40),
+            retryButton.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: 8
+            ),
+            retryButton.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -8
+            ),
         ])
     }
 }

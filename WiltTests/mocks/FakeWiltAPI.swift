@@ -13,8 +13,8 @@ struct TopSomethingRequest: Hashable {
 class FakeWiltAPI: WiltAPI {
     private let topArtistPerWeekResult: [Timespan:Result<[TopArtistData], Error>]
     private let topArtistPerWeekAnythingResponse: Result<[TopArtistData], Error>?
-    private let topArtistResult: [TopSomethingRequest:Result<TopArtistInfo, Error>]
-    private let topTrackResult: [TopSomethingRequest:Result<TopTrackInfo, Error>]
+    var topArtistResult: [TopSomethingRequest:Result<TopArtistInfo, Error>]
+    var topTrackResult: [TopSomethingRequest:Result<TopTrackInfo, Error>]
     var topArtistsPerWeekCalls = [(from: Int64, to: Int64)]()
     var topArtistCalls = [(timeRange: String, index: Int)]()
     var topTrackCalls = [(timeRange: String, index: Int)]()

@@ -4,6 +4,10 @@ import XCTest
 
 class ProfileViewModelTest: XCTestCase {
     private var viewModel: ProfileViewModel!
+    enum ProfileViewModelTestError: Error {
+        case testError
+    }
+    private let error = ProfileViewModelTestError.testError
 
     override func setUp() {
         viewModel = ProfileViewModel(api: FakeWiltAPI())
@@ -180,6 +184,66 @@ class ProfileViewModelTest: XCTestCase {
                 subtitleSecondLine: "",
                 imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
             ),
+            .loading(tagTitle: "Your favourite song in recent months"),
+        ]
+        viewModel.onViewUpdate = {
+            if expected == $0 {
+                exp.fulfill()
+            }
+        }
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnViewAppearedTrackError() {
+        let error = ProfileViewModelTestError.testError
+        let api = FakeWiltAPI(
+            topTrackResult: [
+                TopSomethingRequest(timeRange: "long_term", index: 0): .failure(error)
+            ]
+        )
+        viewModel = ProfileViewModel(api: api)
+        let exp = expectation(description: "Should receive update")
+        let expected: [CardViewModelState] = [
+            .loading(tagTitle: "Your favourite artist ever"),
+            .error,
+            .loading(tagTitle: "Your favourite artist recently"),
+            .loading(tagTitle: "Your favourite song recently"),
+            .loading(tagTitle: "Your favourite artist in recent months"),
+            .loading(tagTitle: "Your favourite song in recent months"),
+        ]
+        viewModel.onViewUpdate = {
+            if expected == $0 {
+                exp.fulfill()
+            }
+        }
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnViewAppearedArtistError() {
+        let error = ProfileViewModelTestError.testError
+        let api = FakeWiltAPI(
+            topArtistResult: [
+                TopSomethingRequest(timeRange: "medium_term", index: 0): .failure(error)
+            ]
+        )
+        viewModel = ProfileViewModel(api: api)
+        let exp = expectation(description: "Should receive update")
+        let expected: [CardViewModelState] = [
+            .loading(tagTitle: "Your favourite artist ever"),
+            .loading(tagTitle: "Your favourite song ever"),
+            .loading(tagTitle: "Your favourite artist recently"),
+            .loading(tagTitle: "Your favourite song recently"),
+            .error,
             .loading(tagTitle: "Your favourite song in recent months"),
         ]
         viewModel.onViewUpdate = {
