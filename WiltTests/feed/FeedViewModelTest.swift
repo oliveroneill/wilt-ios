@@ -393,4 +393,53 @@ class FeedViewModelTest: XCTestCase {
             }
         }
     }
+
+    func testOnViewDisappeared() {
+        viewModel.onViewUpdate = {
+            if $0 == FeedViewState.loadingAtTop {
+                // Disappear the view when in a loading state
+                self.viewModel.onViewDisappeared()
+            } else if $0 == FeedViewState.displayingRows {
+                // Ensure that we made it to the displaying state
+                self.exp.fulfill()
+            }
+        }
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnViewDisappearedWhenNotLoading() {
+        viewModel = FeedViewModel(
+            dao: FakeDao(items: []),
+            api: FakeWiltAPI(
+                topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
+            )
+        )
+        // We'll use the variable to check whether we move to the displaying
+        // state and we'll fail if it happens
+        var stateChangedToDisplayingRows = false
+        viewModel.onViewUpdate = {
+            if $0 == FeedViewState.errorAtTop {
+                // Disappear the view when in an error state
+                self.viewModel.onViewDisappeared()
+                // Fulfill the expectation since we should've reacted to the
+                // disappear by now
+                self.exp.fulfill()
+            } else if $0 == FeedViewState.displayingRows {
+                // Ensure that we made it to the displaying state
+                stateChangedToDisplayingRows = true
+            }
+        }
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+            XCTAssertFalse(stateChangedToDisplayingRows)
+        }
+    }
 }

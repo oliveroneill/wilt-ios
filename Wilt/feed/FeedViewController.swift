@@ -123,6 +123,10 @@ class FeedViewController: UITableViewController {
         }
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        viewModel.onViewDisappeared()
+    }
+
     @objc func retryLoadFromBottom() {
         viewModel.onRetryFooterPressed()
     }

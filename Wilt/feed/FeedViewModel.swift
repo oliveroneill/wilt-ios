@@ -137,6 +137,19 @@ class FeedViewModel {
         loadLaterPage()
     }
 
+    func onViewDisappeared() {
+        guard state == .loadingAtTop || state == .loadingAtBottom else {
+            return
+        }
+        // If we were loading something then we need to stop the refresh
+        // control otherwise it gets stuck. displayingRows will fix this and
+        // when the view appears again we'll change the state as needed
+        // See https://stackoverflow.com/questions/24341192/uirefreshcontrol-stuck-after-switching-tabs-in-uitabbarcontroller
+        // TODO: this is a view-specific quirk so I'm not sure how this should
+        // work
+        updateState(state: .displayingRows)
+    }
+
     private func loadEarlierPage() {
         let earliestItem = dao.items.last
         backgroundQueue.async { [unowned self] in
