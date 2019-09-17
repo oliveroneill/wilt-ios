@@ -72,6 +72,54 @@ PODS:
   - KIF (3.7.6):
     - KIF/Core (= 3.7.6)
   - KIF/Core (3.7.6)
+  - MaterialComponents/AnimationTiming (83.0.1)
+  - MaterialComponents/Cards (83.0.1):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Icons/ic_check_circle
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Shapes
+  - MaterialComponents/Chips (83.0.1):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+    - MaterialComponents/TextFields
+    - MaterialComponents/Typography
+    - MDFInternationalization
+  - MaterialComponents/Ink (83.0.1):
+    - MaterialComponents/private/Math
+  - MaterialComponents/Palettes (83.0.1)
+  - MaterialComponents/private/Application (83.0.1)
+  - MaterialComponents/private/Icons/Base (83.0.1)
+  - MaterialComponents/private/Icons/ic_check_circle (83.0.1):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/Math (83.0.1)
+  - MaterialComponents/Ripple (83.0.1):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Math
+  - MaterialComponents/ShadowElevations (83.0.1)
+  - MaterialComponents/ShadowLayer (83.0.1):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (83.0.1):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (83.0.1):
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/TextFields (83.0.1):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Math
+    - MaterialComponents/Typography
+    - MDFInternationalization
+  - MaterialComponents/Typography (83.0.1):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+  - MDFInternationalization (2.0.0)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -86,6 +134,8 @@ PODS:
   - SDWebImage (5.0.2):
     - SDWebImage/Core (= 5.0.2)
   - SDWebImage/Core (5.0.2)
+  - Shimmer (1.0.2)
+  - SwiftDate (6.0.2)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -93,8 +143,12 @@ DEPENDENCIES:
   - Firebase/Functions
   - Keys (from `Pods/CocoaPodsKeys`)
   - KIF
+  - MaterialComponents/Cards
+  - MaterialComponents/Chips
   - Nimble-Snapshots
   - SDWebImage (~> 5.0)
+  - Shimmer
+  - SwiftDate
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -110,10 +164,14 @@ SPEC REPOS:
     - GTMSessionFetcher
     - iOSSnapshotTestCase
     - KIF
+    - MaterialComponents
+    - MDFInternationalization
     - nanopb
     - Nimble
     - Nimble-Snapshots
     - SDWebImage
+    - Shimmer
+    - SwiftDate
 
 EXTERNAL SOURCES:
   Keys:
@@ -133,11 +191,15 @@ SPEC CHECKSUMS:
   iOSSnapshotTestCase: 944a73f6d9676302811a86c0cf35f0e6ef5ab2a0
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   KIF: ae73fd36b1c860588841cb27e7f6efc4477122e2
+  MaterialComponents: 2363f5dab79a96d3958e6aaf49ec116e102d23dc
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
   Nimble-Snapshots: 2d6d712ceb2d1850d88f850fbd7c732618106022
   SDWebImage: 6764b5fa0f73c203728052955dbefa2bf1f33282
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
+  SwiftDate: bbed9b23bfec599bd62b9a305afc554f7bd0eb6f
 
-PODFILE CHECKSUM: 5506d6bd40a6cec070ad9837d3b68ae6a0a7014c
+PODFILE CHECKSUM: c34e879c3c05c7d4b5924e35e5edb0bbb7f98a11
 
 COCOAPODS: 1.6.1

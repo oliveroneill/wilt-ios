@@ -8,3 +8,9 @@
 "empty_data_text" = "Check back later! We've just started tracking your favourite artists and don't have enough data yet";
 "feed_error_text" = "An error occurred. Tap to retry";
 "feed_title" = "Your Top Artists Per Week";
+"top_artist_long_term_text" = "Your favourite artist ever";
+"top_artist_medium_term_text" = "Your favourite artist in recent months";
+"top_artist_short_term_text" = "Your favourite artist recently";
+"top_track_long_term_text" = "Your favourite song ever";
+"top_track_medium_term_text" = "Your favourite song in recent months";
+"top_track_short_term_text" = "Your favourite song recently";

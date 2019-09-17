@@ -143,7 +143,7 @@ class FeedViewModelTest: XCTestCase {
     func testonRetryHeaderPressedEmpty() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(sameResponseToAnything: .success([]))
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -161,7 +161,7 @@ class FeedViewModelTest: XCTestCase {
     func testOnScrolledToBottomEmpty() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(sameResponseToAnything: .success([]))
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -179,7 +179,7 @@ class FeedViewModelTest: XCTestCase {
     func testOnRetryFooterPressedEmpty() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(sameResponseToAnything: .success([]))
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -197,7 +197,7 @@ class FeedViewModelTest: XCTestCase {
     func testOnViewAppearedEmpty() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(sameResponseToAnything: .success([]))
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -215,7 +215,7 @@ class FeedViewModelTest: XCTestCase {
     func testRefreshEmpty() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(sameResponseToAnything: .success([]))
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -233,7 +233,7 @@ class FeedViewModelTest: XCTestCase {
     func testRefreshDisplaysRowsAfterAPICall() {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
-            api: FakeWiltAPI(sameResponseToAnything: .success(FakeData.items))
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success(FakeData.items))
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.displayingRows {
@@ -252,7 +252,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(
-                sameResponseToAnything: .failure(FeedViewModelTestError.testError)
+                topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
         )
         viewModel.onViewUpdate = {
@@ -272,7 +272,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: FakeData.items),
             api: FakeWiltAPI(
-                sameResponseToAnything: .failure(FeedViewModelTestError.testError)
+                topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
         )
         viewModel.onViewUpdate = {
@@ -292,7 +292,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: FakeData.items),
             api: FakeWiltAPI(
-                sameResponseToAnything: .failure(FeedViewModelTestError.testError)
+                topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
         )
         viewModel.onViewUpdate = {
@@ -312,7 +312,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(
-                sameResponseToAnything: .failure(FeedViewModelTestError.testError)
+                topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
         )
         viewModel.onViewUpdate = {
@@ -332,7 +332,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(
-                sameResponseToAnything: .failure(FeedViewModelTestError.testError)
+                topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
         )
         viewModel.onViewUpdate = {
@@ -352,7 +352,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: FakeData.items),
             api: FakeWiltAPI(
-                sameResponseToAnything: .success([])
+                topArtistPerWeekAnythingResponse: .success([])
             )
         )
         viewModel.onViewUpdate = {
@@ -372,7 +372,7 @@ class FeedViewModelTest: XCTestCase {
         viewModel = FeedViewModel(
             dao: FakeDao(items: []),
             api: FakeWiltAPI(
-                sameResponseToAnything: .failure(WiltAPIError.loggedOut)
+                topArtistPerWeekAnythingResponse: .failure(WiltAPIError.loggedOut)
             )
         )
         class ListeningDelegate: FeedViewModelDelegate {

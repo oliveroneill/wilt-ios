@@ -50,18 +50,34 @@ class MainAppViewController: UITabBarController {
         let feedViewController = FeedViewController(viewModel: viewModel)
         feedViewController.tabBarItem = UITabBarItem(
             tabBarSystemItem: .recents,
-            tag: 0
+            tag: 1
         )
         return feedViewController
+    }
+
+    private func setupProfileController(context: NSManagedObjectContext,
+                                        api: WiltAPI) -> ProfileViewController {
+        let controller = ProfileViewController(
+            viewModel: ProfileViewModel(api: api)
+        )
+        controller.tabBarItem = UITabBarItem(
+            tabBarSystemItem: .contacts,
+            tag: 0
+        )
+        return controller
     }
 
     private func setupTabs(context: NSManagedObjectContext,
                            api: WiltAPI) throws {
         tabs = [
             (
+                controller: setupProfileController(context: context, api: api),
+                title: "Profile"
+            ),
+            (
                 controller: try setupFeedController(context: context, api: api),
                 title: "feed_title".localized
-            )
+            ),
         ]
         title = tabs[0].title
         viewControllers = tabs.map { $0.controller }

@@ -17,12 +17,12 @@ class FeedViewControllerTest: KIFTestCase {
     /// Seup the controller under test. By default these tests will have
     /// a controller that will respond to expected API calls with empty data.
     ///
-    /// - Parameter apiResponds: Set this to false so that the API never
-    /// responds. This is useful to avoid the loading spinners disappearing
-    /// before the snapshot is taken
+    /// - Parameters:
+    ///   - apiResponse: response to be returned to topArtistPerWeek API call
+    ///   - dao: The database access object for the play history cache
     private func setupController(apiResponse: Result<[TopArtistData], Error>? = .success([]),
                                  dao: PlayHistoryDao = FakeDao(items: FakeData.items + FakeData.items + FakeData.items)) {
-        api = FakeWiltAPI(sameResponseToAnything: apiResponse)
+        api = FakeWiltAPI(topArtistPerWeekAnythingResponse: apiResponse)
         let viewModel = FeedViewModel(
             dao: dao,
             api: api

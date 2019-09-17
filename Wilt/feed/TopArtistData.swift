@@ -12,13 +12,6 @@ struct TopArtistData: Equatable {
     let week: String
     let imageURL: URL
 
-    private static var formatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
-
     /// Convert a network response into a `TopArtistData` struct
     ///
     /// - Parameter dict: A dictionary that should represent to a TopArtist
@@ -30,7 +23,9 @@ struct TopArtistData: Equatable {
             let count = dict["count"] as? Int64,
             let dateString = dict["date"] as? String,
             let imageURL = URL(string: dict["imageUrl"] as? String ?? ""),
-            let date = formatter.date(from: dateString) else {
+            let date = WiltAPIDateFormatters.dateStringFormatter.date(
+                from: dateString
+            ) else {
                 throw TopArtistError.unexpectedNil
         }
         return TopArtistData(
