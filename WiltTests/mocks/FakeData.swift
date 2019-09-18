@@ -4,6 +4,7 @@ enum FakeData {
     static var formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone(abbreviation: "GMT")
         return formatter
     }()
 

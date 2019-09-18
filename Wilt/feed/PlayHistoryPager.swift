@@ -151,6 +151,12 @@ private extension Date {
                 from: self
             )
         )!
+        // If we're already on a sunday then we want to go back to the previous
+        // Monday
+        guard dayOfYear != sunday.dayOfYear else {
+            // Subtract 6 days
+            return Date.gregorian.date(byAdding: .day, value: -6, to: sunday)!
+        }
         return Date.gregorian.date(byAdding: .day, value: 1, to: sunday)!
     }
 
