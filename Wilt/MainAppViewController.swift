@@ -79,7 +79,7 @@ class MainAppViewController: UITabBarController {
                     container: container,
                     api: api
                 ),
-                title: "Profile"
+                title: "profile_title".localized
             ),
             (
                 controller: try setupFeedController(
