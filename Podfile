@@ -16,12 +16,12 @@ target 'Wilt' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Functions'
   pod 'Firebase/Auth'
-  pod 'SDWebImage', '~> 5.0'
+  pod 'SDWebImage'
   pod 'MaterialComponents/Cards'
   pod 'SwiftDate'
   pod 'Shimmer'
   pod 'MaterialComponents/Chips'
-  pod 'SwiftIcons', '~> 2.3.2'
+  pod 'SwiftIcons'
 
   target 'WiltTests' do
     inherit! :search_paths

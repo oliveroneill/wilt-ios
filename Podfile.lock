@@ -147,10 +147,10 @@ DEPENDENCIES:
   - MaterialComponents/Cards
   - MaterialComponents/Chips
   - Nimble-Snapshots
-  - SDWebImage (~> 5.0)
+  - SDWebImage
   - Shimmer
   - SwiftDate
-  - SwiftIcons (~> 2.3.2)
+  - SwiftIcons
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -204,6 +204,6 @@ SPEC CHECKSUMS:
   SwiftDate: bbed9b23bfec599bd62b9a305afc554f7bd0eb6f
   SwiftIcons: e652cfd2676441c462ad57b6e92977faf577e590
 
-PODFILE CHECKSUM: 1d5598d9a9084f9273989f504dffa5c4b6b0c1a3
+PODFILE CHECKSUM: f22bfcff0a4f01df27c6040285d1c9ffbbc7a75d
 
 COCOAPODS: 1.6.1
