@@ -3,6 +3,7 @@ before_script:
   - export TZ=Australia/Sydney
 language: swift
 cache: cocoapods
+xcode_workspace: Wilt.xcworkspace
 xcode_scheme: Wilt
 xcode_destination: platform=iOS Simulator,OS=12.4,name=iPhone Xʀ
 
