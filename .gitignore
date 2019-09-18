@@ -39,3 +39,6 @@ Pods/
 # *.xcworkspace
 
 Wilt/GoogleService-Info.plist
+
+# Just in case I ever want to check in Pods/
+Pods/CocoaPodsKeys
