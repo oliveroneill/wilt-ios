@@ -8,8 +8,8 @@ xcode_destination: platform=iOS Simulator,OS=12.4,name=iPhone Xʀ
 
 env:
   # To fool Cocoapods keys
-  - SpotifyClientID=notarealspotifyclientID
-  - SpotifyRedirectURI=http://notarealURL.thisisjustatest.com/faking
+  - SpotifyClientID=notarealspotifyclientID SpotifyRedirectURI=http://notarealURL.thisisjustatest.com/faking
 
 before_install:
+- gem install cocoapods-keys
 - openssl aes-256-cbc -K $encrypted_1849705d09ff_key -iv $encrypted_1849705d09ff_iv -in GoogleService-Info.plist.enc -out Wilt/GoogleService-Info.plist -d
