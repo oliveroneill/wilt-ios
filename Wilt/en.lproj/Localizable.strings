@@ -17,3 +17,5 @@
 "top_track_short_term_text" = "Your favourite song recently";
 "profile_card_error_text" = "An error occurred.";
 "profile_card_retry_text" = "Retry";
+"profile_tab_title" = "Profile";
+"feed_tab_title" = "Feed";

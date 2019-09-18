@@ -10,7 +10,7 @@ class MainAppViewController: UITabBarController {
 
     private lazy var profileTabItem: UITabBarItem = {
         let item = UITabBarItem(
-            title: "Profile",
+            title: "profile_tab_title".localized,
             image: nil,
             selectedImage: nil
         )
@@ -24,7 +24,7 @@ class MainAppViewController: UITabBarController {
 
     private lazy var feedTabItem: UITabBarItem = {
         let item = UITabBarItem(
-            title: "Feed",
+            title: "feed_tab_title".localized,
             image: nil,
             selectedImage: nil
         )
@@ -128,7 +128,6 @@ class MainAppViewController: UITabBarController {
 extension MainAppViewController: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard item.tag < tabs.count else {
-            title = "Wilt"
             return
         }
         title = tabs[item.tag].title
