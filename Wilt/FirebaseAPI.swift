@@ -1,6 +1,6 @@
 import Firebase
 
-protocol WiltAPI {
+protocol WiltAPI: ProfileAPI {
     func topArtistsPerWeek(from: Int64, to: Int64,
                            completion: @escaping (Result<[TopArtistData], Error>) -> Void)
     func topArtist(timeRange: String, index: Int,
@@ -159,16 +159,16 @@ enum TimeRange {
     }
 }
 
-struct TopArtistInfo {
+struct TopArtistInfo: Equatable {
     let name: String
-    let count: Int
+    let count: Int64
     /// Will be nil if it hasn't been played since joining Wilt
     let lastPlayed: Date?
     let imageURL: URL
 
     static func from(dict: [String:Any]) throws -> TopArtistInfo {
         guard let name = dict["name"] as? String,
-            let count = dict["count"] as? Int,
+            let count = dict["count"] as? Int64,
             let dateDict = dict["lastPlay"] as? [String:Any]?,
             let imageURL = URL(string: dict["imageUrl"] as? String ?? "") else {
                 throw TopArtistError.unexpectedNil
@@ -192,7 +192,7 @@ struct TopArtistInfo {
     }
 }
 
-struct TopTrackInfo {
+struct TopTrackInfo: Equatable {
     let name: String
     let totalPlayTime: TimeInterval
     /// Will be nil if it hasn't been played since joining Wilt

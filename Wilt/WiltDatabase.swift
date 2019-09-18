@@ -23,17 +23,17 @@ class WiltDatabase {
 
     /// Get the viewContext from Core Data
     ///
-    /// - Parameter onContextLoaded: Called when we've loaded the context or
+    /// - Parameter onContextLoaded: Called when we've loaded the container or
     /// failed
     func loadContext(
-        onContextLoaded: @escaping (Result<NSManagedObjectContext, Error>) -> Void
+        onContextLoaded: @escaping (Result<NSPersistentContainer, Error>) -> Void
     ) {
         loadPersistentStore { [unowned self] in
             if let error = $0 {
                 onContextLoaded(.failure(error))
                 return
             }
-            onContextLoaded(.success(self.container.viewContext))
+            onContextLoaded(.success(self.container))
         }
     }
 }

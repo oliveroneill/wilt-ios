@@ -60,7 +60,7 @@ class ProfileViewModel {
         .topArtist(index: 0, timeRange: .mediumTerm),
         .topTrack(index: 0, timeRange: .mediumTerm),
     ]
-    private let api: WiltAPI
+    private let api: ProfileAPI
     private var cardStates: [CardViewModelState] {
         didSet {
             onViewUpdate?(cardStates)
@@ -69,7 +69,7 @@ class ProfileViewModel {
     /// The view should set this value to receive state updates
     var onViewUpdate: (([CardViewModelState]) -> Void)?
 
-    init(api: WiltAPI) {
+    init(api: ProfileAPI) {
         self.api = api
         // Initial state will be loading
         cardStates = cards.map { .loading(tagTitle: $0.readableString) }

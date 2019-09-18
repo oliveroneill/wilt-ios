@@ -11,6 +11,8 @@
 		24AC9242CFCDDE53967CAAA6 /* Pods_WiltUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC434F58D15DA4CB45F11761 /* Pods_WiltUITests.framework */; };
 		7D233B302330472800EC95B6 /* ProfileViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B2F2330472800EC95B6 /* ProfileViewModelTest.swift */; };
 		7D233B322330473200EC95B6 /* ProfileViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B312330473200EC95B6 /* ProfileViewControllerTest.swift */; };
+		7D233B34233109C800EC95B6 /* ProfileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B33233109C800EC95B6 /* ProfileCache.swift */; };
+		7D233B36233226F300EC95B6 /* ProfileCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B35233226F300EC95B6 /* ProfileCacheTest.swift */; };
 		7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */; };
 		7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */; };
 		7D47CCA722FB88C900A4D96E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D47CCA622FB88C900A4D96E /* Assets.xcassets */; };
@@ -84,6 +86,8 @@
 		1F6756815F71C7654A6921D7 /* Pods-WiltTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiltTests.release.xcconfig"; path = "Target Support Files/Pods-WiltTests/Pods-WiltTests.release.xcconfig"; sourceTree = "<group>"; };
 		7D233B2F2330472800EC95B6 /* ProfileViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelTest.swift; sourceTree = "<group>"; };
 		7D233B312330473200EC95B6 /* ProfileViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerTest.swift; sourceTree = "<group>"; };
+		7D233B33233109C800EC95B6 /* ProfileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCache.swift; sourceTree = "<group>"; };
+		7D233B35233226F300EC95B6 /* ProfileCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCacheTest.swift; sourceTree = "<group>"; };
 		7D47CC9922FB88C700A4D96E /* Wilt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wilt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D47CCA422FB88C700A4D96E /* Wilt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wilt.xcdatamodel; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 		7D233B2E2330470B00EC95B6 /* profile */ = {
 			isa = PBXGroup;
 			children = (
+				7D233B35233226F300EC95B6 /* ProfileCacheTest.swift */,
 				7D233B312330473200EC95B6 /* ProfileViewControllerTest.swift */,
 				7D233B2F2330472800EC95B6 /* ProfileViewModelTest.swift */,
 			);
@@ -305,6 +310,7 @@
 		7D809136232DFFE4006FE0FA /* profile */ = {
 			isa = PBXGroup;
 			children = (
+				7D233B33233109C800EC95B6 /* ProfileCache.swift */,
 				7DA898BB232E4C1300204823 /* ProfileCardView.swift */,
 				7DA898B7232E002000204823 /* ProfileViewController.swift */,
 				7DA898B9232E02E500204823 /* ProfileViewModel.swift */,
@@ -641,6 +647,7 @@
 				7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */,
 				7DB158872318808800F86A9E /* WalkthroughViewModel.swift in Sources */,
 				7DA898B8232E002000204823 /* ProfileViewController.swift in Sources */,
+				7D233B34233109C800EC95B6 /* ProfileCache.swift in Sources */,
 				7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */,
 				7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */,
 				7DB15863230ABD8F00F86A9E /* WalkthroughPage.swift in Sources */,
@@ -663,6 +670,7 @@
 				7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */,
 				7DB1586C2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift in Sources */,
 				7D5A2B032322682F00B56000 /* FeedViewControllerTest.swift in Sources */,
+				7D233B36233226F300EC95B6 /* ProfileCacheTest.swift in Sources */,
 				7DB158892319575C00F86A9E /* WalkthroughCoordinatorTest.swift in Sources */,
 				7D5A2B172325169900B56000 /* FakeData.swift in Sources */,
 				7DF11A22232C803E00C1072B /* Wilt.xcdatamodeld in Sources */,

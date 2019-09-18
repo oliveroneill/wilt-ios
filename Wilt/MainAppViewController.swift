@@ -17,10 +17,10 @@ class MainAppViewController: UITabBarController {
         delegate = self
         database.loadContext { [unowned self] in
             switch ($0) {
-            case .success(let context):
+            case .success(let container):
                 do {
                     try self.setupTabs(
-                        context: context,
+                        container: container,
                         api: api
                     )
                 } catch {
@@ -40,10 +40,10 @@ class MainAppViewController: UITabBarController {
         }
     }
 
-    private func setupFeedController(context: NSManagedObjectContext,
+    private func setupFeedController(container: NSPersistentContainer,
                                      api: WiltAPI) throws -> FeedViewController {
         let viewModel = FeedViewModel(
-            dao: try PlayHistoryCache(viewContext: context),
+            dao: try PlayHistoryCache(viewContext: container.viewContext),
             api: api
         )
         viewModel.delegate = self
@@ -55,10 +55,14 @@ class MainAppViewController: UITabBarController {
         return feedViewController
     }
 
-    private func setupProfileController(context: NSManagedObjectContext,
+    private func setupProfileController(container: NSPersistentContainer,
                                         api: WiltAPI) -> ProfileViewController {
+        let cache = ProfileCache(
+            backgroundContext: container.newBackgroundContext(),
+            networkAPI: api
+        )
         let controller = ProfileViewController(
-            viewModel: ProfileViewModel(api: api)
+            viewModel: ProfileViewModel(api: cache)
         )
         controller.tabBarItem = UITabBarItem(
             tabBarSystemItem: .contacts,
@@ -67,15 +71,21 @@ class MainAppViewController: UITabBarController {
         return controller
     }
 
-    private func setupTabs(context: NSManagedObjectContext,
+    private func setupTabs(container: NSPersistentContainer,
                            api: WiltAPI) throws {
         tabs = [
             (
-                controller: setupProfileController(context: context, api: api),
+                controller: setupProfileController(
+                    container: container,
+                    api: api
+                ),
                 title: "Profile"
             ),
             (
-                controller: try setupFeedController(context: context, api: api),
+                controller: try setupFeedController(
+                    container: container,
+                    api: api
+                ),
                 title: "feed_title".localized
             ),
         ]
