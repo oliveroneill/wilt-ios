@@ -1,11 +1,40 @@
 import Foundation
 import CoreData
+import SwiftIcons
 
 /// Once logged in, the main app will revolve around this controller and
 /// different tabs will be used to navigate
 class MainAppViewController: UITabBarController {
     weak var controllerDelegate: MainAppViewControllerDelegate?
     private var tabs = [(controller: UIViewController, title: String)]()
+
+    private lazy var profileTabItem: UITabBarItem = {
+        let item = UITabBarItem(
+            title: "Profile",
+            image: nil,
+            selectedImage: nil
+        )
+        item.setIcon(
+            icon: .emoji(.user),
+            textColor: .lightGray,
+            selectedTextColor: view.tintColor
+        )
+        return item
+    }()
+
+    private lazy var feedTabItem: UITabBarItem = {
+        let item = UITabBarItem(
+            title: "Feed",
+            image: nil,
+            selectedImage: nil
+        )
+        item.setIcon(
+            icon: .emoji(.newspaper),
+            textColor: .lightGray,
+            selectedTextColor: view.tintColor
+        )
+        return item
+    }()
 
     /// Create the main app controller
     ///
@@ -40,21 +69,6 @@ class MainAppViewController: UITabBarController {
         }
     }
 
-    private func setupFeedController(container: NSPersistentContainer,
-                                     api: WiltAPI) throws -> FeedViewController {
-        let viewModel = FeedViewModel(
-            dao: try PlayHistoryCache(viewContext: container.viewContext),
-            api: api
-        )
-        viewModel.delegate = self
-        let feedViewController = FeedViewController(viewModel: viewModel)
-        feedViewController.tabBarItem = UITabBarItem(
-            tabBarSystemItem: .recents,
-            tag: 1
-        )
-        return feedViewController
-    }
-
     private func setupProfileController(container: NSPersistentContainer,
                                         api: WiltAPI) -> ProfileViewController {
         let cache = ProfileCache(
@@ -64,11 +78,20 @@ class MainAppViewController: UITabBarController {
         let controller = ProfileViewController(
             viewModel: ProfileViewModel(api: cache)
         )
-        controller.tabBarItem = UITabBarItem(
-            tabBarSystemItem: .contacts,
-            tag: 0
-        )
+        controller.tabBarItem = profileTabItem
         return controller
+    }
+
+    private func setupFeedController(container: NSPersistentContainer,
+                                     api: WiltAPI) throws -> FeedViewController {
+        let viewModel = FeedViewModel(
+            dao: try PlayHistoryCache(viewContext: container.viewContext),
+            api: api
+        )
+        viewModel.delegate = self
+        let feedViewController = FeedViewController(viewModel: viewModel)
+        feedViewController.tabBarItem = feedTabItem
+        return feedViewController
     }
 
     private func setupTabs(container: NSPersistentContainer,

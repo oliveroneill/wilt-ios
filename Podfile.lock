@@ -136,6 +136,7 @@ PODS:
   - SDWebImage/Core (5.0.2)
   - Shimmer (1.0.2)
   - SwiftDate (6.0.2)
+  - SwiftIcons (2.3.2)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -149,6 +150,7 @@ DEPENDENCIES:
   - SDWebImage (~> 5.0)
   - Shimmer
   - SwiftDate
+  - SwiftIcons (~> 2.3.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -172,6 +174,7 @@ SPEC REPOS:
     - SDWebImage
     - Shimmer
     - SwiftDate
+    - SwiftIcons
 
 EXTERNAL SOURCES:
   Keys:
@@ -199,7 +202,8 @@ SPEC CHECKSUMS:
   SDWebImage: 6764b5fa0f73c203728052955dbefa2bf1f33282
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
   SwiftDate: bbed9b23bfec599bd62b9a305afc554f7bd0eb6f
+  SwiftIcons: e652cfd2676441c462ad57b6e92977faf577e590
 
-PODFILE CHECKSUM: c34e879c3c05c7d4b5924e35e5edb0bbb7f98a11
+PODFILE CHECKSUM: 1d5598d9a9084f9273989f504dffa5c4b6b0c1a3
 
 COCOAPODS: 1.6.1
