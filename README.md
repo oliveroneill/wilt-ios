@@ -1,6 +1,6 @@
 # Wilt - What I Listen To
 
-[![Build Status](https://travis-ci.org/oliveroneill/wilt-android.svg?branch=master)](https://travis-ci.org/oliveroneill/wilt-android)
+[![Build Status](https://travis-ci.org/oliveroneill/wilt-ios.svg?branch=master)](https://travis-ci.org/oliveroneill/wilt-ios)
 
 This is an iOS client for displaying Wilt metrics.
 
