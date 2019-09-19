@@ -1,6 +1,4 @@
 osx_image: xcode10.3
-before_script:
-  - export TZ=Australia/Sydney
 language: swift
 cache: cocoapods
 xcode_workspace: Wilt.xcworkspace
