@@ -40,19 +40,18 @@ class TopArtistCell: UITableViewCell {
             }
         }
     }
-    private let artistLabel: UILabel
-    private let playsLabel: UILabel
-    private let dateLabel: UILabel
+    private lazy var artistLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }()
+    private let playsLabel = UILabel(frame: .zero)
+    private let dateLabel = UILabel(frame: .zero)
     // I know UITableViewCell has it's own imageView property but I didn't
     // want to have to unwrap it all the time
-    private let artistImageView: UIImageView
+    private let artistImageView = UIImageView(frame: .zero)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        artistLabel = UILabel(frame: .zero)
-        artistLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        playsLabel = UILabel(frame: .zero)
-        dateLabel = UILabel(frame: .zero)
-        artistImageView = UIImageView(frame: .zero)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // Setup views
         contentView.addSubview(artistLabel)
