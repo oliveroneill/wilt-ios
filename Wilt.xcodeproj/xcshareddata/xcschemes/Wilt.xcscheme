@@ -38,16 +38,6 @@
                ReferencedContainer = "container:Wilt.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7D47CCBA22FB88CA00A4D96E"
-               BuildableName = "WiltUITests.xctest"
-               BlueprintName = "WiltUITests"
-               ReferencedContainer = "container:Wilt.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
