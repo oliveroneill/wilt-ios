@@ -36,6 +36,21 @@ class MainAppViewController: UITabBarController {
         return item
     }()
 
+    private lazy var settingsBarButton: UIBarButtonItem = {
+        let item = UIBarButtonItem(
+            title: nil,
+            style: .plain,
+            target: self,
+            action: #selector(onSettingsButtonPressed)
+        )
+        item.setIcon(
+            icon: .emoji(.gearNoHub),
+            iconSize: 22,
+            color: view.tintColor
+        )
+        return item
+    }()
+
     /// Create the main app controller
     ///
     /// - Parameters:
@@ -67,6 +82,7 @@ class MainAppViewController: UITabBarController {
                 break
             }
         }
+        navigationItem.rightBarButtonItem = settingsBarButton
     }
 
     private func setupProfileController(container: NSPersistentContainer,
@@ -123,6 +139,10 @@ class MainAppViewController: UITabBarController {
     override func viewDidLoad() {
         view.backgroundColor = .white
     }
+
+    @objc private func onSettingsButtonPressed() {
+        controllerDelegate?.showSettings()
+    }
 }
 
 extension MainAppViewController: UITabBarControllerDelegate {
@@ -143,5 +163,6 @@ extension MainAppViewController: FeedViewModelDelegate {
 /// Delegate for the `MainAppViewController` for events that occur in the
 /// main app
 protocol MainAppViewControllerDelegate: class {
+    func showSettings()
     func loggedOut()
 }

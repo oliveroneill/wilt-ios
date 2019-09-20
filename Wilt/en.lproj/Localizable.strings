@@ -19,3 +19,14 @@
 "profile_card_retry_text" = "Retry";
 "profile_tab_title" = "Profile";
 "feed_tab_title" = "Feed";
+"about_text" = "Wilt help you keep track of your favourite artists. Ever wonder what your favourite band was last autumn?\
+\
+Unfortunately we can only start tracking from when you login but just wait a while and we'll have heaps of things to show you!\
+\
+This is still an alpha project and may cease to work at any point.\
+\
+Spotify play history and user info will be stored and periodically updated. To opt-out or delete stored data, please tap on this box to contact us.";
+"logout_text" = "Log out";
+"about_title_text" = "About Wilt";
+"logout_title_text" = "User Settings";
+"settings_title_text" = "Wilt Settings";

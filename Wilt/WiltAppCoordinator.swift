@@ -64,7 +64,21 @@ extension WiltAppCoordinator: WalkthroughCoordinatorDelegate {
 }
 
 extension WiltAppCoordinator: LoggedInCoordinatorDelegate {
-    func loggedOut() {
-        showWalkthrough()
+    func contactUs() {
+        UIApplication.shared.open(
+            URL(string: "mailto:contact.wiltapp@gmail.com")!,
+            options: [:],
+            completionHandler: nil
+        )
+    }
+
+    func logOut() {
+        defer { showWalkthrough() }
+        do {
+            try auth.logOut()
+        } catch {
+            print("Failed to logout:", error)
+            // TODO: not sure what to do here
+        }
     }
 }

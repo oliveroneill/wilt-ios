@@ -15,6 +15,10 @@ class FirebaseAuthentication: Authenticator {
         return auth.currentUser?.uid
     }
 
+    func logOut() throws {
+        try auth.signOut()
+    }
+
     /// Sign up this user with specified Spotify authorisation code
     ///
     /// - Parameters:

@@ -13,6 +13,8 @@
 		7D233B322330473200EC95B6 /* ProfileViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B312330473200EC95B6 /* ProfileViewControllerTest.swift */; };
 		7D233B34233109C800EC95B6 /* ProfileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B33233109C800EC95B6 /* ProfileCache.swift */; };
 		7D233B36233226F300EC95B6 /* ProfileCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B35233226F300EC95B6 /* ProfileCacheTest.swift */; };
+		7D233B38233384EE00EC95B6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B37233384EE00EC95B6 /* SettingsViewController.swift */; };
+		7D233B3A2334C6DF00EC95B6 /* SettingsViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B392334C6DF00EC95B6 /* SettingsViewControllerTest.swift */; };
 		7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */; };
 		7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */; };
 		7D47CCA722FB88C900A4D96E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D47CCA622FB88C900A4D96E /* Assets.xcassets */; };
@@ -88,6 +90,8 @@
 		7D233B312330473200EC95B6 /* ProfileViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerTest.swift; sourceTree = "<group>"; };
 		7D233B33233109C800EC95B6 /* ProfileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCache.swift; sourceTree = "<group>"; };
 		7D233B35233226F300EC95B6 /* ProfileCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCacheTest.swift; sourceTree = "<group>"; };
+		7D233B37233384EE00EC95B6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7D233B392334C6DF00EC95B6 /* SettingsViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTest.swift; sourceTree = "<group>"; };
 		7D47CC9922FB88C700A4D96E /* Wilt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wilt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D47CCA422FB88C700A4D96E /* Wilt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wilt.xcdatamodel; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 				7DB15891231A516F00F86A9E /* walkthrough */,
 				7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */,
 				7D5A2AF8231A573800B56000 /* MainAppViewController.swift */,
+				7D233B37233384EE00EC95B6 /* SettingsViewController.swift */,
 				7DB15869230D6C8600F86A9E /* Utils.swift */,
 				7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */,
 				7D5A2AFE231E6C7600B56000 /* WiltDatabase.swift */,
@@ -268,6 +273,7 @@
 				7D233B2E2330470B00EC95B6 /* profile */,
 				7DB15892231A519400F86A9E /* walkthrough */,
 				7DB1586E23120F6F00F86A9E /* KIFUtil.swift */,
+				7D233B392334C6DF00EC95B6 /* SettingsViewControllerTest.swift */,
 				7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */,
 				7D47CCB622FB88CA00A4D96E /* Info.plist */,
 			);
@@ -657,6 +663,7 @@
 				7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */,
 				7DB1588123169D5E00F86A9E /* FirebaseAPI.swift in Sources */,
 				7D5A2AFD231E687100B56000 /* PlayHistoryCache.swift in Sources */,
+				7D233B38233384EE00EC95B6 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +689,7 @@
 				7DB1588E2319EDF000F86A9E /* FakeAuthenticator.swift in Sources */,
 				7DB1587F2315EED700F86A9E /* WalkthroughViewModelTest.swift in Sources */,
 				7D5A2B1D232A719E00B56000 /* PlayHistoryPagerTest.swift in Sources */,
+				7D233B3A2334C6DF00EC95B6 /* SettingsViewControllerTest.swift in Sources */,
 				7D5A2B132324DDBD00B56000 /* FakeDao.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
