@@ -206,6 +206,45 @@ class ProfileCacheTest: XCTestCase {
         }
     }
 
+    func testTopArtistUpsertsOnExpiredCache() {
+        let timeRange = "short_term"
+        let index = 32
+        let expected = TopArtistInfo(
+            name: "(Sandy) Alex G",
+            count: 354,
+            lastPlayed: Date().minusWeeks(6),
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+        )
+        storeArtist(
+            artist: expected,
+            timeRange: timeRange,
+            index: index,
+            // It's been in cache for 10 weeks
+            storedAt: Date().minusWeeks(10)
+        )
+        let api = FakeWiltAPI(
+            topArtistResult: [
+                TopSomethingRequest(timeRange: timeRange, index: index): .success(expected)
+            ]
+        )
+        cache = ProfileCache(
+            backgroundContext: context,
+            networkAPI: api
+        )
+        let exp = expectation(description: "Should return a value")
+        cache.topArtist(timeRange: timeRange, index: index) { _ in
+            defer { exp.fulfill() }
+            self.cache.topArtist(timeRange: timeRange, index: index) { _ in
+                XCTAssertEqual(1, api.topArtistCalls.count)
+            }
+        }
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
     func testTopArtistNetworkError() {
         let timeRange = "short_term"
         let index = 32
@@ -336,6 +375,45 @@ class ProfileCacheTest: XCTestCase {
                 return
             }
             XCTAssertEqual(expected, artist)
+        }
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testTopTrackUpsertsOnExpiredCache() {
+        let timeRange = "short_term"
+        let index = 32
+        let expected = TopTrackInfo(
+            name: "(Sandy) Alex G",
+            totalPlayTime: 354,
+            lastPlayed: Date().minusWeeks(6),
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+        )
+        storeTrack(
+            track: expected,
+            timeRange: timeRange,
+            index: index,
+            // It's been in cache for 10 weeks
+            storedAt: Date().minusWeeks(10)
+        )
+        let api = FakeWiltAPI(
+            topTrackResult: [
+                TopSomethingRequest(timeRange: timeRange, index: index): .success(expected)
+            ]
+        )
+        cache = ProfileCache(
+            backgroundContext: context,
+            networkAPI: api
+        )
+        let exp = expectation(description: "Should return a value")
+        cache.topTrack(timeRange: timeRange, index: index) { _ in
+            self.cache.topTrack(timeRange: timeRange, index: index) { _ in
+                defer { exp.fulfill() }
+                XCTAssertEqual(1, api.topTrackCalls.count)
+            }
         }
         waitForExpectations(timeout: 1) {
             if let error = $0 {

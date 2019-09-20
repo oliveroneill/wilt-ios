@@ -15,7 +15,7 @@ class ProfileCache: ProfileAPI {
     private let backgroundContext: NSManagedObjectContext
     private let networkAPI: ProfileAPI
     // We'll let things sit in cache for one day maximum
-    private let maxCacheIntervalSeconds = TimeInterval(60 * 60 * 24)
+    fileprivate static let maxCacheIntervalSeconds = TimeInterval(60 * 60 * 24)
 
     /// Create a ProfileCache
     ///
@@ -83,15 +83,7 @@ class ProfileCache: ProfileAPI {
         fetchRequest.fetchLimit = 1
         let fetchResult = try backgroundContext.execute(fetchRequest)
         let result = fetchResult as? NSAsynchronousFetchResult<NSFetchRequestResult>
-        let found = result?.finalResult?.first as? TopArtistInfoEntity
-        if let found = found {
-            // Return nil if the cache is old. We won't delete the item
-            // because it should be replaced after the network request
-            guard Date().timeIntervalSince(found.lastUpdated!) < maxCacheIntervalSeconds else {
-                return nil
-            }
-        }
-        return found
+        return result?.finalResult?.first as? TopArtistInfoEntity
     }
 
     private func getTrack(timeRange: String, index: Int) throws -> TopTrackInfoEntity? {
@@ -104,22 +96,23 @@ class ProfileCache: ProfileAPI {
         fetchRequest.fetchLimit = 1
         let fetchResult = try backgroundContext.execute(fetchRequest)
         let result = fetchResult as? NSAsynchronousFetchResult<NSFetchRequestResult>
-        let found = result?.finalResult?.first as? TopTrackInfoEntity
-        if let found = found {
-            // Return nil if the cache is old. We won't delete the item
-            // because it should be replaced after the network request
-            guard Date().timeIntervalSince(found.lastUpdated!) < maxCacheIntervalSeconds else {
-                return nil
-            }
-        }
-        return found
+        return result?.finalResult?.first as? TopTrackInfoEntity
     }
 
     func topArtist(timeRange: String, index: Int,
                    completion: @escaping (Result<TopArtistInfo, Error>) -> Void) {
         var artist: TopArtistInfo?
         backgroundContext.performAndWait {
-            artist = try? getArtist(timeRange: timeRange, index: index)?.toData()
+            let artistEntity = try? getArtist(
+                timeRange: timeRange,
+                index: index
+            )
+            // If it's out of date then don't bother using it
+            if artistEntity?.isOutOfDate ?? false {
+                artist = nil
+            } else {
+                artist = artistEntity?.toData()
+            }
         }
         if let artist = artist {
             completion(.success(artist))
@@ -146,7 +139,13 @@ class ProfileCache: ProfileAPI {
                   completion: @escaping (Result<TopTrackInfo, Error>) -> Void) {
         var track: TopTrackInfo?
         backgroundContext.performAndWait {
-            track = try? getTrack(timeRange: timeRange, index: index)?.toData()
+            let trackEntity = try? getTrack(timeRange: timeRange, index: index)
+            // If it's out of date then don't bother using it
+            if trackEntity?.isOutOfDate ?? false {
+                track = nil
+            } else {
+                track = trackEntity?.toData()
+            }
         }
         if let track = track {
             completion(.success(track))
@@ -171,11 +170,15 @@ class ProfileCache: ProfileAPI {
 }
 
 extension TopArtistInfoEntity {
+    var isOutOfDate: Bool {
+        return Date().timeIntervalSince(lastUpdated!) >= ProfileCache.maxCacheIntervalSeconds
+    }
+
     func toData() -> TopArtistInfo {
         // We'll error if any of the values are nil. This shouldn't occur but
         // I wonder if there's a better way to handle this
         guard let name = name, let imageURL = imageURL else {
-                fatalError("Unexpected nil stored in Core Data")
+            fatalError("Unexpected nil stored in Core Data")
         }
         return TopArtistInfo(
             name: name,
@@ -187,6 +190,10 @@ extension TopArtistInfoEntity {
 }
 
 extension TopTrackInfoEntity {
+    var isOutOfDate: Bool {
+        return Date().timeIntervalSince(lastUpdated!) >= ProfileCache.maxCacheIntervalSeconds
+    }
+
     func toData() -> TopTrackInfo {
         // We'll error if any of the values are nil. This shouldn't occur but
         // I wonder if there's a better way to handle this
