@@ -50,14 +50,15 @@ extension LoggedInCoordinator: SettingsViewControllerDelegate {
         delegate?.contactUs()
     }
 
-    private func closeSettings(completionHandler: @escaping () -> Void) {
+    private func closeSettings(animated: Bool = false,
+                               completionHandler: @escaping () -> Void) {
         guard let controller = settingsController else { return }
-        controller.dismiss(animated: false, completion: completionHandler)
+        controller.dismiss(animated: animated, completion: completionHandler)
         settingsController = nil
     }
 
     func close() {
-        closeSettings { }
+        closeSettings(animated: true) { }
     }
 
     func logOut() {
