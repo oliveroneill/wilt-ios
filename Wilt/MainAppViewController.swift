@@ -83,6 +83,7 @@ class MainAppViewController: UITabBarController {
             }
         }
         navigationItem.rightBarButtonItem = settingsBarButton
+        navigationItem.hidesBackButton = true
     }
 
     private func setupProfileController(container: NSPersistentContainer,

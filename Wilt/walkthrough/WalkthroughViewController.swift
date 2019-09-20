@@ -21,6 +21,7 @@ class WalkthroughViewController: UIViewController {
         viewModel.onViewUpdate = { [unowned self] in
             self.onViewUpdate(state: $0)
         }
+        navigationItem.hidesBackButton = true
     }
 
     required init?(coder aDecoder: NSCoder) {
