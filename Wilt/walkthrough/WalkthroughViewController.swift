@@ -74,10 +74,13 @@ class WalkthroughViewController: UIViewController {
         DispatchQueue.main.async { [unowned self] in
             switch (state) {
             case .walkthrough:
+                self.navigationItem.rightBarButtonItem = self.infoBarButton
                 self.displayWalkthrough()
             case .loginError:
+                self.navigationItem.rightBarButtonItem = self.infoBarButton
                 self.displayError()
             case .authenticating:
+                self.navigationItem.rightBarButtonItem = nil
                 self.displayLoadingSpinner()
             }
         }
