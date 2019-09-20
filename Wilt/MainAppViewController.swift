@@ -7,6 +7,7 @@ import SwiftIcons
 class MainAppViewController: UITabBarController {
     weak var controllerDelegate: MainAppViewControllerDelegate?
     private var tabs = [(controller: UIViewController, title: String)]()
+    private var container: NSPersistentContainer
 
     private lazy var profileTabItem: UITabBarItem = {
         let item = UITabBarItem(
@@ -54,33 +55,21 @@ class MainAppViewController: UITabBarController {
     /// Create the main app controller
     ///
     /// - Parameters:
-    ///   - database: Where data should be persisted
+    ///   - container: Where data should be persisted
     ///   - api: Where data should be requested from
-    init(database: WiltDatabase, api: WiltAPI) {
+    init(container: NSPersistentContainer, api: WiltAPI) {
+        self.container = container
         super.init(nibName: nil, bundle: nil)
         delegate = self
-        database.loadContext { [unowned self] in
-            switch ($0) {
-            case .success(let container):
-                do {
-                    try self.setupTabs(
-                        container: container,
-                        api: api
-                    )
-                } catch {
-                    // This is most likely a developer error that means the
-                    // cache is broken with no option of recovery
-                    fatalError("Unexpected error setting up app: \(error)")
-                }
-            case .failure(let error):
-                // This error might be recoverable, eg. if the device is out
-                // of disk space. However, it's unlikely that clearing the
-                // cache would free up enough space and I'm not sure whether
-                // the user would care if we displayed an alert an exit vs
-                // just exiting
-                fatalError("Unexpected Core Data error: \(error)")
-                break
-            }
+        do {
+            try self.setupTabs(
+                container: container,
+                api: api
+            )
+        } catch {
+            // This is most likely a developer error that means the
+            // cache is broken with no option of recovery
+            fatalError("Unexpected error setting up app: \(error)")
         }
         navigationItem.rightBarButtonItem = settingsBarButton
         navigationItem.hidesBackButton = true
