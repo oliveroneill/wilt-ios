@@ -20,6 +20,7 @@ class MainAppViewController: UITabBarController {
             textColor: .lightGray,
             selectedTextColor: view.tintColor
         )
+        item.tag = 0
         return item
     }()
 
@@ -34,6 +35,7 @@ class MainAppViewController: UITabBarController {
             textColor: .lightGray,
             selectedTextColor: view.tintColor
         )
+        item.tag = 1
         return item
     }()
 
