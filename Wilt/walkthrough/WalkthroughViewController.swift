@@ -15,6 +15,21 @@ class WalkthroughViewController: UIViewController {
     private var loadingLabel: UILabel!
     private let viewModel: WalkthroughViewModel
 
+    private lazy var infoBarButton: UIBarButtonItem = {
+        let item = UIBarButtonItem(
+            title: nil,
+            style: .plain,
+            target: self,
+            action: #selector(onInfoButtonPressed)
+        )
+        item.setIcon(
+            icon: .fontAwesomeSolid(.info),
+            iconSize: 22,
+            color: view.tintColor
+        )
+        return item
+    }()
+
     init(viewModel: WalkthroughViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -22,6 +37,7 @@ class WalkthroughViewController: UIViewController {
             self.onViewUpdate(state: $0)
         }
         navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItem = infoBarButton
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -235,6 +251,10 @@ class WalkthroughViewController: UIViewController {
 
     @objc private func signUpButtonPressed(sender: UIButton!) {
         viewModel.onSignInButtonPressed()
+    }
+
+    @objc private func onInfoButtonPressed() {
+        viewModel.onInfoButtonPressed()
     }
 }
 

@@ -28,6 +28,10 @@ class WalkthroughViewModel {
         onViewUpdate?(.walkthrough)
     }
 
+    func onInfoButtonPressed() {
+        delegate?.showInfo()
+    }
+
     func onSignInButtonPressed() {
         // Update state to display the loading spinner
         onViewUpdate?(.authenticating)
@@ -74,4 +78,5 @@ class WalkthroughViewModel {
 /// The delegate for events that occur within the walkthrough view
 protocol WalkthroughViewModelDelegate: class {
     func loggedIn(userID: String)
+    func showInfo()
 }

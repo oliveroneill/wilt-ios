@@ -1,5 +1,7 @@
-/// View for displaying settings
+/// View for displaying settings but also doing a bit of double duty for
+/// displaying some info about the app
 class SettingsViewController: UITableViewController {
+    private let loggedIn: Bool
     private lazy var aboutLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -32,7 +34,11 @@ class SettingsViewController: UITableViewController {
     }()
     weak var delegate: SettingsViewControllerDelegate?
 
-    init() {
+    /// Create a SettingsViewController
+    ///
+    /// - Parameter loggedIn: Whether to show the log-out button or not
+    init(loggedIn: Bool = true) {
+        self.loggedIn = loggedIn
         super.init(nibName: nil, bundle: nil)
         title = "settings_title_text".localized
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -89,7 +95,7 @@ class SettingsViewController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1 + (loggedIn ? 1 : 0)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

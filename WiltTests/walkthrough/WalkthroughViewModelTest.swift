@@ -115,6 +115,7 @@ class WalkthroughViewModelTest: XCTestCase {
             func loggedIn(userID: String) {
                 self.userID = userID
             }
+            func showInfo() {}
         }
         let delegate = TestDelegate()
         let viewModel = WalkthroughViewModel(
@@ -137,6 +138,7 @@ class WalkthroughViewModelTest: XCTestCase {
             func loggedIn(userID: String) {
                 self.userID = userID
             }
+            func showInfo() {}
         }
         let delegate = TestDelegate()
         let viewModel = WalkthroughViewModel(
@@ -163,5 +165,23 @@ class WalkthroughViewModelTest: XCTestCase {
         }
         viewModel.onSignInButtonPressed()
         XCTAssertEqual(WalkthroughViewState.loginError, state)
+    }
+
+    func testOnInfoButtonPressed() {
+        class TestDelegate: WalkthroughViewModelDelegate {
+            var infoCalls = 0
+            func loggedIn(userID: String) {}
+            func showInfo() {
+                infoCalls += 1
+            }
+        }
+        let delegate = TestDelegate()
+        let viewModel = WalkthroughViewModel(
+            userAuthenticator: FakeAuthenticator(),
+            spotifyAuthoriser: FakeAuthoriser()
+        )
+        viewModel.delegate = delegate
+        viewModel.onInfoButtonPressed()
+        XCTAssertEqual(1, delegate.infoCalls)
     }
 }

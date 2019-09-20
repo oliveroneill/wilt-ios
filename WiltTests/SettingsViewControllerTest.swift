@@ -31,8 +31,8 @@ class SettingsViewControllerTest: KIFTestCase {
         setupController()
     }
 
-    private func setupController() {
-        controller = SettingsViewController()
+    private func setupController(loggedIn: Bool = true) {
+        controller = SettingsViewController(loggedIn: loggedIn)
         guard let window = UIApplication.shared.keyWindow else {
             XCTFail("Unexpected nil window")
             return
@@ -58,5 +58,12 @@ class SettingsViewControllerTest: KIFTestCase {
         controller.delegate = testDelegate
         tester().tapView(withAccessibilityLabel: "about_cell")
         XCTAssertEqual(1, testDelegate.contactUsCalls)
+    }
+
+    func testNotLoggedIn() {
+        setupController(loggedIn: false)
+        tester().waitForAnimationsToFinish()
+        // expect(self.controller.view).to(recordSnapshot())
+        expect(self.controller.view).to(haveValidSnapshot())
     }
 }
