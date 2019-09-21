@@ -109,7 +109,11 @@ class FeedViewModel {
             updateState(state: .displayingRows)
         } catch {
             guard (error as? WiltAPIError) != WiltAPIError.loggedOut else {
-                    delegate?.loggedOut()
+                // Call delegate on main thread since it will do navigation
+                // things
+                DispatchQueue.main.async { [unowned self] in
+                    self.delegate?.loggedOut()
+                }
                 return
             }
             print("insert failed:", error)
