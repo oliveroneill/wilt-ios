@@ -59,6 +59,11 @@ class ProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewWillLayoutSubviews() {
+        // To handle resizing views for orientation change
+        collectionView.reloadData()
+    }
+
     func updateState(state: [CardViewModelState]) {
         DispatchQueue.main.async { [unowned self] in
             self.cards = state
@@ -95,6 +100,6 @@ extension ProfileViewController: UICollectionViewDelegate {}
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width - 32, height: 300)
+        return CGSize(width: collectionView.frame.size.width - 32, height: 300)
     }
 }

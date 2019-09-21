@@ -192,35 +192,35 @@ class ProfileCardView: MDCCardCollectionCell {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             shimmer.topAnchor.constraint(
-                equalTo: topAnchor,
+                equalTo: safeAreaLayoutGuide.topAnchor,
                 constant: 0
             ),
             shimmer.heightAnchor.constraint(
                 equalToConstant: frame.size.height
             ),
             shimmer.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
+                equalTo: safeAreaLayoutGuide.leadingAnchor,
                 constant: 0
             ),
             shimmer.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
+                equalTo: safeAreaLayoutGuide.trailingAnchor,
                 constant: 0
             ),
         ])
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(
-                equalTo: topAnchor,
+                equalTo: safeAreaLayoutGuide.topAnchor,
                 constant: 0
             ),
             imageView.heightAnchor.constraint(
                 equalToConstant: frame.size.height * 0.6
             ),
             imageView.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
+                equalTo: safeAreaLayoutGuide.leadingAnchor,
                 constant: 0
             ),
             imageView.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
+                equalTo: safeAreaLayoutGuide.trailingAnchor,
                 constant: 0
             ),
         ])
@@ -230,15 +230,15 @@ class ProfileCardView: MDCCardCollectionCell {
                 constant: 8
             ),
             titleLabel.bottomAnchor.constraint(
-                lessThanOrEqualTo: bottomAnchor,
+                lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor,
                 constant: -8
             ),
             titleLabel.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
+                equalTo: safeAreaLayoutGuide.leadingAnchor,
                 constant: 8
             ),
             titleLabel.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
+                equalTo: safeAreaLayoutGuide.trailingAnchor,
                 constant: -8
             ),
             titleLabel.heightAnchor.constraint(equalToConstant: 20)
@@ -249,15 +249,15 @@ class ProfileCardView: MDCCardCollectionCell {
                 constant: 8
             ),
             subtitle1Label.bottomAnchor.constraint(
-                lessThanOrEqualTo: bottomAnchor,
+                lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor,
                 constant: -8
             ),
             subtitle1Label.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
+                equalTo: safeAreaLayoutGuide.leadingAnchor,
                 constant: 8
             ),
             subtitle1Label.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
+                equalTo: safeAreaLayoutGuide.trailingAnchor,
                 constant: -8
             ),
             subtitle1Label.heightAnchor.constraint(equalToConstant: 20)
@@ -268,15 +268,15 @@ class ProfileCardView: MDCCardCollectionCell {
                 constant: 8
             ),
             subtitle2Label.bottomAnchor.constraint(
-                lessThanOrEqualTo: bottomAnchor,
+                lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor,
                 constant: -8
             ),
             subtitle2Label.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
+                equalTo: safeAreaLayoutGuide.leadingAnchor,
                 constant: 8
             ),
             subtitle2Label.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
+                equalTo: safeAreaLayoutGuide.trailingAnchor,
                 constant: -8
             ),
             subtitle2Label.heightAnchor.constraint(equalToConstant: 20)
@@ -295,16 +295,16 @@ class ProfileCardView: MDCCardCollectionCell {
         NSLayoutConstraint.activate([
             errorLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             errorLabel.centerYAnchor.constraint(
-                equalTo: centerYAnchor,
+                equalTo: safeAreaLayoutGuide.centerYAnchor,
                 constant: -40
             ),
             errorLabel.heightAnchor.constraint(equalToConstant: 20),
             errorLabel.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
+                equalTo: safeAreaLayoutGuide.leadingAnchor,
                 constant: 8
             ),
             errorLabel.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
+                equalTo: safeAreaLayoutGuide.trailingAnchor,
                 constant: -8
             ),
         ])
@@ -316,11 +316,11 @@ class ProfileCardView: MDCCardCollectionCell {
             ),
             retryButton.heightAnchor.constraint(equalToConstant: 40),
             retryButton.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
+                equalTo: safeAreaLayoutGuide.leadingAnchor,
                 constant: 8
             ),
             retryButton.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
+                equalTo: safeAreaLayoutGuide.trailingAnchor,
                 constant: -8
             ),
         ])
