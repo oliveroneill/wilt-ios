@@ -75,6 +75,7 @@ class LoggedInCoordinator: Coordinator {
                 with: container.viewContext
             )
         }
+        _ = try? container.viewContext.save()
     }
 }
 
