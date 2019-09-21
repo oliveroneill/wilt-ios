@@ -61,6 +61,7 @@ class ProfileViewModel {
         .topTrack(index: 0, timeRange: .mediumTerm),
     ]
     private let api: ProfileAPI
+    private let queue = DispatchQueue(label: "com.oliveroneill.wilt.ProfileViewModel.queue")
     private var cardStates: [CardViewModelState] {
         didSet {
             onViewUpdate?(cardStates)
@@ -79,10 +80,12 @@ class ProfileViewModel {
     func onViewAppeared() {
         // When the view appears we'll load the cards
         cardStates = cards.map { .loading(tagTitle: $0.readableString) }
-        // Make a request for each card
-        cards.enumerated().forEach {
-            let (cardIndex, card) = $0
-            loadCard(card: card, cardIndex: cardIndex)
+        queue.async { [unowned self] in
+            // Make a request for each card
+            self.cards.enumerated().forEach {
+                let (cardIndex, card) = $0
+                self.loadCard(card: card, cardIndex: cardIndex)
+            }
         }
     }
 
@@ -134,7 +137,9 @@ class ProfileViewModel {
     func onRetryButtonPressed(cardIndex: Int) {
         let card = cards[cardIndex]
         cardStates[cardIndex] = .loading(tagTitle: card.readableString)
-        loadCard(card: card, cardIndex: cardIndex)
+        queue.async { [unowned self] in
+            self.loadCard(card: card, cardIndex: cardIndex)
+        }
     }
 }
 
