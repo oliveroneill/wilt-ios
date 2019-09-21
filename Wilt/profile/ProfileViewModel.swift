@@ -68,6 +68,7 @@ class ProfileViewModel {
     }
     /// The view should set this value to receive state updates
     var onViewUpdate: (([CardViewModelState]) -> Void)?
+    weak var delegate: ProfileViewModelDelegate?
 
     init(api: ProfileAPI) {
         self.api = api
@@ -97,6 +98,14 @@ class ProfileViewModel {
                 } catch {
                     print("topArtist error", error)
                     self.cardStates[cardIndex] = .error
+                    guard (error as? WiltAPIError) != WiltAPIError.loggedOut else {
+                        // Call delegate on main thread since it will do navigation
+                        // things
+                        DispatchQueue.main.async { [unowned self] in
+                            self.delegate?.loggedOut()
+                        }
+                        return
+                    }
                 }
             }
         case .topTrack(let index, let timeRange):
@@ -109,6 +118,14 @@ class ProfileViewModel {
                 } catch {
                     print("topTrack error", error)
                     self.cardStates[cardIndex] = .error
+                    guard (error as? WiltAPIError) != WiltAPIError.loggedOut else {
+                        // Call delegate on main thread since it will do navigation
+                        // things
+                        DispatchQueue.main.async { [unowned self] in
+                            self.delegate?.loggedOut()
+                        }
+                        return
+                    }
                 }
             }
         }
@@ -183,4 +200,8 @@ extension Date {
             locale: Locales.english
         )
     }
+}
+
+protocol ProfileViewModelDelegate: class {
+    func loggedOut()
 }

@@ -83,8 +83,10 @@ class MainAppViewController: UITabBarController {
             backgroundContext: container.newBackgroundContext(),
             networkAPI: api
         )
+        let viewModel = ProfileViewModel(api: cache)
+        viewModel.delegate = self
         let controller = ProfileViewController(
-            viewModel: ProfileViewModel(api: cache)
+            viewModel: viewModel
         )
         controller.tabBarItem = profileTabItem
         return controller
@@ -146,7 +148,7 @@ extension MainAppViewController: UITabBarControllerDelegate {
     }
 }
 
-extension MainAppViewController: FeedViewModelDelegate {
+extension MainAppViewController: FeedViewModelDelegate, ProfileViewModelDelegate {
     func loggedOut() {
         controllerDelegate?.loggedOut()
     }

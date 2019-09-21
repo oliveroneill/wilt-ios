@@ -258,6 +258,62 @@ class ProfileViewModelTest: XCTestCase {
             }
         }
     }
+
+    func testOnViewAppearedArtistLoggedOut() {
+        let error = WiltAPIError.loggedOut
+        let api = FakeWiltAPI(
+            topArtistResult: [
+                TopSomethingRequest(timeRange: "medium_term", index: 0): .failure(error)
+            ]
+        )
+        viewModel = ProfileViewModel(api: api)
+        let exp = expectation(description: "Should receive update")
+        class TestDelegate: ProfileViewModelDelegate {
+            private let exp: XCTestExpectation
+            init(exp: XCTestExpectation) {
+                self.exp = exp
+            }
+            func loggedOut() {
+                exp.fulfill()
+            }
+        }
+        let delegate = TestDelegate(exp: exp)
+        viewModel.delegate = delegate
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnViewAppearedTrackLoggedOut() {
+        let error = WiltAPIError.loggedOut
+        let api = FakeWiltAPI(
+            topTrackResult: [
+                TopSomethingRequest(timeRange: "medium_term", index: 0): .failure(error)
+            ]
+        )
+        viewModel = ProfileViewModel(api: api)
+        let exp = expectation(description: "Should receive update")
+        class TestDelegate: ProfileViewModelDelegate {
+            private let exp: XCTestExpectation
+            init(exp: XCTestExpectation) {
+                self.exp = exp
+            }
+            func loggedOut() {
+                exp.fulfill()
+            }
+        }
+        let delegate = TestDelegate(exp: exp)
+        viewModel.delegate = delegate
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
 }
 
 
