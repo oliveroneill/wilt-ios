@@ -1,5 +1,8 @@
 import XCTest
 
+// TODO: these are currently disabled because I couldn't get all the
+// dependencies installed correctly
+
 // TODO: not really sure what I should be doing with these tests
 // It seems like a lot of work to write end-to-end tests, especially with
 // third party services, so I'll leave this to only test the walkthrough for
