@@ -149,9 +149,9 @@ class ProfileCardView: MDCCardCollectionCell {
             chip.sizeToFit()
         case .loaded(let tagTitle, let title, let subtitle1, let subtitle2,
                      let imageURL):
+            shimmer.isShimmering = false
             setupSuccessfulView()
             // Update views
-            shimmer.isShimmering = false
             titleLabel.backgroundColor = .white
             subtitle2Label.backgroundColor = .white
             subtitle1Label.backgroundColor = .white
@@ -162,6 +162,7 @@ class ProfileCardView: MDCCardCollectionCell {
             subtitle2Label.text = subtitle2
             imageView.sd_setImage(with: imageURL)
         case .error:
+            shimmer.isShimmering = false
             titleLabel.isHidden = true
             subtitle1Label.isHidden = true
             subtitle2Label.isHidden = true
@@ -169,7 +170,6 @@ class ProfileCardView: MDCCardCollectionCell {
             imageView.isHidden = true
             errorLabel.isHidden = false
             retryButton.isHidden = false
-            shimmer.isShimmering = false
             retryButton.addTarget(
                 self,
                 action: #selector(retryPressed),
