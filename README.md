@@ -20,4 +20,6 @@ Put your `GoogleService-Info.plist` file in `Wilt/`. Generate this file via the
 Firebase console for iOS integration.
 
 ## The app in action
-Coming soon...
+![The profile screen with shimmering load](gifs/profile.gif)
+![The profile screen scrolling](gifs/profile_scroll.gif)
+![The feed](gifs/feed.gif)
