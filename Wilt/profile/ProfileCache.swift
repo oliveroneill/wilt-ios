@@ -41,8 +41,14 @@ class ProfileCache: ProfileAPI {
             obj.index = Int32(index)
             do {
                 try backgroundContext.save()
-            } catch {
-                upsertError = error
+            } catch let error as NSError {
+                upsertError = NSError(
+                    domain: error.domain,
+                    code: error.code,
+                    // Store as string so that we don't have to worry about
+                    // thread-safety
+                    userInfo: ["error": "\(error.userInfo)"]
+                )
             }
         }
         if let error = upsertError {
@@ -64,8 +70,14 @@ class ProfileCache: ProfileAPI {
             obj.index = Int32(index)
             do {
                 try backgroundContext.save()
-            } catch {
-                upsertError = error
+            } catch let error as NSError {
+                upsertError = NSError(
+                    domain: error.domain,
+                    code: error.code,
+                    // Store as string so that we don't have to worry about
+                    // thread-safety
+                    userInfo: ["error": "\(error.userInfo)"]
+                )
             }
         }
         if let error = upsertError {
