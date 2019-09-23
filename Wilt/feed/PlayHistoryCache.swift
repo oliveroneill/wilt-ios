@@ -71,14 +71,26 @@ class PlayHistoryCache: NSObject, PlayHistoryDao {
         updateContext.performAndWait {
             do {
                 try upsert(items: items)
-            } catch {
-                insertError = error
+            } catch let error as NSError {
+                insertError = NSError(
+                    domain: error.domain,
+                    code: error.code,
+                    // Store as string so that we don't have to worry about
+                    // thread-safety
+                    userInfo: ["error": "\(error.userInfo)"]
+                )
             }
             // Independently save, so that this will happen regardless of errors
             do {
                 try updateContext.save()
-            } catch {
-                insertError = error
+            } catch let error as NSError {
+                insertError = NSError(
+                    domain: error.domain,
+                    code: error.code,
+                    // Store as string so that we don't have to worry about
+                    // thread-safety
+                    userInfo: ["error": "\(error.userInfo)"]
+                )
             }
         }
         if let error = insertError {
