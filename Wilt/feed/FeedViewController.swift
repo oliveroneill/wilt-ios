@@ -170,6 +170,7 @@ class FeedViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.onRowTapped(rowIndex: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
