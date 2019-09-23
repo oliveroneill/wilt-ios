@@ -165,12 +165,14 @@ struct TopArtistInfo: Equatable {
     /// Will be nil if it hasn't been played since joining Wilt
     let lastPlayed: Date?
     let imageURL: URL
+    let externalURL: URL
 
     static func from(dict: [String:Any]) throws -> TopArtistInfo {
         guard let name = dict["name"] as? String,
             let count = dict["count"] as? Int64,
             let dateDict = dict["lastPlay"] as? [String:Any]?,
-            let imageURL = URL(string: dict["imageUrl"] as? String ?? "") else {
+            let imageURL = URL(string: dict["imageUrl"] as? String ?? ""),
+            let externalURL = URL(string: dict["externalUrl"] as? String ?? "") else {
                 throw TopArtistError.unexpectedNil
         }
         let date: Date?
@@ -187,7 +189,8 @@ struct TopArtistInfo: Equatable {
             name: name,
             count: count,
             lastPlayed: date,
-            imageURL: imageURL
+            imageURL: imageURL,
+            externalURL: externalURL
         )
     }
 }
@@ -198,12 +201,14 @@ struct TopTrackInfo: Equatable {
     /// Will be nil if it hasn't been played since joining Wilt
     let lastPlayed: Date?
     let imageURL: URL
+    let externalURL: URL
 
     static func from(dict: [String:Any]) throws -> TopTrackInfo {
         guard let name = dict["name"] as? String,
             let totalPlayTimeMs = dict["totalPlayTimeMs"] as? Int64,
             let dateDict = dict["lastPlay"] as? [String:Any]?,
-            let imageURL = URL(string: dict["imageUrl"] as? String ?? "") else {
+            let imageURL = URL(string: dict["imageUrl"] as? String ?? ""),
+            let externalURL = URL(string: dict["externalUrl"] as? String ?? "") else {
                 throw TopArtistError.unexpectedNil
         }
         let date: Date?
@@ -220,7 +225,8 @@ struct TopTrackInfo: Equatable {
             name: name,
             totalPlayTime: TimeInterval(totalPlayTimeMs / 1000),
             lastPlayed: date,
-            imageURL: imageURL
+            imageURL: imageURL,
+            externalURL: externalURL
         )
     }
 }

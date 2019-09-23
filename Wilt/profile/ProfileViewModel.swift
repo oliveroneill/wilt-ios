@@ -45,7 +45,10 @@ enum CardViewModelState: Equatable {
         title: String,
         subtitleFirstLine: String,
         subtitleSecondLine: String,
-        imageURL: URL
+        imageURL: URL,
+        // TODO: this shouldn't really be in the view model but otherwise
+        // it's annoying to store the models as well
+        externalURL: URL
     )
     case error
 }
@@ -141,6 +144,14 @@ class ProfileViewModel {
             self.loadCard(card: card, cardIndex: cardIndex)
         }
     }
+
+    func onCardTapped(cardIndex: Int) {
+        let card = cardStates[cardIndex]
+        guard case let .loaded(_, _, _, _, _, externalURL) = card else {
+            return
+        }
+        delegate?.open(url: externalURL)
+    }
 }
 
 extension TopTrackInfo {
@@ -163,7 +174,8 @@ extension TopTrackInfo {
             title: name,
             subtitleFirstLine: totalPlayText,
             subtitleSecondLine: lastPlayedText,
-            imageURL: imageURL
+            imageURL: imageURL,
+            externalURL: externalURL
         )
     }
 }
@@ -182,7 +194,8 @@ extension TopArtistInfo {
             title: name,
             subtitleFirstLine: "\(count) plays since joining Wilt",
             subtitleSecondLine: lastPlayedText,
-            imageURL: imageURL
+            imageURL: imageURL,
+            externalURL: externalURL
         )
     }
 }
@@ -208,5 +221,6 @@ extension Date {
 }
 
 protocol ProfileViewModelDelegate: class {
+    func open(url: URL)
     func loggedOut()
 }

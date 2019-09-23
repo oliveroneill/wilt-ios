@@ -10,6 +10,7 @@
     </entity>
     <entity name="TopArtistInfoEntity" representedClassName="TopArtistInfoEntity" syncable="YES" codeGenerationType="class">
         <attribute name="count" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="externalURL" attributeType="URI" syncable="YES"/>
         <attribute name="imageURL" attributeType="URI" syncable="YES"/>
         <attribute name="index" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lastPlayed" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -18,6 +19,7 @@
         <attribute name="timeRange" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="TopTrackInfoEntity" representedClassName="TopTrackInfoEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="externalURL" attributeType="URI" syncable="YES"/>
         <attribute name="imageURL" attributeType="URI" syncable="YES"/>
         <attribute name="index" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lastPlayed" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -28,7 +30,7 @@
     </entity>
     <elements>
         <element name="TopArtist" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="TopArtistInfoEntity" positionX="-63" positionY="18" width="128" height="150"/>
-        <element name="TopTrackInfoEntity" positionX="-54" positionY="27" width="128" height="150"/>
+        <element name="TopArtistInfoEntity" positionX="-63" positionY="18" width="128" height="165"/>
+        <element name="TopTrackInfoEntity" positionX="-54" positionY="27" width="128" height="165"/>
     </elements>
 </model>

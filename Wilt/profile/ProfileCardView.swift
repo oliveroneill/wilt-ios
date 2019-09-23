@@ -148,7 +148,7 @@ class ProfileCardView: MDCCardCollectionCell {
             chip.titleLabel.text = tagTitle
             chip.sizeToFit()
         case .loaded(let tagTitle, let title, let subtitle1, let subtitle2,
-                     let imageURL):
+                     let imageURL, _):
             shimmer.isShimmering = false
             setupSuccessfulView()
             // Update views

@@ -66,6 +66,7 @@ class ProfileCacheTest: XCTestCase {
             item.count = artist.count
             item.lastPlayed = artist.lastPlayed
             item.imageURL = artist.imageURL
+            item.externalURL = artist.externalURL
             item.lastUpdated = storedAt
             item.timeRange = timeRange
             item.index = Int32(index)
@@ -88,6 +89,7 @@ class ProfileCacheTest: XCTestCase {
             item.totalPlayTimeSeconds = Int64(track.totalPlayTime)
             item.lastPlayed = track.lastPlayed
             item.imageURL = track.imageURL
+            item.externalURL = track.externalURL
             item.lastUpdated = storedAt
             item.timeRange = timeRange
             item.index = Int32(index)
@@ -103,7 +105,8 @@ class ProfileCacheTest: XCTestCase {
             name: "(Sandy) Alex G",
             count: 354,
             lastPlayed: Date().minusWeeks(6),
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         let api = FakeWiltAPI(
             topArtistResult: [
@@ -137,7 +140,8 @@ class ProfileCacheTest: XCTestCase {
             name: "(Sandy) Alex G",
             count: 354,
             lastPlayed: Date().minusWeeks(6),
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         storeArtist(
             artist: expected,
@@ -172,7 +176,8 @@ class ProfileCacheTest: XCTestCase {
             name: "(Sandy) Alex G",
             count: 354,
             lastPlayed: Date().minusWeeks(6),
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         storeArtist(
             artist: expected,
@@ -213,7 +218,8 @@ class ProfileCacheTest: XCTestCase {
             name: "(Sandy) Alex G",
             count: 354,
             lastPlayed: Date().minusWeeks(6),
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         storeArtist(
             artist: expected,
@@ -280,7 +286,8 @@ class ProfileCacheTest: XCTestCase {
             name: "(Sandy) Alex G",
             totalPlayTime: 354,
             lastPlayed: Date().minusWeeks(6),
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         let api = FakeWiltAPI(
             topTrackResult: [
@@ -314,7 +321,8 @@ class ProfileCacheTest: XCTestCase {
             name: "(Sandy) Alex G",
             totalPlayTime: 354,
             lastPlayed: Date().minusWeeks(6),
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         storeTrack(
             track: expected,
@@ -349,7 +357,8 @@ class ProfileCacheTest: XCTestCase {
             name: "(Sandy) Alex G",
             totalPlayTime: 354,
             lastPlayed: Date().minusWeeks(6),
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         storeTrack(
             track: expected,
@@ -390,7 +399,8 @@ class ProfileCacheTest: XCTestCase {
             name: "(Sandy) Alex G",
             totalPlayTime: 354,
             lastPlayed: Date().minusWeeks(6),
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         storeTrack(
             track: expected,

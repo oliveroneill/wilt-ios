@@ -40,7 +40,8 @@ class ProfileViewModelTest: XCTestCase {
             name: "EARFQUAKE by Tyler, The Creator",
             totalPlayTime: TimeInterval(7200),
             lastPlayed: Date().minusWeeks(3),
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         let api = FakeWiltAPI(
             topTrackResult: [
@@ -56,7 +57,8 @@ class ProfileViewModelTest: XCTestCase {
                 title: "EARFQUAKE by Tyler, The Creator",
                 subtitleFirstLine: "2 hours spent listening since joining Wilt",
                 subtitleSecondLine: "Last listened to 3 weeks ago",
-                imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+                imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+                externalURL: URL(string: "http://notarealdomainok.com/x/y")!
             ),
             .loading(tagTitle: "Your favourite artist recently"),
             .loading(tagTitle: "Your favourite song recently"),
@@ -81,7 +83,8 @@ class ProfileViewModelTest: XCTestCase {
             name: "(Sandy) Alex G",
             count: 354,
             lastPlayed: Date().minusWeeks(6),
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         let api = FakeWiltAPI(
             topArtistResult: [
@@ -100,7 +103,8 @@ class ProfileViewModelTest: XCTestCase {
                 title: "(Sandy) Alex G",
                 subtitleFirstLine: "354 plays since joining Wilt",
                 subtitleSecondLine: "Last listened to last month",
-                imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+                imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+                externalURL: URL(string: "http://notarealdomainok.com/x/y")!
             ),
             .loading(tagTitle: "Your favourite song in recent months"),
         ]
@@ -122,7 +126,8 @@ class ProfileViewModelTest: XCTestCase {
             name: "EARFQUAKE by Tyler, The Creator",
             totalPlayTime: TimeInterval(0),
             lastPlayed: nil,
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         let api = FakeWiltAPI(
             topTrackResult: [
@@ -138,7 +143,8 @@ class ProfileViewModelTest: XCTestCase {
                 title: "EARFQUAKE by Tyler, The Creator",
                 subtitleFirstLine: "0 seconds spent listening since joining Wilt",
                 subtitleSecondLine: "",
-                imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+                imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+                externalURL: URL(string: "http://notarealdomainok.com/x/y")!
             ),
             .loading(tagTitle: "Your favourite artist recently"),
             .loading(tagTitle: "Your favourite song recently"),
@@ -163,7 +169,8 @@ class ProfileViewModelTest: XCTestCase {
             name: "(Sandy) Alex G",
             count: 0,
             lastPlayed: nil,
-            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
         )
         let api = FakeWiltAPI(
             topArtistResult: [
@@ -182,7 +189,8 @@ class ProfileViewModelTest: XCTestCase {
                 title: "(Sandy) Alex G",
                 subtitleFirstLine: "0 plays since joining Wilt",
                 subtitleSecondLine: "",
-                imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!
+                imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+                externalURL: URL(string: "http://notarealdomainok.com/x/y")!
             ),
             .loading(tagTitle: "Your favourite song in recent months"),
         ]
@@ -276,6 +284,7 @@ class ProfileViewModelTest: XCTestCase {
             func loggedOut() {
                 exp.fulfill()
             }
+            func open(url: URL) {}
         }
         let delegate = TestDelegate(exp: exp)
         viewModel.delegate = delegate
@@ -304,6 +313,7 @@ class ProfileViewModelTest: XCTestCase {
             func loggedOut() {
                 exp.fulfill()
             }
+            func open(url: URL) {}
         }
         let delegate = TestDelegate(exp: exp)
         viewModel.delegate = delegate
@@ -313,6 +323,79 @@ class ProfileViewModelTest: XCTestCase {
                 XCTFail("Unexpected error: \(error)")
             }
         }
+    }
+
+    func testOnCardTapped() {
+        let index = 4
+        let artistInfo = TopArtistInfo(
+            name: "(Sandy) Alex G",
+            count: 0,
+            lastPlayed: nil,
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
+        )
+        let api = FakeWiltAPI(
+            topArtistResult: [
+                TopSomethingRequest(timeRange: "medium_term", index: 0): .success(artistInfo)
+            ]
+        )
+        viewModel = ProfileViewModel(api: api)
+        let exp = expectation(description: "Should receive update")
+        class TestDelegate: ProfileViewModelDelegate {
+            private let expectedURL: URL
+            private let exp: XCTestExpectation
+            init(expectedURL: URL, exp: XCTestExpectation) {
+                self.expectedURL = expectedURL
+                self.exp = exp
+            }
+            func loggedOut() {}
+            func open(url: URL) {
+                XCTAssertEqual(expectedURL, url)
+                exp.fulfill()
+            }
+        }
+        let delegate = TestDelegate(
+            expectedURL: artistInfo.externalURL,
+            exp: exp
+        )
+        viewModel.delegate = delegate
+        viewModel.onViewUpdate = { _ in
+            self.viewModel.onCardTapped(cardIndex: index)
+        }
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnCardTappedWhileStillLoading() {
+        let index = 4
+        let artistInfo = TopArtistInfo(
+            name: "(Sandy) Alex G",
+            count: 0,
+            lastPlayed: nil,
+            imageURL: URL(string: "http://notarealdomainyeah.com/x/y")!,
+            externalURL: URL(string: "http://notarealdomainok.com/x/y")!
+        )
+        let api = FakeWiltAPI(
+            topArtistResult: [
+                TopSomethingRequest(timeRange: "medium_term", index: 0): .success(artistInfo)
+            ]
+        )
+        viewModel = ProfileViewModel(api: api)
+        class TestDelegate: ProfileViewModelDelegate {
+            var openCallCount = 0
+            func loggedOut() {}
+            func open(url: URL) {
+                openCallCount += 1
+            }
+        }
+        let delegate = TestDelegate()
+        viewModel.delegate = delegate
+        self.viewModel.onCardTapped(cardIndex: index)
+        XCTAssertEqual(0, delegate.openCallCount)
     }
 }
 

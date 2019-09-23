@@ -36,6 +36,7 @@ class ProfileCache: ProfileAPI {
             obj.count = artist.count
             obj.lastPlayed = artist.lastPlayed
             obj.imageURL = artist.imageURL
+            obj.externalURL = artist.externalURL
             obj.lastUpdated = Date()
             obj.timeRange = timeRange
             obj.index = Int32(index)
@@ -65,6 +66,7 @@ class ProfileCache: ProfileAPI {
             obj.totalPlayTimeSeconds = Int64(track.totalPlayTime)
             obj.lastPlayed = track.lastPlayed
             obj.imageURL = track.imageURL
+            obj.externalURL = track.externalURL
             obj.lastUpdated = Date()
             obj.timeRange = timeRange
             obj.index = Int32(index)
@@ -189,14 +191,16 @@ extension TopArtistInfoEntity {
     func toData() -> TopArtistInfo {
         // We'll error if any of the values are nil. This shouldn't occur but
         // I wonder if there's a better way to handle this
-        guard let name = name, let imageURL = imageURL else {
+        guard let name = name, let imageURL = imageURL,
+            let externalURL = externalURL else {
             fatalError("Unexpected nil stored in Core Data")
         }
         return TopArtistInfo(
             name: name,
             count: count,
             lastPlayed: lastPlayed,
-            imageURL: imageURL
+            imageURL: imageURL,
+            externalURL: externalURL
         )
     }
 }
@@ -209,14 +213,16 @@ extension TopTrackInfoEntity {
     func toData() -> TopTrackInfo {
         // We'll error if any of the values are nil. This shouldn't occur but
         // I wonder if there's a better way to handle this
-        guard let name = name, let imageURL = imageURL else {
+        guard let name = name, let imageURL = imageURL,
+            let externalURL = externalURL else {
             fatalError("Unexpected nil stored in Core Data")
         }
         return TopTrackInfo(
             name: name,
             totalPlayTime: TimeInterval(totalPlayTimeSeconds),
             lastPlayed: lastPlayed,
-            imageURL: imageURL
+            imageURL: imageURL,
+            externalURL: externalURL
         )
     }
 }
