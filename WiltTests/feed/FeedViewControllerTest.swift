@@ -8,6 +8,7 @@ import KIF
 class FeedViewControllerTest: KIFTestCase {
     private var window: UIWindow!
     private var controller: FeedViewController!
+    private var viewModel: FeedViewModel!
     private var api: FakeWiltAPI!
     enum FeedViewControllerTestError: Error {
         case testError
@@ -23,7 +24,7 @@ class FeedViewControllerTest: KIFTestCase {
     private func setupController(apiResponse: Result<[TopArtistData], Error>? = .success([]),
                                  dao: PlayHistoryDao = FakeDao(items: FakeData.items + FakeData.items + FakeData.items)) {
         api = FakeWiltAPI(topArtistPerWeekAnythingResponse: apiResponse)
-        let viewModel = FeedViewModel(
+        viewModel = FeedViewModel(
             dao: dao,
             api: api
         )
@@ -162,4 +163,36 @@ class FeedViewControllerTest: KIFTestCase {
         // 3
         XCTAssertEqual(3, api.topArtistsPerWeekCalls.count)
     }
+
+    func testOnRowTapped() {
+        let index = 8
+        setupController()
+        tester().waitForAnimationsToFinish()
+        class ListeningDelegate: FeedViewModelDelegate {
+            private let exp: XCTestExpectation
+            private let index: Int
+            init(index: Int, expectation: XCTestExpectation) {
+                self.index = index
+                self.exp = expectation
+            }
+            func loggedOut() {}
+            func open(url: URL) {
+                XCTAssertEqual(FakeData.items[index].externalURL, url)
+                exp.fulfill()
+            }
+        }
+        let exp = expectation(description: "Should trigger delegate")
+        let delegate = ListeningDelegate(index: index, expectation: exp)
+        viewModel.delegate = delegate
+        tester().tapRow(
+            at: IndexPath(row: index, section: 0),
+            inTableViewWithAccessibilityIdentifier: "feed_table_view"
+        )
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
 }

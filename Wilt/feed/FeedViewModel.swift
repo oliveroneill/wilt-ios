@@ -21,6 +21,7 @@ struct FeedItemViewModel: Equatable {
     let playsText: String
     let dateText: String
     let imageURL: URL
+    let externalURL: URL
 }
 
 /// View model for displaying the user's music playing history in a feed
@@ -52,7 +53,8 @@ class FeedViewModel {
                 artistName: $0.topArtist,
                 playsText: "\($0.count) plays",
                 dateText: "\(dateFormatter.string(from: $0.date))",
-                imageURL: $0.imageURL
+                imageURL: $0.imageURL,
+                externalURL: $0.externalURL
             )
         }
     }
@@ -154,6 +156,10 @@ class FeedViewModel {
         updateState(state: .displayingRows)
     }
 
+    func onRowTapped(rowIndex: Int) {
+        delegate?.open(url: items[rowIndex].externalURL)
+    }
+
     private func loadEarlierPage() {
         let earliestItem = dao.items.last
         backgroundQueue.async { [unowned self] in
@@ -197,5 +203,6 @@ class FeedViewModel {
 /// Delegate for the `FeedViewModel` for events that occur during the
 /// feed
 protocol FeedViewModelDelegate: class {
+    func open(url: URL)
     func loggedOut()
 }

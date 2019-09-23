@@ -80,6 +80,10 @@ class LoggedInCoordinator: Coordinator {
 }
 
 extension LoggedInCoordinator: MainAppViewControllerDelegate {
+    func open(url: URL) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+
     func showSettings() {
         let controller = SettingsViewController()
         controller.delegate = self

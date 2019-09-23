@@ -116,6 +116,7 @@ class PlayHistoryCache: NSObject, PlayHistoryDao {
                     item.date = $0.date
                     item.week = $0.week
                     item.imageURL = $0.imageURL
+                    item.externalURL = $0.externalURL
                     updateContext.insert(item)
                     return
             }
@@ -125,6 +126,7 @@ class PlayHistoryCache: NSObject, PlayHistoryDao {
             found.date = $0.date
             found.week = $0.week
             found.imageURL = $0.imageURL
+            found.externalURL = $0.externalURL
         }
     }
 }

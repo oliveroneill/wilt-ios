@@ -3,6 +3,7 @@
     <entity name="TopArtist" representedClassName="TopArtist" syncable="YES" codeGenerationType="class">
         <attribute name="count" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="externalURL" attributeType="URI" syncable="YES"/>
         <attribute name="imageURL" attributeType="URI" syncable="YES"/>
         <attribute name="topArtist" attributeType="String" syncable="YES"/>
         <attribute name="week" attributeType="String" syncable="YES"/>
@@ -26,7 +27,7 @@
         <attribute name="totalPlayTimeSeconds" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TopArtist" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="TopArtist" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="TopArtistInfoEntity" positionX="-63" positionY="18" width="128" height="150"/>
         <element name="TopTrackInfoEntity" positionX="-54" positionY="27" width="128" height="150"/>
     </elements>

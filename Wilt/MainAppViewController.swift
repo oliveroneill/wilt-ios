@@ -149,6 +149,10 @@ extension MainAppViewController: UITabBarControllerDelegate {
 }
 
 extension MainAppViewController: FeedViewModelDelegate, ProfileViewModelDelegate {
+    func open(url: URL) {
+        controllerDelegate?.open(url: url)
+    }
+
     func loggedOut() {
         controllerDelegate?.loggedOut()
     }
@@ -157,6 +161,7 @@ extension MainAppViewController: FeedViewModelDelegate, ProfileViewModelDelegate
 /// Delegate for the `MainAppViewController` for events that occur in the
 /// main app
 protocol MainAppViewControllerDelegate: class {
+    func open (url: URL)
     func showSettings()
     func loggedOut()
 }

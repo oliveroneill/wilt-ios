@@ -72,9 +72,10 @@ class FeedViewController: UITableViewController {
             self.onViewUpdate(state: $0)
         }
         refreshControl = customRefreshControl
-        tableView.allowsSelection = false
         // This will hide the cell dividers when there's no data
         tableView.tableFooterView = UIView(frame: .zero)
+        // Used for KIF testing
+        tableView.accessibilityIdentifier = "feed_table_view"
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -165,6 +166,10 @@ class FeedViewController: UITableViewController {
             !tableView.isErrorFooterShowing {
             viewModel.onScrolledToBottom()
         }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.onRowTapped(rowIndex: indexPath.row)
     }
 }
 

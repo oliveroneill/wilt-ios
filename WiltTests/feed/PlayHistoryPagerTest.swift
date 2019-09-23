@@ -24,7 +24,8 @@ class PlayHistoryPagerTest: XCTestCase {
             count: 99,
             date: FakeData.formatter.date(from: "2019-02-25")!,
             week: "09-2019",
-            imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!
         )
         pager.loadEarlierPage(earliestItem: earliestItem) { _ in }
         XCTAssertEqual(1, api.topArtistsPerWeekCalls.count)
@@ -39,7 +40,8 @@ class PlayHistoryPagerTest: XCTestCase {
             count: 99,
             date: FakeData.formatter.date(from: "2019-03-25")!,
             week: "13-2019",
-            imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!
         )
         pager.loadEarlierPage(earliestItem: earliestItem) { _ in }
         XCTAssertEqual(1, api.topArtistsPerWeekCalls.count)
@@ -55,14 +57,16 @@ class PlayHistoryPagerTest: XCTestCase {
                 count: 99,
                 date: FakeData.formatter.date(from: "2019-02-25")!,
                 week: "09-2019",
-                imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://notarealimageurl.notreal.net")!
             ),
             TopArtistData(
                 topArtist: "Bon Iver",
                 count: 12,
                 date: FakeData.formatter.date(from: "2018-12-25")!,
                 week: "52-2018",
-                imageURL: URL(string: "http://anothernotrealone.notreal.net")!
+                imageURL: URL(string: "http://anothernotrealone.notreal.net")!,
+                externalURL: URL(string: "http://notarealimageurl.notreal.net")!
             )
         ]
         api = FakeWiltAPI(
@@ -76,7 +80,8 @@ class PlayHistoryPagerTest: XCTestCase {
             count: 10,
             date: FakeData.formatter.date(from: "2018-11-25")!,
             week: "47-2018",
-            imageURL: URL(string: "http://arandomurl.net/img.png")!
+            imageURL: URL(string: "http://arandomurl.net/img.png")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!
         )
         // When
         let exp = expectation(
@@ -108,7 +113,8 @@ class PlayHistoryPagerTest: XCTestCase {
             count: 99,
             date: FakeData.formatter.date(from: "2019-02-25")!,
             week: "09-2019",
-            imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!
         )
         let expected = error
         api = FakeWiltAPI(
@@ -144,7 +150,8 @@ class PlayHistoryPagerTest: XCTestCase {
             count: 99,
             date: FakeData.formatter.date(from: "2019-02-25")!,
             week: "09-2019",
-            imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!
         )
         let expected = error
         api = FakeWiltAPI(
@@ -187,7 +194,8 @@ class PlayHistoryPagerTest: XCTestCase {
             count: 99,
             date: FakeData.formatter.date(from: "2018-02-25")!,
             week: "09-2019",
-            imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!
         )
         pager.loadLaterPage(latestItem: item) { _ in }
         XCTAssertEqual(1, api.topArtistsPerWeekCalls.count)
@@ -201,7 +209,8 @@ class PlayHistoryPagerTest: XCTestCase {
             count: 99,
             date: FakeData.formatter.date(from: "2018-02-25")!,
             week: "09-2019",
-            imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!
         )
         pager.loadLaterPage(latestItem: item) { _ in }
         XCTAssertEqual(1, api.topArtistsPerWeekCalls.count)
@@ -219,7 +228,8 @@ class PlayHistoryPagerTest: XCTestCase {
             count: 99,
             date: FakeData.formatter.date(from: "2018-02-25")!,
             week: "09-2019",
-            imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!
         )
         pager.loadLaterPage(latestItem: item) { _ in }
         XCTAssertEqual(1, api.topArtistsPerWeekCalls.count)
@@ -242,7 +252,8 @@ class PlayHistoryPagerTest: XCTestCase {
             count: 99,
             date: FakeData.formatter.date(from: "2018-02-25")!,
             week: "09-2019",
-            imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!
         )
         api = FakeWiltAPI(
             topArtistPerWeekResult: [

@@ -11,6 +11,7 @@ struct TopArtistData: Equatable {
     let date: Date
     let week: String
     let imageURL: URL
+    let externalURL: URL
 
     /// Convert a network response into a `TopArtistData` struct
     ///
@@ -18,11 +19,13 @@ struct TopArtistData: Equatable {
     /// - Returns: The created TopArtist value
     /// - Throws: If we couldn't parse this data
     static func from(dict: [String:Any]) throws -> TopArtistData {
+        print("TOPARTISTDATA", dict)
         guard let topArtist = dict["top_artist"] as? String,
             let week = dict["week"] as? String,
             let count = dict["count"] as? Int64,
             let dateString = dict["date"] as? String,
             let imageURL = URL(string: dict["imageUrl"] as? String ?? ""),
+            let externalURL = URL(string: dict["externalUrl"] as? String ?? ""),
             let date = WiltAPIDateFormatters.dateStringFormatter.date(
                 from: dateString
             ) else {
@@ -33,7 +36,8 @@ struct TopArtistData: Equatable {
             count: count,
             date: date,
             week: week,
-            imageURL: imageURL
+            imageURL: imageURL,
+            externalURL: externalURL
         )
     }
 }
@@ -47,7 +51,8 @@ extension TopArtist {
         // We'll error if any of the values are nil. This shouldn't occur but
         // I wonder if there's a better way to handle this
         guard let topArtist = topArtist, let date = date,
-            let week = week, let imageURL = imageURL else {
+            let week = week, let imageURL = imageURL,
+            let externalURL = externalURL else {
                 fatalError("Unexpected nil stored in Core Data")
         }
         return TopArtistData(
@@ -55,7 +60,8 @@ extension TopArtist {
             count: count,
             date: date,
             week: week,
-            imageURL: imageURL
+            imageURL: imageURL,
+            externalURL: externalURL
         )
     }
 }

@@ -39,21 +39,24 @@ class FeedViewModelTest: XCTestCase {
                 count: 99,
                 date: FakeData.formatter.date(from: "2019-02-25")!,
                 week: "09-2019",
-                imageURL: URL(string: "http://notarealimageurl1.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl1.notreal.net")!,
+                externalURL: URL(string: "http://notarealurl1.notreal.net")!
             ),
             TopArtistData(
                 topArtist: "Bon Iver",
                 count: 12,
                 date: FakeData.formatter.date(from: "2018-12-25")!,
                 week: "52-2018",
-                imageURL: URL(string: "http://notarealimageurl2.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl2.notreal.net")!,
+                externalURL: URL(string: "http://notarealurl2.notreal.net")!
             ),
             TopArtistData(
                 topArtist: "Death Grips",
                 count: 78,
                 date: FakeData.formatter.date(from: "2018-10-21")!,
                 week: "43-2018",
-                imageURL: URL(string: "http://notarealimageurl3.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl3.notreal.net")!,
+                externalURL: URL(string: "http://notarealurl3.notreal.net")!
             ),
         ]
         let expected = [
@@ -61,19 +64,22 @@ class FeedViewModelTest: XCTestCase {
                 artistName: "Pinegrove",
                 playsText: "99 plays",
                 dateText: "Feb 2019",
-                imageURL: URL(string: "http://notarealimageurl1.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl1.notreal.net")!,
+                externalURL: URL(string: "http://notarealurl1.notreal.net")!
             ),
             FeedItemViewModel(
                 artistName: "Bon Iver",
                 playsText: "12 plays",
                 dateText: "Dec 2018",
-                imageURL: URL(string: "http://notarealimageurl2.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl2.notreal.net")!,
+                externalURL: URL(string: "http://notarealurl2.notreal.net")!
             ),
             FeedItemViewModel(
                 artistName: "Death Grips",
                 playsText: "78 plays",
                 dateText: "Oct 2018",
-                imageURL: URL(string: "http://notarealimageurl3.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl3.notreal.net")!,
+                externalURL: URL(string: "http://notarealurl3.notreal.net")!
             ),
         ]
         viewModel = FeedViewModel(
@@ -383,6 +389,7 @@ class FeedViewModelTest: XCTestCase {
             func loggedOut() {
                 exp.fulfill()
             }
+            func open(url: URL) {}
         }
         let delegate = ListeningDelegate(expectation: exp)
         viewModel.delegate = delegate
@@ -440,6 +447,35 @@ class FeedViewModelTest: XCTestCase {
                 XCTFail("Unexpected error: \(error)")
             }
             XCTAssertFalse(stateChangedToDisplayingRows)
+        }
+    }
+
+    func testOnRowTapped() {
+        let index = 8
+        viewModel = FeedViewModel(
+            dao: FakeDao(items: FakeData.items),
+            api: FakeWiltAPI()
+        )
+        class ListeningDelegate: FeedViewModelDelegate {
+            private let exp: XCTestExpectation
+            private let index: Int
+            init(index: Int, expectation: XCTestExpectation) {
+                self.index = index
+                self.exp = expectation
+            }
+            func loggedOut() {}
+            func open(url: URL) {
+                XCTAssertEqual(FakeData.items[index].externalURL, url)
+                exp.fulfill()
+            }
+        }
+        let delegate = ListeningDelegate(index: index, expectation: exp)
+        viewModel.delegate = delegate
+        viewModel.onRowTapped(rowIndex: index)
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
         }
     }
 }

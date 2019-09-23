@@ -43,6 +43,7 @@ class PlayHistoryCacheTest: XCTestCase {
             item.date = $0.date
             item.week = $0.week
             item.imageURL = $0.imageURL
+            item.externalURL = $0.externalURL
             mockPersistentContainer.viewContext.insert(item)
         }
         try! mockPersistentContainer.viewContext.save()
@@ -80,6 +81,7 @@ class PlayHistoryCacheTest: XCTestCase {
             item.date = $0.date
             item.week = $0.week
             item.imageURL = $0.imageURL
+            item.externalURL = $0.externalURL
             mockPersistentContainer.viewContext.insert(item)
         }
         try! mockPersistentContainer.viewContext.save()
@@ -94,14 +96,16 @@ class PlayHistoryCacheTest: XCTestCase {
                 count: 16,
                 date: FakeData.formatter.date(from: "2013-02-25")!,
                 week: "09-2013",
-                imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://anexternalurlok.xyz")!
             ),
             TopArtistData(
                 topArtist: "Whitney",
                 count: 23,
                 date: FakeData.formatter.date(from: "2012-02-25")!,
                 week: "09-2012",
-                imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://theexternalurlok.xyz")!
             ),
         ]
         do {
@@ -120,7 +124,8 @@ class PlayHistoryCacheTest: XCTestCase {
                 count: 16,
                 date: FakeData.formatter.date(from: "2013-02-25")!,
                 week: "09-2013",
-                imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://notarealimageurl.notreal.net")!
             ),
             TopArtistData(
                 topArtist: "Whitney",
@@ -129,7 +134,8 @@ class PlayHistoryCacheTest: XCTestCase {
                 // This one has the same week as the second element in
                 // FakeData.items
                 week: "52-2018",
-                imageURL: URL(string: "http://notarealimageurl.notreal.net")!
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://notarealimageurl.notreal.net")!
             ),
         ]
         do {
