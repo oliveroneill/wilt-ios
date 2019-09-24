@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -18,24 +18,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wilt - What I Listen To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvY-p0-BRb">
-                                <rect key="frame" x="34.5" y="425.5" width="345" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wilt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvY-p0-BRb">
+                                <rect key="frame" x="179.66666666666666" y="425.66666666666669" width="55" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WalkthroughScreen1" translatesAutoresizingMaskIntoConstraints="NO" id="2OL-6K-I7t">
+                                <rect key="frame" x="48" y="-65" width="318" height="520.66666666666663"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YvY-p0-BRb" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="CHw-9s-Pzo"/>
+                            <constraint firstItem="YvY-p0-BRb" firstAttribute="top" secondItem="2OL-6K-I7t" secondAttribute="bottom" constant="-30" id="Jqt-Wy-n6O"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2OL-6K-I7t" secondAttribute="trailing" constant="48" id="LfL-co-syk"/>
                             <constraint firstItem="YvY-p0-BRb" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="SKZ-8m-A2q"/>
+                            <constraint firstItem="2OL-6K-I7t" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="VPx-bH-Deo"/>
+                            <constraint firstItem="2OL-6K-I7t" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="-65" id="mRw-uF-Pf1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="WalkthroughScreen1" width="1024" height="1024"/>
+    </resources>
 </document>
