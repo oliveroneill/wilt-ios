@@ -19,7 +19,6 @@ struct TopArtistData: Equatable {
     /// - Returns: The created TopArtist value
     /// - Throws: If we couldn't parse this data
     static func from(dict: [String:Any]) throws -> TopArtistData {
-        print("TOPARTISTDATA", dict)
         guard let topArtist = dict["top_artist"] as? String,
             let week = dict["week"] as? String,
             let count = dict["count"] as? Int64,
