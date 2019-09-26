@@ -32,9 +32,11 @@ class FirebaseAuthentication: Authenticator {
             "spotifyAuthCode": authCode,
             "spotifyRedirectUri": redirectURI
         ]
+        NetworkActivityUtil.showNetworkIndicator()
         functions
             .httpsCallable("signUp")
             .call(data) {
+                NetworkActivityUtil.showNetworkIndicator()
                 guard let data = $0?.data as? [String: Any] else {
                     guard let error = $1 else {
                         fatalError("No error and no response?")

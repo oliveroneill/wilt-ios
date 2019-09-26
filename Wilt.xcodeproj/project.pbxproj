@@ -37,6 +37,7 @@
 		7D5A2B1B232A504600B56000 /* FeedViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1A232A504600B56000 /* FeedViewModelTest.swift */; };
 		7D5A2B1D232A719E00B56000 /* PlayHistoryPagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1C232A719E00B56000 /* PlayHistoryPagerTest.swift */; };
 		7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1E232A71F700B56000 /* PlayHistoryCacheTest.swift */; };
+		7D910C5E233CDA5B006B8D94 /* NetworkActivityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D910C5D233CDA5B006B8D94 /* NetworkActivityUtil.swift */; };
 		7DA898B8232E002000204823 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA898B7232E002000204823 /* ProfileViewController.swift */; };
 		7DA898BA232E02E500204823 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA898B9232E02E500204823 /* ProfileViewModel.swift */; };
 		7DA898BC232E4C1300204823 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA898BB232E4C1300204823 /* ProfileCardView.swift */; };
@@ -120,6 +121,7 @@
 		7D5A2B1A232A504600B56000 /* FeedViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModelTest.swift; sourceTree = "<group>"; };
 		7D5A2B1C232A719E00B56000 /* PlayHistoryPagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayHistoryPagerTest.swift; sourceTree = "<group>"; };
 		7D5A2B1E232A71F700B56000 /* PlayHistoryCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayHistoryCacheTest.swift; sourceTree = "<group>"; };
+		7D910C5D233CDA5B006B8D94 /* NetworkActivityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivityUtil.swift; sourceTree = "<group>"; };
 		7DA898B7232E002000204823 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7DA898B9232E02E500204823 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		7DA898BB232E4C1300204823 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */,
 				7DB158582307D7FE00F86A9E /* Coordinator.swift */,
 				7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */,
+				7D910C5D233CDA5B006B8D94 /* NetworkActivityUtil.swift */,
 				7D5A2B0C2324BEF700B56000 /* feed */,
 				7D809136232DFFE4006FE0FA /* profile */,
 				7DB15891231A516F00F86A9E /* walkthrough */,
@@ -654,6 +657,7 @@
 				7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */,
 				7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */,
 				7DB158872318808800F86A9E /* WalkthroughViewModel.swift in Sources */,
+				7D910C5E233CDA5B006B8D94 /* NetworkActivityUtil.swift in Sources */,
 				7DA898B8232E002000204823 /* ProfileViewController.swift in Sources */,
 				7D233B34233109C800EC95B6 /* ProfileCache.swift in Sources */,
 				7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */,
