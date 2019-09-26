@@ -111,7 +111,6 @@ class ProfileCardView: MDCCardCollectionCell {
     }
 
     private func resetViewsToLoadingState() {
-        shimmer.isShimmering = true
         titleLabel.backgroundColor = .lightGray
         subtitle2Label.backgroundColor = .lightGray
         subtitle1Label.backgroundColor = .lightGray
