@@ -24,9 +24,11 @@ class FirebaseAPI: WiltAPI {
             "start": from,
             "end": to
         ]
+        FirebaseAPI.showNetworkIndicator()
         functions
             .httpsCallable("getTopArtistPerWeek")
             .call(data) {
+                defer { FirebaseAPI.hideNetworkIndicator() }
                 guard let data = $0?.data as? [[String: Any]] else {
                     guard let error = $1 else {
                         fatalError("No error and no response?")
@@ -59,9 +61,11 @@ class FirebaseAPI: WiltAPI {
             "timeRange": timeRange,
             "index": index
         ]
+        FirebaseAPI.showNetworkIndicator()
         functions
             .httpsCallable("topArtist")
             .call(data) {
+                defer { FirebaseAPI.hideNetworkIndicator() }
                 guard let data = $0?.data as? [String: Any] else {
                     guard let error = $1 else {
                         fatalError("No error and no response?")
@@ -92,9 +96,11 @@ class FirebaseAPI: WiltAPI {
             "timeRange": timeRange,
             "index": index
         ]
+        FirebaseAPI.showNetworkIndicator()
         functions
             .httpsCallable("topTrack")
             .call(data) {
+                defer { FirebaseAPI.hideNetworkIndicator() }
                 guard let data = $0?.data as? [String: Any] else {
                     guard let error = $1 else {
                         fatalError("No error and no response?")
@@ -116,6 +122,18 @@ class FirebaseAPI: WiltAPI {
                 } catch {
                     completion(.failure(error))
                 }
+        }
+    }
+
+    private static func showNetworkIndicator() {
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
+    }
+
+    private static func hideNetworkIndicator() {
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
 }
