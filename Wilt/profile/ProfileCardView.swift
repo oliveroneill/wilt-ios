@@ -25,6 +25,7 @@ class ProfileCardView: MDCCardCollectionCell {
 
     private lazy var subtitle1Label: UILabel = {
         let label = UILabel(frame: .zero)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .lightGray
         return label
@@ -32,6 +33,7 @@ class ProfileCardView: MDCCardCollectionCell {
 
     private lazy var subtitle2Label: UILabel = {
         let label = UILabel(frame: .zero)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .lightGray
         return label
