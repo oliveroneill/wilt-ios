@@ -23,6 +23,9 @@ protocol SpotifyAuthoriser {
 /// or use web if it isn't.
 /// NSObject is required to implement SPTSessionManagerDelegate
 class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
+    private let canceledURL = URL(
+        string: "wilt://spotify-login?error=user_canceled&error_description=User%20aborted"
+    )!
     private lazy var sessionManager: SPTSessionManager = {
         // cocoapods-keys is used to store secrets
         let keys = WiltKeys()
@@ -51,6 +54,13 @@ class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
     /// `application open` function
     func authorisationComplete(application: UIApplication, url: URL,
                                options: [UIApplication.OpenURLOptionsKey : Any]) {
+        // There seems to be a bug in the Spotify iOS SDK where user cancels
+        // via the Spotify app don't trigger anything on the session manager.
+        // This is a workaround
+        guard url != canceledURL else {
+            onAuthorisationComplete?(.failure(SpotifyAuthoriserError.userAbort))
+            return
+        }
         sessionManager.application(
             application,
             open: url,
@@ -63,8 +73,10 @@ class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
 ///
 /// - noCodeGiven: If the Spotify auth code is empty, meaning the cancel button
 /// was pressed
+/// - userAbort: The user cancelled the auth flow
 enum SpotifyAuthoriserError: Error {
     case noCodeGiven
+    case userAbort
 }
 
 extension SpotifyAppAuthoriser: SPTSessionManagerDelegate {
