@@ -137,6 +137,7 @@ class SettingsViewController: UITableViewController {
         default:
             fatalError("An unexpected section was found")
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     @objc private func closeSettings() {
