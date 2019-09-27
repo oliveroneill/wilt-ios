@@ -57,25 +57,27 @@ class LoggedInCoordinator: Coordinator {
         guard let container = container else {
             return
         }
-        let entities = container.managedObjectModel.entities
-        for entity in entities {
-            guard let name = entity.name else {
-                // Not sure what to do in this case
-                continue
+        container.viewContext.performAndWait {
+            let entities = container.managedObjectModel.entities
+            for entity in entities {
+                guard let name = entity.name else {
+                    // Not sure what to do in this case
+                    continue
+                }
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(
+                    entityName: name
+                )
+                let deleteRequest = NSBatchDeleteRequest(
+                    fetchRequest: fetchRequest
+                )
+                // Ignore the error since I'm not sure what to do if it fails
+                _ = try? container.persistentStoreCoordinator.execute(
+                    deleteRequest,
+                    with: container.viewContext
+                )
             }
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(
-                entityName: name
-            )
-            let deleteRequest = NSBatchDeleteRequest(
-                fetchRequest: fetchRequest
-            )
-            // Ignore the error since I'm not sure what to do if it fails
-            _ = try? container.persistentStoreCoordinator.execute(
-                deleteRequest,
-                with: container.viewContext
-            )
+            _ = try? container.viewContext.save()
         }
-        _ = try? container.viewContext.save()
     }
 }
 
