@@ -131,14 +131,14 @@ class ProfileCache: ProfileAPI {
         if let artist = artist {
             completion(.success(artist))
         } else {
-            networkAPI.topArtist(timeRange: timeRange, index: index) { [unowned self] in
+            networkAPI.topArtist(timeRange: timeRange, index: index) { [weak self] in
                 switch ($0) {
                 case .failure(let error):
                     completion(.failure(error))
                 case .success(let artist):
                     // Ignore error on upsert so that we still show the user
                     // the result
-                    try? self.upsert(
+                    try? self?.upsert(
                         artist: artist,
                         timeRange: timeRange,
                         index: index
@@ -164,14 +164,14 @@ class ProfileCache: ProfileAPI {
         if let track = track {
             completion(.success(track))
         } else {
-            networkAPI.topTrack(timeRange: timeRange, index: index) { [unowned self] in
+            networkAPI.topTrack(timeRange: timeRange, index: index) { [weak self] in
                 switch ($0) {
                 case .failure(let error):
                     completion(.failure(error))
                 case .success(let track):
                     // Ignore error on upsert so that we still show the user
                     // the result
-                    try? self.upsert(
+                    try? self?.upsert(
                         track: track,
                         timeRange: timeRange,
                         index: index

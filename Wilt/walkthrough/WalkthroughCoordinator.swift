@@ -40,6 +40,11 @@ class WalkthroughCoordinator: Coordinator {
             options: options
         )
     }
+
+    func dismiss() {
+        navigationController.popViewController(animated: false)
+        _ = childCoordinators.popLast()
+    }
 }
 
 extension WalkthroughCoordinator: WalkthroughViewModelDelegate {

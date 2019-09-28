@@ -107,7 +107,8 @@ class PlayHistoryPager {
     private func topArtists(start: Int64, end: Int64,
                             completionHandler: @escaping PagerCompletionHandler,
                             firstLoad: Bool = false) {
-        api.topArtistsPerWeek(from: start, to: end) { [unowned self] in
+        api.topArtistsPerWeek(from: start, to: end) { [weak self] in
+            guard let self = self else { return }
             do {
                 let items = try $0.get()
                 // If this is the initial load and there's no data available

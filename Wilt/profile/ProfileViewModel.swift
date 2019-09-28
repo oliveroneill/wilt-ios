@@ -82,7 +82,8 @@ class ProfileViewModel {
 
     func onViewAppeared() {
         onViewUpdate?(cardStates)
-        queue.async { [unowned self] in
+        queue.async { [weak self] in
+            guard let self = self else { return }
             // Make a request for each card
             self.cards.enumerated().forEach {
                 let (cardIndex, card) = $0
@@ -94,7 +95,8 @@ class ProfileViewModel {
     private func loadCard(card: ProfileCard, cardIndex: Int) {
         switch (card) {
         case .topArtist(let index, let timeRange):
-            api.topArtist(timeRange: timeRange.description, index: index) { [unowned self] in
+            api.topArtist(timeRange: timeRange.description, index: index) { [weak self] in
+                guard let self = self else { return }
                 do {
                     let artist = try $0.get()
                     self.cardStates[cardIndex] = artist.toViewModel(
@@ -106,15 +108,16 @@ class ProfileViewModel {
                     guard (error as? WiltAPIError) != WiltAPIError.loggedOut else {
                         // Call delegate on main thread since it will do navigation
                         // things
-                        DispatchQueue.main.async { [unowned self] in
-                            self.delegate?.loggedOut()
+                        DispatchQueue.main.async { [weak self] in
+                            self?.delegate?.loggedOut()
                         }
                         return
                     }
                 }
             }
         case .topTrack(let index, let timeRange):
-            api.topTrack(timeRange: timeRange.description, index: index) { [unowned self] in
+            api.topTrack(timeRange: timeRange.description, index: index) { [weak self] in
+                guard let self = self else { return }
                 do {
                     let track = try $0.get()
                     self.cardStates[cardIndex] = track.toViewModel(
@@ -126,8 +129,8 @@ class ProfileViewModel {
                     guard (error as? WiltAPIError) != WiltAPIError.loggedOut else {
                         // Call delegate on main thread since it will do navigation
                         // things
-                        DispatchQueue.main.async { [unowned self] in
-                            self.delegate?.loggedOut()
+                        DispatchQueue.main.async { [weak self] in
+                            self?.delegate?.loggedOut()
                         }
                         return
                     }
@@ -139,8 +142,8 @@ class ProfileViewModel {
     func onRetryButtonPressed(cardIndex: Int) {
         let card = cards[cardIndex]
         cardStates[cardIndex] = .loading(tagTitle: card.readableString)
-        queue.async { [unowned self] in
-            self.loadCard(card: card, cardIndex: cardIndex)
+        queue.async { [weak self] in
+            self?.loadCard(card: card, cardIndex: cardIndex)
         }
     }
 

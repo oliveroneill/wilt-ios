@@ -37,7 +37,8 @@ class WalkthroughViewModel {
         onViewUpdate?(.authenticating)
         // Start authorising
         let redirectURI = WiltKeys().spotifyRedirectURI
-        spotifyAuthoriser.authorise { [unowned self] in
+        spotifyAuthoriser.authorise { [weak self] in
+            guard let self = self else { return }
             let authCode: String
             do {
                 authCode = try $0.get()
@@ -49,7 +50,8 @@ class WalkthroughViewModel {
             self.userAuthenticator.signUp(
                 authCode: authCode,
                 redirectURI: redirectURI
-            ) { [unowned self] in
+            ) { [weak self] in
+                guard let self = self else { return }
                 let token: String
                 do {
                     token = try $0.get()
@@ -58,7 +60,8 @@ class WalkthroughViewModel {
                     self.onViewUpdate?(.loginError)
                     return
                 }
-                self.userAuthenticator.login(token: token) { [unowned self] in
+                self.userAuthenticator.login(token: token) { [weak self] in
+                    guard let self = self else { return }
                     let userID: String
                     do {
                         userID = try $0.get()

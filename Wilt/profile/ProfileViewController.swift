@@ -52,8 +52,8 @@ class ProfileViewController: UIViewController {
                 constant: 0
             ),
         ])
-        viewModel.onViewUpdate = { [unowned self] in
-            self.updateState(state: $0)
+        viewModel.onViewUpdate = { [weak self] in
+            self?.updateState(state: $0)
         }
     }
 
@@ -67,8 +67,8 @@ class ProfileViewController: UIViewController {
     }
 
     func updateState(state: [CardViewModelState]) {
-        DispatchQueue.main.async { [unowned self] in
-            self.cards = state
+        DispatchQueue.main.async { [weak self] in
+            self?.cards = state
         }
     }
 
@@ -91,8 +91,8 @@ extension ProfileViewController: UICollectionViewDataSource {
             for: indexPath
         ) as! ProfileCardView
         // Setup the view
-        cell.configure(state: cards[indexPath.row]) { [unowned self] in
-            self.viewModel.onRetryButtonPressed(cardIndex: indexPath.row)
+        cell.configure(state: cards[indexPath.row]) { [weak self] in
+            self?.viewModel.onRetryButtonPressed(cardIndex: indexPath.row)
         }
         return cell
     }

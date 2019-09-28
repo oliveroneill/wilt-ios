@@ -33,8 +33,8 @@ class WalkthroughViewController: UIViewController {
     init(viewModel: WalkthroughViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        viewModel.onViewUpdate = { [unowned self] in
-            self.onViewUpdate(state: $0)
+        viewModel.onViewUpdate = { [weak self] in
+            self?.onViewUpdate(state: $0)
         }
         navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItem = infoBarButton
@@ -71,7 +71,8 @@ class WalkthroughViewController: UIViewController {
     }
 
     private func onViewUpdate(state: WalkthroughViewState) {
-        DispatchQueue.main.async { [unowned self] in
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             switch (state) {
             case .walkthrough:
                 self.navigationItem.rightBarButtonItem = self.infoBarButton

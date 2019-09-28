@@ -134,8 +134,8 @@ class PlayHistoryCache: NSObject, PlayHistoryDao {
 extension PlayHistoryCache: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         // Persist whatever this change is
-        DispatchQueue.main.async { [unowned self] in
-            try? self.viewContext.save()
+        DispatchQueue.main.async { [weak self] in
+            try? self?.viewContext.save()
         }
         onDataChange?()
     }

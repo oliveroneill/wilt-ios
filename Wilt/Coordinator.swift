@@ -13,4 +13,7 @@ protocol Coordinator {
     /// Called to start the coordinator. This should navigate to the
     /// first controller in this coordinator's state
     func start()
+
+    /// Dismiss the coordinator. This should remove any controllers on screen
+    func dismiss()
 }

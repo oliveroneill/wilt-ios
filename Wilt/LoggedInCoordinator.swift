@@ -45,6 +45,11 @@ class LoggedInCoordinator: Coordinator {
         }
     }
 
+    func dismiss() {
+        navigationController.popViewController(animated: false)
+        _ = childCoordinators.popLast()
+    }
+
     private func clearCacheAndLogOut() {
         // Clear the caches so that we don't cache data of the wrong user once
         // we log back in

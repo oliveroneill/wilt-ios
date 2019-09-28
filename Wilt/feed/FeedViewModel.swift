@@ -73,8 +73,8 @@ class FeedViewModel {
             dao: dao,
             pageSize: 10
         )
-        dao.onDataChange = { [unowned self] in
-            self.onRowsUpdated?()
+        dao.onDataChange = { [weak self] in
+            self?.onRowsUpdated?()
         }
     }
 
@@ -113,8 +113,8 @@ class FeedViewModel {
             guard (error as? WiltAPIError) != WiltAPIError.loggedOut else {
                 // Call delegate on main thread since it will do navigation
                 // things
-                DispatchQueue.main.async { [unowned self] in
-                    self.delegate?.loggedOut()
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.loggedOut()
                 }
                 return
             }
@@ -162,18 +162,19 @@ class FeedViewModel {
 
     private func loadEarlierPage() {
         let earliestItem = dao.items.last
-        backgroundQueue.async { [unowned self] in
+        backgroundQueue.async { [weak self] in
+            guard let self = self else { return }
             guard let earliestItem = earliestItem else {
-                self.pager.onZeroItemsLoaded { [unowned self] in
-                    self.handleInsertResult(
+                self.pager.onZeroItemsLoaded { [weak self] in
+                    self?.handleInsertResult(
                         upsertCountResult: $0,
                         isItemsEmpty: true
                     )
                 }
                 return
             }
-            self.pager.loadEarlierPage(earliestItem: earliestItem) { [unowned self] in
-                self.handleInsertResult(
+            self.pager.loadEarlierPage(earliestItem: earliestItem) { [weak self] in
+                self?.handleInsertResult(
                     upsertCountResult: $0,
                     onErrorState: .errorAtBottom
                 )
@@ -183,18 +184,19 @@ class FeedViewModel {
 
     private func loadLaterPage() {
         let latestItem = dao.items.first
-        backgroundQueue.async { [unowned self] in
+        backgroundQueue.async { [weak self] in
+            guard let self = self else { return }
             guard let latestItem = latestItem else {
-                self.pager.onZeroItemsLoaded { [unowned self] in
-                    self.handleInsertResult(
+                self.pager.onZeroItemsLoaded { [weak self] in
+                    self?.handleInsertResult(
                         upsertCountResult: $0,
                         isItemsEmpty: true
                     )
                 }
                 return
             }
-            self.pager.loadLaterPage(latestItem: latestItem) { [unowned self] in
-                self.handleInsertResult(upsertCountResult: $0)
+            self.pager.loadLaterPage(latestItem: latestItem) { [weak self] in
+                self?.handleInsertResult(upsertCountResult: $0)
             }
         }
     }

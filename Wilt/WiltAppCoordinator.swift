@@ -21,6 +21,12 @@ class WiltAppCoordinator: Coordinator {
         }
     }
 
+    func dismiss() {
+        // This is the root coordinator, so dismissing would mean closing the
+        // app
+        fatalError("The root coordinator should not be dismissed")
+    }
+
     func spotifyAuthComplete(application: UIApplication, url: URL,
                              options: [UIApplication.OpenURLOptionsKey : Any]) {
         // We need to return this response back to the SpotifyAuthoriser,
@@ -59,6 +65,7 @@ class WiltAppCoordinator: Coordinator {
 
 extension WiltAppCoordinator: WalkthroughCoordinatorDelegate {
     func loggedIn(userID: String) {
+        childCoordinators.first?.dismiss()
         showContent(database: database)
     }
 }
@@ -73,7 +80,10 @@ extension WiltAppCoordinator: LoggedInCoordinatorDelegate {
     }
 
     func logOut() {
-        defer { showWalkthrough() }
+        defer {
+            childCoordinators.first?.dismiss()
+            showWalkthrough()
+        }
         do {
             try auth.logOut()
         } catch {

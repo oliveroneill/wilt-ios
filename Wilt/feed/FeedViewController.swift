@@ -63,13 +63,13 @@ class FeedViewController: UITableViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         TopArtistCell.register(tableView: tableView)
-        viewModel.onRowsUpdated = { [unowned self] in
-            DispatchQueue.main.async { [unowned self] in
-                self.tableView.reloadData()
+        viewModel.onRowsUpdated = {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
             }
         }
-        viewModel.onViewUpdate = { [unowned self] in
-            self.onViewUpdate(state: $0)
+        viewModel.onViewUpdate = { [weak self] in
+            self?.onViewUpdate(state: $0)
         }
         refreshControl = customRefreshControl
         // This will hide the cell dividers when there's no data
@@ -87,7 +87,8 @@ class FeedViewController: UITableViewController {
     }
 
     private func onViewUpdate(state: FeedViewState) {
-        DispatchQueue.main.async { [unowned self] in
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.tableView.hideLoadingFooter()
             self.refreshControl?.stopRefreshing()
             self.tableView.backgroundView = nil
