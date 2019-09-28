@@ -81,8 +81,7 @@ class ProfileViewModel {
     }
 
     func onViewAppeared() {
-        // When the view appears we'll load the cards
-        cardStates = cards.map { .loading(tagTitle: $0.readableString) }
+        onViewUpdate?(cardStates)
         queue.async { [unowned self] in
             // Make a request for each card
             self.cards.enumerated().forEach {
