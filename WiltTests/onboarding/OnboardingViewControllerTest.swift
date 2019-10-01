@@ -5,8 +5,8 @@ import KIF
 
 @testable import Wilt
 
-class WalkthroughViewControllerTest: KIFTestCase {
-    private var controller: WalkthroughViewController!
+class OnboardingViewControllerTest: KIFTestCase {
+    private var controller: OnboardingViewController!
     private var authoriser: FakeAuthoriser!
 
     override func setUp() {
@@ -18,11 +18,11 @@ class WalkthroughViewControllerTest: KIFTestCase {
         authenticator: FakeAuthenticator = FakeAuthenticator()
     ) {
         self.authoriser = authoriser
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: authenticator,
             spotifyAuthoriser: authoriser
         )
-        controller = WalkthroughViewController(viewModel: viewModel)
+        controller = OnboardingViewController(viewModel: viewModel)
         guard let window = UIApplication.shared.keyWindow else {
             XCTFail("Unexpected nil window")
             return
@@ -38,7 +38,7 @@ class WalkthroughViewControllerTest: KIFTestCase {
 
     func testSecondScreen() {
         tester().waitForAnimationsToFinish()
-        tester().swipeView(withAccessibilityLabel: "walkthrough_view", in: .left)
+        tester().swipeView(withAccessibilityLabel: "onboarding_view", in: .left)
         tester().waitForAnimationsToFinish()
         // expect(self.controller.view).to(recordSnapshot())
         expect(self.controller.view).to(haveValidSnapshot())

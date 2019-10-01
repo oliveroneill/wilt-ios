@@ -1,21 +1,21 @@
 import Keys
 
-/// The view state of the walkthrough controller
+/// The view state of the onboarding controller
 ///
-/// - walkthrough: Showing the walkthrough
+/// - onboarding: Showing the walkthrough
 /// - authenticating: Should show a loading spinner while authenticating
 /// - loginError: Something went wrong
-enum WalkthroughViewState: Equatable {
-    case walkthrough
+enum OnboardingViewState: Equatable {
+    case onboarding
     case authenticating
     case loginError
 }
 
-class WalkthroughViewModel {
-    var onViewUpdate: ((WalkthroughViewState) -> Void)?
+class OnboardingViewModel {
+    var onViewUpdate: ((OnboardingViewState) -> Void)?
     private let spotifyAuthoriser: SpotifyAuthoriser
     private let userAuthenticator: Authenticator
-    weak var delegate: WalkthroughViewModelDelegate?
+    weak var delegate: OnboardingViewModelDelegate?
 
     init(userAuthenticator: Authenticator = FirebaseAuthentication(),
          spotifyAuthoriser: SpotifyAuthoriser = SpotifyAppAuthoriser()) {
@@ -25,7 +25,7 @@ class WalkthroughViewModel {
 
     func onViewAppeared() {
         // The default state will show the walkthrough
-        onViewUpdate?(.walkthrough)
+        onViewUpdate?(.onboarding)
     }
 
     func onInfoButtonPressed() {
@@ -78,8 +78,8 @@ class WalkthroughViewModel {
     }
 }
 
-/// The delegate for events that occur within the walkthrough view
-protocol WalkthroughViewModelDelegate: class {
+/// The delegate for events that occur within the onboarding view
+protocol OnboardingViewModelDelegate: class {
     func loggedIn(userID: String)
     func showInfo()
 }

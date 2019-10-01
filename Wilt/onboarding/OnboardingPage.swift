@@ -1,7 +1,7 @@
 import UIKit
 
 /// A single page of the walkthrough
-class WalkthroughPage: UIViewController {
+class OnboardingPage: UIViewController {
     private let text: String
     private let image: UIImage?
     private var label: UILabel!

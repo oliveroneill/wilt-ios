@@ -2,11 +2,11 @@ import XCTest
 
 @testable import Wilt
 
-class WalkthroughCoordinatorTest: XCTestCase {
+class OnboardingCoordinatorTest: XCTestCase {
     func testSpotifyAuthComplete() {
         let mockAuthoriser = FakeAuthoriser()
         let mockAuthenticator = FakeAuthenticator()
-        let coordinator = WalkthroughCoordinator(
+        let coordinator = OnboardingCoordinator(
             navigationController: UINavigationController(),
             auth: mockAuthenticator,
             spotifyAuthoriser: mockAuthoriser

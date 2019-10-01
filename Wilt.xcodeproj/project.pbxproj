@@ -42,22 +42,22 @@
 		7DA898BA232E02E500204823 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA898B9232E02E500204823 /* ProfileViewModel.swift */; };
 		7DA898BC232E4C1300204823 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA898BB232E4C1300204823 /* ProfileCardView.swift */; };
 		7DB158592307D7FE00F86A9E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158582307D7FE00F86A9E /* Coordinator.swift */; };
-		7DB1585B2307D88200F86A9E /* WalkthroughCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */; };
-		7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */; };
-		7DB158612309658100F86A9E /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158602309658100F86A9E /* WalkthroughViewController.swift */; };
-		7DB15863230ABD8F00F86A9E /* WalkthroughPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */; };
+		7DB1585B2307D88200F86A9E /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1585A2307D88200F86A9E /* OnboardingCoordinator.swift */; };
+		7DB1585F2307DA8200F86A9E /* OnboardingIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1585E2307DA8200F86A9E /* OnboardingIntroViewController.swift */; };
+		7DB158612309658100F86A9E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158602309658100F86A9E /* OnboardingViewController.swift */; };
+		7DB15863230ABD8F00F86A9E /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB15862230ABD8F00F86A9E /* OnboardingPage.swift */; };
 		7DB15866230D6BEC00F86A9E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DB15868230D6BEC00F86A9E /* Localizable.strings */; };
 		7DB1586A230D6C8700F86A9E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB15869230D6C8600F86A9E /* Utils.swift */; };
-		7DB1586C2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */; };
+		7DB1586C2310CC1C00F86A9E /* OnboardingViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1586B2310CC1C00F86A9E /* OnboardingViewControllerTest.swift */; };
 		7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1586E23120F6F00F86A9E /* KIFUtil.swift */; };
 		7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */; };
 		7DB1587D2314028C00F86A9E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB158722312960C00F86A9E /* SpotifyiOS.framework */; };
-		7DB1587F2315EED700F86A9E /* WalkthroughViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587E2315EED700F86A9E /* WalkthroughViewModelTest.swift */; };
+		7DB1587F2315EED700F86A9E /* OnboardingViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587E2315EED700F86A9E /* OnboardingViewModelTest.swift */; };
 		7DB1588123169D5E00F86A9E /* FirebaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */; };
 		7DB1588323169E0D00F86A9E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1588223169E0D00F86A9E /* GoogleService-Info.plist */; };
 		7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158842316A0D900F86A9E /* FirebaseAuthentication.swift */; };
-		7DB158872318808800F86A9E /* WalkthroughViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158862318808800F86A9E /* WalkthroughViewModel.swift */; };
-		7DB158892319575C00F86A9E /* WalkthroughCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158882319575C00F86A9E /* WalkthroughCoordinatorTest.swift */; };
+		7DB158872318808800F86A9E /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158862318808800F86A9E /* OnboardingViewModel.swift */; };
+		7DB158892319575C00F86A9E /* OnboardingCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB158882319575C00F86A9E /* OnboardingCoordinatorTest.swift */; };
 		7DB1588C2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */; };
 		7DB1588E2319EDF000F86A9E /* FakeAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588D2319EDF000F86A9E /* FakeAuthenticator.swift */; };
 		7DB15890231A4E2200F86A9E /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588F231A4E2200F86A9E /* FakeError.swift */; };
@@ -126,24 +126,24 @@
 		7DA898B9232E02E500204823 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		7DA898BB232E4C1300204823 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
 		7DB158582307D7FE00F86A9E /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCoordinator.swift; sourceTree = "<group>"; };
-		7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughIntroViewController.swift; sourceTree = "<group>"; };
-		7DB158602309658100F86A9E /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
-		7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPage.swift; sourceTree = "<group>"; };
+		7DB1585A2307D88200F86A9E /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		7DB1585E2307DA8200F86A9E /* OnboardingIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingIntroViewController.swift; sourceTree = "<group>"; };
+		7DB158602309658100F86A9E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		7DB15862230ABD8F00F86A9E /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		7DB15867230D6BEC00F86A9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7DB15869230D6C8600F86A9E /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewControllerTest.swift; sourceTree = "<group>"; };
+		7DB1586B2310CC1C00F86A9E /* OnboardingViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllerTest.swift; sourceTree = "<group>"; };
 		7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WiltTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7DB1586E23120F6F00F86A9E /* KIFUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIFUtil.swift; sourceTree = "<group>"; };
 		7DB158722312960C00F86A9E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wilt-Bridging-Header.h"; sourceTree = "<group>"; };
 		7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthoriser.swift; sourceTree = "<group>"; };
-		7DB1587E2315EED700F86A9E /* WalkthroughViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewModelTest.swift; sourceTree = "<group>"; };
+		7DB1587E2315EED700F86A9E /* OnboardingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModelTest.swift; sourceTree = "<group>"; };
 		7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAPI.swift; sourceTree = "<group>"; };
 		7DB1588223169E0D00F86A9E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7DB158842316A0D900F86A9E /* FirebaseAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthentication.swift; sourceTree = "<group>"; };
-		7DB158862318808800F86A9E /* WalkthroughViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewModel.swift; sourceTree = "<group>"; };
-		7DB158882319575C00F86A9E /* WalkthroughCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCoordinatorTest.swift; sourceTree = "<group>"; };
+		7DB158862318808800F86A9E /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		7DB158882319575C00F86A9E /* OnboardingCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTest.swift; sourceTree = "<group>"; };
 		7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSpotifyAuthoriser.swift; sourceTree = "<group>"; };
 		7DB1588D2319EDF000F86A9E /* FakeAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAuthenticator.swift; sourceTree = "<group>"; };
 		7DB1588F231A4E2200F86A9E /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
@@ -250,7 +250,7 @@
 				7D910C5D233CDA5B006B8D94 /* NetworkActivityUtil.swift */,
 				7D5A2B0C2324BEF700B56000 /* feed */,
 				7D809136232DFFE4006FE0FA /* profile */,
-				7DB15891231A516F00F86A9E /* walkthrough */,
+				7DB15891231A516F00F86A9E /* onboarding */,
 				7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */,
 				7D5A2AF8231A573800B56000 /* MainAppViewController.swift */,
 				7D233B37233384EE00EC95B6 /* SettingsViewController.swift */,
@@ -274,7 +274,7 @@
 				7DB1588A2319ED9900F86A9E /* mocks */,
 				7D5A2B0D2324C15A00B56000 /* feed */,
 				7D233B2E2330470B00EC95B6 /* profile */,
-				7DB15892231A519400F86A9E /* walkthrough */,
+				7DB15892231A519400F86A9E /* onboarding */,
 				7DB1586E23120F6F00F86A9E /* KIFUtil.swift */,
 				7D233B392334C6DF00EC95B6 /* SettingsViewControllerTest.swift */,
 				7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */,
@@ -341,28 +341,28 @@
 			path = mocks;
 			sourceTree = "<group>";
 		};
-		7DB15891231A516F00F86A9E /* walkthrough */ = {
+		7DB15891231A516F00F86A9E /* onboarding */ = {
 			isa = PBXGroup;
 			children = (
 				7DB158842316A0D900F86A9E /* FirebaseAuthentication.swift */,
 				7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */,
-				7DB1585A2307D88200F86A9E /* WalkthroughCoordinator.swift */,
-				7DB1585E2307DA8200F86A9E /* WalkthroughIntroViewController.swift */,
-				7DB15862230ABD8F00F86A9E /* WalkthroughPage.swift */,
-				7DB158602309658100F86A9E /* WalkthroughViewController.swift */,
-				7DB158862318808800F86A9E /* WalkthroughViewModel.swift */,
+				7DB1585A2307D88200F86A9E /* OnboardingCoordinator.swift */,
+				7DB1585E2307DA8200F86A9E /* OnboardingIntroViewController.swift */,
+				7DB15862230ABD8F00F86A9E /* OnboardingPage.swift */,
+				7DB158602309658100F86A9E /* OnboardingViewController.swift */,
+				7DB158862318808800F86A9E /* OnboardingViewModel.swift */,
 			);
-			path = walkthrough;
+			path = onboarding;
 			sourceTree = "<group>";
 		};
-		7DB15892231A519400F86A9E /* walkthrough */ = {
+		7DB15892231A519400F86A9E /* onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				7DB1586B2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift */,
-				7DB1587E2315EED700F86A9E /* WalkthroughViewModelTest.swift */,
-				7DB158882319575C00F86A9E /* WalkthroughCoordinatorTest.swift */,
+				7DB1586B2310CC1C00F86A9E /* OnboardingViewControllerTest.swift */,
+				7DB1587E2315EED700F86A9E /* OnboardingViewModelTest.swift */,
+				7DB158882319575C00F86A9E /* OnboardingCoordinatorTest.swift */,
 			);
-			path = walkthrough;
+			path = onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -651,18 +651,18 @@
 				7D5A2AF7231A554D00B56000 /* LoggedInCoordinator.swift in Sources */,
 				7D5A2B0B2324B75900B56000 /* TopArtistData.swift in Sources */,
 				7D5A2AF9231A573800B56000 /* MainAppViewController.swift in Sources */,
-				7DB158612309658100F86A9E /* WalkthroughViewController.swift in Sources */,
+				7DB158612309658100F86A9E /* OnboardingViewController.swift in Sources */,
 				7D5A2AFB231A5B1D00B56000 /* FeedViewController.swift in Sources */,
-				7DB1585B2307D88200F86A9E /* WalkthroughCoordinator.swift in Sources */,
-				7DB1585F2307DA8200F86A9E /* WalkthroughIntroViewController.swift in Sources */,
+				7DB1585B2307D88200F86A9E /* OnboardingCoordinator.swift in Sources */,
+				7DB1585F2307DA8200F86A9E /* OnboardingIntroViewController.swift in Sources */,
 				7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */,
-				7DB158872318808800F86A9E /* WalkthroughViewModel.swift in Sources */,
+				7DB158872318808800F86A9E /* OnboardingViewModel.swift in Sources */,
 				7D910C5E233CDA5B006B8D94 /* NetworkActivityUtil.swift in Sources */,
 				7DA898B8232E002000204823 /* ProfileViewController.swift in Sources */,
 				7D233B34233109C800EC95B6 /* ProfileCache.swift in Sources */,
 				7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */,
 				7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */,
-				7DB15863230ABD8F00F86A9E /* WalkthroughPage.swift in Sources */,
+				7DB15863230ABD8F00F86A9E /* OnboardingPage.swift in Sources */,
 				7D5A2AFF231E6C7600B56000 /* WiltDatabase.swift in Sources */,
 				7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */,
 				7DB1588123169D5E00F86A9E /* FirebaseAPI.swift in Sources */,
@@ -681,17 +681,17 @@
 				7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */,
 				7D5A2B0F2324C24B00B56000 /* FakePlayHistoryDao.swift in Sources */,
 				7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */,
-				7DB1586C2310CC1C00F86A9E /* WalkthroughViewControllerTest.swift in Sources */,
+				7DB1586C2310CC1C00F86A9E /* OnboardingViewControllerTest.swift in Sources */,
 				7D5A2B032322682F00B56000 /* FeedViewControllerTest.swift in Sources */,
 				7D233B36233226F300EC95B6 /* ProfileCacheTest.swift in Sources */,
-				7DB158892319575C00F86A9E /* WalkthroughCoordinatorTest.swift in Sources */,
+				7DB158892319575C00F86A9E /* OnboardingCoordinatorTest.swift in Sources */,
 				7D5A2B172325169900B56000 /* FakeData.swift in Sources */,
 				7DF11A22232C803E00C1072B /* Wilt.xcdatamodeld in Sources */,
 				7DB1588C2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift in Sources */,
 				7D233B302330472800EC95B6 /* ProfileViewModelTest.swift in Sources */,
 				7DB15890231A4E2200F86A9E /* FakeError.swift in Sources */,
 				7DB1588E2319EDF000F86A9E /* FakeAuthenticator.swift in Sources */,
-				7DB1587F2315EED700F86A9E /* WalkthroughViewModelTest.swift in Sources */,
+				7DB1587F2315EED700F86A9E /* OnboardingViewModelTest.swift in Sources */,
 				7D5A2B1D232A719E00B56000 /* PlayHistoryPagerTest.swift in Sources */,
 				7D233B3A2334C6DF00EC95B6 /* SettingsViewControllerTest.swift in Sources */,
 				7D5A2B132324DDBD00B56000 /* FakeDao.swift in Sources */,

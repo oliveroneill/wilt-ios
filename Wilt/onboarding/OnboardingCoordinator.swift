@@ -1,13 +1,13 @@
 import UIKit
 import Keys
 
-/// Coordinating navigation for the walkthrough
-class WalkthroughCoordinator: Coordinator {
+/// Coordinating navigation for the onboarding
+class OnboardingCoordinator: Coordinator {
     internal var navigationController: UINavigationController
     internal var childCoordinators = [Coordinator]()
     private let spotifyAuthoriser: SpotifyAuthoriser
     private let auth: Authenticator
-    weak var delegate: WalkthroughCoordinatorDelegate?
+    weak var delegate: OnboardingCoordinatorDelegate?
     // Will be non-nil if the settings page is being presented and nil when
     // not visible
     private var settingsController: UINavigationController?
@@ -21,11 +21,11 @@ class WalkthroughCoordinator: Coordinator {
     }
 
     func start() {
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: auth,
             spotifyAuthoriser: spotifyAuthoriser
         )
-        let controller = WalkthroughViewController(viewModel: viewModel)
+        let controller = OnboardingViewController(viewModel: viewModel)
         viewModel.delegate = self
         navigationController.pushViewController(controller, animated: false)
     }
@@ -47,7 +47,7 @@ class WalkthroughCoordinator: Coordinator {
     }
 }
 
-extension WalkthroughCoordinator: WalkthroughViewModelDelegate {
+extension OnboardingCoordinator: OnboardingViewModelDelegate {
     func showInfo() {
         let controller = SettingsViewController(loggedIn: false)
         controller.delegate = self
@@ -66,7 +66,7 @@ extension WalkthroughCoordinator: WalkthroughViewModelDelegate {
     }
 }
 
-extension WalkthroughCoordinator: SettingsViewControllerDelegate {
+extension OnboardingCoordinator: SettingsViewControllerDelegate {
     func contactUs() {
         delegate?.contactUs()
     }
@@ -81,9 +81,9 @@ extension WalkthroughCoordinator: SettingsViewControllerDelegate {
     func logOut() {}
 }
 
-/// Delegate for the `WalkthroughCoordinator` for events that occur during the
-/// walkthrough
-protocol WalkthroughCoordinatorDelegate: class {
+/// Delegate for the `OnboardingCoordinator` for events that occur during
+/// onboarding
+protocol OnboardingCoordinatorDelegate: class {
     func loggedIn(userID: String)
     func contactUs()
 }

@@ -1,19 +1,19 @@
 import UIKit
 
-/// The controller for the entire walkthrough, made up of a page view
+/// The controller for the entire onboarding process, made up of a page view
 /// controller and a button
-class WalkthroughViewController: UIViewController {
-    private let walkthroughController = WalkthroughIntroViewController()
-    private let errorPage = WalkthroughPage(
+class OnboardingViewController: UIViewController {
+    private let onboardingController = OnboardingIntroViewController()
+    private let errorPage = OnboardingPage(
         text: "login_error_text".localized,
         image: #imageLiteral(resourceName: "ErrorScreen")
     )
-    private var walkthroughView: UIView!
+    private var onboardingView: UIView!
     private var signUpButton: UIButton!
     private var loadingSpinner: UIActivityIndicatorView!
     private var errorView: UIView!
     private var loadingLabel: UILabel!
-    private let viewModel: WalkthroughViewModel
+    private let viewModel: OnboardingViewModel
 
     private lazy var infoBarButton: UIBarButtonItem = {
         let item = UIBarButtonItem(
@@ -30,7 +30,7 @@ class WalkthroughViewController: UIViewController {
         return item
     }()
 
-    init(viewModel: WalkthroughViewModel) {
+    init(viewModel: OnboardingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         viewModel.onViewUpdate = { [weak self] in
@@ -47,14 +47,14 @@ class WalkthroughViewController: UIViewController {
     override func loadView() {
         super.loadView()
         // Used for testing with KIF
-        view.accessibilityLabel = "walkthrough_view"
-        setupWalkthroughView()
+        view.accessibilityLabel = "onboarding_view"
+        setupOnboardingView()
         setupSignUpButton()
         setupLoadingSpinner()
         setuploadingLabel()
         setupErrorView()
         // Hide all views until the viewModel tells us to show them
-        walkthroughView.isHidden = true
+        onboardingView.isHidden = true
         signUpButton.isHidden = true
         loadingSpinner.stopAnimating()
         errorView.isHidden = true
@@ -70,13 +70,13 @@ class WalkthroughViewController: UIViewController {
         viewModel.onViewAppeared()
     }
 
-    private func onViewUpdate(state: WalkthroughViewState) {
+    private func onViewUpdate(state: OnboardingViewState) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             switch (state) {
-            case .walkthrough:
+            case .onboarding:
                 self.navigationItem.rightBarButtonItem = self.infoBarButton
-                self.displayWalkthrough()
+                self.displayOnboarding()
             case .loginError:
                 self.navigationItem.rightBarButtonItem = self.infoBarButton
                 self.displayError()
@@ -87,14 +87,14 @@ class WalkthroughViewController: UIViewController {
         }
     }
 
-    private func displayWalkthrough() {
+    private func displayOnboarding() {
         // Hide unused views
         loadingSpinner.stopAnimating()
         loadingLabel.isHidden = true
         errorView.isHidden = true
         // Update visible views
         signUpButton.setTitle("sign_in_text".localized, for: .normal)
-        walkthroughView.isHidden = false
+        onboardingView.isHidden = false
         signUpButton.isHidden = false
     }
 
@@ -110,7 +110,7 @@ class WalkthroughViewController: UIViewController {
 
     private func displayLoadingSpinner() {
         // Hide unused views
-        walkthroughView.isHidden = true
+        onboardingView.isHidden = true
         signUpButton.isHidden = true
         errorView.isHidden = true
         // Update visible views
@@ -207,22 +207,22 @@ class WalkthroughViewController: UIViewController {
         ])
     }
 
-    private func setupWalkthroughView() {
-        addChild(walkthroughController)
-        walkthroughView = walkthroughController.view!
-        view.addSubview(walkthroughView)
-        walkthroughView.translatesAutoresizingMaskIntoConstraints = false
+    private func setupOnboardingView() {
+        addChild(onboardingController)
+        onboardingView = onboardingController.view!
+        view.addSubview(onboardingView)
+        onboardingView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            walkthroughView.topAnchor.constraint(
+            onboardingView.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor
             ),
-            walkthroughView.leadingAnchor.constraint(
+            onboardingView.leadingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leadingAnchor
             ),
-            walkthroughView.trailingAnchor.constraint(
+            onboardingView.trailingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.trailingAnchor
             ),
-            walkthroughView.bottomAnchor.constraint(
+            onboardingView.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                 constant: -64
             ),
@@ -235,7 +235,7 @@ class WalkthroughViewController: UIViewController {
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             signUpButton.topAnchor.constraint(
-                equalTo: walkthroughView.bottomAnchor,
+                equalTo: onboardingView.bottomAnchor,
                 constant: 8
             ),
             signUpButton.leadingAnchor.constraint(

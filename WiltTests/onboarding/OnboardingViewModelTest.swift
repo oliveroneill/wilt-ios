@@ -2,39 +2,39 @@ import XCTest
 
 @testable import Wilt
 
-class WalkthroughViewModelTest: XCTestCase {
+class OnboardingViewModelTest: XCTestCase {
     func testOnViewAppeared() {
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: FakeAuthenticator(),
             spotifyAuthoriser: FakeAuthoriser()
         )
-        var state: WalkthroughViewState?
+        var state: OnboardingViewState?
         viewModel.onViewUpdate = {
             state = $0
         }
         viewModel.onViewAppeared()
-        XCTAssertEqual(WalkthroughViewState.walkthrough, state)
+        XCTAssertEqual(OnboardingViewState.onboarding, state)
     }
 
     func testOnSignInButtonPressedChangesState() {
         let mockAuthoriser = FakeAuthoriser()
         let mockAuthenticator = FakeAuthenticator()
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: mockAuthenticator,
             spotifyAuthoriser: mockAuthoriser
         )
-        var state: WalkthroughViewState?
+        var state: OnboardingViewState?
         viewModel.onViewUpdate = {
             state = $0
         }
         viewModel.onSignInButtonPressed()
-        XCTAssertEqual(WalkthroughViewState.authenticating, state)
+        XCTAssertEqual(OnboardingViewState.authenticating, state)
     }
 
     func testOnSignInButtonPressedCallsAuthorise() {
         let mockAuthoriser = FakeAuthoriser()
         let mockAuthenticator = FakeAuthenticator()
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: mockAuthenticator,
             spotifyAuthoriser: mockAuthoriser
         )
@@ -50,7 +50,7 @@ class WalkthroughViewModelTest: XCTestCase {
         let expected = "a_spotify_token_for_tests"
         let mockAuthoriser = FakeAuthoriser(authoriseResult: .success(expected))
         let mockAuthenticator = FakeAuthenticator()
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: mockAuthenticator,
             spotifyAuthoriser: mockAuthoriser
         )
@@ -65,7 +65,7 @@ class WalkthroughViewModelTest: XCTestCase {
         let expected = FakeError.testError
         let mockAuthoriser = FakeAuthoriser(authoriseResult: .failure(expected))
         let mockAuthenticator = FakeAuthenticator()
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: mockAuthenticator,
             spotifyAuthoriser: mockAuthoriser
         )
@@ -81,7 +81,7 @@ class WalkthroughViewModelTest: XCTestCase {
         let mockAuthenticator = FakeAuthenticator(
             signUpResult: .success(expected)
         )
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: mockAuthenticator,
             spotifyAuthoriser: mockAuthoriser
         )
@@ -95,7 +95,7 @@ class WalkthroughViewModelTest: XCTestCase {
         let mockAuthenticator = FakeAuthenticator(
             signUpResult: .failure(expected)
         )
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: mockAuthenticator,
             spotifyAuthoriser: mockAuthoriser
         )
@@ -110,7 +110,7 @@ class WalkthroughViewModelTest: XCTestCase {
             signUpResult: .success("346451"),
             loginResult: .success(expected)
         )
-        class TestDelegate: WalkthroughViewModelDelegate {
+        class TestDelegate: OnboardingViewModelDelegate {
             var userID: String?
             func loggedIn(userID: String) {
                 self.userID = userID
@@ -118,7 +118,7 @@ class WalkthroughViewModelTest: XCTestCase {
             func showInfo() {}
         }
         let delegate = TestDelegate()
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: mockAuthenticator,
             spotifyAuthoriser: mockAuthoriser
         )
@@ -133,7 +133,7 @@ class WalkthroughViewModelTest: XCTestCase {
             signUpResult: .success("346451"),
             loginResult: .failure(FakeError.testError)
         )
-        class TestDelegate: WalkthroughViewModelDelegate {
+        class TestDelegate: OnboardingViewModelDelegate {
             var userID: String?
             func loggedIn(userID: String) {
                 self.userID = userID
@@ -141,7 +141,7 @@ class WalkthroughViewModelTest: XCTestCase {
             func showInfo() {}
         }
         let delegate = TestDelegate()
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: mockAuthenticator,
             spotifyAuthoriser: mockAuthoriser
         )
@@ -155,20 +155,20 @@ class WalkthroughViewModelTest: XCTestCase {
         let mockAuthenticator = FakeAuthenticator(
             signUpResult: .failure(FakeError.testError)
         )
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: mockAuthenticator,
             spotifyAuthoriser: mockAuthoriser
         )
-        var state: WalkthroughViewState?
+        var state: OnboardingViewState?
         viewModel.onViewUpdate = {
             state = $0
         }
         viewModel.onSignInButtonPressed()
-        XCTAssertEqual(WalkthroughViewState.loginError, state)
+        XCTAssertEqual(OnboardingViewState.loginError, state)
     }
 
     func testOnInfoButtonPressed() {
-        class TestDelegate: WalkthroughViewModelDelegate {
+        class TestDelegate: OnboardingViewModelDelegate {
             var infoCalls = 0
             func loggedIn(userID: String) {}
             func showInfo() {
@@ -176,7 +176,7 @@ class WalkthroughViewModelTest: XCTestCase {
             }
         }
         let delegate = TestDelegate()
-        let viewModel = WalkthroughViewModel(
+        let viewModel = OnboardingViewModel(
             userAuthenticator: FakeAuthenticator(),
             spotifyAuthoriser: FakeAuthoriser()
         )

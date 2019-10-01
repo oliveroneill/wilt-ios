@@ -1,13 +1,13 @@
 import UIKit
 
-/// The page view controller for the walkthrough
-class WalkthroughIntroViewController: UIPageViewController {
+/// The page view controller for onboarding
+class OnboardingIntroViewController: UIPageViewController {
     private let pages: [UIViewController] = [
-        WalkthroughPage(
+        OnboardingPage(
             text: "walkthrough1_text".localized,
             image: #imageLiteral(resourceName: "WalkthroughScreen1")
         ),
-        WalkthroughPage(
+        OnboardingPage(
             text: "walkthrough2_text".localized,
             image: #imageLiteral(resourceName: "WalkthroughScreen2")
         ),
@@ -38,7 +38,7 @@ class WalkthroughIntroViewController: UIPageViewController {
     }
 }
 
-extension WalkthroughIntroViewController: UIPageViewControllerDataSource {
+extension OnboardingIntroViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = pages.firstIndex(of: viewController) else {
             return nil

@@ -5,7 +5,7 @@ import XCTest
 
 // TODO: not really sure what I should be doing with these tests
 // It seems like a lot of work to write end-to-end tests, especially with
-// third party services, so I'll leave this to only test the walkthrough for
+// third party services, so I'll leave this to only test the onboarding for
 // now
 class WiltUITests: XCTestCase {
     var app: XCUIApplication!
@@ -25,7 +25,7 @@ class WiltUITests: XCTestCase {
 
     func testSlide() {
         app.otherElements
-            .containing(.navigationBar, identifier:"Wilt.WalkthroughView")
+            .containing(.navigationBar, identifier:"Wilt.OnboardingView")
             .children(matching: .other).element
             /*@START_MENU_TOKEN@*/.swipeLeft()/*[[".swipeUp()",".swipeLeft()"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         let secondPageText = app.staticTexts[

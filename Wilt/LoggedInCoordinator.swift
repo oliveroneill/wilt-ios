@@ -132,8 +132,8 @@ extension LoggedInCoordinator: SettingsViewControllerDelegate {
     }
 }
 
-/// Delegate for the `WalkthroughCoordinator` for events that occur during the
-/// walkthrough
+/// Delegate for the `OnboardingCoordinator` for events that occur during
+/// onboarding
 protocol LoggedInCoordinatorDelegate: class {
     func contactUs()
     func logOut()

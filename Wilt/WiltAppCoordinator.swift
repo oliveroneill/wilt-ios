@@ -17,7 +17,7 @@ class WiltAppCoordinator: Coordinator {
         if let _ = auth.currentUser {
             showContent(database: database)
         } else {
-            showWalkthrough()
+            showOnboarding()
         }
     }
 
@@ -32,7 +32,7 @@ class WiltAppCoordinator: Coordinator {
         // We need to return this response back to the SpotifyAuthoriser,
         // which should be stored in the first child coordinator in the ideal
         // case
-        if let coordinator = childCoordinators.first as? WalkthroughCoordinator {
+        if let coordinator = childCoordinators.first as? OnboardingCoordinator {
             coordinator.spotifyAuthComplete(
                 application: application,
                 url: url,
@@ -52,18 +52,18 @@ class WiltAppCoordinator: Coordinator {
         loggedInCoordinator.start()
     }
 
-    private func showWalkthrough() {
-        let walkthroughCoordinator = WalkthroughCoordinator(
+    private func showOnboarding() {
+        let onboardingCoordinator = OnboardingCoordinator(
             navigationController: navigationController,
             auth: auth
         )
-        childCoordinators.append(walkthroughCoordinator)
-        walkthroughCoordinator.delegate = self
-        walkthroughCoordinator.start()
+        childCoordinators.append(onboardingCoordinator)
+        onboardingCoordinator.delegate = self
+        onboardingCoordinator.start()
     }
 }
 
-extension WiltAppCoordinator: WalkthroughCoordinatorDelegate {
+extension WiltAppCoordinator: OnboardingCoordinatorDelegate {
     func loggedIn(userID: String) {
         childCoordinators.first?.dismiss()
         showContent(database: database)
@@ -82,7 +82,7 @@ extension WiltAppCoordinator: LoggedInCoordinatorDelegate {
     func logOut() {
         defer {
             childCoordinators.first?.dismiss()
-            showWalkthrough()
+            showOnboarding()
         }
         do {
             try auth.logOut()
