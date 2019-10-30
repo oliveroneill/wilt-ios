@@ -145,6 +145,7 @@ class ProfileCardView: MDCCardCollectionCell {
         switch (state) {
         case .loading(let tagTitle):
             setupSuccessfulView()
+            shimmer.isShimmering = true
             resetViewsToLoadingState()
             chip.titleLabel.text = tagTitle
             chip.sizeToFit()
