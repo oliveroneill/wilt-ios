@@ -3,7 +3,7 @@ language: swift
 cache: cocoapods
 xcode_workspace: Wilt.xcworkspace
 xcode_scheme: Wilt
-xcode_destination: platform=iOS Simulator,OS=12.4,name=iPhone Xʀ
+xcode_destination: platform=iOS Simulator,OS=13.1,name=iPhone Xʀ
 
 env:
   # To fool Cocoapods keys

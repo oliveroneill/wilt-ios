@@ -1,5 +1,5 @@
 import MaterialComponents.MaterialCards
-import MaterialComponents.MaterialChips
+import MaterialComponents.MDCChipView
 import Shimmer
 import SDWebImage
 
@@ -7,6 +7,9 @@ import SDWebImage
 class ProfileCardView: MDCCardCollectionCell {
     static let reuseIdentifier = "profileCell"
 
+    // Keep track of the width constraint for the chip so that we can update
+    // the constraint whenever the title changes
+    private var chipWidthConstraint: NSLayoutConstraint?
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFill
@@ -49,7 +52,6 @@ class ProfileCardView: MDCCardCollectionCell {
 
     private lazy var chip: MDCChipView = {
         let chip = MDCChipView()
-        chip.sizeToFit()
         chip.translatesAutoresizingMaskIntoConstraints = false
         return chip
     }()
@@ -118,10 +120,10 @@ class ProfileCardView: MDCCardCollectionCell {
         subtitle1Label.backgroundColor = .lightGray
         imageView.backgroundColor = .lightGray
         imageView.image = nil
-        titleLabel.text = ""
-        subtitle1Label.text = ""
-        subtitle2Label.text = ""
-        chip.titleLabel.text = ""
+        titleLabel.text = nil
+        subtitle1Label.text = nil
+        subtitle2Label.text = nil
+        chip.titleLabel.text = nil
     }
 
     private func setupSuccessfulView() {
@@ -148,7 +150,7 @@ class ProfileCardView: MDCCardCollectionCell {
             shimmer.isShimmering = true
             resetViewsToLoadingState()
             chip.titleLabel.text = tagTitle
-            chip.sizeToFit()
+            updateChipWidthConstraint()
         case .loaded(let tagTitle, let title, let subtitle1, let subtitle2,
                      let imageURL, _):
             shimmer.isShimmering = false
@@ -158,7 +160,7 @@ class ProfileCardView: MDCCardCollectionCell {
             subtitle2Label.backgroundColor = .white
             subtitle1Label.backgroundColor = .white
             chip.titleLabel.text = tagTitle
-            chip.sizeToFit()
+            updateChipWidthConstraint()
             titleLabel.text = title
             subtitle1Label.text = subtitle1
             subtitle2Label.text = subtitle2
@@ -178,6 +180,23 @@ class ProfileCardView: MDCCardCollectionCell {
                 for: .touchUpInside
             )
         }
+    }
+
+    /// Update the width constraint for the chip so that it matches the width needed to fit the title
+    /// label
+    private func updateChipWidthConstraint() {
+        // Delete the existing constraint if we have one
+        if let constraint = chipWidthConstraint {
+            NSLayoutConstraint.deactivate([constraint])
+        }
+        // Create a new constraint using `sizeThatFits` to work out what the
+        // width of the view should be
+        let constraint = chip.widthAnchor.constraint(
+            equalToConstant: chip.sizeThatFits(frame.size).width
+        )
+        // Store the constraint so we deactivate it later
+        chipWidthConstraint = constraint
+        NSLayoutConstraint.activate([constraint])
     }
 
     @objc private func retryPressed() {
@@ -292,7 +311,11 @@ class ProfileCardView: MDCCardCollectionCell {
                 equalTo: imageView.leadingAnchor,
                 constant: 8
             ),
-            chip.widthAnchor.constraint(greaterThanOrEqualToConstant: 10),
+            chip.heightAnchor.constraint(equalToConstant: 32),
+            chip.trailingAnchor.constraint(
+                lessThanOrEqualTo: safeAreaLayoutGuide.trailingAnchor,
+                constant: -8
+            ),
         ])
         NSLayoutConstraint.activate([
             errorLabel.centerXAnchor.constraint(equalTo: centerXAnchor),

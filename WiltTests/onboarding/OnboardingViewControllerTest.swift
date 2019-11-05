@@ -51,7 +51,7 @@ class OnboardingViewControllerTest: KIFTestCase {
 
     func testAuthenticatingScreen() {
         tester().tapView(withAccessibilityLabel: "sign_in_button")
-         // expect(self.controller.view).to(recordSnapshot())
+        // expect(self.controller.view).to(recordSnapshot())
         expect(self.controller.view).to(haveValidSnapshot())
     }
 
