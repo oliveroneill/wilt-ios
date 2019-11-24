@@ -16,7 +16,7 @@ enum WiltAPIError: Error {
     case loggedOut
 }
 
-class FirebaseAPI: WiltAPI {
+final class FirebaseAPI: WiltAPI {
     private lazy var functions = Functions.functions(region: "asia-northeast1")
     func topArtistsPerWeek(from: Int64, to: Int64,
                            completion: @escaping (Result<[TopArtistData], Error>) -> Void) {

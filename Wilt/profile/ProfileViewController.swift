@@ -1,6 +1,6 @@
 /// View controller for the profile screen. This will use a collection view
 /// to display cards about the user
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     private let viewModel: ProfileViewModel
     /// The current state
     private var cards: [CardViewModelState]? {

@@ -2,7 +2,7 @@ import Foundation
 
 /// A controller for displaying the user's play history as a feed, with infinite
 /// scrolling and caching implemented
-class FeedViewController: UITableViewController {
+final class FeedViewController: UITableViewController {
     private let viewModel: FeedViewModel
     private lazy var customRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()

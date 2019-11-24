@@ -16,7 +16,7 @@ protocol PlayHistoryDao: class {
 
 /// An implementation of PlayHistoryDao using CoreData and
 /// NSFetchedResultsController
-class PlayHistoryCache: NSObject, PlayHistoryDao {
+final class PlayHistoryCache: NSObject, PlayHistoryDao {
     private let viewContext: NSManagedObjectContext
     private lazy var updateContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(

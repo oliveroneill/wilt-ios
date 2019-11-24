@@ -3,7 +3,7 @@ import CoreData
 
 @testable import Wilt
 
-class ProfileCacheTest: XCTestCase {
+final class ProfileCacheTest: XCTestCase {
     enum ProfileCacheTestError: Error {
         case testError
     }

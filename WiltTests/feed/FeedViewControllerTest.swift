@@ -5,7 +5,7 @@ import KIF
 
 @testable import Wilt
 
-class FeedViewControllerTest: KIFTestCase {
+final class FeedViewControllerTest: KIFTestCase {
     private var window: UIWindow!
     private var controller: FeedViewController!
     private var viewModel: FeedViewModel!
@@ -93,7 +93,7 @@ class FeedViewControllerTest: KIFTestCase {
     func testOnRowsUpdated() {
         // Create a dao that we can change the underlying items and ensure
         // the view updates
-        class ChangingItemsDao: PlayHistoryDao {
+        final class ChangingItemsDao: PlayHistoryDao {
             var items: [TopArtistData] = []
             var onDataChange: (() -> Void)?
             func batchUpsert(items: [TopArtistData]) throws {}
@@ -168,7 +168,7 @@ class FeedViewControllerTest: KIFTestCase {
         let index = 8
         setupController()
         tester().waitForAnimationsToFinish()
-        class ListeningDelegate: FeedViewModelDelegate {
+        final class ListeningDelegate: FeedViewModelDelegate {
             private let exp: XCTestExpectation
             private let index: Int
             init(index: Int, expectation: XCTestExpectation) {
@@ -194,5 +194,4 @@ class FeedViewControllerTest: KIFTestCase {
             }
         }
     }
-
 }

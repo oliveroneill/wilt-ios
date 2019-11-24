@@ -5,7 +5,7 @@ import KIF
 
 @testable import Wilt
 
-class OnboardingViewControllerTest: KIFTestCase {
+final class OnboardingViewControllerTest: KIFTestCase {
     private var controller: OnboardingViewController!
     private var authoriser: FakeAuthoriser!
 

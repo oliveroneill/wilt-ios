@@ -2,7 +2,7 @@ import UIKit
 
 /// The controller for the entire onboarding process, made up of a page view
 /// controller and a button
-class OnboardingViewController: UIViewController {
+final class OnboardingViewController: UIViewController {
     private let onboardingController = OnboardingIntroViewController()
     private let errorPage = OnboardingPage(
         text: "login_error_text".localized,

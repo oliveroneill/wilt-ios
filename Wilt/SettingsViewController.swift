@@ -1,6 +1,6 @@
 /// View for displaying settings but also doing a bit of double duty for
 /// displaying some info about the app
-class SettingsViewController: UITableViewController {
+final class SettingsViewController: UITableViewController {
     private let loggedIn: Bool
     private lazy var aboutLabel: UILabel = {
         let label = UILabel(frame: .zero)

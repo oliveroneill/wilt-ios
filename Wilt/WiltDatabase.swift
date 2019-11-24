@@ -1,7 +1,7 @@
 import CoreData
 
 /// A Core Data wrapper for accessing the database
-class WiltDatabase {
+final class WiltDatabase {
     private let container = NSPersistentContainer(name: "Wilt")
     private var persistenceLoaded = false
     private var persistenceLoadError: NSError?

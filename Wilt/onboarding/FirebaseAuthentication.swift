@@ -7,7 +7,7 @@ protocol Authenticator {
     func login(token: String, callback: @escaping (Result<String, Error>) -> Void)
 }
 
-class FirebaseAuthentication: Authenticator {
+final class FirebaseAuthentication: Authenticator {
     private let auth = Auth.auth()
     lazy var functions = Functions.functions(region: "asia-northeast1")
     /// Get the current logged in user, or null if there's no user logged in

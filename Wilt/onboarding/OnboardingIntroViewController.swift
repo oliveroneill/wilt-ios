@@ -1,7 +1,7 @@
 import UIKit
 
 /// The page view controller for onboarding
-class OnboardingIntroViewController: UIPageViewController {
+final class OnboardingIntroViewController: UIPageViewController {
     private let pages: [UIViewController] = [
         OnboardingPage(
             text: "walkthrough1_text".localized,

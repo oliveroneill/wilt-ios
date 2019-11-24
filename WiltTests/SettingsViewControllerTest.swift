@@ -5,11 +5,11 @@ import KIF
 
 @testable import Wilt
 
-class SettingsViewControllerTest: KIFTestCase {
+final class SettingsViewControllerTest: KIFTestCase {
     private var controller: SettingsViewController!
     private var testDelegate: TestDelegate!
 
-    class TestDelegate: SettingsViewControllerDelegate {
+    final class TestDelegate: SettingsViewControllerDelegate {
         var contactUsCalls = 0
         var closeCalls = 0
         var logoutCalls = 0

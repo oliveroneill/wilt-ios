@@ -5,7 +5,7 @@ import KIF
 
 @testable import Wilt
 
-class ProfileViewControllerTest: KIFTestCase {
+final class ProfileViewControllerTest: KIFTestCase {
     private var window: UIWindow!
     private var controller: ProfileViewController!
     private var viewModel: ProfileViewModel!
@@ -124,7 +124,7 @@ class ProfileViewControllerTest: KIFTestCase {
         )
         tester().waitForAnimationsToFinish()
         let exp = expectation(description: "Should open URL")
-        class TestDelegate: ProfileViewModelDelegate {
+        final class TestDelegate: ProfileViewModelDelegate {
             private let expectedURL: URL
             private let exp: XCTestExpectation
             init(expectedURL: URL, exp: XCTestExpectation) {

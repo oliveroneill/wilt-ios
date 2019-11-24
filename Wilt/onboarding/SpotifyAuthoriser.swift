@@ -22,7 +22,7 @@ protocol SpotifyAuthoriser {
 /// SpotifyAuthoriser that will open the Spotify app if it's installed
 /// or use web if it isn't.
 /// NSObject is required to implement SPTSessionManagerDelegate
-class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
+final class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
     private let canceledURL = URL(
         string: "wilt://spotify-login?error=user_canceled&error_description=User%20aborted"
     )!

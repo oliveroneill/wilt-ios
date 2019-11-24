@@ -2,7 +2,7 @@ import XCTest
 
 @testable import Wilt
 
-class ProfileViewModelTest: XCTestCase {
+final class ProfileViewModelTest: XCTestCase {
     private var viewModel: ProfileViewModel!
     enum ProfileViewModelTestError: Error {
         case testError
@@ -276,7 +276,7 @@ class ProfileViewModelTest: XCTestCase {
         )
         viewModel = ProfileViewModel(api: api)
         let exp = expectation(description: "Should receive update")
-        class TestDelegate: ProfileViewModelDelegate {
+        final class TestDelegate: ProfileViewModelDelegate {
             private let exp: XCTestExpectation
             init(exp: XCTestExpectation) {
                 self.exp = exp
@@ -305,7 +305,7 @@ class ProfileViewModelTest: XCTestCase {
         )
         viewModel = ProfileViewModel(api: api)
         let exp = expectation(description: "Should receive update")
-        class TestDelegate: ProfileViewModelDelegate {
+        final class TestDelegate: ProfileViewModelDelegate {
             private let exp: XCTestExpectation
             init(exp: XCTestExpectation) {
                 self.exp = exp
@@ -341,7 +341,7 @@ class ProfileViewModelTest: XCTestCase {
         )
         viewModel = ProfileViewModel(api: api)
         let exp = expectation(description: "Should receive update")
-        class TestDelegate: ProfileViewModelDelegate {
+        final class TestDelegate: ProfileViewModelDelegate {
             private let expectedURL: URL
             private let exp: XCTestExpectation
             init(expectedURL: URL, exp: XCTestExpectation) {
@@ -385,7 +385,7 @@ class ProfileViewModelTest: XCTestCase {
             ]
         )
         viewModel = ProfileViewModel(api: api)
-        class TestDelegate: ProfileViewModelDelegate {
+        final class TestDelegate: ProfileViewModelDelegate {
             var openCallCount = 0
             func loggedOut() {}
             func open(url: URL) {

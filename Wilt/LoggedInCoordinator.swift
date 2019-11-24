@@ -1,7 +1,7 @@
 import CoreData
 
 /// A coordinator to handle the flow once the user is logged in
-class LoggedInCoordinator: Coordinator {
+final class LoggedInCoordinator: Coordinator {
     private let database: WiltDatabase
     private let api: WiltAPI
     var navigationController: UINavigationController

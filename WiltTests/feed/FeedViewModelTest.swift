@@ -2,7 +2,7 @@ import XCTest
 
 @testable import Wilt
 
-class FeedViewModelTest: XCTestCase {
+final class FeedViewModelTest: XCTestCase {
     private var viewModel: FeedViewModel!
     private var exp: XCTestExpectation!
 
@@ -381,7 +381,7 @@ class FeedViewModelTest: XCTestCase {
                 topArtistPerWeekAnythingResponse: .failure(WiltAPIError.loggedOut)
             )
         )
-        class ListeningDelegate: FeedViewModelDelegate {
+        final class ListeningDelegate: FeedViewModelDelegate {
             private let exp: XCTestExpectation
             init(expectation: XCTestExpectation) {
                 self.exp = expectation
@@ -456,7 +456,7 @@ class FeedViewModelTest: XCTestCase {
             dao: FakeDao(items: FakeData.items),
             api: FakeWiltAPI()
         )
-        class ListeningDelegate: FeedViewModelDelegate {
+        final class ListeningDelegate: FeedViewModelDelegate {
             private let exp: XCTestExpectation
             private let index: Int
             init(index: Int, expectation: XCTestExpectation) {

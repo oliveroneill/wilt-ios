@@ -4,7 +4,7 @@ import Shimmer
 import SDWebImage
 
 /// A card view for the profile tab
-class ProfileCardView: MDCCardCollectionCell {
+final class ProfileCardView: MDCCardCollectionCell {
     static let reuseIdentifier = "profileCell"
 
     // Keep track of the width constraint for the chip so that we can update

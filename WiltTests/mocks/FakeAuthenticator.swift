@@ -1,6 +1,6 @@
 @testable import Wilt
 
-class FakeAuthenticator: Authenticator {
+final class FakeAuthenticator: Authenticator {
     /// This will store the authCode passed into signUp. We won't test the
     /// redirect URI
     var signUpCalls = [String]()

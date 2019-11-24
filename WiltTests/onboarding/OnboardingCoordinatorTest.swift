@@ -2,7 +2,7 @@ import XCTest
 
 @testable import Wilt
 
-class OnboardingCoordinatorTest: XCTestCase {
+final class OnboardingCoordinatorTest: XCTestCase {
     func testSpotifyAuthComplete() {
         let mockAuthoriser = FakeAuthoriser()
         let mockAuthenticator = FakeAuthenticator()

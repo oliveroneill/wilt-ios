@@ -10,7 +10,7 @@ struct TopSomethingRequest: Hashable {
     let index: Int
 }
 
-class FakeWiltAPI: WiltAPI {
+final class FakeWiltAPI: WiltAPI {
     private let topArtistPerWeekResult: [Timespan:Result<[TopArtistData], Error>]
     private let topArtistPerWeekAnythingResponse: Result<[TopArtistData], Error>?
     var topArtistResult: [TopSomethingRequest:Result<TopArtistInfo, Error>]

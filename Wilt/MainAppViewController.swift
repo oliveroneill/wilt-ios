@@ -4,7 +4,7 @@ import SwiftIcons
 
 /// Once logged in, the main app will revolve around this controller and
 /// different tabs will be used to navigate
-class MainAppViewController: UITabBarController {
+final class MainAppViewController: UITabBarController {
     weak var controllerDelegate: MainAppViewControllerDelegate?
     private var tabs = [(controller: UIViewController, title: String)]()
     private var container: NSPersistentContainer

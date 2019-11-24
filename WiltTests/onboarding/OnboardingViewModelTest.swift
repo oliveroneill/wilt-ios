@@ -2,7 +2,7 @@ import XCTest
 
 @testable import Wilt
 
-class OnboardingViewModelTest: XCTestCase {
+final class OnboardingViewModelTest: XCTestCase {
     func testOnViewAppeared() {
         let viewModel = OnboardingViewModel(
             userAuthenticator: FakeAuthenticator(),
@@ -110,7 +110,7 @@ class OnboardingViewModelTest: XCTestCase {
             signUpResult: .success("346451"),
             loginResult: .success(expected)
         )
-        class TestDelegate: OnboardingViewModelDelegate {
+        final class TestDelegate: OnboardingViewModelDelegate {
             var userID: String?
             func loggedIn(userID: String) {
                 self.userID = userID
@@ -133,7 +133,7 @@ class OnboardingViewModelTest: XCTestCase {
             signUpResult: .success("346451"),
             loginResult: .failure(FakeError.testError)
         )
-        class TestDelegate: OnboardingViewModelDelegate {
+        final class TestDelegate: OnboardingViewModelDelegate {
             var userID: String?
             func loggedIn(userID: String) {
                 self.userID = userID
@@ -168,7 +168,7 @@ class OnboardingViewModelTest: XCTestCase {
     }
 
     func testOnInfoButtonPressed() {
-        class TestDelegate: OnboardingViewModelDelegate {
+        final class TestDelegate: OnboardingViewModelDelegate {
             var infoCalls = 0
             func loggedIn(userID: String) {}
             func showInfo() {

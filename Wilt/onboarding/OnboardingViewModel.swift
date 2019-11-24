@@ -11,7 +11,7 @@ enum OnboardingViewState: Equatable {
     case loginError
 }
 
-class OnboardingViewModel {
+final class OnboardingViewModel {
     var onViewUpdate: ((OnboardingViewState) -> Void)?
     private let spotifyAuthoriser: SpotifyAuthoriser
     private let userAuthenticator: Authenticator

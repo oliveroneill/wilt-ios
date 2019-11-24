@@ -1,6 +1,6 @@
 @testable import Wilt
 
-class FakeAuthoriser: SpotifyAuthoriser {
+final class FakeAuthoriser: SpotifyAuthoriser {
     var authoriseCallCount = 0
     var authorisationCompleteCallCount = 0
     private let authoriseResult: Result<String, Error>?

@@ -3,7 +3,7 @@ import CoreData
 
 @testable import Wilt
 
-class PlayHistoryCacheTest: XCTestCase {
+final class PlayHistoryCacheTest: XCTestCase {
     private lazy var managedObjectModel: NSManagedObjectModel = {
         let managedObjectModel = NSManagedObjectModel.mergedModel(
             from: [Bundle(for: type(of: self))]

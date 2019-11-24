@@ -54,7 +54,7 @@ enum CardViewModelState: Equatable {
 }
 
 /// View model for the profile screen
-class ProfileViewModel {
+final class ProfileViewModel {
     private let cards: [ProfileCard] = [
         .topArtist(index: 0, timeRange: .longTerm),
         .topTrack(index: 0, timeRange: .longTerm),

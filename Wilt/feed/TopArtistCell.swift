@@ -2,7 +2,7 @@ import Foundation
 import SDWebImage
 
 /// A single table view for the play history feed. See `FeedViewController`
-class TopArtistCell: UITableViewCell {
+final class TopArtistCell: UITableViewCell {
     static let reuseIdentifier = "topArtistCell"
     private lazy var roundCornerTransformer: SDImageTransformer = {
         return SDImagePipelineTransformer(

@@ -2,7 +2,7 @@ import XCTest
 
 @testable import Wilt
 
-class PlayHistoryPagerTest: XCTestCase {
+final class PlayHistoryPagerTest: XCTestCase {
     private let pageSize = 11
     private var pager: PlayHistoryPager!
     private var api: FakeWiltAPI!

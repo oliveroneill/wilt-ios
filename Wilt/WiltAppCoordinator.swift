@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 /// The coordinator for the entire app
-class WiltAppCoordinator: Coordinator {
+final class WiltAppCoordinator: Coordinator {
     internal var navigationController: UINavigationController
     internal var childCoordinators = [Coordinator]()
     private let auth = FirebaseAuthentication()

@@ -2,7 +2,7 @@ import UIKit
 import Keys
 
 /// Coordinating navigation for the onboarding
-class OnboardingCoordinator: Coordinator {
+final class OnboardingCoordinator: Coordinator {
     internal var navigationController: UINavigationController
     internal var childCoordinators = [Coordinator]()
     private let spotifyAuthoriser: SpotifyAuthoriser

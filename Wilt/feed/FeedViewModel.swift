@@ -25,7 +25,7 @@ struct FeedItemViewModel: Equatable {
 }
 
 /// View model for displaying the user's music playing history in a feed
-class FeedViewModel {
+final class FeedViewModel {
     private let dao: PlayHistoryDao
     private let pager: PlayHistoryPager
     private let backgroundQueue = DispatchQueue(

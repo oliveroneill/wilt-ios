@@ -11,7 +11,7 @@ protocol ProfileAPI {
 /// A cache for the profile screen. This will used cached values when possible
 /// and make calls to the underlying network when the cache is expired or is
 /// empty. The max cache time is 1 day
-class ProfileCache: ProfileAPI {
+final class ProfileCache: ProfileAPI {
     private let backgroundContext: NSManagedObjectContext
     private let networkAPI: ProfileAPI
     // We'll let things sit in cache for one day maximum

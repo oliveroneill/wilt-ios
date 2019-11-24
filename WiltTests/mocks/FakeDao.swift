@@ -1,6 +1,6 @@
 @testable import Wilt
 
-class FakeDao: PlayHistoryDao {
+final class FakeDao: PlayHistoryDao {
     var items: [TopArtistData]
     var batchUpsertCalls = [[TopArtistData]]()
 

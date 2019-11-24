@@ -5,7 +5,7 @@ typealias PagerCompletionHandler = (Result<Int, Error>) -> Void
 
 /// Requests play history data from Wilt in pages. A single item will be
 /// an aggregate of a week's worth of plays
-class PlayHistoryPager {
+final class PlayHistoryPager {
     private let api: WiltAPI
     private let dao: PlayHistoryDao
     private let pageSize: Int

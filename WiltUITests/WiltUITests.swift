@@ -7,7 +7,7 @@ import XCTest
 // It seems like a lot of work to write end-to-end tests, especially with
 // third party services, so I'll leave this to only test the onboarding for
 // now
-class WiltUITests: XCTestCase {
+final class WiltUITests: XCTestCase {
     var app: XCUIApplication!
 
     override func setUp() {
