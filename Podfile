@@ -1,18 +1,12 @@
 plugin 'cocoapods-keys', {
   :project => "Wilt",
+  :target => ["Wilt", "WiltUITests"],
   :keys => [
     "SpotifyClientID",
     "SpotifyRedirectURI",
   ]}
 
-# Uncomment the next line to define a global platform for your project
-platform :ios, '11.0'
-
-target 'Wilt' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for Wilt
+def wilt_dependencies
   pod 'Firebase/Analytics'
   pod 'Firebase/Functions'
   pod 'Firebase/Auth'
@@ -22,6 +16,17 @@ target 'Wilt' do
   pod 'Shimmer'
   pod 'MaterialComponents/Chips'
   pod 'SwiftIcons'
+end
+
+# Uncomment the next line to define a global platform for your project
+platform :ios, '11.0'
+
+target 'Wilt' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Wilt
+  wilt_dependencies
 
   target 'WiltTests' do
     inherit! :search_paths
@@ -29,8 +34,9 @@ target 'Wilt' do
     pod 'Nimble-Snapshots'
   end
 
-  target 'WiltUITests' do
-    inherit! :search_paths
-  end
+end
 
+target 'WiltUITests' do
+  use_frameworks!
+  wilt_dependencies
 end

@@ -42,3 +42,7 @@ Wilt/GoogleService-Info.plist
 
 # Just in case I ever want to check in Pods/
 Pods/CocoaPodsKeys
+
+# Fastlane stuff
+fastlane/Appfile
+fastlane/screenshots
