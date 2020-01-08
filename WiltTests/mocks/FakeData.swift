@@ -98,4 +98,14 @@ enum FakeData {
             externalURL: URL(string: "http://notarealimageurl.notreal.net")!
         ),
     ]
+
+    static var lastListenItems: [ListenLaterArtist] {
+        FakeData.items.map {
+            ListenLaterArtist(
+                name: $0.topArtist,
+                externalURL: $0.externalURL,
+                imageURL: $0.imageURL
+            )
+        }
+    }
 }

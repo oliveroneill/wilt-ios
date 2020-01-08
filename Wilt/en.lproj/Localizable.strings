@@ -30,3 +30,7 @@ Spotify play history and user info will be stored and periodically updated. To o
 "about_title_text" = "About Wilt";
 "logout_title_text" = "User Settings";
 "settings_title_text" = "Wilt Settings";
+"listen_later_title" = "Artists You Need To Check Out";
+"listen_later_tab_title" = "Listen Later";
+"listen_later_empty_data_text" = "You haven't starred anything yet!\
+Go to your feed and drag from the right to star artists you want to listen to";

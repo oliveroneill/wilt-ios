@@ -39,6 +39,21 @@ final class MainAppViewController: UITabBarController {
         return item
     }()
 
+    private lazy var listenLaterTabItem: UITabBarItem = {
+        let item = UITabBarItem(
+            title: "listen_later_tab_title".localized,
+            image: nil,
+            selectedImage: nil
+        )
+        item.setIcon(
+            icon: .emoji(.musicEighthNote),
+            textColor: .lightGray,
+            selectedTextColor: view.tintColor
+        )
+        item.tag = 2
+        return item
+    }()
+
     private lazy var settingsBarButton: UIBarButtonItem = {
         let item = UIBarButtonItem(
             title: nil,
@@ -104,6 +119,16 @@ final class MainAppViewController: UITabBarController {
         return feedViewController
     }
 
+    private func setupListenLaterController(container: NSPersistentContainer) throws -> ListenLaterViewController {
+        let viewModel = ListenLaterViewModel(
+            dao: try ListenLaterStore(viewContext: container.viewContext)
+        )
+        viewModel.delegate = self
+        let listenLaterViewController = ListenLaterViewController(viewModel: viewModel)
+        listenLaterViewController.tabBarItem = listenLaterTabItem
+        return listenLaterViewController
+    }
+
     private func setupTabs(container: NSPersistentContainer,
                            api: WiltAPI) throws {
         tabs = [
@@ -120,6 +145,10 @@ final class MainAppViewController: UITabBarController {
                     api: api
                 ),
                 title: "feed_title".localized
+            ),
+            (
+                controller: try setupListenLaterController(container: container),
+                title: "listen_later_title".localized
             ),
         ]
         title = tabs[0].title
@@ -148,7 +177,7 @@ extension MainAppViewController: UITabBarControllerDelegate {
     }
 }
 
-extension MainAppViewController: FeedViewModelDelegate, ProfileViewModelDelegate {
+extension MainAppViewController: FeedViewModelDelegate, ProfileViewModelDelegate, ListenLaterViewModelDelegate {
     func open(url: URL) {
         controllerDelegate?.open(url: url)
     }
