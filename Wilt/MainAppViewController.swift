@@ -46,7 +46,7 @@ final class MainAppViewController: UITabBarController {
             selectedImage: nil
         )
         item.setIcon(
-            icon: .emoji(.musicEighthNote),
+            icon: .emoji(.clock),
             textColor: .lightGray,
             selectedTextColor: view.tintColor
         )
