@@ -1,5 +1,6 @@
 import Foundation
 import SDWebImage
+import SwiftIcons
 
 /// A single table view for the play history feed. See `FeedViewController`
 final class TopArtistCell: UITableViewCell {
@@ -31,12 +32,13 @@ final class TopArtistCell: UITableViewCell {
             artistLabel.text = viewModel?.artistName ?? ""
             playsLabel.text = viewModel?.playsText ?? ""
             dateLabel.text = viewModel?.dateText ?? ""
-            if let imageURL = viewModel?.imageURL {
+            if let viewModel = viewModel {
                 artistImageView.sd_setImage(
-                    with: imageURL,
+                    with: viewModel.imageURL,
                     placeholderImage: nil,
                     context: [.imageTransformer: roundCornerTransformer]
                 )
+                starImageView.isHidden = !viewModel.isStarred
             }
         }
     }
@@ -44,6 +46,14 @@ final class TopArtistCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
+    }()
+    private lazy var starImageView: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.image = UIImage(
+            icon: .emoji(.clock),
+            size: CGSize(width: 64, height: 64)
+        )
+        return imageView
     }()
     private let playsLabel = UILabel(frame: .zero)
     private let dateLabel = UILabel(frame: .zero)
@@ -58,6 +68,7 @@ final class TopArtistCell: UITableViewCell {
         contentView.addSubview(playsLabel)
         contentView.addSubview(dateLabel)
         contentView.addSubview(artistImageView)
+        contentView.addSubview(starImageView)
         artistImageView.translatesAutoresizingMaskIntoConstraints = false
         artistImageView.contentMode = .scaleAspectFill
         NSLayoutConstraint.activate([
@@ -136,6 +147,27 @@ final class TopArtistCell: UITableViewCell {
             dateLabel.trailingAnchor.constraint(
                 equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
                 constant: -8
+            ),
+        ])
+        starImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            starImageView.topAnchor.constraint(
+                greaterThanOrEqualTo: contentView.safeAreaLayoutGuide.topAnchor,
+                constant: 16
+            ),
+            starImageView.bottomAnchor.constraint(
+                lessThanOrEqualTo: contentView.safeAreaLayoutGuide.bottomAnchor,
+                constant: -16
+            ),
+            starImageView.trailingAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
+                constant: -16
+            ),
+            starImageView.heightAnchor.constraint(
+                equalToConstant: 16
+            ),
+            starImageView.widthAnchor.constraint(
+                equalTo: starImageView.heightAnchor
             ),
         ])
     }

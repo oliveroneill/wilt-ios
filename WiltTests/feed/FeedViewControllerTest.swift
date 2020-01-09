@@ -27,7 +27,9 @@ final class FeedViewControllerTest: KIFTestCase {
         viewModel = FeedViewModel(
             historyDao: dao,
             api: api,
-            listenLaterDao: FakeListenLaterDao(items: [])
+            listenLaterDao: FakeListenLaterDao(
+                items: [FakeData.listenLaterItems[3]]
+            )
         )
         controller = FeedViewController(viewModel: viewModel)
         guard let window = UIApplication.shared.keyWindow else {
