@@ -37,6 +37,8 @@ protocol ListenLaterDao: class {
     /// - Parameter items: The item to insert
     /// - Throws: If the operation fails
     func insert(item: ListenLaterArtist) throws
+    func contains(name: String) throws -> Bool
+    func delete(name: String) throws
 }
 
 /// An implementation of ListenLaterDao using CoreData and
@@ -122,12 +124,7 @@ final class ListenLaterStore: NSObject, ListenLaterDao {
     private func store(item: ListenLaterArtist) throws {
         // There's no primary keys in Core Data, so we have to check each
         // item to see if it already exists
-        let fetchRequest: NSFetchRequest<ListenLaterArtistEntity> = ListenLaterArtistEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", item.name)
-        fetchRequest.fetchLimit = 1
-        let fetchResult = try updateContext.execute(fetchRequest)
-        guard let result = fetchResult as? NSAsynchronousFetchResult<NSFetchRequestResult>,
-            let found = result.finalResult?.first as? ListenLaterArtistEntity else {
+        guard let found = try get(name: item.name) else {
                 // We couldn't find an existing item so we just insert it
                 let stored = ListenLaterArtistEntity(context: updateContext)
                 stored.name = item.name
@@ -140,6 +137,23 @@ final class ListenLaterStore: NSObject, ListenLaterDao {
         found.name = item.name
         found.imageURL = item.imageURL
         found.externalURL = item.externalURL
+    }
+
+    private func get(name: String) throws -> ListenLaterArtistEntity? {
+        let fetchRequest: NSFetchRequest<ListenLaterArtistEntity> = ListenLaterArtistEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        fetchRequest.fetchLimit = 1
+        let fetchResult = try updateContext.execute(fetchRequest)
+        let result = fetchResult as? NSAsynchronousFetchResult<NSFetchRequestResult>
+        return result?.finalResult?.first as? ListenLaterArtistEntity
+    }
+
+    func contains(name: String) throws -> Bool {
+        try get(name: name) != nil
+    }
+
+    func delete(name: String) throws {
+        // TODO
     }
 }
 

@@ -110,8 +110,9 @@ final class MainAppViewController: UITabBarController {
     private func setupFeedController(container: NSPersistentContainer,
                                      api: WiltAPI) throws -> FeedViewController {
         let viewModel = FeedViewModel(
-            dao: try PlayHistoryCache(viewContext: container.viewContext),
-            api: api
+            historyDao: try PlayHistoryCache(viewContext: container.viewContext),
+            api: api,
+            listenLaterDao: try ListenLaterStore(viewContext: container.viewContext)
         )
         viewModel.delegate = self
         let feedViewController = FeedViewController(viewModel: viewModel)

@@ -99,7 +99,7 @@ enum FakeData {
         ),
     ]
 
-    static var lastListenItems: [ListenLaterArtist] {
+    static var listenLaterItems: [ListenLaterArtist] {
         FakeData.items.map {
             ListenLaterArtist(
                 name: $0.topArtist,

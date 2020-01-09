@@ -121,4 +121,9 @@ final class ListenLaterStoreTest: XCTestCase {
         }
         XCTAssertEqual(expectedItems, store.items)
     }
+
+    func testContains() {
+        XCTAssert((try? store.contains(name: expectedItems[3].name)) ?? false)
+        XCTAssertFalse((try? store.contains(name: "Random name missing")) ?? true)
+    }
 }

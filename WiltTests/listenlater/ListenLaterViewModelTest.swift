@@ -2,27 +2,13 @@ import XCTest
 
 @testable import Wilt
 
-final class FakeListenLaterStore: ListenLaterDao {
-    var items: [ListenLaterArtist]
-    var insertCalls = [ListenLaterArtist]()
-
-    init(items: [ListenLaterArtist]) {
-        self.items = items
-    }
-
-    var onDataChange: (() -> Void)?
-    func insert(item: ListenLaterArtist) throws {
-        insertCalls.append(item)
-    }
-}
-
 final class ListenLaterViewModelTest: XCTestCase {
     private var viewModel: ListenLaterViewModel!
     private var exp: XCTestExpectation!
 
     override func setUp() {
         viewModel = ListenLaterViewModel(
-            dao: FakeListenLaterStore(items: FakeData.lastListenItems)
+            dao: FakeListenLaterDao(items: FakeData.listenLaterItems)
         )
         exp = expectation(description: "Should receive view update")
     }
@@ -62,7 +48,7 @@ final class ListenLaterViewModelTest: XCTestCase {
                 externalURL: URL(string: "http://notarealurl3.notreal.net")!
             ),
         ]
-        viewModel = ListenLaterViewModel(dao: FakeListenLaterStore(items: items))
+        viewModel = ListenLaterViewModel(dao: FakeListenLaterDao(items: items))
         XCTAssertEqual(expected, viewModel.items)
         // We need to fulfill the expectation since we declare it in setUp
         // A small sacrifice so that I don't have to redeclare it in all of the
@@ -74,7 +60,7 @@ final class ListenLaterViewModelTest: XCTestCase {
     func testOnRowTapped() {
         let index = 8
         viewModel = ListenLaterViewModel(
-            dao: FakeListenLaterStore(items: FakeData.lastListenItems)
+            dao: FakeListenLaterDao(items: FakeData.listenLaterItems)
         )
         final class ListeningDelegate: ListenLaterViewModelDelegate {
             private let exp: XCTestExpectation

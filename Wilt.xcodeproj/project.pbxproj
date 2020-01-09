@@ -68,6 +68,7 @@
 		7DD271F723C5C7AE006B543F /* ListenLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271F623C5C7AE006B543F /* ListenLaterViewController.swift */; };
 		7DD271F923C5DFB5006B543F /* ListenLaterArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271F823C5DFB5006B543F /* ListenLaterArtistCell.swift */; };
 		7DD271FB23C5E32E006B543F /* ListenLaterViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271FA23C5E32E006B543F /* ListenLaterViewControllerTest.swift */; };
+		7DD271FD23C67FFA006B543F /* FakeListenLaterDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271FC23C67FFA006B543F /* FakeListenLaterDao.swift */; };
 		7DF11A22232C803E00C1072B /* Wilt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */; };
 		7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */; };
 		A8853DE7A8B060739C6FFBCA /* Pods_Wilt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7207B04CB17C38F14DBEE6 /* Pods_Wilt.framework */; };
@@ -164,6 +165,7 @@
 		7DD271F623C5C7AE006B543F /* ListenLaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterViewController.swift; sourceTree = "<group>"; };
 		7DD271F823C5DFB5006B543F /* ListenLaterArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterArtistCell.swift; sourceTree = "<group>"; };
 		7DD271FA23C5E32E006B543F /* ListenLaterViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterViewControllerTest.swift; sourceTree = "<group>"; };
+		7DD271FC23C67FFA006B543F /* FakeListenLaterDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeListenLaterDao.swift; sourceTree = "<group>"; };
 		7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltAppCoordinator.swift; sourceTree = "<group>"; };
 		9F080601268B05D76B57D93C /* Pods-WiltUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiltUITests.release.xcconfig"; path = "Target Support Files/Pods-WiltUITests/Pods-WiltUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CC23487B05CFBECB94E2C7F1 /* Pods-Wilt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wilt.release.xcconfig"; path = "Target Support Files/Pods-Wilt/Pods-Wilt.release.xcconfig"; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				7D5A2B122324DDBD00B56000 /* FakeDao.swift */,
 				7D5A2B162325169900B56000 /* FakeData.swift */,
 				7DB1588F231A4E2200F86A9E /* FakeError.swift */,
+				7DD271FC23C67FFA006B543F /* FakeListenLaterDao.swift */,
 				7D5A2B0E2324C24B00B56000 /* FakePlayHistoryDao.swift */,
 				7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */,
 				7D5A2B102324C25E00B56000 /* FakeWiltAPI.swift */,
@@ -781,6 +784,7 @@
 				7DB1587F2315EED700F86A9E /* OnboardingViewModelTest.swift in Sources */,
 				7D5A2B1D232A719E00B56000 /* PlayHistoryPagerTest.swift in Sources */,
 				7D233B3A2334C6DF00EC95B6 /* SettingsViewControllerTest.swift in Sources */,
+				7DD271FD23C67FFA006B543F /* FakeListenLaterDao.swift in Sources */,
 				7DD271FB23C5E32E006B543F /* ListenLaterViewControllerTest.swift in Sources */,
 				7D5A2B132324DDBD00B56000 /* FakeDao.swift in Sources */,
 			);

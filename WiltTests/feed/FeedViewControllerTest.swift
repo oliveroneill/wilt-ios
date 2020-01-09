@@ -25,8 +25,9 @@ final class FeedViewControllerTest: KIFTestCase {
                                  dao: PlayHistoryDao = FakeDao(items: FakeData.items + FakeData.items + FakeData.items)) {
         api = FakeWiltAPI(topArtistPerWeekAnythingResponse: apiResponse)
         viewModel = FeedViewModel(
-            dao: dao,
-            api: api
+            historyDao: dao,
+            api: api,
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         controller = FeedViewController(viewModel: viewModel)
         guard let window = UIApplication.shared.keyWindow else {

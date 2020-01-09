@@ -5,18 +5,6 @@ import KIF
 
 @testable import Wilt
 
-final class FakeLastListenDao: ListenLaterDao {
-    var items: [ListenLaterArtist]
-
-    init(items: [ListenLaterArtist]) {
-        self.items = items
-    }
-
-    var onDataChange: (() -> Void)?
-
-    func insert(item: ListenLaterArtist) throws {}
-}
-
 final class ListenLaterViewControllerTest: KIFTestCase {
     private var window: UIWindow!
     private var controller: ListenLaterViewController!
@@ -27,8 +15,8 @@ final class ListenLaterViewControllerTest: KIFTestCase {
     ///
     /// - Parameters:
     ///   - dao: The database access object for the listen later store
-    private func setupController(dao: ListenLaterDao = FakeLastListenDao(
-        items: FakeData.lastListenItems + FakeData.lastListenItems + FakeData.lastListenItems
+    private func setupController(dao: ListenLaterDao = FakeListenLaterDao(
+        items: FakeData.listenLaterItems + FakeData.listenLaterItems + FakeData.listenLaterItems
         )
     ) {
         viewModel = ListenLaterViewModel(dao: dao)
@@ -53,7 +41,7 @@ final class ListenLaterViewControllerTest: KIFTestCase {
     }
 
     func testEmptyData() {
-        setupController(dao: FakeLastListenDao(items: []))
+        setupController(dao: FakeListenLaterDao(items: []))
         tester().waitForAnimationsToFinish()
         // expect(self.window).to(recordSnapshot())
         expect(self.window).to(haveValidSnapshot())
@@ -67,13 +55,15 @@ final class ListenLaterViewControllerTest: KIFTestCase {
             var items: [ListenLaterArtist] = []
             var onDataChange: (() -> Void)?
             func insert(item: ListenLaterArtist) throws {}
+            func contains(name: String) throws -> Bool { false }
+            func delete(name: String) throws {}
         }
         let dao = ChangingItemsDao()
         // Start with an empty dataset
         setupController(dao: dao)
         tester().waitForAnimationsToFinish()
         // Change the dao to now display some data
-        dao.items = FakeData.lastListenItems
+        dao.items = FakeData.listenLaterItems
         // Alert the view
         dao.onDataChange?()
         // Ensure that the table view now displays everything
