@@ -42,6 +42,10 @@ final class ListenLaterViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         if viewModel.items.isEmpty {
             tableView.backgroundView = self.emptyDataView
+        } else {
+            // Show hint for swipe action
+            tableView.cellForRow(at: IndexPath(row: 0, section: 0))?
+                .hintSwipeAction(swipeActionColor: .red)
         }
     }
 

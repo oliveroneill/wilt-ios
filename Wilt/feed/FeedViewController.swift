@@ -153,6 +153,14 @@ final class FeedViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         viewModel.onViewAppeared()
+        // If there's at least one element then we should indicate
+        // that there's a swipe action available
+        if !viewModel.items.isEmpty {
+            let first = IndexPath(row: 0, section: 0)
+            tableView.cellForRow(at: first)?.hintSwipeAction(
+                swipeActionColor: swipeColor(for: first)
+            )
+        }
     }
 
     override func tableView(_ tableView: UITableView,
@@ -202,10 +210,15 @@ final class FeedViewController: UITableViewController {
             }
             $2(true)
         }
-        let lightBlue = UIColor(red: 0, green: 0.5, blue: 1, alpha: 1)
-        action.backgroundColor = isStarred ? .gray : lightBlue
+        action.backgroundColor = swipeColor(for: indexPath)
         let configuration = UISwipeActionsConfiguration(actions: [action])
         return configuration
+    }
+
+    func swipeColor(for indexPath: IndexPath) -> UIColor {
+        let isStarred = viewModel.items[indexPath.row].isStarred
+        let lightBlue = UIColor(red: 0, green: 0.5, blue: 1, alpha: 1)
+        return isStarred ? .gray : lightBlue
     }
 }
 
