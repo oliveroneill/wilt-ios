@@ -4,13 +4,11 @@ import XCTest
 
 final class ListenLaterViewModelTest: XCTestCase {
     private var viewModel: ListenLaterViewModel!
-    private var exp: XCTestExpectation!
+    private var dao: FakeListenLaterDao!
 
     override func setUp() {
-        viewModel = ListenLaterViewModel(
-            dao: FakeListenLaterDao(items: FakeData.listenLaterItems)
-        )
-        exp = expectation(description: "Should receive view update")
+        dao = FakeListenLaterDao(items: FakeData.listenLaterItems)
+        viewModel = ListenLaterViewModel(dao: dao)
     }
 
     func testItems() {
@@ -50,14 +48,10 @@ final class ListenLaterViewModelTest: XCTestCase {
         ]
         viewModel = ListenLaterViewModel(dao: FakeListenLaterDao(items: items))
         XCTAssertEqual(expected, viewModel.items)
-        // We need to fulfill the expectation since we declare it in setUp
-        // A small sacrifice so that I don't have to redeclare it in all of the
-        // other tests
-        exp.fulfill()
-        waitForExpectations(timeout: 1) {_ in}
     }
 
     func testOnRowTapped() {
+        let exp = expectation(description: "Should trigger open")
         let index = 8
         viewModel = ListenLaterViewModel(
             dao: FakeListenLaterDao(items: FakeData.listenLaterItems)
@@ -78,6 +72,20 @@ final class ListenLaterViewModelTest: XCTestCase {
         let delegate = ListeningDelegate(index: index, expectation: exp)
         viewModel.delegate = delegate
         viewModel.onRowTapped(rowIndex: index)
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnDeletePressed() {
+        let exp = expectation(description: "Should trigger delete")
+        dao.onDelete = {
+            XCTAssertEqual(FakeData.listenLaterItems[3].name, $0)
+            exp.fulfill()
+        }
+        viewModel.onDeletePressed(rowIndex: 3)
         waitForExpectations(timeout: 1) {
             if let error = $0 {
                 XCTFail("Unexpected error: \(error)")

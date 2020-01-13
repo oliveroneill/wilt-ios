@@ -204,7 +204,8 @@ final class FeedViewControllerTest: KIFTestCase {
         setupController()
         tester().waitForAnimationsToFinish()
         let exp = expectation(description: "Should trigger insert")
-        listenLaterDao.onInsert = { _ in
+        listenLaterDao.onInsert = {
+            XCTAssertEqual(FakeData.listenLaterItems[0], $0)
             exp.fulfill()
         }
         tester().swipeRow(
@@ -232,8 +233,9 @@ final class FeedViewControllerTest: KIFTestCase {
     func testOnRowUnstarred() {
         setupController()
         tester().waitForAnimationsToFinish()
-        let exp = expectation(description: "Should trigger insert")
-        listenLaterDao.onDelete = { _ in
+        let exp = expectation(description: "Should trigger delete")
+        listenLaterDao.onDelete = {
+            XCTAssertEqual(FakeData.listenLaterItems[3].name, $0)
             exp.fulfill()
         }
         tester().swipeRow(

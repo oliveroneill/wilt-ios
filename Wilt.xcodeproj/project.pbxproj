@@ -392,8 +392,8 @@
 			isa = PBXGroup;
 			children = (
 				7DD271F423C5BBF8006B543F /* ListenLaterStoreTest.swift */,
-				7DD271F223C5BBE7006B543F /* ListenLaterViewModelTest.swift */,
 				7DD271FA23C5E32E006B543F /* ListenLaterViewControllerTest.swift */,
+				7DD271F223C5BBE7006B543F /* ListenLaterViewModelTest.swift */,
 			);
 			path = listenlater;
 			sourceTree = "<group>";

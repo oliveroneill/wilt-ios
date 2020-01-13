@@ -18,10 +18,16 @@ final class ListenLaterViewController: UITableViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         ListenLaterArtistCell.register(tableView: tableView)
-        viewModel.onRowsUpdated = {
+        viewModel.onRowDeleted = { rowIndex in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.tableView.reloadData()
+                // Update the row that's been deleted
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(
+                    at: [IndexPath(row: rowIndex, section: 0)],
+                    with: .left
+                )
+                self.tableView.endUpdates()
                 if self.viewModel.items.isEmpty {
                     self.tableView.backgroundView = self.emptyDataView
                 }
@@ -67,5 +73,17 @@ final class ListenLaterViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.onRowTapped(rowIndex: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let title = "listen_later_undo_action_title".localized
+        let action = UIContextualAction(style: .normal, title: title) {
+            self.viewModel.onDeletePressed(rowIndex: indexPath.row)
+            $2(true)
+        }
+        action.backgroundColor = .red
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
     }
 }

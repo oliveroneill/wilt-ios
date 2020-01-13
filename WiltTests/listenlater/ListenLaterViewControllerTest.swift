@@ -9,16 +9,18 @@ final class ListenLaterViewControllerTest: KIFTestCase {
     private var window: UIWindow!
     private var controller: ListenLaterViewController!
     private var viewModel: ListenLaterViewModel!
-    
+    private var dao: FakeListenLaterDao!
+
 
     /// Seup the controller under test. By default the store has a bunch of random data in it.
     ///
     /// - Parameters:
     ///   - dao: The database access object for the listen later store
-    private func setupController(dao: ListenLaterDao = FakeListenLaterDao(
+    private func setupController(dao: FakeListenLaterDao = FakeListenLaterDao(
         items: FakeData.listenLaterItems + FakeData.listenLaterItems + FakeData.listenLaterItems
         )
     ) {
+        self.dao = dao
         viewModel = ListenLaterViewModel(dao: dao)
         controller = ListenLaterViewController(viewModel: viewModel)
         guard let window = UIApplication.shared.keyWindow else {
@@ -47,33 +49,6 @@ final class ListenLaterViewControllerTest: KIFTestCase {
         expect(self.window).to(haveValidSnapshot())
     }
 
-
-    func testOnRowsUpdated() {
-        // Create a dao that we can change the underlying items and ensure
-        // the view updates
-        final class ChangingItemsDao: ListenLaterDao {
-            var items: [ListenLaterArtist] = []
-            var onDataChange: (() -> Void)?
-            func insert(item: ListenLaterArtist) throws {}
-            func contains(name: String) throws -> Bool { false }
-            func delete(name: String) throws {}
-        }
-        let dao = ChangingItemsDao()
-        // Start with an empty dataset
-        setupController(dao: dao)
-        tester().waitForAnimationsToFinish()
-        // Change the dao to now display some data
-        dao.items = FakeData.listenLaterItems
-        // Alert the view
-        dao.onDataChange?()
-        // Ensure that the table view now displays everything
-        tester().waitForAnimationsToFinish()
-        controller.tableView.contentOffset = .zero
-        tester().waitForAnimationsToFinish()
-        // expect(self.window).to(recordSnapshot())
-        expect(self.window).to(haveValidSnapshot())
-    }
-
     func testOnRowTapped() {
         let index = 8
         setupController()
@@ -97,6 +72,36 @@ final class ListenLaterViewControllerTest: KIFTestCase {
         tester().tapRow(
             at: IndexPath(row: index, section: 0),
             inTableViewWithAccessibilityIdentifier: "listen_later_table_view"
+        )
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnRowDeleted() {
+        setupController()
+        tester().waitForAnimationsToFinish()
+        let exp = expectation(description: "Should trigger delete")
+        dao.onDelete = {
+            XCTAssertEqual(FakeData.listenLaterItems[0].name, $0)
+            exp.fulfill()
+        }
+        tester().swipeRow(
+            at: IndexPath(row: 0, section: 0),
+            in: controller.tableView,
+            in: .left
+        )
+        tester().waitForAnimationsToFinish()
+        // This is a hack because the UIContextualAction is not a tappable
+        // view and I can't figure out how to put an accessibilityLabel on
+        // the actual button :(
+        tester().tapScreen(
+            at: CGPoint(
+                x: UIScreen.main.bounds.size.width - 10,
+                y: UIApplication.shared.statusBarFrame.height + 10
+            )
         )
         waitForExpectations(timeout: 1) {
             if let error = $0 {

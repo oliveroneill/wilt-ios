@@ -14,10 +14,8 @@ final class ListenLaterViewModel {
     )
     weak var delegate: ListenLaterViewModelDelegate?
 
-    /// This is a specific state update when the rows of the list change. This
-    /// needs to be modelled separately since it will reload the views and
-    /// it would be ugly to have a state that does that
-    var onRowsUpdated: (() -> Void)?
+    /// Called when rows are deleted. The argument is the row index that has just been deleted
+    var onRowDeleted: ((Int) -> Void)?
     /// The items that should be displayed on the feed as cells
     var items: [ListenLaterItemViewModel] {
         return dao.items.lazy.map {
@@ -35,13 +33,24 @@ final class ListenLaterViewModel {
     ///   - dao: Where data will be stored and retrieved
     init(dao: ListenLaterDao) {
         self.dao = dao
-        dao.onDataChange = { [weak self] in
-            self?.onRowsUpdated?()
-        }
     }
 
     func onRowTapped(rowIndex: Int) {
         delegate?.open(url: items[rowIndex].externalURL)
+    }
+
+    func onDeletePressed(rowIndex: Int) {
+        backgroundQueue.async { [weak self] in
+            guard let self = self else { return }
+            do {
+                try self.dao.delete(
+                    name: self.items[rowIndex].artistName
+                )
+                self.onRowDeleted?(rowIndex)
+            } catch {
+                // TODO
+            }
+        }
     }
 }
 
