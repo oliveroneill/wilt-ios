@@ -10,12 +10,14 @@ final class FeedViewModelTest: XCTestCase {
         case testError
     }
     private let error = FeedViewModelTestError.testError
+    private var listenLaterDao: FakeListenLaterDao!
 
     override func setUp() {
+        listenLaterDao = FakeListenLaterDao(items: [])
         viewModel = FeedViewModel(
             historyDao: FakeDao(items: FakeData.items),
             api: FakeWiltAPI(),
-            listenLaterDao: FakeListenLaterDao(items: [])
+            listenLaterDao: listenLaterDao
         )
         exp = expectation(description: "Should receive view update")
     }
@@ -553,6 +555,24 @@ final class FeedViewModelTest: XCTestCase {
         // A small sacrifice so that I don't have to redeclare it in all of the
         // other tests
         exp.fulfill()
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowStarred() {
+        listenLaterDao.onInsert = {
+            XCTAssertEqual(FakeData.listenLaterItems[2], $0)
+            self.exp.fulfill()
+        }
+        viewModel.onRowStarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowUnstarred() {
+        listenLaterDao.onDelete = {
+            XCTAssertEqual(FakeData.listenLaterItems[2].name, $0)
+            self.exp.fulfill()
+        }
+        viewModel.onRowUnstarred(rowIndex: 2)
         waitForExpectations(timeout: 1) {_ in}
     }
 }

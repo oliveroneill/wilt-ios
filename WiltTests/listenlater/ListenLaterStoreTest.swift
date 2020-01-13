@@ -5,13 +5,7 @@ import CoreData
 
 final class ListenLaterStoreTest: XCTestCase {
     private lazy var expectedItems: [ListenLaterArtist] = {
-        FakeData.items.map {
-            ListenLaterArtist(
-                name: $0.topArtist,
-                externalURL: $0.externalURL,
-                imageURL: $0.imageURL
-            )
-        }.sorted {
+        FakeData.listenLaterItems.sorted {
             $0.name < $1.name
         }
     }()
@@ -125,5 +119,14 @@ final class ListenLaterStoreTest: XCTestCase {
     func testContains() {
         XCTAssert((try? store.contains(name: expectedItems[3].name)) ?? false)
         XCTAssertFalse((try? store.contains(name: "Random name missing")) ?? true)
+    }
+
+    func testDelete() {
+        do {
+            try store.delete(name: expectedItems[3].name)
+        } catch {
+            XCTFail()
+        }
+        XCTAssertFalse((try? store.contains(name: expectedItems[3].name)) ?? true)
     }
 }

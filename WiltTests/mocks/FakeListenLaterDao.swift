@@ -2,7 +2,8 @@
 
 final class FakeListenLaterDao: ListenLaterDao {
     var items: [ListenLaterArtist]
-    var insertCalls = [ListenLaterArtist]()
+    var onInsert: ((ListenLaterArtist) -> Void)?
+    var onDelete: ((String) -> Void)?
 
     init(items: [ListenLaterArtist]) {
         self.items = items
@@ -10,12 +11,14 @@ final class FakeListenLaterDao: ListenLaterDao {
 
     var onDataChange: (() -> Void)?
     func insert(item: ListenLaterArtist) throws {
-        insertCalls.append(item)
+        onInsert?(item)
     }
 
     func contains(name: String) throws -> Bool {
         items.contains { $0.name == name }
     }
 
-    func delete(name: String) throws {}
+    func delete(name: String) throws {
+        onDelete?(name)
+    }
 }

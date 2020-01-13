@@ -41,6 +41,10 @@ protocol ListenLaterDao: class {
     func delete(name: String) throws
 }
 
+enum ListenLaterStoreError: Error {
+    case unexpectedUnfinishedOperation
+}
+
 /// An implementation of ListenLaterDao using CoreData and
 /// NSFetchedResultsController
 final class ListenLaterStore: NSObject, ListenLaterDao {
@@ -69,7 +73,7 @@ final class ListenLaterStore: NSObject, ListenLaterDao {
         return fetchedResultsController
     }()
 
-    /// The items in cache. These will be read out in batches of 10
+    /// The items stored for later listening. These will be read out in batches of 10
     var items: [ListenLaterArtist] {
         return fetchedResultsController.fetchedObjects!.lazy.map { $0.toData() }
     }
@@ -94,17 +98,6 @@ final class ListenLaterStore: NSObject, ListenLaterDao {
         updateContext.performAndWait {
             do {
                 try store(item: item)
-            } catch let error as NSError {
-                insertError = NSError(
-                    domain: error.domain,
-                    code: error.code,
-                    // Store as string so that we don't have to worry about
-                    // thread-safety
-                    userInfo: ["error": "\(error.userInfo)"]
-                )
-            }
-            // Independently save, so that this will happen regardless of errors
-            do {
                 try updateContext.save()
             } catch let error as NSError {
                 insertError = NSError(
@@ -149,11 +142,53 @@ final class ListenLaterStore: NSObject, ListenLaterDao {
     }
 
     func contains(name: String) throws -> Bool {
-        try get(name: name) != nil
+        // performAndWait can't throw, so we need to store the error and
+        // throw it at the end
+        var result: Result<Bool, Error>?
+        updateContext.performAndWait {
+            do {
+                result = .success(try get(name: name) != nil)
+            } catch let error as NSError {
+                let queryError = NSError(
+                    domain: error.domain,
+                    code: error.code,
+                    // Store as string so that we don't have to worry about
+                    // thread-safety
+                    userInfo: ["error": "\(error.userInfo)"]
+                )
+                result = .failure(queryError)
+            }
+        }
+        guard let r = result else {
+            throw ListenLaterStoreError.unexpectedUnfinishedOperation
+        }
+        return try r.get()
     }
 
     func delete(name: String) throws {
-        // TODO
+        // performAndWait can't throw, so we need to store the error and
+        // throw it at the end
+        var queryError: Error?
+        updateContext.performAndWait {
+            do {
+                guard let found = try get(name: name) else {
+                    return
+                }
+                updateContext.delete(found)
+                try updateContext.save()
+            } catch let error as NSError {
+                queryError = NSError(
+                    domain: error.domain,
+                    code: error.code,
+                    // Store as string so that we don't have to worry about
+                    // thread-safety
+                    userInfo: ["error": "\(error.userInfo)"]
+                )
+            }
+        }
+        if let error = queryError {
+            throw error
+        }
     }
 }
 

@@ -103,6 +103,34 @@ final class FeedViewModel {
         loadLaterPage()
     }
 
+    func onRowStarred(rowIndex: Int) {
+        backgroundQueue.async { [weak self] in
+            guard let self = self else { return }
+            do {
+                try self.listenLaterDao.insert(
+                    item: self.items[rowIndex].toListenLaterArtist()
+                )
+                self.onRowsUpdated?()
+            } catch {
+                // TODO
+            }
+        }
+    }
+
+    func onRowUnstarred(rowIndex: Int) {
+        backgroundQueue.async { [weak self] in
+            guard let self = self else { return }
+            do {
+                try self.listenLaterDao.delete(
+                    name: self.items[rowIndex].artistName
+                )
+                self.onRowsUpdated?()
+            } catch {
+                // TODO
+            }
+        }
+    }
+
     private func handleInsertResult(upsertCountResult: Result<Int, Error>,
                                     isItemsEmpty: Bool = false,
                                     onErrorState: FeedViewState = .errorAtTop) {
@@ -211,6 +239,16 @@ final class FeedViewModel {
 protocol FeedViewModelDelegate: class {
     func open(url: URL)
     func loggedOut()
+}
+
+extension FeedItemViewModel {
+    func toListenLaterArtist() -> ListenLaterArtist {
+        return ListenLaterArtist(
+            name: artistName,
+            externalURL: externalURL,
+            imageURL: imageURL
+        )
+    }
 }
 
 extension TopArtistData {

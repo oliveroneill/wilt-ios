@@ -9,6 +9,7 @@ final class FeedViewControllerTest: KIFTestCase {
     private var window: UIWindow!
     private var controller: FeedViewController!
     private var viewModel: FeedViewModel!
+    private var listenLaterDao: FakeListenLaterDao!
     private var api: FakeWiltAPI!
     enum FeedViewControllerTestError: Error {
         case testError
@@ -24,12 +25,13 @@ final class FeedViewControllerTest: KIFTestCase {
     private func setupController(apiResponse: Result<[TopArtistData], Error>? = .success([]),
                                  dao: PlayHistoryDao = FakeDao(items: FakeData.items + FakeData.items + FakeData.items)) {
         api = FakeWiltAPI(topArtistPerWeekAnythingResponse: apiResponse)
+        listenLaterDao = FakeListenLaterDao(
+            items: [FakeData.listenLaterItems[3]]
+        )
         viewModel = FeedViewModel(
             historyDao: dao,
             api: api,
-            listenLaterDao: FakeListenLaterDao(
-                items: [FakeData.listenLaterItems[3]]
-            )
+            listenLaterDao: listenLaterDao
         )
         controller = FeedViewController(viewModel: viewModel)
         guard let window = UIApplication.shared.keyWindow else {
@@ -190,6 +192,66 @@ final class FeedViewControllerTest: KIFTestCase {
         tester().tapRow(
             at: IndexPath(row: index, section: 0),
             inTableViewWithAccessibilityIdentifier: "feed_table_view"
+        )
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnRowStarred() {
+        setupController()
+        tester().waitForAnimationsToFinish()
+        let exp = expectation(description: "Should trigger insert")
+        listenLaterDao.onInsert = { _ in
+            exp.fulfill()
+        }
+        tester().swipeRow(
+            at: IndexPath(row: 0, section: 0),
+            in: controller.tableView,
+            in: .left
+        )
+        tester().waitForAnimationsToFinish()
+        // This is a hack because the UIContextualAction is not a tappable
+        // view and I can't figure out how to put an accessibilityLabel on
+        // the actual button :(
+        tester().tapScreen(
+            at: CGPoint(
+                x: UIScreen.main.bounds.size.width - 10,
+                y: UIApplication.shared.statusBarFrame.height + 10
+            )
+        )
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnRowUnstarred() {
+        setupController()
+        tester().waitForAnimationsToFinish()
+        let exp = expectation(description: "Should trigger insert")
+        listenLaterDao.onDelete = { _ in
+            exp.fulfill()
+        }
+        tester().swipeRow(
+            at: IndexPath(row: 3, section: 0),
+            in: controller.tableView,
+            in: .left
+        )
+        tester().waitForAnimationsToFinish()
+        // Each row has a height of 112 and we're tapping the third element
+        let rowYPosition: CGFloat = 112 * 3
+        // This is a hack because the UIContextualAction is not a tappable
+        // view and I can't figure out how to put an accessibilityLabel on
+        // the actual button :(
+        tester().tapScreen(
+            at: CGPoint(
+                x: UIScreen.main.bounds.size.width - 10,
+                y: UIApplication.shared.statusBarFrame.height + 10 + rowYPosition
+            )
         )
         waitForExpectations(timeout: 1) {
             if let error = $0 {
