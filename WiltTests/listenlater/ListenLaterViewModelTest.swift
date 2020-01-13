@@ -85,7 +85,7 @@ final class ListenLaterViewModelTest: XCTestCase {
             XCTAssertEqual(FakeData.listenLaterItems[3].name, $0)
             exp.fulfill()
         }
-        viewModel.onDeletePressed(rowIndex: 3)
+        viewModel.onDeletePressed(rowIndex: 3) { XCTAssertTrue($0) }
         waitForExpectations(timeout: 1) {
             if let error = $0 {
                 XCTFail("Unexpected error: \(error)")

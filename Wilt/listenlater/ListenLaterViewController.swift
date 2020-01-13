@@ -18,21 +18,6 @@ final class ListenLaterViewController: UITableViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         ListenLaterArtistCell.register(tableView: tableView)
-        viewModel.onRowDeleted = { rowIndex in
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                // Update the row that's been deleted
-                self.tableView.beginUpdates()
-                self.tableView.deleteRows(
-                    at: [IndexPath(row: rowIndex, section: 0)],
-                    with: .left
-                )
-                self.tableView.endUpdates()
-                if self.viewModel.items.isEmpty {
-                    self.tableView.backgroundView = self.emptyDataView
-                }
-            }
-        }
         // This will hide the cell dividers when there's no data
         tableView.tableFooterView = UIView(frame: .zero)
         // Used for KIF testing
@@ -83,7 +68,25 @@ final class ListenLaterViewController: UITableViewController {
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let title = "listen_later_undo_action_title".localized
         let action = UIContextualAction(style: .normal, title: title) {
-            self.viewModel.onDeletePressed(rowIndex: indexPath.row)
+            // Begin tableview modification updates
+            self.tableView.beginUpdates()
+            self.viewModel.onDeletePressed(rowIndex: indexPath.row) { wasSuccessful in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    // If we successfully deleted the row then delete it here
+                    // too
+                    if wasSuccessful {
+                        self.tableView.deleteRows(
+                            at: [IndexPath(row: indexPath.row, section: 0)],
+                            with: .left
+                        )
+                    }
+                    self.tableView.endUpdates()
+                    if self.viewModel.items.isEmpty {
+                        self.tableView.backgroundView = self.emptyDataView
+                    }
+                }
+            }
             $2(true)
         }
         action.backgroundColor = .red

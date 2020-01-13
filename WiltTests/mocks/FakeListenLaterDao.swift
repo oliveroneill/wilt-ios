@@ -19,6 +19,7 @@ final class FakeListenLaterDao: ListenLaterDao {
     }
 
     func delete(name: String) throws {
+        items.removeAll { $0.name == name }
         onDelete?(name)
     }
 }

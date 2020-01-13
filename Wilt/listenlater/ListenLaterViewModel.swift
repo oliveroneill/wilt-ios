@@ -14,8 +14,6 @@ final class ListenLaterViewModel {
     )
     weak var delegate: ListenLaterViewModelDelegate?
 
-    /// Called when rows are deleted. The argument is the row index that has just been deleted
-    var onRowDeleted: ((Int) -> Void)?
     /// The items that should be displayed on the feed as cells
     var items: [ListenLaterItemViewModel] {
         return dao.items.lazy.map {
@@ -39,16 +37,25 @@ final class ListenLaterViewModel {
         delegate?.open(url: items[rowIndex].externalURL)
     }
 
-    func onDeletePressed(rowIndex: Int) {
+    /// Called when a row is indicated to be deleted by a user
+    /// - Parameters:
+    ///   - rowIndex: The index of the row
+    ///   - onDeletionComplete: Called when the row deletion operation is complete, the boolean
+    /// will indicate whether it failed or not. True means succeeded
+    func onDeletePressed(rowIndex: Int, onDeletionComplete: @escaping ((Bool) -> Void)) {
         backgroundQueue.async { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                onDeletionComplete(false)
+                return
+            }
             do {
                 try self.dao.delete(
                     name: self.items[rowIndex].artistName
                 )
-                self.onRowDeleted?(rowIndex)
+                onDeletionComplete(true)
             } catch {
-                // TODO
+                // TODO: actually show the user the error
+                onDeletionComplete(false)
             }
         }
     }

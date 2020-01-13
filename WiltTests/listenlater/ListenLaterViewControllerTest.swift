@@ -17,7 +17,7 @@ final class ListenLaterViewControllerTest: KIFTestCase {
     /// - Parameters:
     ///   - dao: The database access object for the listen later store
     private func setupController(dao: FakeListenLaterDao = FakeListenLaterDao(
-        items: FakeData.listenLaterItems + FakeData.listenLaterItems + FakeData.listenLaterItems
+        items: FakeData.listenLaterItems
         )
     ) {
         self.dao = dao
