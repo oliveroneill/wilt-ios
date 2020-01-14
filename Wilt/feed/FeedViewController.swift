@@ -84,11 +84,12 @@ final class FeedViewController: UITableViewController {
     }
 
     private func reloadData() {
+
         // This transition is necessary to avoid cancelling any running
         // animations that the table view is already doing
         UIView.transition(
             with: self.tableView,
-            duration: 0.1,
+            duration: 0.2,
             options: .transitionCrossDissolve,
             // Reload the table view data
             animations: { [weak self] in self?.tableView.reloadData() },
