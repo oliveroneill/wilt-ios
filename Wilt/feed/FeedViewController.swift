@@ -73,7 +73,7 @@ final class FeedViewController: UITableViewController {
             // To avoid jank from the swipe animation being cut short we
             // need to wait a second. This seems like a hack but I'm not sure
             // how to get around it
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
                 guard let self = self else { return }
                 self.tableView.reloadData()
             }
