@@ -66,7 +66,16 @@ final class FeedViewController: UITableViewController {
         viewModel.onRowsUpdated = {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.reloadData()
+                self.tableView.reloadData()
+            }
+        }
+        viewModel.onStarsUpdated = {
+            // To avoid jank from the swipe animation being cut short we
+            // need to wait a second. This seems like a hack but I'm not sure
+            // how to get around it
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                guard let self = self else { return }
+                self.tableView.reloadData()
             }
         }
         viewModel.onViewUpdate = { [weak self] in
@@ -81,20 +90,6 @@ final class FeedViewController: UITableViewController {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    private func reloadData() {
-
-        // This transition is necessary to avoid cancelling any running
-        // animations that the table view is already doing
-        UIView.transition(
-            with: self.tableView,
-            duration: 0.2,
-            options: .transitionCrossDissolve,
-            // Reload the table view data
-            animations: { [weak self] in self?.tableView.reloadData() },
-            completion: { _ in }
-        )
     }
 
     @objc private func refresh() {

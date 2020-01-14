@@ -559,6 +559,14 @@ final class FeedViewModelTest: XCTestCase {
     }
 
     func testOnRowStarred() {
+        viewModel.onStarsUpdated = {
+            self.exp.fulfill()
+        }
+        viewModel.onRowStarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowStarredTriggersInsert() {
         listenLaterDao.onInsert = {
             XCTAssertEqual(FakeData.listenLaterItems[2], $0)
             self.exp.fulfill()
@@ -568,6 +576,14 @@ final class FeedViewModelTest: XCTestCase {
     }
 
     func testOnRowUnstarred() {
+        viewModel.onStarsUpdated = {
+            self.exp.fulfill()
+        }
+        viewModel.onRowUnstarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowUnstarredTriggersInsert() {
         listenLaterDao.onDelete = {
             XCTAssertEqual(FakeData.listenLaterItems[2].name, $0)
             self.exp.fulfill()

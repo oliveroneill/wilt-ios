@@ -43,6 +43,7 @@ final class FeedViewModel {
     /// needs to be modelled separately since it will reload the views and
     /// it would be ugly to have a state that does that
     var onRowsUpdated: (() -> Void)?
+    var onStarsUpdated: (() -> Void)?
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM yyyy"
@@ -110,7 +111,7 @@ final class FeedViewModel {
                 try self.listenLaterDao.insert(
                     item: self.items[rowIndex].toListenLaterArtist()
                 )
-                self.onRowsUpdated?()
+                self.onStarsUpdated?()
             } catch {
                 // TODO
             }
@@ -124,7 +125,7 @@ final class FeedViewModel {
                 try self.listenLaterDao.delete(
                     name: self.items[rowIndex].artistName
                 )
-                self.onRowsUpdated?()
+                self.onStarsUpdated?()
             } catch {
                 // TODO
             }
