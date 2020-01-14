@@ -35,6 +35,18 @@ final class FeedViewModelTest: XCTestCase {
         }
     }
 
+    func testOnViewAppearedTriggersStarUpdate() {
+        viewModel.onStarsUpdated = {
+            self.exp.fulfill()
+        }
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
     func testItems() {
         let items = [
             TopArtistData(

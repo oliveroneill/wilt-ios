@@ -92,6 +92,9 @@ final class FeedViewModel {
         guard state != .loadingAtTop else {
             return
         }
+        // We must trigger star update in case the stars have changed since
+        // we last saw the page
+        onStarsUpdated?()
         updateState(state: .loadingAtTop)
         loadLaterPage()
     }
