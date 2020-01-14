@@ -12,6 +12,8 @@ final class ListenLaterViewModel {
     private let backgroundQueue = DispatchQueue(
         label: "com.oliveroneill.wilt.ListenLaterViewModel.backgroundQueue"
     )
+    /// Triggered when rows are deleted. The argument to this closure is a list of indexes
+    var onRowsDeleted: (([Int]) -> Void)?
     weak var delegate: ListenLaterViewModelDelegate?
 
     /// The items that should be displayed on the feed as cells
@@ -40,22 +42,16 @@ final class ListenLaterViewModel {
     /// Called when a row is indicated to be deleted by a user
     /// - Parameters:
     ///   - rowIndex: The index of the row
-    ///   - onDeletionComplete: Called when the row deletion operation is complete, the boolean
-    /// will indicate whether it failed or not. True means succeeded
-    func onDeletePressed(rowIndex: Int, onDeletionComplete: @escaping ((Bool) -> Void)) {
+    func onDeletePressed(rowIndex: Int) {
         backgroundQueue.async { [weak self] in
-            guard let self = self else {
-                onDeletionComplete(false)
-                return
-            }
+            guard let self = self else { return }
             do {
                 try self.dao.delete(
                     name: self.items[rowIndex].artistName
                 )
-                onDeletionComplete(true)
+                self.onRowsDeleted?([rowIndex])
             } catch {
-                // TODO: actually show the user the error
-                onDeletionComplete(false)
+                // TODO
             }
         }
     }

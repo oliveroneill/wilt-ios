@@ -81,11 +81,25 @@ final class ListenLaterViewModelTest: XCTestCase {
 
     func testOnDeletePressed() {
         let exp = expectation(description: "Should trigger delete")
+        viewModel.onRowsDeleted = {
+            XCTAssertEqual([3], $0)
+            exp.fulfill()
+        }
+        viewModel.onDeletePressed(rowIndex: 3)
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnDeletePressedTriggersDelete() {
+        let exp = expectation(description: "Should trigger delete")
         dao.onDelete = {
             XCTAssertEqual(FakeData.listenLaterItems[3].name, $0)
             exp.fulfill()
         }
-        viewModel.onDeletePressed(rowIndex: 3) { XCTAssertTrue($0) }
+        viewModel.onDeletePressed(rowIndex: 3)
         waitForExpectations(timeout: 1) {
             if let error = $0 {
                 XCTFail("Unexpected error: \(error)")

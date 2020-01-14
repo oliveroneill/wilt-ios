@@ -16,6 +16,18 @@ final class ListenLaterViewController: UITableViewController {
     init(viewModel: ListenLaterViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        viewModel.onRowsDeleted = { rows in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.tableView.deleteRows(
+                    at: rows.map { IndexPath(row: $0, section: 0) },
+                    with: .left
+                )
+                if self.viewModel.items.isEmpty {
+                    self.tableView.backgroundView = self.emptyDataView
+                }
+            }
+        }
         ListenLaterArtistCell.register(tableView: tableView)
         // This will hide the cell dividers when there's no data
         tableView.tableFooterView = UIView(frame: .zero)
@@ -71,25 +83,7 @@ final class ListenLaterViewController: UITableViewController {
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let title = "listen_later_undo_action_title".localized
         let action = UIContextualAction(style: .normal, title: title) {
-            // Begin tableview modification updates
-            self.tableView.beginUpdates()
-            self.viewModel.onDeletePressed(rowIndex: indexPath.row) { wasSuccessful in
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    // If we successfully deleted the row then delete it here
-                    // too
-                    if wasSuccessful {
-                        self.tableView.deleteRows(
-                            at: [IndexPath(row: indexPath.row, section: 0)],
-                            with: .left
-                        )
-                    }
-                    self.tableView.endUpdates()
-                    if self.viewModel.items.isEmpty {
-                        self.tableView.backgroundView = self.emptyDataView
-                    }
-                }
-            }
+            self.viewModel.onDeletePressed(rowIndex: indexPath.row)
             $2(true)
         }
         action.backgroundColor = .red

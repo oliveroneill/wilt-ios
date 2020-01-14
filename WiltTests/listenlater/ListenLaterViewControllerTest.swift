@@ -109,4 +109,27 @@ final class ListenLaterViewControllerTest: KIFTestCase {
             }
         }
     }
+
+    func testOnRowDeletedSnapshot() {
+        setupController()
+        tester().waitForAnimationsToFinish()
+        tester().swipeRow(
+            at: IndexPath(row: 0, section: 0),
+            in: controller.tableView,
+            in: .left
+        )
+        tester().waitForAnimationsToFinish()
+        // This is a hack because the UIContextualAction is not a tappable
+        // view and I can't figure out how to put an accessibilityLabel on
+        // the actual button :(
+        tester().tapScreen(
+            at: CGPoint(
+                x: UIScreen.main.bounds.size.width - 10,
+                y: UIApplication.shared.statusBarFrame.height + 10
+            )
+        )
+        tester().waitForAnimationsToFinish()
+        // expect(self.window).to(recordSnapshot())
+        expect(self.window).to(haveValidSnapshot())
+    }
 }
