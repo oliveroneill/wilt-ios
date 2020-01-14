@@ -21,7 +21,6 @@ final class FeedViewController: UITableViewController {
         label.font = UIFont.systemFont(ofSize: 21)
         label.textAlignment = .center
         label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "empty_data_text".localized
         label.numberOfLines = 0
         return label
