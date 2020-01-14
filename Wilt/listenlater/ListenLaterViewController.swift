@@ -8,7 +8,6 @@ final class ListenLaterViewController: UITableViewController {
         label.font = UIFont.systemFont(ofSize: 21)
         label.textAlignment = .center
         label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "listen_later_empty_data_text".localized
         label.numberOfLines = 0
         return label
@@ -28,6 +27,9 @@ final class ListenLaterViewController: UITableViewController {
         if viewModel.items.isEmpty {
             tableView.backgroundView = self.emptyDataView
         } else {
+            // We must delete the background view since there are cells
+            // available
+            tableView.backgroundView = nil
             tableView.reloadData()
             // Show hint for swipe action
             tableView.cellForRow(at: IndexPath(row: 0, section: 0))?
