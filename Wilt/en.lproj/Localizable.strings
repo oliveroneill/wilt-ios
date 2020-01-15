@@ -7,6 +7,8 @@
 "loading_txt" = "Loading your favourite artists...";
 "empty_data_text" = "Check back later! We've just started tracking your favourite artists and don't have enough data yet";
 "feed_error_text" = "An error occurred. Tap to retry";
+"feed_error_footer_text" = "An error occurred loading older records";
+"feed_error_header_text" = "An error occurred loading newer records";
 "feed_title" = "Your Top Artists Per Week";
 "profile_title" = "About You";
 "top_artist_long_term_text" = "Your favourite artist ever";
@@ -30,3 +32,5 @@ Spotify play history and user info will be stored and periodically updated. To o
 "about_title_text" = "About Wilt";
 "logout_title_text" = "User Settings";
 "settings_title_text" = "Wilt Settings";
+"onboarding_view_accessibility_text" = "Onboarding screen";
+"about_cell_accessibility_text" = "View explaining what the app is for";

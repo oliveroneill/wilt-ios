@@ -38,19 +38,22 @@ final class OnboardingViewControllerTest: KIFTestCase {
 
     func testSecondScreen() {
         tester().waitForAnimationsToFinish()
-        tester().swipeView(withAccessibilityLabel: "onboarding_view", in: .left)
+        tester().swipeView(
+            withAccessibilityLabel: "onboarding_view_accessibility_text".localized,
+            in: .left
+        )
         tester().waitForAnimationsToFinish()
         // expect(self.controller.view).to(recordSnapshot())
         expect(self.controller.view).to(haveValidSnapshot())
     }
 
     func testSignInButton() {
-        tester().tapView(withAccessibilityLabel: "sign_in_button")
+        tester().tapView(withAccessibilityLabel: "sign_in_text".localized)
         XCTAssertEqual(1, authoriser.authoriseCallCount)
     }
 
     func testAuthenticatingScreen() {
-        tester().tapView(withAccessibilityLabel: "sign_in_button")
+        tester().tapView(withAccessibilityLabel: "sign_in_text".localized)
         // expect(self.controller.view).to(recordSnapshot())
         expect(self.controller.view).to(haveValidSnapshot())
     }
@@ -60,7 +63,7 @@ final class OnboardingViewControllerTest: KIFTestCase {
             authoriseResult: .failure(FakeError.testError)
         )
         setupController(authoriser: mockAuthoriser)
-        tester().tapView(withAccessibilityLabel: "sign_in_button")
+        tester().tapView(withAccessibilityLabel: "sign_in_text".localized)
         // expect(self.controller.view).to(recordSnapshot())
         expect(self.controller.view).to(haveValidSnapshot())
     }

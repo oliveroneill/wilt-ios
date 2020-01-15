@@ -14,7 +14,7 @@ final class SettingsViewController: UITableViewController {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.addSubview(aboutLabel)
         // Used for KIF testing
-        cell.accessibilityLabel = "about_cell"
+        cell.accessibilityLabel = "about_cell_accessibility_text".localized
         return cell
     }()
 
@@ -29,7 +29,7 @@ final class SettingsViewController: UITableViewController {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.addSubview(logOutLabel)
         // Used for KIF testing
-        cell.accessibilityLabel = "logout_cell"
+        cell.accessibilityLabel = "logout_text".localized
         return cell
     }()
     weak var delegate: SettingsViewControllerDelegate?

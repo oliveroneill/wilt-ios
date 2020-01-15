@@ -141,7 +141,9 @@ final class FeedViewControllerTest: KIFTestCase {
 
     func testErrorAtTopRetry() {
         setupController(apiResponse: .failure(error))
-        tester().tapView(withAccessibilityLabel: "feed_error_header_button")
+        tester().tapView(
+            withAccessibilityLabel: "feed_error_header_text".localized
+        )
         XCTAssertEqual(2, api.topArtistsPerWeekCalls.count)
     }
 
@@ -158,7 +160,9 @@ final class FeedViewControllerTest: KIFTestCase {
         )
         tester().waitForAnimationsToFinish()
         sleep(5)
-        tester().tapView(withAccessibilityLabel: "feed_error_footer_button")
+        tester().tapView(
+            withAccessibilityLabel: "feed_error_footer_text".localized
+        )
         // It will load the top, then load the bottom and then retry. Therefore
         // 3
         XCTAssertEqual(3, api.topArtistsPerWeekCalls.count)

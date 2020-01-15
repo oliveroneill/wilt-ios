@@ -69,7 +69,7 @@ final class ProfileCardView: MDCCardCollectionCell {
     private lazy var retryButton: UIButton = {
         let button = UIButton(frame: .zero)
         // Used for KIF testing
-        button.accessibilityLabel = "profile_retry_button"
+        button.accessibilityLabel = "profile_card_retry_text".localized
         button.setTitle("profile_card_retry_text".localized, for: .normal)
         button.titleLabel?.textColor = .white
         let darkBlue = UIColor(red: 0, green: 0.41, blue: 0.89, alpha: 1)

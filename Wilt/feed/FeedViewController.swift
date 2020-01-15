@@ -48,13 +48,13 @@ final class FeedViewController: UITableViewController {
     private lazy var errorFooterView: UIButton = {
         let button = errorButton
         // Used for KIF testing
-        button.accessibilityLabel = "feed_error_footer_button"
+        button.accessibilityLabel = "feed_error_footer_text".localized
         return button
     }()
     private lazy var errorHeaderView: UIButton = {
         let button = errorButton
         // Used for KIF testing
-        button.accessibilityLabel = "feed_error_header_button"
+        button.accessibilityLabel = "feed_error_header_text".localized
         return button
     }()
 

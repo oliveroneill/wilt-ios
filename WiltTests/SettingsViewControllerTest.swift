@@ -49,14 +49,16 @@ final class SettingsViewControllerTest: KIFTestCase {
     func testLogOut() {
         tester().waitForAnimationsToFinish()
         controller.delegate = testDelegate
-        tester().tapView(withAccessibilityLabel: "logout_cell")
+        tester().tapView(withAccessibilityLabel: "logout_text".localized)
         XCTAssertEqual(1, testDelegate.logoutCalls)
     }
 
     func testContactUs() {
         tester().waitForAnimationsToFinish()
         controller.delegate = testDelegate
-        tester().tapView(withAccessibilityLabel: "about_cell")
+        tester().tapView(
+            withAccessibilityLabel: "about_cell_accessibility_text".localized
+        )
         XCTAssertEqual(1, testDelegate.contactUsCalls)
     }
 
