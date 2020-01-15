@@ -6,7 +6,7 @@ final class PlayHistoryPagerTest: XCTestCase {
     private let pageSize = 11
     private var pager: PlayHistoryPager!
     private var api: FakeWiltAPI!
-    private var dao: FakeDao!
+    private var dao: FakePlayHistoryDao!
     enum PlayHistoryPagerTestError: Error {
         case testError
     }
@@ -14,7 +14,7 @@ final class PlayHistoryPagerTest: XCTestCase {
 
     override func setUp() {
         api = FakeWiltAPI()
-        dao = FakeDao(items: [])
+        dao = FakePlayHistoryDao(items: [])
         pager = PlayHistoryPager(api: api, dao: dao, pageSize: pageSize)
     }
 

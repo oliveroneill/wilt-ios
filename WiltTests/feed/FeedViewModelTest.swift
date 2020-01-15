@@ -13,7 +13,7 @@ final class FeedViewModelTest: XCTestCase {
 
     override func setUp() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: FakeData.items),
+            dao: FakePlayHistoryDao(items: FakeData.items),
             api: FakeWiltAPI()
         )
         exp = expectation(description: "Should receive view update")
@@ -83,7 +83,7 @@ final class FeedViewModelTest: XCTestCase {
             ),
         ]
         viewModel = FeedViewModel(
-            dao: FakeDao(items: items),
+            dao: FakePlayHistoryDao(items: items),
             api: FakeWiltAPI()
         )
         XCTAssertEqual(expected, viewModel.items)
@@ -148,7 +148,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testonRetryHeaderPressedEmpty() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
         )
         viewModel.onViewUpdate = {
@@ -166,7 +166,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnScrolledToBottomEmpty() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
         )
         viewModel.onViewUpdate = {
@@ -184,7 +184,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnRetryFooterPressedEmpty() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
         )
         viewModel.onViewUpdate = {
@@ -202,7 +202,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewAppearedEmpty() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
         )
         viewModel.onViewUpdate = {
@@ -220,7 +220,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testRefreshEmpty() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
         )
         viewModel.onViewUpdate = {
@@ -238,7 +238,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testRefreshDisplaysRowsAfterAPICall() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success(FakeData.items))
         )
         viewModel.onViewUpdate = {
@@ -256,7 +256,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testonRetryHeaderPressedError() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
@@ -276,7 +276,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnScrolledToBottomError() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: FakeData.items),
+            dao: FakePlayHistoryDao(items: FakeData.items),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
@@ -296,7 +296,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnRetryFooterPressedError() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: FakeData.items),
+            dao: FakePlayHistoryDao(items: FakeData.items),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
@@ -316,7 +316,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewAppearedError() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
@@ -336,7 +336,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testRefreshError() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
@@ -356,7 +356,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewAppearedDisplayingRows() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: FakeData.items),
+            dao: FakePlayHistoryDao(items: FakeData.items),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .success([])
             )
@@ -376,7 +376,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewAppearedLoggedOut() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(WiltAPIError.loggedOut)
             )
@@ -421,7 +421,7 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewDisappearedWhenNotLoading() {
         viewModel = FeedViewModel(
-            dao: FakeDao(items: []),
+            dao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
             )
@@ -453,7 +453,7 @@ final class FeedViewModelTest: XCTestCase {
     func testOnRowTapped() {
         let index = 8
         viewModel = FeedViewModel(
-            dao: FakeDao(items: FakeData.items),
+            dao: FakePlayHistoryDao(items: FakeData.items),
             api: FakeWiltAPI()
         )
         final class ListeningDelegate: FeedViewModelDelegate {
