@@ -42,6 +42,7 @@ final class FeedViewControllerTest: KIFTestCase {
         window.makeKeyAndVisible()
         self.window = window
         tester().waitForAnimationsToFinish()
+        tester().waitForAnimationsToFinish()
     }
 
     func testDisplayRows() {
