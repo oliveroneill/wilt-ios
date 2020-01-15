@@ -47,7 +47,7 @@ final class OnboardingViewController: UIViewController {
     override func loadView() {
         super.loadView()
         // Used for testing with KIF
-        view.accessibilityLabel = "onboarding_view"
+        view.accessibilityLabel = "onboarding_view_accessibility_text".localized
         setupOnboardingView()
         setupSignUpButton()
         setupLoadingSpinner()
@@ -169,7 +169,7 @@ final class OnboardingViewController: UIViewController {
 
     private func setupSignUpButtonAppearance() {
         // Used for testing with KIF
-        signUpButton.accessibilityLabel = "sign_in_button"
+        signUpButton.accessibilityLabel = "sign_in_text".localized
         signUpButton.titleLabel?.textColor = .white
         // Set background colour
         let darkBlue = UIColor(red: 0, green: 0.41, blue: 0.89, alpha: 1)

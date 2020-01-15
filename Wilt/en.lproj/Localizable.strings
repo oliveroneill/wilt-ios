@@ -7,6 +7,8 @@
 "loading_txt" = "Loading your favourite artists...";
 "empty_data_text" = "Check back later! We've just started tracking your favourite artists and don't have enough data yet";
 "feed_error_text" = "An error occurred. Tap to retry";
+"feed_error_footer_text" = "An error occurred loading older records";
+"feed_error_header_text" = "An error occurred loading newer records";
 "feed_title" = "Your Top Artists Per Week";
 "profile_title" = "About You";
 "top_artist_long_term_text" = "Your favourite artist ever";
@@ -36,3 +38,5 @@ Spotify play history and user info will be stored and periodically updated. To o
 Go to your feed and drag from the right to star artists you want to listen to";
 "listen_later_action_title" = "Remind me about this later";
 "listen_later_undo_action_title" = "Forget about this one";
+"onboarding_view_accessibility_text" = "Onboarding screen";
+"about_cell_accessibility_text" = "View explaining what the app is for";

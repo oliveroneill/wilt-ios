@@ -23,7 +23,7 @@ final class FeedViewControllerTest: KIFTestCase {
     ///   - apiResponse: response to be returned to topArtistPerWeek API call
     ///   - dao: The database access object for the play history cache
     private func setupController(apiResponse: Result<[TopArtistData], Error>? = .success([]),
-                                 dao: PlayHistoryDao = FakeDao(items: FakeData.items + FakeData.items + FakeData.items)) {
+                                 dao: PlayHistoryDao = FakePlayHistoryDao(items: FakeData.items + FakeData.items + FakeData.items)) {
         api = FakeWiltAPI(topArtistPerWeekAnythingResponse: apiResponse)
         listenLaterDao = FakeListenLaterDao(
             items: [FakeData.listenLaterItems[3]]
@@ -89,7 +89,7 @@ final class FeedViewControllerTest: KIFTestCase {
     }
 
     func testEmptyData() {
-        setupController(dao: FakeDao(items: []))
+        setupController(dao: FakePlayHistoryDao(items: []))
         tester().waitForAnimationsToFinish()
         // expect(self.window).to(recordSnapshot())
         expect(self.window).to(haveValidSnapshot())
@@ -147,7 +147,9 @@ final class FeedViewControllerTest: KIFTestCase {
 
     func testErrorAtTopRetry() {
         setupController(apiResponse: .failure(error))
-        tester().tapView(withAccessibilityLabel: "feed_error_header_button")
+        tester().tapView(
+            withAccessibilityLabel: "feed_error_header_text".localized
+        )
         XCTAssertEqual(2, api.topArtistsPerWeekCalls.count)
     }
 
@@ -164,7 +166,9 @@ final class FeedViewControllerTest: KIFTestCase {
         )
         tester().waitForAnimationsToFinish()
         sleep(5)
-        tester().tapView(withAccessibilityLabel: "feed_error_footer_button")
+        tester().tapView(
+            withAccessibilityLabel: "feed_error_footer_text".localized
+        )
         // It will load the top, then load the bottom and then retry. Therefore
         // 3
         XCTAssertEqual(3, api.topArtistsPerWeekCalls.count)

@@ -104,7 +104,9 @@ final class ProfileViewControllerTest: KIFTestCase {
         tester().waitForAnimationsToFinish()
         // Stop the error from happening again
         api.topTrackResult = [:]
-        tester().tapView(withAccessibilityLabel: "profile_retry_button")
+        tester().tapView(
+            withAccessibilityLabel: "profile_card_retry_text".localized
+        )
         // expect(self.window).to(recordSnapshot())
         expect(self.window).to(haveValidSnapshot())
     }
