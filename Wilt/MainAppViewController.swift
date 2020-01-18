@@ -15,6 +15,21 @@ final class MainAppViewController: UITabBarController {
     ]()
     private var container: NSPersistentContainer
 
+    private lazy var listenLaterTabItem: UITabBarItem = {
+        let item = UITabBarItem(
+            title: "listen_later_tab_title".localized,
+            image: nil,
+            selectedImage: nil
+        )
+        item.setIcon(
+            icon: .emoji(.clock),
+            textColor: .lightGray,
+            selectedTextColor: view.tintColor
+        )
+        item.tag = 0
+        return item
+    }()
+
     private lazy var profileTabItem: UITabBarItem = {
         let item = UITabBarItem(
             title: "profile_tab_title".localized,
@@ -26,7 +41,7 @@ final class MainAppViewController: UITabBarController {
             textColor: .lightGray,
             selectedTextColor: view.tintColor
         )
-        item.tag = 0
+        item.tag = 1
         return item
     }()
 
@@ -38,21 +53,6 @@ final class MainAppViewController: UITabBarController {
         )
         item.setIcon(
             icon: .emoji(.newspaper),
-            textColor: .lightGray,
-            selectedTextColor: view.tintColor
-        )
-        item.tag = 1
-        return item
-    }()
-
-    private lazy var listenLaterTabItem: UITabBarItem = {
-        let item = UITabBarItem(
-            title: "listen_later_tab_title".localized,
-            image: nil,
-            selectedImage: nil
-        )
-        item.setIcon(
-            icon: .emoji(.clock),
             textColor: .lightGray,
             selectedTextColor: view.tintColor
         )
@@ -144,6 +144,14 @@ final class MainAppViewController: UITabBarController {
                            api: WiltAPI) throws {
         tabs = [
             (
+                controller: try setupListenLaterController(container: container),
+                title: "listen_later_title".localized,
+                leftBarButton: UIBarButtonItem(
+                    barButtonSystemItem: .add, target: self,
+                    action: #selector(onAddArtistButtonPressed)
+                )
+            ),
+            (
                 controller: setupProfileController(
                     container: container,
                     api: api
@@ -159,16 +167,9 @@ final class MainAppViewController: UITabBarController {
                 title: "feed_title".localized,
                 leftBarButton: nil
             ),
-            (
-                controller: try setupListenLaterController(container: container),
-                title: "listen_later_title".localized,
-                leftBarButton: UIBarButtonItem(
-                    barButtonSystemItem: .add, target: self,
-                    action: #selector(onAddArtistButtonPressed)
-                )
-            ),
         ]
         title = tabs[0].title
+        navigationItem.leftBarButtonItem = tabs[0].leftBarButton
         viewControllers = tabs.map { $0.controller }
     }
 
