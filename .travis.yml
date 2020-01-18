@@ -6,10 +6,11 @@ xcode_scheme: Wilt
 xcode_destination: platform=iOS Simulator,name=iPhone 11
 
 env:
-  # To fool Cocoapods keys
-  - SpotifyClientID=notarealspotifyclientID
-  - SpotifyRedirectURI=http://notarealURL.thisisjustatest.com/faking
-  - SpotifyAuthTokenURL=http://notarealURL.thisisjustatest.com/faking
+  global:
+    # To fool Cocoapods keys
+    - SpotifyClientID=notarealspotifyclientID
+    - SpotifyRedirectURI=http://notarealURL.thisisjustatest.com/faking
+    - SpotifyAuthTokenURL=http://notarealURL.thisisjustatest.com/faking
 
 before_install:
 - gem install cocoapods-keys
