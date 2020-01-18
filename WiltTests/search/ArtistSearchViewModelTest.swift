@@ -83,7 +83,27 @@ final class ArtistSearchViewModelTest: XCTestCase {
             exp.fulfill()
         }
         viewModel.onSearchTextChanged(text: "random_band")
-        viewModel.onSearchTextChanged(text: "a_different band")
+        // Wait for 0.3 seconds to get passed the debounce period
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.viewModel.onSearchTextChanged(text: "a_different band")
+        }
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnSearchTextChangedDebounce() {
+        let exp = expectation(description: "Should insert item")
+        let expected = "a_different band"
+        api.onSearch = {
+            XCTAssertEqual(expected, $0)
+            exp.fulfill()
+            return .success([])
+        }
+        viewModel.onSearchTextChanged(text: "random_band")
+        viewModel.onSearchTextChanged(text: expected)
         waitForExpectations(timeout: 1) {
             if let error = $0 {
                 XCTFail("Unexpected error: \(error)")

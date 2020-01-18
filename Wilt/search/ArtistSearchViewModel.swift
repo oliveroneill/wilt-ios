@@ -19,6 +19,8 @@ final class ArtistSearchViewModel {
         }
     }
     var onStateChange: ((ArtistSearchState) -> Void)?
+    /// Used to keep track of what's waiting to be run based on the debounce of the search
+    private var currentWorkItemForDebouncing: DispatchWorkItem?
 
     /// Create a view model for the search results controller
     ///
@@ -59,6 +61,13 @@ final class ArtistSearchViewModel {
     }
 
     func onSearchTextChanged(text: String) {
+        debounce { [weak self] in
+            guard let self = self else { return }
+            self.search(text: text)
+        }
+    }
+
+    private func search(text: String) {
         guard !text.isEmpty else { return }
         // Change state to loading
         currentState = .loading
@@ -85,6 +94,19 @@ final class ArtistSearchViewModel {
                 self.currentState = .loaded(resultData)
             }
         }
+    }
+
+    /// Debounce the current action and only send it if it's been 0.2 seconds since the last
+    /// action
+    /// - Parameter callback: The action to perform
+    private func debounce(callback: @escaping (() -> Void)) {
+        // Cancel whatever we were currently waiting for since this new search
+        // is more up to date
+        currentWorkItemForDebouncing?.cancel()
+        let workItem = DispatchWorkItem(block: callback)
+        // Wait 0.2 seconds before searching
+        backgroundQueue.asyncAfter(deadline: .now() + 0.2, execute: workItem)
+        currentWorkItemForDebouncing = workItem
     }
 }
 
