@@ -28,6 +28,21 @@ final class ListenLaterViewController: UITableViewController {
                 }
             }
         }
+        viewModel.onDeleteError = { message in
+            DispatchQueue.main.async { [weak self] in
+                let alert = UIAlertController(
+                    title: "Uh oh!",
+                    message: message,
+                    preferredStyle: .alert
+                )
+                alert.addAction(
+                    UIAlertAction(title: "OK", style: .default) { _ in
+                        alert.dismiss(animated: true)
+                    }
+                )
+                self?.present(alert, animated: true, completion: nil)
+            }
+        }
         ArtistTableViewCell.register(tableView: tableView)
         // This will hide the cell dividers when there's no data
         tableView.tableFooterView = UIView(frame: .zero)

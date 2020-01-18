@@ -107,4 +107,24 @@ final class ListenLaterViewModelTest: XCTestCase {
             }
         }
     }
+
+    func testOnDeletePressedError() {
+        let exp = expectation(description: "Should trigger error")
+        dao.onDelete = { _ in
+            throw FakeError.testError
+        }
+        viewModel.onDeleteError = {
+            XCTAssertEqual(
+                "There was an error saving Danny Brown to your list. Maybe try again later?",
+                $0
+            )
+            exp.fulfill()
+        }
+        viewModel.onDeletePressed(rowIndex: 3)
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
 }

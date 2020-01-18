@@ -1,6 +1,7 @@
 enum ArtistSearchState {
     case loading
     case loaded([ArtistViewModel])
+    case error(String)
 }
 
 /// View model for displaying search results for Spotify artists
@@ -36,7 +37,8 @@ final class ArtistSearchViewModel {
         onStateChange?(currentState)
         backgroundQueue.async { [weak self] in
             guard let self = self else { return }
-            // TODO: handle error
+            // We ignore this error since we can retry when the user searches
+            // and display the error then
             self.api.prepare { _ in }
         }
     }
@@ -48,7 +50,11 @@ final class ArtistSearchViewModel {
                 try self.dao.insert(item: artist.toListenLaterArtist())
                 self.onSearchExit()
             } catch {
-                // TODO
+                let errorMessage = String(
+                    format: "star_insert_error".localized,
+                    artist.artistName
+                )
+                self.currentState = .error(errorMessage)
             }
         }
     }
@@ -80,7 +86,7 @@ final class ArtistSearchViewModel {
                 self.currentSearch = nil
                 // Check the response
                 guard let results = try? $0.get() else {
-                    // TODO: handle error
+                    self.currentState = .error("search_error".localized)
                     return
                 }
                 // Map the results to the view model

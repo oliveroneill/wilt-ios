@@ -78,6 +78,21 @@ final class FeedViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+        viewModel.onStarError = { message in
+            DispatchQueue.main.async { [weak self] in
+                let alert = UIAlertController(
+                    title: "Uh oh!",
+                    message: message,
+                    preferredStyle: .alert
+                )
+                alert.addAction(
+                    UIAlertAction(title: "OK", style: .default) { _ in
+                        alert.dismiss(animated: true)
+                    }
+                )
+                self?.present(alert, animated: true, completion: nil)
+            }
+        }
         viewModel.onViewUpdate = { [weak self] in
             self?.onViewUpdate(state: $0)
         }

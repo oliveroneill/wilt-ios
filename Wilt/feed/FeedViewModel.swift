@@ -44,6 +44,7 @@ final class FeedViewModel {
     /// it would be ugly to have a state that does that
     var onRowsUpdated: (() -> Void)?
     var onStarsUpdated: (() -> Void)?
+    var onStarError: ((String) -> Void)?
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM yyyy"
@@ -116,7 +117,12 @@ final class FeedViewModel {
                 )
                 self.onStarsUpdated?()
             } catch {
-                // TODO
+                self.onStarError?(
+                    String(
+                        format: "star_insert_error".localized,
+                        self.items[rowIndex].artistName
+                    )
+                )
             }
         }
     }
@@ -130,7 +136,12 @@ final class FeedViewModel {
                 )
                 self.onStarsUpdated?()
             } catch {
-                // TODO
+                self.onStarError?(
+                    String(
+                        format: "star_delete_error".localized,
+                        self.items[rowIndex].artistName
+                    )
+                )
             }
         }
     }

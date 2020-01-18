@@ -19,6 +19,19 @@ class ArtistResultsTableViewController: UITableViewController {
                     self.onLoadingStateChanged?(false)
                     self.results = results
                     self.tableView.reloadData()
+                case .error(let message):
+                    self.onLoadingStateChanged?(false)
+                    let alert = UIAlertController(
+                        title: "Uh oh!",
+                        message: message,
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(
+                        UIAlertAction(title: "OK", style: .default) { _ in
+                            alert.dismiss(animated: true)
+                        }
+                    )
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }

@@ -597,6 +597,21 @@ final class FeedViewModelTest: XCTestCase {
         waitForExpectations(timeout: 1) {_ in}
     }
 
+    func testOnRowStarredWithError() {
+        listenLaterDao.onInsert = { _ in
+            throw FakeError.testError
+        }
+        viewModel.onStarError = {
+            XCTAssertEqual(
+                "There was an error saving Death Grips to your list. Maybe try again later?",
+                $0
+            )
+            self.exp.fulfill()
+        }
+        viewModel.onRowStarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
     func testOnRowUnstarred() {
         viewModel.onStarsUpdated = {
             self.exp.fulfill()
@@ -605,9 +620,24 @@ final class FeedViewModelTest: XCTestCase {
         waitForExpectations(timeout: 1) {_ in}
     }
 
-    func testOnRowUnstarredTriggersInsert() {
+    func testOnRowUnstarredTriggersDelete() {
         listenLaterDao.onDelete = {
             XCTAssertEqual(FakeData.listenLaterItems[2].name, $0)
+            self.exp.fulfill()
+        }
+        viewModel.onRowUnstarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowUnstarredWithError() {
+        listenLaterDao.onDelete = { _ in
+            throw FakeError.testError
+        }
+        viewModel.onStarError = {
+            XCTAssertEqual(
+                "There was an error removing Death Grips from your list. Maybe try again later?",
+                $0
+            )
             self.exp.fulfill()
         }
         viewModel.onRowUnstarred(rowIndex: 2)

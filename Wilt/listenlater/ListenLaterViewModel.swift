@@ -7,6 +7,7 @@ final class ListenLaterViewModel {
     )
     /// Triggered when rows are deleted. The argument to this closure is a list of indexes
     var onRowsDeleted: (([Int]) -> Void)?
+    var onDeleteError: ((String) -> Void)?
     weak var delegate: ListenLaterViewModelDelegate?
 
     /// The items that should be displayed on the feed as cells
@@ -44,7 +45,12 @@ final class ListenLaterViewModel {
                 )
                 self.onRowsDeleted?([rowIndex])
             } catch {
-                // TODO
+                self.onDeleteError?(
+                    String(
+                        format: "star_insert_error".localized,
+                        self.items[rowIndex].artistName
+                    )
+                )
             }
         }
     }

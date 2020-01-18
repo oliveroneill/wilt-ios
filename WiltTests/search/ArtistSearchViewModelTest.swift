@@ -68,6 +68,28 @@ final class ArtistSearchViewModelTest: XCTestCase {
         }
     }
 
+    func testOnSearchTextChangedError() {
+        let exp = expectation(description: "Should send error to view")
+        api.onSearch = { _ in
+            return .failure(FakeError.testError)
+        }
+        viewModel.onStateChange = {
+            if case .error(let errorMessage) = $0 {
+                XCTAssertEqual(
+                    "Your search failed! Maybe check your internet connection?",
+                    errorMessage
+                )
+                exp.fulfill()
+            }
+        }
+        viewModel.onSearchTextChanged(text: "random_band")
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
     func testOnSearchTextChangedIgnoresEmptyText() {
         // When text is search, the state change will be triggered before
         // returning from `onSearchTextChanged` so this would fail
@@ -255,6 +277,46 @@ final class ArtistSearchViewModelTest: XCTestCase {
         }
         let listeningDelegate = ListeningDelegate(expectation: exp)
         viewModel.delegate = listeningDelegate
+        viewModel.onSearchTextChanged(text: "random_band")
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnItemPressedError() {
+        let exp = expectation(description: "Should send error to view")
+        api.onSearch = { _ in
+            return .success(
+                [
+                    ArtistSearchResult(
+                        artistName: "Pinegrove",
+                        imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                        externalURL: URL(string: "http://notarealimageurl.notreal.net")!
+                    ),
+                ]
+            )
+        }
+        let itemPressed = ArtistViewModel(
+            artistName: "Death Grips",
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!
+        )
+        viewModel.onStateChange = {
+            if case .loaded(_) = $0 {
+                self.viewModel.onItemPressed(artist: itemPressed)
+            } else if case .error(let message) = $0 {
+                XCTAssertEqual(
+                    "There was an error saving Death Grips to your list. Maybe try again later?",
+                    message
+                )
+                exp.fulfill()
+            }
+        }
+        dao.onInsert = { _ in
+            throw FakeError.testError
+        }
         viewModel.onSearchTextChanged(text: "random_band")
         waitForExpectations(timeout: 1) {
             if let error = $0 {

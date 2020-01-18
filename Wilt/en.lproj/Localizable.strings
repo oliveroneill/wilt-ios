@@ -45,3 +45,6 @@ Spotify play history and user info will be stored and periodically updated. To o
 "notification_title_1" = "You've got to check out %@";
 "notification_title_2" = "Why not listen to %@?";
 "notification_title_3" = "Have you listened to %@ yet?";
+"star_insert_error" = "There was an error saving %@ to your list. Maybe try again later?";
+"star_delete_error" = "There was an error removing %@ from your list. Maybe try again later?";
+"search_error" = "Your search failed! Maybe check your internet connection?";
