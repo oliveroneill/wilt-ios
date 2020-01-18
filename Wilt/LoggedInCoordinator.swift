@@ -20,6 +20,9 @@ final class LoggedInCoordinator: Coordinator {
     }
 
     func start() {
+        // Request notificaton permission. We ignore the result, since the
+        // app can function either way
+        UNUserNotificationCenter.current().requestAuthorization(options: [.badge]) { _, _ in }
         database.loadContext { [unowned self] in
             switch ($0) {
             case .success(let container):
@@ -93,7 +96,7 @@ extension LoggedInCoordinator: MainAppViewControllerDelegate, ArtistSearchViewMo
             return
         }
         let viewModel = ArtistSearchViewModel(
-            dao: store,
+            dao: ListenLaterNotifyingStore(dao: store),
             api: SpotifySearchAPI()
         )
         viewModel.delegate = self

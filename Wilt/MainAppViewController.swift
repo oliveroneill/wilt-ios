@@ -118,7 +118,9 @@ final class MainAppViewController: UITabBarController {
         let viewModel = FeedViewModel(
             historyDao: try PlayHistoryCache(viewContext: container.viewContext),
             api: api,
-            listenLaterDao: try ListenLaterStore(viewContext: container.viewContext)
+            listenLaterDao: ListenLaterNotifyingStore(
+                dao: try ListenLaterStore(viewContext: container.viewContext)
+            )
         )
         viewModel.delegate = self
         let feedViewController = FeedViewController(viewModel: viewModel)
@@ -128,7 +130,9 @@ final class MainAppViewController: UITabBarController {
 
     private func setupListenLaterController(container: NSPersistentContainer) throws -> ListenLaterViewController {
         let viewModel = ListenLaterViewModel(
-            dao: try ListenLaterStore(viewContext: container.viewContext)
+            dao: ListenLaterNotifyingStore(
+                dao: try ListenLaterStore(viewContext: container.viewContext)
+            )
         )
         viewModel.delegate = self
         let listenLaterViewController = ListenLaterViewController(viewModel: viewModel)

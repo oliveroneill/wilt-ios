@@ -70,6 +70,7 @@
 		7DD05B9323D195820020EDD0 /* UISearchBar+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B9223D195820020EDD0 /* UISearchBar+Loading.swift */; };
 		7DD05B9523D2866B0020EDD0 /* ArtistSearchViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B9423D2866B0020EDD0 /* ArtistSearchViewModelTest.swift */; };
 		7DD05B9923D28FDD0020EDD0 /* FakeSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B9823D28FDD0020EDD0 /* FakeSearchAPI.swift */; };
+		7DD05B9B23D2D9EF0020EDD0 /* ListenLaterNotifyingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B9A23D2D9ED0020EDD0 /* ListenLaterNotifyingStore.swift */; };
 		7DD271EE23C52CDB006B543F /* ListenLaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271ED23C52CDB006B543F /* ListenLaterViewModel.swift */; };
 		7DD271F023C53075006B543F /* ListenLaterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271EF23C53075006B543F /* ListenLaterStore.swift */; };
 		7DD271F323C5BBE7006B543F /* ListenLaterViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271F223C5BBE7006B543F /* ListenLaterViewModelTest.swift */; };
@@ -176,6 +177,7 @@
 		7DD05B9223D195820020EDD0 /* UISearchBar+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Loading.swift"; sourceTree = "<group>"; };
 		7DD05B9423D2866B0020EDD0 /* ArtistSearchViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSearchViewModelTest.swift; sourceTree = "<group>"; };
 		7DD05B9823D28FDD0020EDD0 /* FakeSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchAPI.swift; sourceTree = "<group>"; };
+		7DD05B9A23D2D9ED0020EDD0 /* ListenLaterNotifyingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterNotifyingStore.swift; sourceTree = "<group>"; };
 		7DD271ED23C52CDB006B543F /* ListenLaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterViewModel.swift; sourceTree = "<group>"; };
 		7DD271EF23C53075006B543F /* ListenLaterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterStore.swift; sourceTree = "<group>"; };
 		7DD271F223C5BBE7006B543F /* ListenLaterViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterViewModelTest.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				7DD271F823C5DFB5006B543F /* ListenLaterArtistCell.swift */,
 				7DD271F623C5C7AE006B543F /* ListenLaterViewController.swift */,
 				7DD271ED23C52CDB006B543F /* ListenLaterViewModel.swift */,
+				7DD05B9A23D2D9ED0020EDD0 /* ListenLaterNotifyingStore.swift */,
 				7DD271EF23C53075006B543F /* ListenLaterStore.swift */,
 			);
 			path = listenlater;
@@ -788,6 +791,7 @@
 				7D5A2AFB231A5B1D00B56000 /* FeedViewController.swift in Sources */,
 				7DB1585B2307D88200F86A9E /* OnboardingCoordinator.swift in Sources */,
 				7DD271F023C53075006B543F /* ListenLaterStore.swift in Sources */,
+				7DD05B9B23D2D9EF0020EDD0 /* ListenLaterNotifyingStore.swift in Sources */,
 				7DB1585F2307DA8200F86A9E /* OnboardingIntroViewController.swift in Sources */,
 				7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */,
 				7DB158872318808800F86A9E /* OnboardingViewModel.swift in Sources */,

@@ -40,3 +40,8 @@ Spotify play history and user info will be stored and periodically updated. To o
 "onboarding_view_accessibility_text" = "Onboarding screen";
 "about_cell_accessibility_text" = "View explaining what the app is for";
 "listen_later_search_placeholder_text" = "Enter an artist's name";
+"notification_subtitle" = "Don't forget to give them a listen.";
+"notification_title_0" = "Remember %@?";
+"notification_title_1" = "You've got to check out %@";
+"notification_title_2" = "Why not listen to %@?";
+"notification_title_3" = "Have you listened to %@ yet?";
