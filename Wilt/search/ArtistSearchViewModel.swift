@@ -110,8 +110,8 @@ final class ArtistSearchViewModel {
         // is more up to date
         currentWorkItemForDebouncing?.cancel()
         let workItem = DispatchWorkItem(block: callback)
-        // Wait 0.2 seconds before searching
-        backgroundQueue.asyncAfter(deadline: .now() + 0.2, execute: workItem)
+        // Wait 0.1 seconds before searching
+        backgroundQueue.asyncAfter(deadline: .now() + 0.1, execute: workItem)
         currentWorkItemForDebouncing = workItem
     }
 }

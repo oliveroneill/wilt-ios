@@ -105,8 +105,8 @@ final class ArtistSearchViewModelTest: XCTestCase {
             exp.fulfill()
         }
         viewModel.onSearchTextChanged(text: "random_band")
-        // Wait for 0.3 seconds to get passed the debounce period
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        // Wait for 0.2 seconds to get passed the debounce period
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.viewModel.onSearchTextChanged(text: "a_different band")
         }
         waitForExpectations(timeout: 1) {
