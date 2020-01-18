@@ -4,6 +4,7 @@ plugin 'cocoapods-keys', {
   :keys => [
     "SpotifyClientID",
     "SpotifyRedirectURI",
+    "SpotifyAuthTokenURL",
   ]}
 
 def wilt_dependencies

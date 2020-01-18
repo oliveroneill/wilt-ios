@@ -1,4 +1,4 @@
-import Firebase
+import Keys
 
 /// The search result format from SearchAPI
 struct ArtistSearchResult {
@@ -51,10 +51,9 @@ extension Reference: Cancellable where T == Cancellable? {
     }
 }
 
-/// A Search API implementation using Spotify's Web API for the search. It also uses Firebase to retrieve
-/// an authorisation token
+/// A Search API implementation using Spotify's Web API for the search. It also uses a Firebase function to
+/// retrieve an authorisation token
 final class SpotifySearchAPI: SearchAPI {
-    private lazy var functions = Functions.functions(region: "asia-northeast1")
     private var spotifyAuthToken: String?
 
     /// Get an authorisation token
@@ -66,27 +65,28 @@ final class SpotifySearchAPI: SearchAPI {
         // handler. The value won't be set until we've retrieved the auth token
         let ref = Reference<T>()
         NetworkActivityUtil.showNetworkIndicator()
-        functions
-            .httpsCallable("getSpotifyAuthToken")
-            .call() {
-                defer { NetworkActivityUtil.hideNetworkIndicator() }
-                guard let data = $0?.data as? [String: String] else {
-                    guard let error = $1 else {
-                        fatalError("No error and no response?")
-                    }
-                    ref.value = completion(
-                        .failure(error)
-                    )
-                    return
+        let keys = WiltKeys()
+        URLSession.shared.dataTask(with: URL(string: keys.spotifyAuthTokenURL)!) {
+            defer { NetworkActivityUtil.hideNetworkIndicator() }
+            if let error = $2 {
+                ref.value = completion(.failure(error))
+                return
+            }
+            guard let data = try? JSONSerialization.jsonObject(with: $0 ?? Data()) as? [String:String] else {
+                guard let error = $2 else {
+                    fatalError("No error and no response?")
                 }
-                guard let token = data["token"] else {
-                    ref.value = completion(
-                        .failure(SearchAPIError.unexpectedResponse)
-                    )
-                    return
-                }
-                ref.value = completion(.success(token))
-        }
+                ref.value = completion(.failure(error))
+                return
+            }
+            guard let token = data["token"] else {
+                ref.value = completion(
+                    .failure(SearchAPIError.unexpectedResponse)
+                )
+                return
+            }
+            ref.value = completion(.success(token))
+        }.resume()
         return ref
     }
 
