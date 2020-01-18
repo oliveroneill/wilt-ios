@@ -60,6 +60,16 @@
 		7DB1588E2319EDF000F86A9E /* FakeAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588D2319EDF000F86A9E /* FakeAuthenticator.swift */; };
 		7DB15890231A4E2200F86A9E /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588F231A4E2200F86A9E /* FakeError.swift */; };
 		7DBF9C5723C1AB480064C345 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF9C5623C1AB470064C345 /* SnapshotHelper.swift */; };
+		7DD05B8423D03A880020EDD0 /* ArtistSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B8323D03A880020EDD0 /* ArtistSearchViewController.swift */; };
+		7DD05B8623D03B950020EDD0 /* ArtistResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B8523D03B950020EDD0 /* ArtistResultsTableViewController.swift */; };
+		7DD05B8823D04CB80020EDD0 /* ArtistSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B8723D04CB80020EDD0 /* ArtistSearchViewModel.swift */; };
+		7DD05B8A23D0547B0020EDD0 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B8923D0547B0020EDD0 /* ArtistViewModel.swift */; };
+		7DD05B8C23D05C690020EDD0 /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B8B23D05C690020EDD0 /* SearchAPI.swift */; };
+		7DD05B8E23D1036B0020EDD0 /* SpotifyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B8D23D1036B0020EDD0 /* SpotifyAPI.swift */; };
+		7DD05B9123D103F10020EDD0 /* SpotifyAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B9023D103F10020EDD0 /* SpotifyAPITest.swift */; };
+		7DD05B9323D195820020EDD0 /* UISearchBar+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B9223D195820020EDD0 /* UISearchBar+Loading.swift */; };
+		7DD05B9523D2866B0020EDD0 /* ArtistSearchViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B9423D2866B0020EDD0 /* ArtistSearchViewModelTest.swift */; };
+		7DD05B9923D28FDD0020EDD0 /* FakeSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD05B9823D28FDD0020EDD0 /* FakeSearchAPI.swift */; };
 		7DD271EE23C52CDB006B543F /* ListenLaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271ED23C52CDB006B543F /* ListenLaterViewModel.swift */; };
 		7DD271F023C53075006B543F /* ListenLaterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271EF23C53075006B543F /* ListenLaterStore.swift */; };
 		7DD271F323C5BBE7006B543F /* ListenLaterViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271F223C5BBE7006B543F /* ListenLaterViewModelTest.swift */; };
@@ -156,6 +166,16 @@
 		7DB1588D2319EDF000F86A9E /* FakeAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAuthenticator.swift; sourceTree = "<group>"; };
 		7DB1588F231A4E2200F86A9E /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
 		7DBF9C5623C1AB470064C345 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = "<group>"; };
+		7DD05B8323D03A880020EDD0 /* ArtistSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSearchViewController.swift; sourceTree = "<group>"; };
+		7DD05B8523D03B950020EDD0 /* ArtistResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistResultsTableViewController.swift; sourceTree = "<group>"; };
+		7DD05B8723D04CB80020EDD0 /* ArtistSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSearchViewModel.swift; sourceTree = "<group>"; };
+		7DD05B8923D0547B0020EDD0 /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
+		7DD05B8B23D05C690020EDD0 /* SearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
+		7DD05B8D23D1036B0020EDD0 /* SpotifyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAPI.swift; sourceTree = "<group>"; };
+		7DD05B9023D103F10020EDD0 /* SpotifyAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAPITest.swift; sourceTree = "<group>"; };
+		7DD05B9223D195820020EDD0 /* UISearchBar+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Loading.swift"; sourceTree = "<group>"; };
+		7DD05B9423D2866B0020EDD0 /* ArtistSearchViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSearchViewModelTest.swift; sourceTree = "<group>"; };
+		7DD05B9823D28FDD0020EDD0 /* FakeSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchAPI.swift; sourceTree = "<group>"; };
 		7DD271ED23C52CDB006B543F /* ListenLaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterViewModel.swift; sourceTree = "<group>"; };
 		7DD271EF23C53075006B543F /* ListenLaterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterStore.swift; sourceTree = "<group>"; };
 		7DD271F223C5BBE7006B543F /* ListenLaterViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterViewModelTest.swift; sourceTree = "<group>"; };
@@ -252,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */,
+				7DD05B8923D0547B0020EDD0 /* ArtistViewModel.swift */,
 				7DB158582307D7FE00F86A9E /* Coordinator.swift */,
 				7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */,
 				7D910C5D233CDA5B006B8D94 /* NetworkActivityUtil.swift */,
@@ -259,6 +280,7 @@
 				7DD271EC23C52CB9006B543F /* listenlater */,
 				7D809136232DFFE4006FE0FA /* profile */,
 				7DB15891231A516F00F86A9E /* onboarding */,
+				7DD05B8223D03A6D0020EDD0 /* search */,
 				7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */,
 				7D5A2AF8231A573800B56000 /* MainAppViewController.swift */,
 				7D233B37233384EE00EC95B6 /* SettingsViewController.swift */,
@@ -284,6 +306,7 @@
 				7DD271F123C5BBCB006B543F /* listenlater */,
 				7D233B2E2330470B00EC95B6 /* profile */,
 				7DB15892231A519400F86A9E /* onboarding */,
+				7DD05B8F23D103D70020EDD0 /* search */,
 				7DB1586E23120F6F00F86A9E /* KIFUtil.swift */,
 				7D233B392334C6DF00EC95B6 /* SettingsViewControllerTest.swift */,
 				7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */,
@@ -344,6 +367,7 @@
 				7DB1588F231A4E2200F86A9E /* FakeError.swift */,
 				7DD271FC23C67FFA006B543F /* FakeListenLaterDao.swift */,
 				7D5A2B0E2324C24B00B56000 /* FakePlayHistoryDao.swift */,
+				7DD05B9823D28FDD0020EDD0 /* FakeSearchAPI.swift */,
 				7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */,
 				7D5A2B102324C25E00B56000 /* FakeWiltAPI.swift */,
 			);
@@ -372,6 +396,28 @@
 				7DB158882319575C00F86A9E /* OnboardingCoordinatorTest.swift */,
 			);
 			path = onboarding;
+			sourceTree = "<group>";
+		};
+		7DD05B8223D03A6D0020EDD0 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				7DD05B8523D03B950020EDD0 /* ArtistResultsTableViewController.swift */,
+				7DD05B8323D03A880020EDD0 /* ArtistSearchViewController.swift */,
+				7DD05B8723D04CB80020EDD0 /* ArtistSearchViewModel.swift */,
+				7DD05B8B23D05C690020EDD0 /* SearchAPI.swift */,
+				7DD05B8D23D1036B0020EDD0 /* SpotifyAPI.swift */,
+				7DD05B9223D195820020EDD0 /* UISearchBar+Loading.swift */,
+			);
+			path = search;
+			sourceTree = "<group>";
+		};
+		7DD05B8F23D103D70020EDD0 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				7DD05B9423D2866B0020EDD0 /* ArtistSearchViewModelTest.swift */,
+				7DD05B9023D103F10020EDD0 /* SpotifyAPITest.swift */,
+			);
+			path = search;
 			sourceTree = "<group>";
 		};
 		7DD271EC23C52CB9006B543F /* listenlater */ = {
@@ -724,14 +770,19 @@
 				7D5A2B05232371B400B56000 /* PlayHistoryPager.swift in Sources */,
 				7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */,
 				7DB158592307D7FE00F86A9E /* Coordinator.swift in Sources */,
+				7DD05B9323D195820020EDD0 /* UISearchBar+Loading.swift in Sources */,
 				7D5A2B092324B25F00B56000 /* TopArtistCell.swift in Sources */,
 				7DB1586A230D6C8700F86A9E /* Utils.swift in Sources */,
 				7DD271EE23C52CDB006B543F /* ListenLaterViewModel.swift in Sources */,
 				7DA898BC232E4C1300204823 /* ProfileCardView.swift in Sources */,
+				7DD05B8623D03B950020EDD0 /* ArtistResultsTableViewController.swift in Sources */,
 				7D5A2B152324E0FD00B56000 /* FeedViewModel.swift in Sources */,
+				7DD05B8823D04CB80020EDD0 /* ArtistSearchViewModel.swift in Sources */,
+				7DD05B8C23D05C690020EDD0 /* SearchAPI.swift in Sources */,
 				7DA898BA232E02E500204823 /* ProfileViewModel.swift in Sources */,
 				7D5A2AF7231A554D00B56000 /* LoggedInCoordinator.swift in Sources */,
 				7D5A2B0B2324B75900B56000 /* TopArtistData.swift in Sources */,
+				7DD05B8423D03A880020EDD0 /* ArtistSearchViewController.swift in Sources */,
 				7D5A2AF9231A573800B56000 /* MainAppViewController.swift in Sources */,
 				7DB158612309658100F86A9E /* OnboardingViewController.swift in Sources */,
 				7D5A2AFB231A5B1D00B56000 /* FeedViewController.swift in Sources */,
@@ -745,6 +796,8 @@
 				7DA898B8232E002000204823 /* ProfileViewController.swift in Sources */,
 				7D233B34233109C800EC95B6 /* ProfileCache.swift in Sources */,
 				7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */,
+				7DD05B8A23D0547B0020EDD0 /* ArtistViewModel.swift in Sources */,
+				7DD05B8E23D1036B0020EDD0 /* SpotifyAPI.swift in Sources */,
 				7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */,
 				7DB15863230ABD8F00F86A9E /* OnboardingPage.swift in Sources */,
 				7D5A2AFF231E6C7600B56000 /* WiltDatabase.swift in Sources */,
@@ -766,7 +819,9 @@
 				7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */,
 				7D5A2B0F2324C24B00B56000 /* FakePlayHistoryDao.swift in Sources */,
 				7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */,
+				7DD05B9923D28FDD0020EDD0 /* FakeSearchAPI.swift in Sources */,
 				7DD271F323C5BBE7006B543F /* ListenLaterViewModelTest.swift in Sources */,
+				7DD05B9523D2866B0020EDD0 /* ArtistSearchViewModelTest.swift in Sources */,
 				7DB1586C2310CC1C00F86A9E /* OnboardingViewControllerTest.swift in Sources */,
 				7D5A2B032322682F00B56000 /* FeedViewControllerTest.swift in Sources */,
 				7D233B36233226F300EC95B6 /* ProfileCacheTest.swift in Sources */,
@@ -783,6 +838,7 @@
 				7D233B3A2334C6DF00EC95B6 /* SettingsViewControllerTest.swift in Sources */,
 				7DD271FD23C67FFA006B543F /* FakeListenLaterDao.swift in Sources */,
 				7DD271FB23C5E32E006B543F /* ListenLaterViewControllerTest.swift in Sources */,
+				7DD05B9123D103F10020EDD0 /* SpotifyAPITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

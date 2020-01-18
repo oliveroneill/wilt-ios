@@ -2,8 +2,8 @@ import Foundation
 import SDWebImage
 
 /// A single table view cell for the listen later page. See `ListenLaterViewController`
-final class ListenLaterArtistCell: UITableViewCell {
-    static let reuseIdentifier = "listenLaterArtistCell"
+final class ArtistTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "ArtistTableViewCell"
     private lazy var roundCornerTransformer: SDImageTransformer = {
         return SDImagePipelineTransformer(
             transformers: [
@@ -26,7 +26,7 @@ final class ListenLaterArtistCell: UITableViewCell {
         )
     }()
     /// Set this when the view is being reused
-    var viewModel: ListenLaterItemViewModel? {
+    var viewModel: ArtistViewModel? {
         didSet {
             artistLabel.text = viewModel?.artistName ?? ""
             if let imageURL = viewModel?.imageURL {
@@ -105,8 +105,8 @@ final class ListenLaterArtistCell: UITableViewCell {
     /// - Parameter tableView: The tableview to register use with
     static func register(tableView: UITableView) {
         tableView.register(
-            ListenLaterArtistCell.self,
-            forCellReuseIdentifier: ListenLaterArtistCell.reuseIdentifier
+            ArtistTableViewCell.self,
+            forCellReuseIdentifier: ArtistTableViewCell.reuseIdentifier
         )
     }
 }

@@ -30,17 +30,17 @@ final class ListenLaterViewModelTest: XCTestCase {
             ),
         ]
         let expected = [
-            ListenLaterItemViewModel(
+            ArtistViewModel(
                 artistName: "Pinegrove",
                 imageURL: URL(string: "http://notarealimageurl1.notreal.net")!,
                 externalURL: URL(string: "http://notarealurl1.notreal.net")!
             ),
-            ListenLaterItemViewModel(
+            ArtistViewModel(
                 artistName: "Bon Iver",
                 imageURL: URL(string: "http://notarealimageurl2.notreal.net")!,
                 externalURL: URL(string: "http://notarealurl2.notreal.net")!
             ),
-            ListenLaterItemViewModel(
+            ArtistViewModel(
                 artistName: "Death Grips",
                 imageURL: URL(string: "http://notarealimageurl3.notreal.net")!,
                 externalURL: URL(string: "http://notarealurl3.notreal.net")!
@@ -64,6 +64,7 @@ final class ListenLaterViewModelTest: XCTestCase {
                 self.exp = expectation
             }
             func loggedOut() {}
+            func onSearchButtonPressed() {}
             func open(url: URL) {
                 XCTAssertEqual(FakeData.items[index].externalURL, url)
                 exp.fulfill()

@@ -28,7 +28,7 @@ final class ListenLaterViewController: UITableViewController {
                 }
             }
         }
-        ListenLaterArtistCell.register(tableView: tableView)
+        ArtistTableViewCell.register(tableView: tableView)
         // This will hide the cell dividers when there's no data
         tableView.tableFooterView = UIView(frame: .zero)
         // Used for KIF testing
@@ -67,9 +67,9 @@ final class ListenLaterViewController: UITableViewController {
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = viewModel.items[indexPath.row]
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: ListenLaterArtistCell.reuseIdentifier,
+            withIdentifier: ArtistTableViewCell.reuseIdentifier,
             for: indexPath
-        ) as! ListenLaterArtistCell
+        ) as! ArtistTableViewCell
         cell.viewModel = item
         return cell
     }

@@ -34,9 +34,9 @@ Spotify play history and user info will be stored and periodically updated. To o
 "settings_title_text" = "Wilt Settings";
 "listen_later_title" = "Artists You Need To Check Out";
 "listen_later_tab_title" = "Listen Later";
-"listen_later_empty_data_text" = "You haven't starred anything yet!\
-Go to your feed and drag from the right to star artists you want to listen to";
+"listen_later_empty_data_text" = "Click the + button to add some artists you want to be reminded about";
 "listen_later_action_title" = "Remind me about this later";
 "listen_later_undo_action_title" = "Forget about this one";
 "onboarding_view_accessibility_text" = "Onboarding screen";
 "about_cell_accessibility_text" = "View explaining what the app is for";
+"listen_later_search_placeholder_text" = "Enter an artist's name";

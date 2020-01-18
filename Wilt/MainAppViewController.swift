@@ -6,7 +6,13 @@ import SwiftIcons
 /// different tabs will be used to navigate
 final class MainAppViewController: UITabBarController {
     weak var controllerDelegate: MainAppViewControllerDelegate?
-    private var tabs = [(controller: UIViewController, title: String)]()
+    private var tabs = [
+        (
+            controller: UIViewController,
+            title: String,
+            leftBarButton: UIBarButtonItem?
+        )
+    ]()
     private var container: NSPersistentContainer
 
     private lazy var profileTabItem: UITabBarItem = {
@@ -138,18 +144,24 @@ final class MainAppViewController: UITabBarController {
                     container: container,
                     api: api
                 ),
-                title: "profile_title".localized
+                title: "profile_title".localized,
+                leftBarButton: nil
             ),
             (
                 controller: try setupFeedController(
                     container: container,
                     api: api
                 ),
-                title: "feed_title".localized
+                title: "feed_title".localized,
+                leftBarButton: nil
             ),
             (
                 controller: try setupListenLaterController(container: container),
-                title: "listen_later_title".localized
+                title: "listen_later_title".localized,
+                leftBarButton: UIBarButtonItem(
+                    barButtonSystemItem: .add, target: self,
+                    action: #selector(onAddArtistButtonPressed)
+                )
             ),
         ]
         title = tabs[0].title
@@ -167,6 +179,10 @@ final class MainAppViewController: UITabBarController {
     @objc private func onSettingsButtonPressed() {
         controllerDelegate?.showSettings()
     }
+
+    @objc private func onAddArtistButtonPressed() {
+        controllerDelegate?.showSearch()
+    }
 }
 
 extension MainAppViewController: UITabBarControllerDelegate {
@@ -175,6 +191,7 @@ extension MainAppViewController: UITabBarControllerDelegate {
             return
         }
         title = tabs[item.tag].title
+        navigationItem.leftBarButtonItem = tabs[item.tag].leftBarButton
     }
 }
 
@@ -193,5 +210,6 @@ extension MainAppViewController: FeedViewModelDelegate, ProfileViewModelDelegate
 protocol MainAppViewControllerDelegate: class {
     func open (url: URL)
     func showSettings()
+    func showSearch()
     func loggedOut()
 }

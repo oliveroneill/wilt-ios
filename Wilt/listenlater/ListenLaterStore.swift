@@ -3,7 +3,7 @@ import CoreData
 struct ListenLaterArtist: Equatable {
     let name: String
     let externalURL: URL
-    let imageURL: URL
+    let imageURL: URL?
 }
 
 extension ListenLaterArtistEntity {
@@ -14,8 +14,7 @@ extension ListenLaterArtistEntity {
     func toData() -> ListenLaterArtist {
         // We'll error if any of the values are nil. This shouldn't occur but
         // I wonder if there's a better way to handle this
-        guard let name = name, let imageURL = imageURL,
-            let externalURL = externalURL else {
+        guard let name = name, let externalURL = externalURL else {
                 fatalError("Unexpected nil stored in Core Data")
         }
         return ListenLaterArtist(

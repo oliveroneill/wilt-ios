@@ -61,6 +61,7 @@ final class ListenLaterViewControllerTest: KIFTestCase {
                 self.exp = expectation
             }
             func loggedOut() {}
+            func onSearchButtonPressed() {}
             func open(url: URL) {
                 XCTAssertEqual(FakeData.items[index].externalURL, url)
                 exp.fulfill()

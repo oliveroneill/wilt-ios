@@ -1,10 +1,3 @@
-/// View model for a single cell in the list
-struct ListenLaterItemViewModel: Equatable {
-    let artistName: String
-    let imageURL: URL
-    let externalURL: URL
-}
-
 /// View model for displaying the user's list of artists they want to listen to
 /// TODO: These artists should really be stored on the server
 final class ListenLaterViewModel {
@@ -17,9 +10,9 @@ final class ListenLaterViewModel {
     weak var delegate: ListenLaterViewModelDelegate?
 
     /// The items that should be displayed on the feed as cells
-    var items: [ListenLaterItemViewModel] {
+    var items: [ArtistViewModel] {
         return dao.items.lazy.map {
-            ListenLaterItemViewModel(
+            ArtistViewModel(
                 artistName: $0.name,
                 imageURL: $0.imageURL,
                 externalURL: $0.externalURL
@@ -57,7 +50,7 @@ final class ListenLaterViewModel {
     }
 }
 
-/// Delegate for the `FeedViewModel` for events that occur during the
+/// Delegate for the `ListenLaterViewModel` for events that occur during the
 /// feed
 protocol ListenLaterViewModelDelegate: class {
     func open(url: URL)
