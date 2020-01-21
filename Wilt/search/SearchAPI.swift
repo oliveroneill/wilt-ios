@@ -152,6 +152,10 @@ final class SpotifySearchAPI: SearchAPI {
         let task = URLSession.shared.dataTask(with: request) {
             defer { NetworkActivityUtil.hideNetworkIndicator() }
             if let error = $2 {
+                // Ignore response on cancels
+                guard (error as NSError).code != NSURLErrorCancelled else {
+                    return
+                }
                 completion(.failure(error))
                 return
             }
