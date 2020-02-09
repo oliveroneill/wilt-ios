@@ -4,9 +4,9 @@
 
 This is an iOS client for displaying Wilt metrics.
 
-The server-side and browser version of the client is [here](https://github.com/oliveroneill/wilt).
-The server-side uses Firebase and BigQuery. The Android app is available
-[here](https://github.com/oliveroneill/wilt-android).
+External project components:
+- [Server-side and browser client](https://github.com/oliveroneill/wilt) (using Firebase and BigQuery)
+- [Android app](https://github.com/oliveroneill/wilt-android)
 
 ## Installation
 We use [cocoapods-keys](https://github.com/orta/cocoapods-keys) to store
