@@ -6,6 +6,8 @@ plugin 'cocoapods-keys', {
     "SpotifyRedirectURI",
   ]}
 
+inhibit_all_warnings!
+
 def wilt_dependencies
   pod 'Firebase/Analytics'
   pod 'Firebase/Functions'
