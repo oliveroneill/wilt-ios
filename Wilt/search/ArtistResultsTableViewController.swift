@@ -1,5 +1,6 @@
 import Foundation
 
+/// A view controller for displaying search results
 class ArtistResultsTableViewController: UITableViewController {
     private let viewModel: ArtistSearchViewModel
     private var results: [ArtistViewModel]?

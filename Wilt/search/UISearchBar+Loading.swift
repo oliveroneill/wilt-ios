@@ -5,11 +5,13 @@ extension UISearchBar {
         if #available(iOS 13.0, *) {
             return searchTextField
         } else {
+            // Search for the text field in older versions of iOS
             let subViews = subviews.flatMap { $0.subviews }
             return (subViews.filter { $0 is UITextField }).first as? UITextField
         }
     }
 
+    /// Will be set to the activity indicator if it's visible on the search bar
     private var activityIndicator: UIActivityIndicatorView? {
         textField?.leftView?.subviews.compactMap {
             $0 as? UIActivityIndicatorView
@@ -21,6 +23,7 @@ extension UISearchBar {
         return ((subViews.filter { $0 is UIImageView }).first as? UIImageView)?.image
     }
 
+    /// This will enable or disable the loading spinner
     var isLoading: Bool {
         get {
             activityIndicator != nil
@@ -30,6 +33,7 @@ extension UISearchBar {
                 return
             }
             guard activityIndicator == nil else { return }
+            // Place an activity indicator on the search bar
             let newActivityIndicator = UIActivityIndicatorView(style: .gray)
             newActivityIndicator.startAnimating()
             if #available(iOS 13.0, *) {
