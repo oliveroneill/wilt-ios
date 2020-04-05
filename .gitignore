@@ -46,3 +46,6 @@ Pods/CocoaPodsKeys
 # Fastlane stuff
 fastlane/Appfile
 fastlane/screenshots
+
+WiltTests/FailureDiffs/
+
