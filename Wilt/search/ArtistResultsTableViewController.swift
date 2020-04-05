@@ -37,6 +37,7 @@ class ArtistResultsTableViewController: UITableViewController {
         }
         // This will hide the cell dividers when there's no data
         tableView.tableFooterView = UIView(frame: .zero)
+        tableView.accessibilityIdentifier = "search_results_tableview"
         ArtistTableViewCell.register(tableView: tableView)
     }
 

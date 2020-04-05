@@ -1,8 +1,6 @@
 import Foundation
 
 /// A search controller for allowing the user to search for an artist to add to their list
-/// TODO: I can't this to work in the simulator. It just freezes when I tap the search bar. Therefore there's
-/// no snapshot tests for now :(
 class ArtistSearchViewController: UITableViewController {
     private let searchController: UISearchController
     private let resultsController: ArtistResultsTableViewController

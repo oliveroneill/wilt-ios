@@ -34,6 +34,7 @@
 		7D5A2B1B232A504600B56000 /* FeedViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1A232A504600B56000 /* FeedViewModelTest.swift */; };
 		7D5A2B1D232A719E00B56000 /* PlayHistoryPagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1C232A719E00B56000 /* PlayHistoryPagerTest.swift */; };
 		7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B1E232A71F700B56000 /* PlayHistoryCacheTest.swift */; };
+		7D849A0E24397EED003D5A53 /* ArtistSearchViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D849A0D24397EED003D5A53 /* ArtistSearchViewControllerTest.swift */; };
 		7D910C5E233CDA5B006B8D94 /* NetworkActivityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D910C5D233CDA5B006B8D94 /* NetworkActivityUtil.swift */; };
 		7D93CB216ED072AB454E149A /* Pods_WiltUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98E2CB4B35C1468FA503776 /* Pods_WiltUITests.framework */; };
 		7DA898B8232E002000204823 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA898B7232E002000204823 /* ProfileViewController.swift */; };
@@ -140,6 +141,7 @@
 		7D5A2B1A232A504600B56000 /* FeedViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModelTest.swift; sourceTree = "<group>"; };
 		7D5A2B1C232A719E00B56000 /* PlayHistoryPagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayHistoryPagerTest.swift; sourceTree = "<group>"; };
 		7D5A2B1E232A71F700B56000 /* PlayHistoryCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayHistoryCacheTest.swift; sourceTree = "<group>"; };
+		7D849A0D24397EED003D5A53 /* ArtistSearchViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSearchViewControllerTest.swift; sourceTree = "<group>"; };
 		7D910C5D233CDA5B006B8D94 /* NetworkActivityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivityUtil.swift; sourceTree = "<group>"; };
 		7DA898B7232E002000204823 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7DA898B9232E02E500204823 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 		7DD05B8F23D103D70020EDD0 /* search */ = {
 			isa = PBXGroup;
 			children = (
+				7D849A0D24397EED003D5A53 /* ArtistSearchViewControllerTest.swift */,
 				7DD05B9423D2866B0020EDD0 /* ArtistSearchViewModelTest.swift */,
 				7DD05B9023D103F10020EDD0 /* SpotifyAPITest.swift */,
 			);
@@ -825,6 +828,7 @@
 				7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */,
 				7DD05B9923D28FDD0020EDD0 /* FakeSearchAPI.swift in Sources */,
 				7DD271F323C5BBE7006B543F /* ListenLaterViewModelTest.swift in Sources */,
+				7D849A0E24397EED003D5A53 /* ArtistSearchViewControllerTest.swift in Sources */,
 				7DD05B9523D2866B0020EDD0 /* ArtistSearchViewModelTest.swift in Sources */,
 				7DB1586C2310CC1C00F86A9E /* OnboardingViewControllerTest.swift in Sources */,
 				7D5A2B032322682F00B56000 /* FeedViewControllerTest.swift in Sources */,
