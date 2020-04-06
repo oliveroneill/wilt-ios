@@ -10,11 +10,15 @@ final class FeedViewModelTest: XCTestCase {
         case testError
     }
     private let error = FeedViewModelTestError.testError
+    private var listenLaterDao: FakeListenLaterDao!
 
     override func setUp() {
+        listenLaterDao = FakeListenLaterDao(items: [])
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: FakeData.items),
-            api: FakeWiltAPI()
+
+            historyDao: FakePlayHistoryDao(items: FakeData.items),
+            api: FakeWiltAPI(),
+            listenLaterDao: listenLaterDao
         )
         exp = expectation(description: "Should receive view update")
     }
@@ -22,6 +26,18 @@ final class FeedViewModelTest: XCTestCase {
     func testOnViewAppeared() {
         viewModel.onViewUpdate = {
             XCTAssertEqual(FeedViewState.loadingAtTop, $0)
+            self.exp.fulfill()
+        }
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnViewAppearedTriggersStarUpdate() {
+        viewModel.onStarsUpdated = {
             self.exp.fulfill()
         }
         viewModel.onViewAppeared()
@@ -65,26 +81,31 @@ final class FeedViewModelTest: XCTestCase {
                 playsText: "99 plays",
                 dateText: "Feb 2019",
                 imageURL: URL(string: "http://notarealimageurl1.notreal.net")!,
-                externalURL: URL(string: "http://notarealurl1.notreal.net")!
+                externalURL: URL(string: "http://notarealurl1.notreal.net")!,
+                isStarred: false
             ),
             FeedItemViewModel(
                 artistName: "Bon Iver",
                 playsText: "12 plays",
                 dateText: "Dec 2018",
                 imageURL: URL(string: "http://notarealimageurl2.notreal.net")!,
-                externalURL: URL(string: "http://notarealurl2.notreal.net")!
+                externalURL: URL(string: "http://notarealurl2.notreal.net")!,
+                isStarred: false
             ),
             FeedItemViewModel(
                 artistName: "Death Grips",
                 playsText: "78 plays",
                 dateText: "Oct 2018",
                 imageURL: URL(string: "http://notarealimageurl3.notreal.net")!,
-                externalURL: URL(string: "http://notarealurl3.notreal.net")!
+                externalURL: URL(string: "http://notarealurl3.notreal.net")!,
+                isStarred: false
             ),
         ]
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: items),
-            api: FakeWiltAPI()
+
+            historyDao: FakePlayHistoryDao(items: items),
+            api: FakeWiltAPI(),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         XCTAssertEqual(expected, viewModel.items)
         // We need to fulfill the expectation since we declare it in setUp
@@ -148,8 +169,10 @@ final class FeedViewModelTest: XCTestCase {
 
     func testonRetryHeaderPressedEmpty() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
+
+            historyDao: FakePlayHistoryDao(items: []),
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([])),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -166,8 +189,10 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnScrolledToBottomEmpty() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
+
+            historyDao: FakePlayHistoryDao(items: []),
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([])),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -184,8 +209,10 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnRetryFooterPressedEmpty() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
+
+            historyDao: FakePlayHistoryDao(items: []),
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([])),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -202,8 +229,10 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewAppearedEmpty() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
+
+            historyDao: FakePlayHistoryDao(items: []),
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([])),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -220,8 +249,10 @@ final class FeedViewModelTest: XCTestCase {
 
     func testRefreshEmpty() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([]))
+
+            historyDao: FakePlayHistoryDao(items: []),
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([])),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.empty {
@@ -238,8 +269,10 @@ final class FeedViewModelTest: XCTestCase {
 
     func testRefreshDisplaysRowsAfterAPICall() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
-            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success(FakeData.items))
+
+            historyDao: FakePlayHistoryDao(items: []),
+            api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success(FakeData.items)),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.displayingRows {
@@ -256,10 +289,12 @@ final class FeedViewModelTest: XCTestCase {
 
     func testonRetryHeaderPressedError() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
+
+            historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
-            )
+            ),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.errorAtTop {
@@ -276,10 +311,12 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnScrolledToBottomError() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: FakeData.items),
+
+            historyDao: FakePlayHistoryDao(items: FakeData.items),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
-            )
+            ),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.errorAtBottom {
@@ -296,10 +333,11 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnRetryFooterPressedError() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: FakeData.items),
+            historyDao: FakePlayHistoryDao(items: FakeData.items),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
-            )
+            ),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.errorAtBottom {
@@ -316,10 +354,11 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewAppearedError() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
+            historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
-            )
+            ),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.errorAtTop {
@@ -336,10 +375,11 @@ final class FeedViewModelTest: XCTestCase {
 
     func testRefreshError() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
+            historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
-            )
+            ),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.errorAtTop {
@@ -356,10 +396,11 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewAppearedDisplayingRows() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: FakeData.items),
+            historyDao: FakePlayHistoryDao(items: FakeData.items),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .success([])
-            )
+            ),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         viewModel.onViewUpdate = {
             if $0 == FeedViewState.displayingRows {
@@ -376,10 +417,11 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewAppearedLoggedOut() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
+            historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(WiltAPIError.loggedOut)
-            )
+            ),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         final class ListeningDelegate: FeedViewModelDelegate {
             private let exp: XCTestExpectation
@@ -421,10 +463,11 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewDisappearedWhenNotLoading() {
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: []),
+            historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
-            )
+            ),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         // We'll use the variable to check whether we move to the displaying
         // state and we'll fail if it happens
@@ -453,8 +496,9 @@ final class FeedViewModelTest: XCTestCase {
     func testOnRowTapped() {
         let index = 8
         viewModel = FeedViewModel(
-            dao: FakePlayHistoryDao(items: FakeData.items),
-            api: FakeWiltAPI()
+            historyDao: FakePlayHistoryDao(items: FakeData.items),
+            api: FakeWiltAPI(),
+            listenLaterDao: FakeListenLaterDao(items: [])
         )
         final class ListeningDelegate: FeedViewModelDelegate {
             private let exp: XCTestExpectation
@@ -477,5 +521,126 @@ final class FeedViewModelTest: XCTestCase {
                 XCTFail("Unexpected error: \(error)")
             }
         }
+    }
+
+    func testItemsAreStarred() {
+        let items = [
+            TopArtistData(
+                topArtist: "Bon Iver",
+                count: 12,
+                date: FakeData.formatter.date(from: "2018-12-25")!,
+                week: "52-2018",
+                imageURL: URL(string: "http://notarealimageurl2.notreal.net")!,
+                externalURL: URL(string: "http://notarealurl2.notreal.net")!
+            ),
+            TopArtistData(
+                topArtist: "Death Grips",
+                count: 78,
+                date: FakeData.formatter.date(from: "2018-10-21")!,
+                week: "43-2018",
+                imageURL: URL(string: "http://notarealimageurl3.notreal.net")!,
+                externalURL: URL(string: "http://notarealurl3.notreal.net")!
+            ),
+        ]
+        let starredItems = [
+            ListenLaterArtist(
+                name: "Bon Iver",
+                externalURL: URL(string: "http://notarealurl2.notreal.net")!,
+                imageURL: URL(string: "http://notarealimageurl2.notreal.net")!
+            )
+        ]
+        let expected = [
+            FeedItemViewModel(
+                artistName: "Bon Iver",
+                playsText: "12 plays",
+                dateText: "Dec 2018",
+                imageURL: URL(string: "http://notarealimageurl2.notreal.net")!,
+                externalURL: URL(string: "http://notarealurl2.notreal.net")!,
+                isStarred: true
+            ),
+            FeedItemViewModel(
+                artistName: "Death Grips",
+                playsText: "78 plays",
+                dateText: "Oct 2018",
+                imageURL: URL(string: "http://notarealimageurl3.notreal.net")!,
+                externalURL: URL(string: "http://notarealurl3.notreal.net")!,
+                isStarred: false
+            ),
+        ]
+        viewModel = FeedViewModel(
+            historyDao: FakePlayHistoryDao(items: items),
+            api: FakeWiltAPI(),
+            listenLaterDao: FakeListenLaterDao(items: starredItems)
+        )
+        XCTAssertEqual(expected, viewModel.items)
+        // We need to fulfill the expectation since we declare it in setUp
+        // A small sacrifice so that I don't have to redeclare it in all of the
+        // other tests
+        exp.fulfill()
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowStarred() {
+        viewModel.onStarsUpdated = {
+            self.exp.fulfill()
+        }
+        viewModel.onRowStarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowStarredTriggersInsert() {
+        listenLaterDao.onInsert = {
+            XCTAssertEqual(FakeData.listenLaterItems[2], $0)
+            self.exp.fulfill()
+        }
+        viewModel.onRowStarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowStarredWithError() {
+        listenLaterDao.onInsert = { _ in
+            throw FakeError.testError
+        }
+        viewModel.onStarError = {
+            XCTAssertEqual(
+                "There was an error saving Death Grips to your list. Maybe try again later?",
+                $0
+            )
+            self.exp.fulfill()
+        }
+        viewModel.onRowStarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowUnstarred() {
+        viewModel.onStarsUpdated = {
+            self.exp.fulfill()
+        }
+        viewModel.onRowUnstarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowUnstarredTriggersDelete() {
+        listenLaterDao.onDelete = {
+            XCTAssertEqual(FakeData.listenLaterItems[2].name, $0)
+            self.exp.fulfill()
+        }
+        viewModel.onRowUnstarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
+    }
+
+    func testOnRowUnstarredWithError() {
+        listenLaterDao.onDelete = { _ in
+            throw FakeError.testError
+        }
+        viewModel.onStarError = {
+            XCTAssertEqual(
+                "There was an error removing Death Grips from your list. Maybe try again later?",
+                $0
+            )
+            self.exp.fulfill()
+        }
+        viewModel.onRowUnstarred(rowIndex: 2)
+        waitForExpectations(timeout: 1) {_ in}
     }
 }

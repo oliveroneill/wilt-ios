@@ -7,9 +7,9 @@ final class LoggedInCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     weak var delegate: LoggedInCoordinatorDelegate?
-    // Will be non-nil if the settings page is being presented and nil when
+    // Will be non-nil if there's a modular page being presented and nil when
     // not visible
-    private var settingsController: UINavigationController?
+    private var currentController: UINavigationController?
     private var container: NSPersistentContainer?
 
     init(navigationController: UINavigationController, database: WiltDatabase,
@@ -20,6 +20,9 @@ final class LoggedInCoordinator: Coordinator {
     }
 
     func start() {
+        // Request notificaton permission. We ignore the result, since the
+        // app can function either way
+        UNUserNotificationCenter.current().requestAuthorization(options: [.badge]) { _, _ in }
         database.loadContext { [unowned self] in
             switch ($0) {
             case .success(let container):
@@ -86,7 +89,48 @@ final class LoggedInCoordinator: Coordinator {
     }
 }
 
-extension LoggedInCoordinator: MainAppViewControllerDelegate {
+extension LoggedInCoordinator: MainAppViewControllerDelegate, ArtistSearchViewModelDelegate {
+    func showSearch() {
+        guard let container = container else { return }
+        guard let store = try? ListenLaterStore(viewContext: container.viewContext) else {
+            return
+        }
+        let viewModel = ArtistSearchViewModel(
+            dao: ListenLaterNotifyingStore(dao: store),
+            api: SpotifySearchAPI()
+        )
+        viewModel.delegate = self
+        let controller = ArtistSearchViewController(viewModel: viewModel)
+        // controller.delegate = self
+        let toPresent = UINavigationController(rootViewController: controller)
+        toPresent.modalPresentationStyle = .popover
+        currentController = toPresent
+        navigationController.present(
+            toPresent,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    func onSearchExit() {
+        closeCurrentController(animated: true) { [weak self] in
+            guard let self = self else { return }
+            // Since the search controller is a modal this doesn't get
+            // triggered, which means that it's view won't be updated with the
+            // new value. To fix this, we'll signal that the view is visible
+            // ourselves. Not sure whether this should be the coordinator's
+            // responsibility...
+            let currentController = self.navigationController.visibleViewController
+            guard let mainController = currentController as? MainAppViewController else {
+                return
+            }
+            guard let controller = mainController.selectedViewController as? ListenLaterViewController else {
+                return
+            }
+            controller.viewDidAppear(false)
+        }
+    }
+
     func open(url: URL) {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
@@ -96,7 +140,7 @@ extension LoggedInCoordinator: MainAppViewControllerDelegate {
         controller.delegate = self
         let toPresent = UINavigationController(rootViewController: controller)
         toPresent.modalPresentationStyle = .popover
-        settingsController = toPresent
+        currentController = toPresent
         navigationController.present(
             toPresent,
             animated: true,
@@ -114,19 +158,19 @@ extension LoggedInCoordinator: SettingsViewControllerDelegate {
         delegate?.contactUs()
     }
 
-    private func closeSettings(animated: Bool = false,
-                               completionHandler: @escaping () -> Void) {
-        guard let controller = settingsController else { return }
+    private func closeCurrentController(animated: Bool = false,
+                                        completionHandler: @escaping () -> Void) {
+        guard let controller = currentController else { return }
         controller.dismiss(animated: animated, completion: completionHandler)
-        settingsController = nil
+        currentController = nil
     }
 
     func close() {
-        closeSettings(animated: true) { }
+        closeCurrentController(animated: true) { }
     }
 
     func logOut() {
-        closeSettings { [unowned self] in
+        closeCurrentController { [unowned self] in
             self.clearCacheAndLogOut()
         }
     }

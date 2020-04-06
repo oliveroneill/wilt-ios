@@ -64,7 +64,33 @@ final class FeedViewController: UITableViewController {
         TopArtistCell.register(tableView: tableView)
         viewModel.onRowsUpdated = {
             DispatchQueue.main.async { [weak self] in
-                self?.tableView.reloadData()
+                guard let self = self else { return }
+                self.tableView.reloadData()
+            }
+        }
+        viewModel.onStarsUpdated = {
+            // To avoid jank from the swipe animation being cut short we
+            // need to wait a second. This seems like a hack but the alternative
+            // is using didEndEditing to infer that the animation finished,
+            // however I found this to be too slow to seem responsive :(
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                guard let self = self else { return }
+                self.tableView.reloadData()
+            }
+        }
+        viewModel.onStarError = { message in
+            DispatchQueue.main.async { [weak self] in
+                let alert = UIAlertController(
+                    title: "Uh oh!",
+                    message: message,
+                    preferredStyle: .alert
+                )
+                alert.addAction(
+                    UIAlertAction(title: "OK", style: .default) { _ in
+                        alert.dismiss(animated: true)
+                    }
+                )
+                self?.present(alert, animated: true, completion: nil)
             }
         }
         viewModel.onViewUpdate = { [weak self] in
@@ -138,6 +164,14 @@ final class FeedViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         viewModel.onViewAppeared()
+        // If there's at least one element then we should indicate
+        // that there's a swipe action available
+        if !viewModel.items.isEmpty {
+            let first = IndexPath(row: 0, section: 0)
+            tableView.cellForRow(at: first)?.hintSwipeAction(
+                swipeActionColor: swipeColor(for: first)
+            )
+        }
     }
 
     override func tableView(_ tableView: UITableView,
@@ -171,6 +205,31 @@ final class FeedViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.onRowTapped(rowIndex: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let isStarred = viewModel.items[indexPath.row].isStarred
+        let title = isStarred ? "listen_later_undo_action_title".localized :
+            "listen_later_action_title".localized
+
+        let action = UIContextualAction(style: .normal, title: title) {
+            if isStarred {
+                self.viewModel.onRowUnstarred(rowIndex: indexPath.row)
+            } else {
+                self.viewModel.onRowStarred(rowIndex: indexPath.row)
+            }
+            $2(true)
+        }
+        action.backgroundColor = swipeColor(for: indexPath)
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
+
+    func swipeColor(for indexPath: IndexPath) -> UIColor {
+        let isStarred = viewModel.items[indexPath.row].isStarred
+        let lightBlue = UIColor(red: 0, green: 0.5, blue: 1, alpha: 1)
+        return isStarred ? .gray : lightBlue
     }
 }
 

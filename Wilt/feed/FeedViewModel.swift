@@ -22,11 +22,13 @@ struct FeedItemViewModel: Equatable {
     let dateText: String
     let imageURL: URL
     let externalURL: URL
+    let isStarred: Bool
 }
 
 /// View model for displaying the user's music playing history in a feed
 final class FeedViewModel {
-    private let dao: PlayHistoryDao
+    private let historyDao: PlayHistoryDao
+    private let listenLaterDao: ListenLaterDao
     private let pager: PlayHistoryPager
     private let backgroundQueue = DispatchQueue(
         label: "com.oliveroneill.wilt.FeedViewModel.backgroundQueue"
@@ -41,6 +43,8 @@ final class FeedViewModel {
     /// needs to be modelled separately since it will reload the views and
     /// it would be ugly to have a state that does that
     var onRowsUpdated: (() -> Void)?
+    var onStarsUpdated: (() -> Void)?
+    var onStarError: ((String) -> Void)?
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM yyyy"
@@ -48,13 +52,14 @@ final class FeedViewModel {
     }()
     /// The items that should be displayed on the feed as cells
     var items: [FeedItemViewModel] {
-        return dao.items.lazy.map {
+        return historyDao.items.lazy.map {
             FeedItemViewModel(
                 artistName: $0.topArtist,
                 playsText: "\($0.count) plays",
                 dateText: "\(dateFormatter.string(from: $0.date))",
                 imageURL: $0.imageURL,
-                externalURL: $0.externalURL
+                externalURL: $0.externalURL,
+                isStarred: $0.isStarred(dao: listenLaterDao)
             )
         }
     }
@@ -64,16 +69,17 @@ final class FeedViewModel {
     /// - Parameters:
     ///   - dao: Where data will be cached and retrieved
     ///   - api: Used for making network calls when the cache is out of date
-    init(dao: PlayHistoryDao, api: WiltAPI) {
-        self.dao = dao
+    init(historyDao: PlayHistoryDao, api: WiltAPI, listenLaterDao: ListenLaterDao) {
+        self.historyDao = historyDao
+        self.listenLaterDao = listenLaterDao
         // This pager will be used to retrieve data in pages at a time and
         // inserting them into the cache
         pager = PlayHistoryPager(
             api: api,
-            dao: dao,
+            dao: historyDao,
             pageSize: 10
         )
-        dao.onDataChange = { [weak self] in
+        historyDao.onDataChange = { [weak self] in
             self?.onRowsUpdated?()
         }
     }
@@ -87,6 +93,9 @@ final class FeedViewModel {
         guard state != .loadingAtTop else {
             return
         }
+        // We must trigger star update in case the stars have changed since
+        // we last saw the page
+        onStarsUpdated?()
         updateState(state: .loadingAtTop)
         loadLaterPage()
     }
@@ -97,6 +106,44 @@ final class FeedViewModel {
         }
         updateState(state: .loadingAtTop)
         loadLaterPage()
+    }
+
+    func onRowStarred(rowIndex: Int) {
+        backgroundQueue.async { [weak self] in
+            guard let self = self else { return }
+            do {
+                try self.listenLaterDao.insert(
+                    item: self.items[rowIndex].toListenLaterArtist()
+                )
+                self.onStarsUpdated?()
+            } catch {
+                self.onStarError?(
+                    String(
+                        format: "star_insert_error".localized,
+                        self.items[rowIndex].artistName
+                    )
+                )
+            }
+        }
+    }
+
+    func onRowUnstarred(rowIndex: Int) {
+        backgroundQueue.async { [weak self] in
+            guard let self = self else { return }
+            do {
+                try self.listenLaterDao.delete(
+                    name: self.items[rowIndex].artistName
+                )
+                self.onStarsUpdated?()
+            } catch {
+                self.onStarError?(
+                    String(
+                        format: "star_delete_error".localized,
+                        self.items[rowIndex].artistName
+                    )
+                )
+            }
+        }
     }
 
     private func handleInsertResult(upsertCountResult: Result<Int, Error>,
@@ -161,7 +208,7 @@ final class FeedViewModel {
     }
 
     private func loadEarlierPage() {
-        let earliestItem = dao.items.last
+        let earliestItem = historyDao.items.last
         backgroundQueue.async { [weak self] in
             guard let self = self else { return }
             guard let earliestItem = earliestItem else {
@@ -183,7 +230,7 @@ final class FeedViewModel {
     }
 
     private func loadLaterPage() {
-        let latestItem = dao.items.first
+        let latestItem = historyDao.items.first
         backgroundQueue.async { [weak self] in
             guard let self = self else { return }
             guard let latestItem = latestItem else {
@@ -207,4 +254,22 @@ final class FeedViewModel {
 protocol FeedViewModelDelegate: class {
     func open(url: URL)
     func loggedOut()
+}
+
+extension FeedItemViewModel {
+    func toListenLaterArtist() -> ListenLaterArtist {
+        return ListenLaterArtist(
+            name: artistName,
+            externalURL: externalURL,
+            imageURL: imageURL
+        )
+    }
+}
+
+extension TopArtistData {
+    func isStarred(dao: ListenLaterDao) -> Bool {
+        // Just ignore the error. Not sure how we should actually handle
+        // this one
+        return (try? dao.contains(name: topArtist)) ?? false
+    }
 }

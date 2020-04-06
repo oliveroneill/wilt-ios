@@ -1,10 +1,9 @@
 import Foundation
 import SDWebImage
-import SwiftIcons
 
-/// A single table view for the play history feed. See `FeedViewController`
-final class TopArtistCell: UITableViewCell {
-    static let reuseIdentifier = "topArtistCell"
+/// A single table view cell for the listen later page. See `ListenLaterViewController`
+final class ArtistTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "ArtistTableViewCell"
     private lazy var roundCornerTransformer: SDImageTransformer = {
         return SDImagePipelineTransformer(
             transformers: [
@@ -27,18 +26,15 @@ final class TopArtistCell: UITableViewCell {
         )
     }()
     /// Set this when the view is being reused
-    var viewModel: FeedItemViewModel? {
+    var viewModel: ArtistViewModel? {
         didSet {
             artistLabel.text = viewModel?.artistName ?? ""
-            playsLabel.text = viewModel?.playsText ?? ""
-            dateLabel.text = viewModel?.dateText ?? ""
-            if let viewModel = viewModel {
+            if let imageURL = viewModel?.imageURL {
                 artistImageView.sd_setImage(
-                    with: viewModel.imageURL,
+                    with: imageURL,
                     placeholderImage: nil,
                     context: [.imageTransformer: roundCornerTransformer]
                 )
-                starImageView.isHidden = !viewModel.isStarred
             }
         }
     }
@@ -47,16 +43,6 @@ final class TopArtistCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
-    private lazy var starImageView: UIImageView = {
-        let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(
-            icon: .emoji(.clock),
-            size: CGSize(width: 64, height: 64)
-        )
-        return imageView
-    }()
-    private let playsLabel = UILabel(frame: .zero)
-    private let dateLabel = UILabel(frame: .zero)
     // I know UITableViewCell has it's own imageView property but I didn't
     // want to have to unwrap it all the time
     private let artistImageView = UIImageView(frame: .zero)
@@ -65,10 +51,7 @@ final class TopArtistCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // Setup views
         contentView.addSubview(artistLabel)
-        contentView.addSubview(playsLabel)
-        contentView.addSubview(dateLabel)
         contentView.addSubview(artistImageView)
-        contentView.addSubview(starImageView)
         artistImageView.translatesAutoresizingMaskIntoConstraints = false
         artistImageView.contentMode = .scaleAspectFill
         NSLayoutConstraint.activate([
@@ -99,8 +82,8 @@ final class TopArtistCell: UITableViewCell {
                 constant: 16
             ),
             artistLabel.bottomAnchor.constraint(
-                equalTo: playsLabel.topAnchor,
-                constant: -8
+                equalTo: contentView.safeAreaLayoutGuide.bottomAnchor,
+                constant: -32
             ),
             artistLabel.leadingAnchor.constraint(
                 equalTo: artistImageView.trailingAnchor,
@@ -109,65 +92,6 @@ final class TopArtistCell: UITableViewCell {
             artistLabel.trailingAnchor.constraint(
                 equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
                 constant: -8
-            ),
-        ])
-        playsLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            playsLabel.topAnchor.constraint(
-                equalTo: artistLabel.bottomAnchor,
-                constant: 8
-            ),
-            playsLabel.bottomAnchor.constraint(
-                equalTo: dateLabel.topAnchor,
-                constant: -8
-            ),
-            playsLabel.leadingAnchor.constraint(
-                equalTo: artistImageView.trailingAnchor,
-                constant: 16
-            ),
-            playsLabel.trailingAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
-                constant: -8
-            ),
-        ])
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(
-                equalTo: playsLabel.bottomAnchor,
-                constant: 8
-            ),
-            dateLabel.bottomAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.bottomAnchor,
-                constant: -16
-            ),
-            dateLabel.leadingAnchor.constraint(
-                equalTo: artistImageView.trailingAnchor,
-                constant: 16
-            ),
-            dateLabel.trailingAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
-                constant: -8
-            ),
-        ])
-        starImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            starImageView.topAnchor.constraint(
-                greaterThanOrEqualTo: contentView.safeAreaLayoutGuide.topAnchor,
-                constant: 16
-            ),
-            starImageView.bottomAnchor.constraint(
-                lessThanOrEqualTo: contentView.safeAreaLayoutGuide.bottomAnchor,
-                constant: -16
-            ),
-            starImageView.trailingAnchor.constraint(
-                equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
-                constant: -16
-            ),
-            starImageView.heightAnchor.constraint(
-                equalToConstant: 16
-            ),
-            starImageView.widthAnchor.constraint(
-                equalTo: starImageView.heightAnchor
             ),
         ])
     }
@@ -181,8 +105,8 @@ final class TopArtistCell: UITableViewCell {
     /// - Parameter tableView: The tableview to register use with
     static func register(tableView: UITableView) {
         tableView.register(
-            TopArtistCell.self,
-            forCellReuseIdentifier: TopArtistCell.reuseIdentifier
+            ArtistTableViewCell.self,
+            forCellReuseIdentifier: ArtistTableViewCell.reuseIdentifier
         )
     }
 }
