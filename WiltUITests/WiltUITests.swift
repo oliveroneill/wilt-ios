@@ -10,7 +10,13 @@ final class WiltUITests: XCTestCase {
         app.launch()
     }
 
+    func testListenLaterSnapshot() {
+        snapshot("ListenLater")
+    }
+
     func testProfileSnapshot() {
+        let tabBarsQuery = XCUIApplication().tabBars
+        tabBarsQuery.buttons["Profile"].tap()
         snapshot("Profile")
     }
 
