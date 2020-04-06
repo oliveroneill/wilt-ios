@@ -19,5 +19,6 @@ platform :ios do
   desc "Generate new localized screenshots"
   lane :screenshots do
     capture_screenshots(workspace: "Wilt.xcworkspace", scheme: "WiltUITests")
+    upload_to_app_store
   end
 end
