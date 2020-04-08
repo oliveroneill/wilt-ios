@@ -179,6 +179,18 @@ final class ProfileCardView: MDCCardCollectionCell {
                 action: #selector(retryPressed),
                 for: .touchUpInside
             )
+        case .missingData(let tagTitle, let title, let subtitle1):
+            shimmer.isShimmering = false
+            setupSuccessfulView()
+            // Update views
+            titleLabel.backgroundColor = .white
+            subtitle2Label.backgroundColor = .white
+            subtitle1Label.backgroundColor = .white
+            chip.titleLabel.text = tagTitle
+            updateChipWidthConstraint()
+            titleLabel.text = title
+            subtitle1Label.text = subtitle1
+            subtitle2Label.text = ""
         }
     }
 

@@ -48,3 +48,6 @@ Spotify play history and user info will be stored and periodically updated. To o
 "star_insert_error" = "There was an error saving %@ to your list. Maybe try again later?";
 "star_delete_error" = "There was an error removing %@ from your list. Maybe try again later?";
 "search_error" = "Your search failed! Maybe check your internet connection?";
+"profile_missing_data_tag_title" = "Uh oh!";
+"profile_missing_data_title" = "???";
+"profile_missing_data_subtitle" = "Are you new to Spotify? There are no records here yet.";

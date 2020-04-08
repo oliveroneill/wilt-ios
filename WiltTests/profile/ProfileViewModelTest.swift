@@ -1,4 +1,6 @@
 import XCTest
+// Needed to test specific missing data error
+import Firebase
 
 @testable import Wilt
 
@@ -396,6 +398,82 @@ final class ProfileViewModelTest: XCTestCase {
         viewModel.delegate = delegate
         self.viewModel.onCardTapped(cardIndex: index)
         XCTAssertEqual(0, delegate.openCallCount)
+    }
+
+    func testOnViewAppearedArtistMissingData() {
+        let error = NSError(
+            domain: FunctionsErrorDomain,
+            code: FunctionsErrorCode.notFound.rawValue,
+            userInfo: [:]
+        )
+        let api = FakeWiltAPI(
+            topArtistResult: [
+                TopSomethingRequest(timeRange: "medium_term", index: 0): .failure(error)
+            ]
+        )
+        viewModel = ProfileViewModel(api: api)
+        let exp = expectation(description: "Should receive update")
+        let expected: [CardViewModelState] = [
+            .loading(tagTitle: "Your favourite artist ever"),
+            .loading(tagTitle: "Your favourite song ever"),
+            .loading(tagTitle: "Your favourite artist recently"),
+            .loading(tagTitle: "Your favourite song recently"),
+            .missingData(
+                tagTitle: "Uh oh!",
+                title: "???",
+                subtitleFirstLine: "Are you new to Spotify? There are no records here yet."
+            ),
+            .loading(tagTitle: "Your favourite song in recent months"),
+        ]
+        viewModel.onViewUpdate = {
+            if expected == $0 {
+                exp.fulfill()
+            }
+        }
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testOnViewAppearedTrackMissingData() {
+        let error = NSError(
+            domain: FunctionsErrorDomain,
+            code: FunctionsErrorCode.notFound.rawValue,
+            userInfo: [:]
+        )
+        let api = FakeWiltAPI(
+            topTrackResult: [
+                TopSomethingRequest(timeRange: "medium_term", index: 0): .failure(error)
+            ]
+        )
+        viewModel = ProfileViewModel(api: api)
+        let exp = expectation(description: "Should receive update")
+        let expected: [CardViewModelState] = [
+            .loading(tagTitle: "Your favourite artist ever"),
+            .loading(tagTitle: "Your favourite song ever"),
+            .loading(tagTitle: "Your favourite artist recently"),
+            .loading(tagTitle: "Your favourite song recently"),
+            .loading(tagTitle: "Your favourite artist in recent months"),
+            .missingData(
+                tagTitle: "Uh oh!",
+                title: "???",
+                subtitleFirstLine: "Are you new to Spotify? There are no records here yet."
+            )
+        ]
+        viewModel.onViewUpdate = {
+            if expected == $0 {
+                exp.fulfill()
+            }
+        }
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
     }
 }
 

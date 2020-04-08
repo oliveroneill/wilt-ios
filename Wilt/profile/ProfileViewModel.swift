@@ -1,4 +1,5 @@
 import SwiftDate
+import Firebase
 
 /// Specification for cards to be requested and displayed
 ///
@@ -51,6 +52,11 @@ enum CardViewModelState: Equatable {
         externalURL: URL
     )
     case error
+    case missingData(
+        tagTitle: String,
+        title: String,
+        subtitleFirstLine: String
+    )
 }
 
 /// View model for the profile screen
@@ -103,6 +109,16 @@ final class ProfileViewModel {
                         tagTitle: card.readableString
                     )
                 } catch {
+                    if let error = error as NSError?,
+                        error.domain == FunctionsErrorDomain,
+                        error.code == FunctionsErrorCode.notFound.rawValue {
+                        self.cardStates[cardIndex] = .missingData(
+                            tagTitle: "profile_missing_data_tag_title".localized,
+                            title: "profile_missing_data_title".localized,
+                            subtitleFirstLine: "profile_missing_data_subtitle".localized
+                        )
+                        return
+                    }
                     print("topArtist error", error)
                     self.cardStates[cardIndex] = .error
                     guard (error as? WiltAPIError) != WiltAPIError.loggedOut else {
@@ -124,6 +140,16 @@ final class ProfileViewModel {
                         tagTitle: card.readableString
                     )
                 } catch {
+                    if let error = error as NSError?,
+                        error.domain == FunctionsErrorDomain,
+                        error.code == FunctionsErrorCode.notFound.rawValue {
+                        self.cardStates[cardIndex] = .missingData(
+                            tagTitle: "profile_missing_data_tag_title".localized,
+                            title: "profile_missing_data_title".localized,
+                            subtitleFirstLine: "profile_missing_data_subtitle".localized
+                        )
+                        return
+                    }
                     print("topTrack error", error)
                     self.cardStates[cardIndex] = .error
                     guard (error as? WiltAPIError) != WiltAPIError.loggedOut else {

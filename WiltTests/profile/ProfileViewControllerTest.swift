@@ -3,6 +3,9 @@ import Nimble
 import Nimble_Snapshots
 import KIF
 
+// Needed to test specific missing data error
+import Firebase
+
 @testable import Wilt
 
 final class ProfileViewControllerTest: KIFTestCase {
@@ -153,5 +156,43 @@ final class ProfileViewControllerTest: KIFTestCase {
                 XCTFail("Unexpected error: \(error)")
             }
         }
+    }
+
+    func testMissingDataArtist() {
+        let error = NSError(
+            domain: FunctionsErrorDomain,
+            code: FunctionsErrorCode.notFound.rawValue,
+            userInfo: [:]
+        )
+        setupController(
+            topArtistResult: [
+                TopSomethingRequest(timeRange: "medium_term", index: 0): .failure(error)
+            ]
+        )
+        tester().waitForAnimationsToFinish()
+        controller.collectionView.scrollToItem(
+            at: IndexPath(row: 5, section: 0),
+            at: .bottom,
+            animated: true
+        )
+        tester().waitForAnimationsToFinish()
+        // expect(self.window).to(recordSnapshot())
+        expect(self.window).to(haveValidSnapshot())
+    }
+
+    func testMissingDataTrack() {
+        let error = NSError(
+            domain: FunctionsErrorDomain,
+            code: FunctionsErrorCode.notFound.rawValue,
+            userInfo: [:]
+        )
+        setupController(
+            topTrackResult: [
+                TopSomethingRequest(timeRange: "long_term", index: 0): .failure(error)
+            ]
+        )
+        tester().waitForAnimationsToFinish()
+        // expect(self.window).to(recordSnapshot())
+        expect(self.window).to(haveValidSnapshot())
     }
 }
