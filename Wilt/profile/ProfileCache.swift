@@ -185,7 +185,7 @@ final class ProfileCache: ProfileAPI {
 
 extension TopArtistInfoEntity {
     var isOutOfDate: Bool {
-        return Date().timeIntervalSince(lastUpdated!) >= ProfileCache.maxCacheIntervalSeconds
+        Date().timeIntervalSince(lastUpdated!) >= ProfileCache.maxCacheIntervalSeconds
     }
 
     func toData() -> TopArtistInfo {
@@ -207,7 +207,7 @@ extension TopArtistInfoEntity {
 
 extension TopTrackInfoEntity {
     var isOutOfDate: Bool {
-        return Date().timeIntervalSince(lastUpdated!) >= ProfileCache.maxCacheIntervalSeconds
+        Date().timeIntervalSince(lastUpdated!) >= ProfileCache.maxCacheIntervalSeconds
     }
 
     func toData() -> TopTrackInfo {
