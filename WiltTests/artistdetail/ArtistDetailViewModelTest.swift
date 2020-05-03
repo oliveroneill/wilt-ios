@@ -39,7 +39,9 @@ class ArtistDetailViewModelTest: XCTestCase {
     }
 
     func testOnViewAppearedTriggersActivityQuery() {
-        let exp = expectation(description: "Will trigger artist activity update")
+        let exp = expectation(
+            description: "Will trigger artist activity update"
+        )
         viewModel.onViewUpdate = { _ in
             exp.fulfill()
         }
@@ -104,7 +106,9 @@ class ArtistDetailViewModelTest: XCTestCase {
             ),
         ]
         api.getArtistActivityResult = .success(activity)
-        let exp = expectation(description: "Will trigger update to loaded state")
+        let exp = expectation(
+            description: "Will trigger update to loaded state"
+        )
         viewModel.onViewUpdate = {
             guard case .loaded(let artist, let activity) = $0 else {
                 return
@@ -123,7 +127,9 @@ class ArtistDetailViewModelTest: XCTestCase {
 
     func testOnViewUpdateWithError() {
         api.getArtistActivityResult = .failure(error)
-        let exp = expectation(description: "Will trigger update to loaded state")
+        let exp = expectation(
+            description: "Will trigger update to loaded state"
+        )
         viewModel.onViewUpdate = {
             guard case .error(let error) = $0 else {
                 return

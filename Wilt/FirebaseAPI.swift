@@ -127,7 +127,8 @@ final class FirebaseAPI: WiltAPI {
         }
     }
 
-    func getArtistActivity(artistName: String, completion: @escaping (Result<[ArtistActivity], Error>) -> Void) {
+    func getArtistActivity(artistName: String,
+                           completion: @escaping (Result<[ArtistActivity], Error>) -> Void) {
         let data: [String:Any] = ["artist": artistName]
         NetworkActivityUtil.showNetworkIndicator()
         functions
@@ -282,7 +283,9 @@ struct ArtistActivity {
                 throw TopArtistError.unexpectedNil
         }
         guard let dateString = dateDict?["value"] as? String,
-            let date = WiltAPIDateFormatters.dateStringFormatter.date(from: dateString) else {
+            let date = WiltAPIDateFormatters.dateStringFormatter.date(
+                from: dateString
+            ) else {
                 throw TopArtistError.unexpectedNil
         }
         return ArtistActivity(date: date, numberOfPlays: plays)
