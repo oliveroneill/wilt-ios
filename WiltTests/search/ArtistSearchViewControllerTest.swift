@@ -38,7 +38,7 @@ final class ArtistSearchViewControllerTest: KIFTestCase {
         setupController()
         tester().waitForAnimationsToFinish()
         // expect(self.window).to(recordSnapshot())
-        expect(self.window).to(haveValidSnapshot())
+        expect(self.window).to(haveValidSnapshot(tolerance: 0.001))
     }
 
     func testOnSearchLoading() {
