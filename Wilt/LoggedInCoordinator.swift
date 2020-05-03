@@ -89,7 +89,28 @@ final class LoggedInCoordinator: Coordinator {
     }
 }
 
-extension LoggedInCoordinator: MainAppViewControllerDelegate, ArtistSearchViewModelDelegate {
+extension LoggedInCoordinator: MainAppViewControllerDelegate, ArtistSearchViewModelDelegate, ArtistDetailViewModelDelegate {
+    func showDetail(artist: TopArtistData) {
+        let viewModel = ArtistDetailViewModel(
+            artist: ArtistInfo(
+                name: artist.topArtist,
+                imageURL: artist.imageURL,
+                externalURL: artist.externalURL
+            ),
+            api: FirebaseAPI()
+        )
+        viewModel.delegate = self
+        let controller = ArtistDetailViewController(viewModel: viewModel)
+        let toPresent = UINavigationController(rootViewController: controller)
+        toPresent.modalPresentationStyle = .popover
+        currentController = toPresent
+        navigationController.present(
+            toPresent,
+            animated: true,
+            completion: nil
+        )
+    }
+
     func showSearch() {
         guard let container = container else { return }
         guard let store = try? ListenLaterStore(viewContext: container.viewContext) else {

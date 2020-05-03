@@ -186,8 +186,8 @@ final class FeedViewControllerTest: KIFTestCase {
                 self.exp = expectation
             }
             func loggedOut() {}
-            func open(url: URL) {
-                XCTAssertEqual(FakeData.items[index].externalURL, url)
+            func open(url: URL) {}
+            func showDetail(artist: TopArtistData) {
                 exp.fulfill()
             }
         }

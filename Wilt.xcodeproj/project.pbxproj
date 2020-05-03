@@ -18,6 +18,11 @@
 		7D47CCA722FB88C900A4D96E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D47CCA622FB88C900A4D96E /* Assets.xcassets */; };
 		7D47CCAA22FB88C900A4D96E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D47CCA822FB88C900A4D96E /* LaunchScreen.storyboard */; };
 		7D47CCC022FB88CA00A4D96E /* WiltUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCBF22FB88CA00A4D96E /* WiltUITests.swift */; };
+		7D5559B72456D24200EA07FE /* ArtistDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559B62456D24200EA07FE /* ArtistDetailViewController.swift */; };
+		7D5559B92456D35000EA07FE /* ArtistDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559B82456D35000EA07FE /* ArtistDetailViewModel.swift */; };
+		7D5559BB24599AC800EA07FE /* ArtistDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559BA24599AC800EA07FE /* ArtistDetailTitleCell.swift */; };
+		7D5559BE245AF29600EA07FE /* ArtistDetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559BD245AF29600EA07FE /* ArtistDetailViewModelTest.swift */; };
+		7D5559C0245C449F00EA07FE /* ArtistDetailViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559BF245C449F00EA07FE /* ArtistDetailViewControllerTest.swift */; };
 		7D5A2AF7231A554D00B56000 /* LoggedInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */; };
 		7D5A2AF9231A573800B56000 /* MainAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AF8231A573800B56000 /* MainAppViewController.swift */; };
 		7D5A2AFB231A5B1D00B56000 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AFA231A5B1D00B56000 /* FeedViewController.swift */; };
@@ -125,6 +130,11 @@
 		7D47CCBB22FB88CA00A4D96E /* WiltUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WiltUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D47CCBF22FB88CA00A4D96E /* WiltUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltUITests.swift; sourceTree = "<group>"; };
 		7D47CCC122FB88CA00A4D96E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D5559B62456D24200EA07FE /* ArtistDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewController.swift; sourceTree = "<group>"; };
+		7D5559B82456D35000EA07FE /* ArtistDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewModel.swift; sourceTree = "<group>"; };
+		7D5559BA24599AC800EA07FE /* ArtistDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailTitleCell.swift; sourceTree = "<group>"; };
+		7D5559BD245AF29600EA07FE /* ArtistDetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewModelTest.swift; sourceTree = "<group>"; };
+		7D5559BF245C449F00EA07FE /* ArtistDetailViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewControllerTest.swift; sourceTree = "<group>"; };
 		7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInCoordinator.swift; sourceTree = "<group>"; };
 		7D5A2AF8231A573800B56000 /* MainAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewController.swift; sourceTree = "<group>"; };
 		7D5A2AFA231A5B1D00B56000 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +290,7 @@
 				7DB158582307D7FE00F86A9E /* Coordinator.swift */,
 				7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */,
 				7D910C5D233CDA5B006B8D94 /* NetworkActivityUtil.swift */,
+				7D5559B52456D1F700EA07FE /* artistdetail */,
 				7D5A2B0C2324BEF700B56000 /* feed */,
 				7DD271EC23C52CB9006B543F /* listenlater */,
 				7D809136232DFFE4006FE0FA /* profile */,
@@ -305,9 +316,10 @@
 		7D47CCB322FB88CA00A4D96E /* WiltTests */ = {
 			isa = PBXGroup;
 			children = (
-				7DB1588A2319ED9900F86A9E /* mocks */,
+				7D5559BC245AF10700EA07FE /* artistdetail */,
 				7D5A2B0D2324C15A00B56000 /* feed */,
 				7DD271F123C5BBCB006B543F /* listenlater */,
+				7DB1588A2319ED9900F86A9E /* mocks */,
 				7D233B2E2330470B00EC95B6 /* profile */,
 				7DB15892231A519400F86A9E /* onboarding */,
 				7DD05B8F23D103D70020EDD0 /* search */,
@@ -326,6 +338,25 @@
 				7D47CCC122FB88CA00A4D96E /* Info.plist */,
 			);
 			path = WiltUITests;
+			sourceTree = "<group>";
+		};
+		7D5559B52456D1F700EA07FE /* artistdetail */ = {
+			isa = PBXGroup;
+			children = (
+				7D5559BA24599AC800EA07FE /* ArtistDetailTitleCell.swift */,
+				7D5559B62456D24200EA07FE /* ArtistDetailViewController.swift */,
+				7D5559B82456D35000EA07FE /* ArtistDetailViewModel.swift */,
+			);
+			path = artistdetail;
+			sourceTree = "<group>";
+		};
+		7D5559BC245AF10700EA07FE /* artistdetail */ = {
+			isa = PBXGroup;
+			children = (
+				7D5559BD245AF29600EA07FE /* ArtistDetailViewModelTest.swift */,
+				7D5559BF245C449F00EA07FE /* ArtistDetailViewControllerTest.swift */,
+			);
+			path = artistdetail;
 			sourceTree = "<group>";
 		};
 		7D5A2B0C2324BEF700B56000 /* feed */ = {
@@ -601,6 +632,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-WiltUITests/Pods-WiltUITests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
@@ -618,6 +650,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
@@ -667,6 +700,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Wilt/Pods-Wilt-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
@@ -684,6 +718,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
@@ -793,6 +828,7 @@
 				7D5A2B152324E0FD00B56000 /* FeedViewModel.swift in Sources */,
 				7DD05B8823D04CB80020EDD0 /* ArtistSearchViewModel.swift in Sources */,
 				7DD05B8C23D05C690020EDD0 /* SearchAPI.swift in Sources */,
+				7D5559B92456D35000EA07FE /* ArtistDetailViewModel.swift in Sources */,
 				7DA898BA232E02E500204823 /* ProfileViewModel.swift in Sources */,
 				7D5A2AF7231A554D00B56000 /* LoggedInCoordinator.swift in Sources */,
 				7D5A2B0B2324B75900B56000 /* TopArtistData.swift in Sources */,
@@ -802,6 +838,7 @@
 				7D5A2AFB231A5B1D00B56000 /* FeedViewController.swift in Sources */,
 				7DB1585B2307D88200F86A9E /* OnboardingCoordinator.swift in Sources */,
 				7DD271F023C53075006B543F /* ListenLaterStore.swift in Sources */,
+				7D5559B72456D24200EA07FE /* ArtistDetailViewController.swift in Sources */,
 				7DD05B9B23D2D9EF0020EDD0 /* ListenLaterNotifyingStore.swift in Sources */,
 				7DB1585F2307DA8200F86A9E /* OnboardingIntroViewController.swift in Sources */,
 				7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */,
@@ -815,6 +852,7 @@
 				7DD05B8E23D1036B0020EDD0 /* SpotifyAPI.swift in Sources */,
 				7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */,
 				7DB15863230ABD8F00F86A9E /* OnboardingPage.swift in Sources */,
+				7D5559BB24599AC800EA07FE /* ArtistDetailTitleCell.swift in Sources */,
 				7D5A2AFF231E6C7600B56000 /* WiltDatabase.swift in Sources */,
 				7DD271F723C5C7AE006B543F /* ListenLaterViewController.swift in Sources */,
 				7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */,
@@ -834,6 +872,7 @@
 				7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */,
 				7D5A2B0F2324C24B00B56000 /* FakePlayHistoryDao.swift in Sources */,
 				7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */,
+				7D5559C0245C449F00EA07FE /* ArtistDetailViewControllerTest.swift in Sources */,
 				7DD05B9923D28FDD0020EDD0 /* FakeSearchAPI.swift in Sources */,
 				7DD271F323C5BBE7006B543F /* ListenLaterViewModelTest.swift in Sources */,
 				7D849A0E24397EED003D5A53 /* ArtistSearchViewControllerTest.swift in Sources */,
@@ -852,6 +891,7 @@
 				7DB1587F2315EED700F86A9E /* OnboardingViewModelTest.swift in Sources */,
 				7D5A2B1D232A719E00B56000 /* PlayHistoryPagerTest.swift in Sources */,
 				7D233B3A2334C6DF00EC95B6 /* SettingsViewControllerTest.swift in Sources */,
+				7D5559BE245AF29600EA07FE /* ArtistDetailViewModelTest.swift in Sources */,
 				7DD271FD23C67FFA006B543F /* FakeListenLaterDao.swift in Sources */,
 				7DD271FB23C5E32E006B543F /* ListenLaterViewControllerTest.swift in Sources */,
 				7DD05B9123D103F10020EDD0 /* SpotifyAPITest.swift in Sources */,

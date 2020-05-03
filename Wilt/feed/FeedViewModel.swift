@@ -204,7 +204,7 @@ final class FeedViewModel {
     }
 
     func onRowTapped(rowIndex: Int) {
-        delegate?.open(url: items[rowIndex].externalURL)
+        delegate?.showDetail(artist: historyDao.items[rowIndex])
     }
 
     private func loadEarlierPage() {
@@ -252,7 +252,7 @@ final class FeedViewModel {
 /// Delegate for the `FeedViewModel` for events that occur during the
 /// feed
 protocol FeedViewModelDelegate: class {
-    func open(url: URL)
+    func showDetail(artist: TopArtistData)
     func loggedOut()
 }
 

@@ -7,6 +7,8 @@ protocol WiltAPI: ProfileAPI {
                    completion: @escaping (Result<TopArtistInfo, Error>) -> Void)
     func topTrack(timeRange: String, index: Int,
                   completion: @escaping (Result<TopTrackInfo, Error>) -> Void)
+    func getArtistActivity(artistName: String,
+                           completion: @escaping (Result<[ArtistActivity], Error>) -> Void)
 }
 
 /// Special errors from network calls
@@ -124,6 +126,39 @@ final class FirebaseAPI: WiltAPI {
                 }
         }
     }
+
+    func getArtistActivity(artistName: String, completion: @escaping (Result<[ArtistActivity], Error>) -> Void) {
+        let data: [String:Any] = ["artist": artistName]
+        NetworkActivityUtil.showNetworkIndicator()
+        functions
+            .httpsCallable("getArtistActivity")
+            .call(data) {
+                defer { NetworkActivityUtil.hideNetworkIndicator() }
+                guard let data = $0?.data as? [[String: Any]] else {
+                    guard let error = $1 else {
+                        fatalError("No error and no response?")
+                    }
+                    // Handle unauthenticated error specifically, so that we
+                    // can replace this with our own error to easily verify
+                    if let error = error as NSError?,
+                        error.domain == FunctionsErrorDomain,
+                        error.code == FunctionsErrorCode.unauthenticated.rawValue {
+                        completion(.failure(WiltAPIError.loggedOut))
+                        return
+                    }
+                    completion(.failure(error))
+                    return
+                }
+                do {
+                    let info = try data.map {
+                        try ArtistActivity.from(dict: $0)
+                    }
+                    completion(.success(info))
+                } catch {
+                    completion(.failure(error))
+                }
+        }
+    }
 }
 
 /// Useful date formatters due to responses from the Wilt API
@@ -234,5 +269,22 @@ struct TopTrackInfo: Equatable {
             imageURL: imageURL,
             externalURL: externalURL
         )
+    }
+}
+
+struct ArtistActivity {
+    let date: Date
+    let numberOfPlays: Int
+
+    static func from(dict: [String:Any]) throws -> ArtistActivity {
+        guard let plays = dict["plays"] as? Int,
+            let dateDict = dict["date"] as? [String:Any]? else {
+                throw TopArtistError.unexpectedNil
+        }
+        guard let dateString = dateDict?["value"] as? String,
+            let date = WiltAPIDateFormatters.dateStringFormatter.date(from: dateString) else {
+                throw TopArtistError.unexpectedNil
+        }
+        return ArtistActivity(date: date, numberOfPlays: plays)
     }
 }

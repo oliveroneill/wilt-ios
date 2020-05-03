@@ -51,3 +51,8 @@ Spotify play history and user info will be stored and periodically updated. To o
 "profile_missing_data_tag_title" = "Uh oh!";
 "profile_missing_data_title" = "???";
 "profile_missing_data_subtitle" = "Are you new to Spotify? There are no records here yet.";
+"artist_detail_error_message" = "Sorry, something's gone wrong.";
+"artist_detail_empty_data_message" = "Have you listened to this artist before?";
+"artist_detail_open_cell_title" = "Open In Spotify";
+"artist_detail_title" = "Artist Activity";
+"artist_detail_chart_title" = "Number of Plays Per Month";

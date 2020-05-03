@@ -15,9 +15,11 @@ final class FakeWiltAPI: WiltAPI {
     private let topArtistPerWeekAnythingResponse: Result<[TopArtistData], Error>?
     var topArtistResult: [TopSomethingRequest:Result<TopArtistInfo, Error>]
     var topTrackResult: [TopSomethingRequest:Result<TopTrackInfo, Error>]
+    var getArtistActivityResult: Result<[ArtistActivity], Error>?
     var topArtistsPerWeekCalls = [(from: Int64, to: Int64)]()
     var topArtistCalls = [(timeRange: String, index: Int)]()
     var topTrackCalls = [(timeRange: String, index: Int)]()
+    var getArtistActivityCalls = [String]()
 
     init(topArtistPerWeekResult: [Timespan:Result<[TopArtistData], Error>] = [:],
          topArtistResult: [TopSomethingRequest:Result<TopArtistInfo, Error>] = [:],
@@ -54,6 +56,14 @@ final class FakeWiltAPI: WiltAPI {
                   completion: @escaping (Result<TopTrackInfo, Error>) -> Void) {
         topTrackCalls.append((timeRange: timeRange, index: index))
         if let result = topTrackResult[TopSomethingRequest(timeRange: timeRange, index: index)] {
+            completion(result)
+        }
+    }
+
+    func getArtistActivity(artistName: String,
+                           completion: @escaping (Result<[ArtistActivity], Error>) -> Void) {
+        getArtistActivityCalls.append(artistName)
+        if let result = getArtistActivityResult {
             completion(result)
         }
     }

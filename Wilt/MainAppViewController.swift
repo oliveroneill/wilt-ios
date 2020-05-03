@@ -201,6 +201,10 @@ extension MainAppViewController: UITabBarControllerDelegate {
 }
 
 extension MainAppViewController: FeedViewModelDelegate, ProfileViewModelDelegate, ListenLaterViewModelDelegate {
+    func showDetail(artist: TopArtistData) {
+        controllerDelegate?.showDetail(artist: artist)
+    }
+
     func open(url: URL) {
         controllerDelegate?.open(url: url)
     }
@@ -214,6 +218,7 @@ extension MainAppViewController: FeedViewModelDelegate, ProfileViewModelDelegate
 /// main app
 protocol MainAppViewControllerDelegate: class {
     func open (url: URL)
+    func showDetail(artist: TopArtistData)
     func showSettings()
     func showSearch()
     func loggedOut()

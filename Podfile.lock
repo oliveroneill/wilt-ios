@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.4.0):
+    - Charts/Core (= 3.4.0)
+  - Charts/Core (3.4.0)
   - Firebase/Analytics (6.17.0):
     - Firebase/Core
   - Firebase/Auth (6.17.0):
@@ -185,6 +188,7 @@ PODS:
   - SwiftIcons (2.3.2)
 
 DEPENDENCIES:
+  - Charts
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Functions
@@ -200,6 +204,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Charts
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -234,6 +239,7 @@ EXTERNAL SOURCES:
     :path: Pods/CocoaPodsKeys
 
 SPEC CHECKSUMS:
+  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
   Firebase: 2672e5636b42f977177716317e68346ae5e9de25
   FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
   FirebaseAuth: 5ce2b03a3d7fe56b7a6e4c5ec7ff1522890b1d6f
@@ -264,6 +270,6 @@ SPEC CHECKSUMS:
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
   SwiftIcons: e652cfd2676441c462ad57b6e92977faf577e590
 
-PODFILE CHECKSUM: 2248c9853ef46c01df0d06cb5c5cc09140a610f3
+PODFILE CHECKSUM: d25a3d4ebe3e08ff18d4bbcf450f2e416318419c
 
 COCOAPODS: 1.6.1

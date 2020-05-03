@@ -19,6 +19,7 @@ def wilt_dependencies
   pod 'Shimmer'
   pod 'MaterialComponents/Chips'
   pod 'SwiftIcons'
+  pod 'Charts'
 end
 
 # Uncomment the next line to define a global platform for your project

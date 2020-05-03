@@ -169,7 +169,6 @@ final class FeedViewModelTest: XCTestCase {
 
     func testonRetryHeaderPressedEmpty() {
         viewModel = FeedViewModel(
-
             historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([])),
             listenLaterDao: FakeListenLaterDao(items: [])
@@ -189,7 +188,6 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnScrolledToBottomEmpty() {
         viewModel = FeedViewModel(
-
             historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([])),
             listenLaterDao: FakeListenLaterDao(items: [])
@@ -229,7 +227,6 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnViewAppearedEmpty() {
         viewModel = FeedViewModel(
-
             historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([])),
             listenLaterDao: FakeListenLaterDao(items: [])
@@ -249,7 +246,6 @@ final class FeedViewModelTest: XCTestCase {
 
     func testRefreshEmpty() {
         viewModel = FeedViewModel(
-
             historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success([])),
             listenLaterDao: FakeListenLaterDao(items: [])
@@ -269,7 +265,6 @@ final class FeedViewModelTest: XCTestCase {
 
     func testRefreshDisplaysRowsAfterAPICall() {
         viewModel = FeedViewModel(
-
             historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(topArtistPerWeekAnythingResponse: .success(FakeData.items)),
             listenLaterDao: FakeListenLaterDao(items: [])
@@ -289,7 +284,6 @@ final class FeedViewModelTest: XCTestCase {
 
     func testonRetryHeaderPressedError() {
         viewModel = FeedViewModel(
-
             historyDao: FakePlayHistoryDao(items: []),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
@@ -311,7 +305,6 @@ final class FeedViewModelTest: XCTestCase {
 
     func testOnScrolledToBottomError() {
         viewModel = FeedViewModel(
-
             historyDao: FakePlayHistoryDao(items: FakeData.items),
             api: FakeWiltAPI(
                 topArtistPerWeekAnythingResponse: .failure(FeedViewModelTestError.testError)
@@ -432,6 +425,7 @@ final class FeedViewModelTest: XCTestCase {
                 exp.fulfill()
             }
             func open(url: URL) {}
+            func showDetail(artist: TopArtistData) {}
         }
         let delegate = ListeningDelegate(expectation: exp)
         viewModel.delegate = delegate
@@ -508,8 +502,8 @@ final class FeedViewModelTest: XCTestCase {
                 self.exp = expectation
             }
             func loggedOut() {}
-            func open(url: URL) {
-                XCTAssertEqual(FakeData.items[index].externalURL, url)
+            func open(url: URL) {}
+            func showDetail(artist: TopArtistData) {
                 exp.fulfill()
             }
         }
