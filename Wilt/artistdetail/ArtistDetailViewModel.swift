@@ -99,10 +99,15 @@ class ArtistDetailViewModel {
     func openCellTapped() {
         delegate?.open(url: artist.externalURL)
     }
+
+    func onDoneButtonTapped() {
+        delegate?.close()
+    }
 }
 
 /// Delegate for the `ArtistDetailViewModel` for events that occur on this screen
 protocol ArtistDetailViewModelDelegate: class {
     func open(url: URL)
     func loggedOut()
+    func close()
 }

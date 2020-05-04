@@ -156,6 +156,11 @@ class ArtistDetailViewController: UITableViewController {
     init(viewModel: ArtistDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(doneButtonTapped)
+        )
         title = "artist_detail_title".localized
         view.backgroundColor = .white
         tableView.tableFooterView = UIView(frame: .zero)
@@ -178,8 +183,12 @@ class ArtistDetailViewController: UITableViewController {
         viewModel.onViewLoaded()
     }
 
+    @objc private func doneButtonTapped() {
+        viewModel.onDoneButtonTapped()
+    }
+
     /// A custom formatter for labelling bars based on string values
-    class CustomXAxisLabelFormatter: IAxisValueFormatter {
+    private class CustomXAxisLabelFormatter: IAxisValueFormatter {
         private let values: [String]
 
         /// Initialise the formatter

@@ -92,7 +92,7 @@ final class LoggedInCoordinator: Coordinator {
     }
 }
 
-extension LoggedInCoordinator: MainAppViewControllerDelegate, ArtistSearchViewModelDelegate, ArtistDetailViewModelDelegate {
+extension LoggedInCoordinator: MainAppViewControllerDelegate, ArtistSearchViewModelDelegate {
     func showDetail(artist: TopArtistData) {
         let viewModel = ArtistDetailViewModel(
             artist: ArtistInfo(
@@ -155,10 +155,6 @@ extension LoggedInCoordinator: MainAppViewControllerDelegate, ArtistSearchViewMo
         }
     }
 
-    func open(url: URL) {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-
     func showSettings() {
         let controller = SettingsViewController()
         controller.delegate = self
@@ -174,6 +170,12 @@ extension LoggedInCoordinator: MainAppViewControllerDelegate, ArtistSearchViewMo
 
     func loggedOut() {
         clearCacheAndLogOut()
+    }
+}
+
+extension LoggedInCoordinator: ArtistDetailViewModelDelegate {
+    func open(url: URL) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
 
