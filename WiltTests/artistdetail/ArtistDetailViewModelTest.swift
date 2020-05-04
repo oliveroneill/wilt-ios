@@ -171,6 +171,7 @@ class ArtistDetailViewModelTest: XCTestCase {
             }
 
             func loggedOut() {}
+            func close() {}
         }
         let delegate = ListeningDelegate()
         viewModel.delegate = delegate
@@ -186,6 +187,7 @@ class ArtistDetailViewModelTest: XCTestCase {
                 self.expectation = expectation
             }
             func open(url: URL) {}
+            func close() {}
             func loggedOut() {
                 expectation.fulfill()
             }

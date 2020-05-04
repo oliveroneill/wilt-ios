@@ -147,6 +147,7 @@ final class ArtistDetailViewControllerTest: KIFTestCase {
                 openCalls.append(url)
             }
             func loggedOut() {}
+            func close() {}
         }
         let delegate = ListeningDelegate()
         viewModel.delegate = delegate
