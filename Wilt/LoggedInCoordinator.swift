@@ -4,6 +4,7 @@ import CoreData
 final class LoggedInCoordinator: Coordinator {
     private let database: WiltDatabase
     private let api: WiltAPI
+    private let artistActivityCache: ArtistActivityCache
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     weak var delegate: LoggedInCoordinatorDelegate?
@@ -17,6 +18,7 @@ final class LoggedInCoordinator: Coordinator {
         self.navigationController = navigationController
         self.database = database
         self.api = api
+        self.artistActivityCache = ArtistActivityCache(networkAPI: api)
     }
 
     func start() {
@@ -62,6 +64,7 @@ final class LoggedInCoordinator: Coordinator {
 
     /// Clear all the data that we've stored in Core Data
     private func clearCaches() {
+        _ = try? artistActivityCache.clear()
         guard let container = container else {
             return
         }
@@ -97,7 +100,7 @@ extension LoggedInCoordinator: MainAppViewControllerDelegate, ArtistSearchViewMo
                 imageURL: artist.imageURL,
                 externalURL: artist.externalURL
             ),
-            api: ArtistActivityCache(networkAPI: api)
+            api: artistActivityCache
         )
         viewModel.delegate = self
         let controller = ArtistDetailViewController(viewModel: viewModel)
