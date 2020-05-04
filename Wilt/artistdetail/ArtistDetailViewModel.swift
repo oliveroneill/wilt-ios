@@ -24,7 +24,7 @@ enum ArtistDetailViewModelState: Equatable {
 /// The view model for the artist detail screen
 class ArtistDetailViewModel {
     private let artist: ArtistInfo
-    private let api: WiltAPI
+    private let api: ArtistActivityAPI
     private let queue = DispatchQueue(
         label: "com.oliveroneill.wilt.ArtistDetailViewModel.queue"
     )
@@ -43,7 +43,7 @@ class ArtistDetailViewModel {
     /// The view should set this value to receive state updates
     var onViewUpdate: ((ArtistDetailViewModelState) -> Void)?
 
-    init(artist: ArtistInfo, api: WiltAPI) {
+    init(artist: ArtistInfo, api: ArtistActivityAPI) {
         self.artist = artist
         self.api = api
     }

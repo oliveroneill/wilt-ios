@@ -97,7 +97,7 @@ extension LoggedInCoordinator: MainAppViewControllerDelegate, ArtistSearchViewMo
                 imageURL: artist.imageURL,
                 externalURL: artist.externalURL
             ),
-            api: FirebaseAPI()
+            api: ArtistActivityCache(networkAPI: api)
         )
         viewModel.delegate = self
         let controller = ArtistDetailViewController(viewModel: viewModel)

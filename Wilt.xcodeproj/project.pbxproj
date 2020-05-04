@@ -23,6 +23,8 @@
 		7D5559BB24599AC800EA07FE /* ArtistDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559BA24599AC800EA07FE /* ArtistDetailTitleCell.swift */; };
 		7D5559BE245AF29600EA07FE /* ArtistDetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559BD245AF29600EA07FE /* ArtistDetailViewModelTest.swift */; };
 		7D5559C0245C449F00EA07FE /* ArtistDetailViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559BF245C449F00EA07FE /* ArtistDetailViewControllerTest.swift */; };
+		7D5559C424600E4700EA07FE /* ArtistActivityCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559C324600E4700EA07FE /* ArtistActivityCache.swift */; };
+		7D5559C62460243F00EA07FE /* ArtistActivityCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559C52460243F00EA07FE /* ArtistActivityCacheTest.swift */; };
 		7D5A2AF7231A554D00B56000 /* LoggedInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */; };
 		7D5A2AF9231A573800B56000 /* MainAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AF8231A573800B56000 /* MainAppViewController.swift */; };
 		7D5A2AFB231A5B1D00B56000 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AFA231A5B1D00B56000 /* FeedViewController.swift */; };
@@ -135,6 +137,8 @@
 		7D5559BA24599AC800EA07FE /* ArtistDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailTitleCell.swift; sourceTree = "<group>"; };
 		7D5559BD245AF29600EA07FE /* ArtistDetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewModelTest.swift; sourceTree = "<group>"; };
 		7D5559BF245C449F00EA07FE /* ArtistDetailViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewControllerTest.swift; sourceTree = "<group>"; };
+		7D5559C324600E4700EA07FE /* ArtistActivityCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistActivityCache.swift; sourceTree = "<group>"; };
+		7D5559C52460243F00EA07FE /* ArtistActivityCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistActivityCacheTest.swift; sourceTree = "<group>"; };
 		7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInCoordinator.swift; sourceTree = "<group>"; };
 		7D5A2AF8231A573800B56000 /* MainAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewController.swift; sourceTree = "<group>"; };
 		7D5A2AFA231A5B1D00B56000 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 		7D5559B52456D1F700EA07FE /* artistdetail */ = {
 			isa = PBXGroup;
 			children = (
+				7D5559C324600E4700EA07FE /* ArtistActivityCache.swift */,
 				7D5559BA24599AC800EA07FE /* ArtistDetailTitleCell.swift */,
 				7D5559B62456D24200EA07FE /* ArtistDetailViewController.swift */,
 				7D5559B82456D35000EA07FE /* ArtistDetailViewModel.swift */,
@@ -353,6 +358,7 @@
 		7D5559BC245AF10700EA07FE /* artistdetail */ = {
 			isa = PBXGroup;
 			children = (
+				7D5559C52460243F00EA07FE /* ArtistActivityCacheTest.swift */,
 				7D5559BD245AF29600EA07FE /* ArtistDetailViewModelTest.swift */,
 				7D5559BF245C449F00EA07FE /* ArtistDetailViewControllerTest.swift */,
 			);
@@ -828,6 +834,7 @@
 				7D5A2B152324E0FD00B56000 /* FeedViewModel.swift in Sources */,
 				7DD05B8823D04CB80020EDD0 /* ArtistSearchViewModel.swift in Sources */,
 				7DD05B8C23D05C690020EDD0 /* SearchAPI.swift in Sources */,
+				7D5559C424600E4700EA07FE /* ArtistActivityCache.swift in Sources */,
 				7D5559B92456D35000EA07FE /* ArtistDetailViewModel.swift in Sources */,
 				7DA898BA232E02E500204823 /* ProfileViewModel.swift in Sources */,
 				7D5A2AF7231A554D00B56000 /* LoggedInCoordinator.swift in Sources */,
@@ -878,6 +885,7 @@
 				7D849A0E24397EED003D5A53 /* ArtistSearchViewControllerTest.swift in Sources */,
 				7DD05B9523D2866B0020EDD0 /* ArtistSearchViewModelTest.swift in Sources */,
 				7DB1586C2310CC1C00F86A9E /* OnboardingViewControllerTest.swift in Sources */,
+				7D5559C62460243F00EA07FE /* ArtistActivityCacheTest.swift in Sources */,
 				7D5A2B032322682F00B56000 /* FeedViewControllerTest.swift in Sources */,
 				7D233B36233226F300EC95B6 /* ProfileCacheTest.swift in Sources */,
 				7DB158892319575C00F86A9E /* OnboardingCoordinatorTest.swift in Sources */,

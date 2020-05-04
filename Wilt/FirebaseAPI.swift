@@ -1,6 +1,6 @@
 import Firebase
 
-protocol WiltAPI: ProfileAPI {
+protocol WiltAPI: ProfileAPI, ArtistActivityAPI {
     func topArtistsPerWeek(from: Int64, to: Int64,
                            completion: @escaping (Result<[TopArtistData], Error>) -> Void)
     func topArtist(timeRange: String, index: Int,
@@ -273,7 +273,7 @@ struct TopTrackInfo: Equatable {
     }
 }
 
-struct ArtistActivity {
+struct ArtistActivity: Codable, Equatable {
     let date: Date
     let numberOfPlays: Int
 
