@@ -9,6 +9,10 @@ protocol WiltAPI: ProfileAPI, ArtistActivityAPI {
                   completion: @escaping (Result<TopTrackInfo, Error>) -> Void)
     func getArtistActivity(artistName: String,
                            completion: @escaping (Result<[ArtistActivity], Error>) -> Void)
+    func getTrackHistory(limit: Int, after: Int64,
+                         completion: @escaping (Result<[TrackHistoryData], Error>) -> Void)
+    func getTrackHistory(limit: Int, before: Int64,
+                         completion: @escaping (Result<[TrackHistoryData], Error>) -> Void)
 }
 
 /// Special errors from network calls
@@ -153,6 +157,73 @@ final class FirebaseAPI: WiltAPI {
                 do {
                     let info = try data.map {
                         try ArtistActivity.from(dict: $0)
+                    }
+                    completion(.success(info))
+                } catch {
+                    completion(.failure(error))
+                }
+        }
+    }
+
+    func getTrackHistory(limit: Int,
+                         after: Int64,
+                         completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
+        getTrackHistory(
+            limit: limit,
+            before: nil,
+            after: after,
+            completion: completion
+        )
+    }
+
+    func getTrackHistory(limit: Int,
+                         before: Int64,
+                         completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
+        getTrackHistory(
+            limit: limit,
+            before: before,
+            after: nil,
+            completion: completion
+        )
+    }
+
+    private func getTrackHistory(limit: Int,
+                                 before: Int64?, after: Int64?,
+                                 completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
+        guard before == nil || after == nil else {
+            fatalError("Either before or after must be specified")
+        }
+        guard before != nil || after != nil else {
+            fatalError("Either before or after must be specified but not both")
+        }
+        let data: [String:Any] = [
+            "after": after as Any,
+            "before": before as Any,
+            "limit": limit
+        ]
+        NetworkActivityUtil.showNetworkIndicator()
+        functions
+            .httpsCallable("getTrackHistory")
+            .call(data) {
+                defer { NetworkActivityUtil.hideNetworkIndicator() }
+                guard let data = $0?.data as? [[String: Any]] else {
+                    guard let error = $1 else {
+                        fatalError("No error and no response?")
+                    }
+                    // Handle unauthenticated error specifically, so that we
+                    // can replace this with our own error to easily verify
+                    if let error = error as NSError?,
+                        error.domain == FunctionsErrorDomain,
+                        error.code == FunctionsErrorCode.unauthenticated.rawValue {
+                        completion(.failure(WiltAPIError.loggedOut))
+                        return
+                    }
+                    completion(.failure(error))
+                    return
+                }
+                do {
+                    let info = try data.map {
+                        try TrackHistoryData.from(dict: $0)
                     }
                     completion(.success(info))
                 } catch {

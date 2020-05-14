@@ -25,6 +25,14 @@
 		7D5559C0245C449F00EA07FE /* ArtistDetailViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559BF245C449F00EA07FE /* ArtistDetailViewControllerTest.swift */; };
 		7D5559C424600E4700EA07FE /* ArtistActivityCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559C324600E4700EA07FE /* ArtistActivityCache.swift */; };
 		7D5559C62460243F00EA07FE /* ArtistActivityCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559C52460243F00EA07FE /* ArtistActivityCacheTest.swift */; };
+		7D5559D624616FF600EA07FE /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559D424616FF600EA07FE /* HistoryViewController.swift */; };
+		7D5559D724616FF600EA07FE /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559D524616FF600EA07FE /* HistoryViewModel.swift */; };
+		7D5559DA2461779E00EA07FE /* TrackHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559D82461779E00EA07FE /* TrackHistoryCell.swift */; };
+		7D5559DB2461779E00EA07FE /* TrackHistoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559D92461779E00EA07FE /* TrackHistoryData.swift */; };
+		7D5559DE246177B100EA07FE /* TopArtistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559DC246177B000EA07FE /* TopArtistData.swift */; };
+		7D5559DF246177B100EA07FE /* TopArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559DD246177B000EA07FE /* TopArtistCell.swift */; };
+		7D5559E224617B0300EA07FE /* TrackHistoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559E024617B0300EA07FE /* TrackHistoryCache.swift */; };
+		7D5559E324617B0300EA07FE /* TrackHistoryPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5559E124617B0300EA07FE /* TrackHistoryPager.swift */; };
 		7D5A2AF7231A554D00B56000 /* LoggedInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */; };
 		7D5A2AF9231A573800B56000 /* MainAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AF8231A573800B56000 /* MainAppViewController.swift */; };
 		7D5A2AFB231A5B1D00B56000 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AFA231A5B1D00B56000 /* FeedViewController.swift */; };
@@ -32,8 +40,6 @@
 		7D5A2AFF231E6C7600B56000 /* WiltDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2AFE231E6C7600B56000 /* WiltDatabase.swift */; };
 		7D5A2B032322682F00B56000 /* FeedViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B022322682F00B56000 /* FeedViewControllerTest.swift */; };
 		7D5A2B05232371B400B56000 /* PlayHistoryPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B04232371B400B56000 /* PlayHistoryPager.swift */; };
-		7D5A2B092324B25F00B56000 /* TopArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B082324B25F00B56000 /* TopArtistCell.swift */; };
-		7D5A2B0B2324B75900B56000 /* TopArtistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B0A2324B75900B56000 /* TopArtistData.swift */; };
 		7D5A2B0F2324C24B00B56000 /* FakePlayHistoryDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B0E2324C24B00B56000 /* FakePlayHistoryDao.swift */; };
 		7D5A2B112324C25E00B56000 /* FakeWiltAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B102324C25E00B56000 /* FakeWiltAPI.swift */; };
 		7D5A2B152324E0FD00B56000 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A2B142324E0FD00B56000 /* FeedViewModel.swift */; };
@@ -87,6 +93,11 @@
 		7DD271F923C5DFB5006B543F /* ListenLaterArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271F823C5DFB5006B543F /* ListenLaterArtistCell.swift */; };
 		7DD271FB23C5E32E006B543F /* ListenLaterViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271FA23C5E32E006B543F /* ListenLaterViewControllerTest.swift */; };
 		7DD271FD23C67FFA006B543F /* FakeListenLaterDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD271FC23C67FFA006B543F /* FakeListenLaterDao.swift */; };
+		7DDF2B94246C0F3A002EBA42 /* TrackHistoryPagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF2B90246C0F3A002EBA42 /* TrackHistoryPagerTest.swift */; };
+		7DDF2B95246C0F3A002EBA42 /* HistoryViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF2B91246C0F3A002EBA42 /* HistoryViewModelTest.swift */; };
+		7DDF2B96246C0F3A002EBA42 /* HistoryViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF2B92246C0F3A002EBA42 /* HistoryViewControllerTest.swift */; };
+		7DDF2B97246C0F3A002EBA42 /* TrackHistoryCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF2B93246C0F3A002EBA42 /* TrackHistoryCacheTest.swift */; };
+		7DDF2B99246C1012002EBA42 /* FakeTrackHistoryDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF2B98246C1012002EBA42 /* FakeTrackHistoryDao.swift */; };
 		7DF11A22232C803E00C1072B /* Wilt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */; };
 		7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */; };
 		A8853DE7A8B060739C6FFBCA /* Pods_Wilt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7207B04CB17C38F14DBEE6 /* Pods_Wilt.framework */; };
@@ -139,6 +150,14 @@
 		7D5559BF245C449F00EA07FE /* ArtistDetailViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewControllerTest.swift; sourceTree = "<group>"; };
 		7D5559C324600E4700EA07FE /* ArtistActivityCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistActivityCache.swift; sourceTree = "<group>"; };
 		7D5559C52460243F00EA07FE /* ArtistActivityCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistActivityCacheTest.swift; sourceTree = "<group>"; };
+		7D5559D424616FF600EA07FE /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		7D5559D524616FF600EA07FE /* HistoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		7D5559D82461779E00EA07FE /* TrackHistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackHistoryCell.swift; sourceTree = "<group>"; };
+		7D5559D92461779E00EA07FE /* TrackHistoryData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackHistoryData.swift; sourceTree = "<group>"; };
+		7D5559DC246177B000EA07FE /* TopArtistData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopArtistData.swift; sourceTree = "<group>"; };
+		7D5559DD246177B000EA07FE /* TopArtistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopArtistCell.swift; sourceTree = "<group>"; };
+		7D5559E024617B0300EA07FE /* TrackHistoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackHistoryCache.swift; sourceTree = "<group>"; };
+		7D5559E124617B0300EA07FE /* TrackHistoryPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackHistoryPager.swift; sourceTree = "<group>"; };
 		7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInCoordinator.swift; sourceTree = "<group>"; };
 		7D5A2AF8231A573800B56000 /* MainAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewController.swift; sourceTree = "<group>"; };
 		7D5A2AFA231A5B1D00B56000 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -146,8 +165,6 @@
 		7D5A2AFE231E6C7600B56000 /* WiltDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltDatabase.swift; sourceTree = "<group>"; };
 		7D5A2B022322682F00B56000 /* FeedViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewControllerTest.swift; sourceTree = "<group>"; };
 		7D5A2B04232371B400B56000 /* PlayHistoryPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayHistoryPager.swift; sourceTree = "<group>"; };
-		7D5A2B082324B25F00B56000 /* TopArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopArtistCell.swift; sourceTree = "<group>"; };
-		7D5A2B0A2324B75900B56000 /* TopArtistData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopArtistData.swift; sourceTree = "<group>"; };
 		7D5A2B0E2324C24B00B56000 /* FakePlayHistoryDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePlayHistoryDao.swift; sourceTree = "<group>"; };
 		7D5A2B102324C25E00B56000 /* FakeWiltAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeWiltAPI.swift; sourceTree = "<group>"; };
 		7D5A2B142324E0FD00B56000 /* FeedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
@@ -202,6 +219,11 @@
 		7DD271F823C5DFB5006B543F /* ListenLaterArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterArtistCell.swift; sourceTree = "<group>"; };
 		7DD271FA23C5E32E006B543F /* ListenLaterViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenLaterViewControllerTest.swift; sourceTree = "<group>"; };
 		7DD271FC23C67FFA006B543F /* FakeListenLaterDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeListenLaterDao.swift; sourceTree = "<group>"; };
+		7DDF2B90246C0F3A002EBA42 /* TrackHistoryPagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackHistoryPagerTest.swift; sourceTree = "<group>"; };
+		7DDF2B91246C0F3A002EBA42 /* HistoryViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewModelTest.swift; sourceTree = "<group>"; };
+		7DDF2B92246C0F3A002EBA42 /* HistoryViewControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewControllerTest.swift; sourceTree = "<group>"; };
+		7DDF2B93246C0F3A002EBA42 /* TrackHistoryCacheTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackHistoryCacheTest.swift; sourceTree = "<group>"; };
+		7DDF2B98246C1012002EBA42 /* FakeTrackHistoryDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTrackHistoryDao.swift; sourceTree = "<group>"; };
 		7DF84B5F22FE833A00E410B3 /* WiltAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiltAppCoordinator.swift; sourceTree = "<group>"; };
 		9F080601268B05D76B57D93C /* Pods-WiltUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiltUITests.release.xcconfig"; path = "Target Support Files/Pods-WiltUITests/Pods-WiltUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CC23487B05CFBECB94E2C7F1 /* Pods-Wilt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wilt.release.xcconfig"; path = "Target Support Files/Pods-Wilt/Pods-Wilt.release.xcconfig"; sourceTree = "<group>"; };
@@ -296,6 +318,7 @@
 				7D910C5D233CDA5B006B8D94 /* NetworkActivityUtil.swift */,
 				7D5559B52456D1F700EA07FE /* artistdetail */,
 				7D5A2B0C2324BEF700B56000 /* feed */,
+				7D5559C72461618200EA07FE /* history */,
 				7DD271EC23C52CB9006B543F /* listenlater */,
 				7D809136232DFFE4006FE0FA /* profile */,
 				7DB15891231A516F00F86A9E /* onboarding */,
@@ -322,6 +345,7 @@
 			children = (
 				7D5559BC245AF10700EA07FE /* artistdetail */,
 				7D5A2B0D2324C15A00B56000 /* feed */,
+				7DDF2B8F246C0EF7002EBA42 /* history */,
 				7DD271F123C5BBCB006B543F /* listenlater */,
 				7DB1588A2319ED9900F86A9E /* mocks */,
 				7D233B2E2330470B00EC95B6 /* profile */,
@@ -365,6 +389,19 @@
 			path = artistdetail;
 			sourceTree = "<group>";
 		};
+		7D5559C72461618200EA07FE /* history */ = {
+			isa = PBXGroup;
+			children = (
+				7D5559D424616FF600EA07FE /* HistoryViewController.swift */,
+				7D5559D524616FF600EA07FE /* HistoryViewModel.swift */,
+				7D5559E024617B0300EA07FE /* TrackHistoryCache.swift */,
+				7D5559D82461779E00EA07FE /* TrackHistoryCell.swift */,
+				7D5559D92461779E00EA07FE /* TrackHistoryData.swift */,
+				7D5559E124617B0300EA07FE /* TrackHistoryPager.swift */,
+			);
+			path = history;
+			sourceTree = "<group>";
+		};
 		7D5A2B0C2324BEF700B56000 /* feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,8 +409,8 @@
 				7D5A2B142324E0FD00B56000 /* FeedViewModel.swift */,
 				7D5A2AFC231E687100B56000 /* PlayHistoryCache.swift */,
 				7D5A2B04232371B400B56000 /* PlayHistoryPager.swift */,
-				7D5A2B082324B25F00B56000 /* TopArtistCell.swift */,
-				7D5A2B0A2324B75900B56000 /* TopArtistData.swift */,
+				7D5559DD246177B000EA07FE /* TopArtistCell.swift */,
+				7D5559DC246177B000EA07FE /* TopArtistData.swift */,
 			);
 			path = feed;
 			sourceTree = "<group>";
@@ -410,6 +447,7 @@
 				7D5A2B0E2324C24B00B56000 /* FakePlayHistoryDao.swift */,
 				7DD05B9823D28FDD0020EDD0 /* FakeSearchAPI.swift */,
 				7DB1588B2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift */,
+				7DDF2B98246C1012002EBA42 /* FakeTrackHistoryDao.swift */,
 				7D5A2B102324C25E00B56000 /* FakeWiltAPI.swift */,
 			);
 			path = mocks;
@@ -482,6 +520,17 @@
 				7DD271F223C5BBE7006B543F /* ListenLaterViewModelTest.swift */,
 			);
 			path = listenlater;
+			sourceTree = "<group>";
+		};
+		7DDF2B8F246C0EF7002EBA42 /* history */ = {
+			isa = PBXGroup;
+			children = (
+				7DDF2B92246C0F3A002EBA42 /* HistoryViewControllerTest.swift */,
+				7DDF2B91246C0F3A002EBA42 /* HistoryViewModelTest.swift */,
+				7DDF2B93246C0F3A002EBA42 /* TrackHistoryCacheTest.swift */,
+				7DDF2B90246C0F3A002EBA42 /* TrackHistoryPagerTest.swift */,
+			);
+			path = history;
 			sourceTree = "<group>";
 		};
 		8CDDD52BF6B05C77A3C928C7 /* Frameworks */ = {
@@ -823,22 +872,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D5A2B05232371B400B56000 /* PlayHistoryPager.swift in Sources */,
+				7D5559DE246177B100EA07FE /* TopArtistData.swift in Sources */,
 				7DF84B6022FE833A00E410B3 /* WiltAppCoordinator.swift in Sources */,
 				7DB158592307D7FE00F86A9E /* Coordinator.swift in Sources */,
 				7DD05B9323D195820020EDD0 /* UISearchBar+Loading.swift in Sources */,
-				7D5A2B092324B25F00B56000 /* TopArtistCell.swift in Sources */,
 				7DB1586A230D6C8700F86A9E /* Utils.swift in Sources */,
 				7DD271EE23C52CDB006B543F /* ListenLaterViewModel.swift in Sources */,
 				7DA898BC232E4C1300204823 /* ProfileCardView.swift in Sources */,
 				7DD05B8623D03B950020EDD0 /* ArtistResultsTableViewController.swift in Sources */,
+				7D5559D724616FF600EA07FE /* HistoryViewModel.swift in Sources */,
 				7D5A2B152324E0FD00B56000 /* FeedViewModel.swift in Sources */,
 				7DD05B8823D04CB80020EDD0 /* ArtistSearchViewModel.swift in Sources */,
 				7DD05B8C23D05C690020EDD0 /* SearchAPI.swift in Sources */,
 				7D5559C424600E4700EA07FE /* ArtistActivityCache.swift in Sources */,
+				7D5559D624616FF600EA07FE /* HistoryViewController.swift in Sources */,
 				7D5559B92456D35000EA07FE /* ArtistDetailViewModel.swift in Sources */,
 				7DA898BA232E02E500204823 /* ProfileViewModel.swift in Sources */,
 				7D5A2AF7231A554D00B56000 /* LoggedInCoordinator.swift in Sources */,
-				7D5A2B0B2324B75900B56000 /* TopArtistData.swift in Sources */,
 				7DD05B8423D03A880020EDD0 /* ArtistSearchViewController.swift in Sources */,
 				7D5A2AF9231A573800B56000 /* MainAppViewController.swift in Sources */,
 				7DB158612309658100F86A9E /* OnboardingViewController.swift in Sources */,
@@ -853,12 +903,17 @@
 				7D910C5E233CDA5B006B8D94 /* NetworkActivityUtil.swift in Sources */,
 				7DD271F923C5DFB5006B543F /* ListenLaterArtistCell.swift in Sources */,
 				7DA898B8232E002000204823 /* ProfileViewController.swift in Sources */,
+				7D5559DF246177B100EA07FE /* TopArtistCell.swift in Sources */,
+				7D5559E224617B0300EA07FE /* TrackHistoryCache.swift in Sources */,
 				7D233B34233109C800EC95B6 /* ProfileCache.swift in Sources */,
+				7D5559DB2461779E00EA07FE /* TrackHistoryData.swift in Sources */,
 				7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */,
 				7DD05B8A23D0547B0020EDD0 /* ArtistViewModel.swift in Sources */,
+				7D5559DA2461779E00EA07FE /* TrackHistoryCell.swift in Sources */,
 				7DD05B8E23D1036B0020EDD0 /* SpotifyAPI.swift in Sources */,
 				7DB158852316A0D900F86A9E /* FirebaseAuthentication.swift in Sources */,
 				7DB15863230ABD8F00F86A9E /* OnboardingPage.swift in Sources */,
+				7D5559E324617B0300EA07FE /* TrackHistoryPager.swift in Sources */,
 				7D5559BB24599AC800EA07FE /* ArtistDetailTitleCell.swift in Sources */,
 				7D5A2AFF231E6C7600B56000 /* WiltDatabase.swift in Sources */,
 				7DD271F723C5C7AE006B543F /* ListenLaterViewController.swift in Sources */,
@@ -878,8 +933,12 @@
 				7D233B322330473200EC95B6 /* ProfileViewControllerTest.swift in Sources */,
 				7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */,
 				7D5A2B0F2324C24B00B56000 /* FakePlayHistoryDao.swift in Sources */,
+				7DDF2B97246C0F3A002EBA42 /* TrackHistoryCacheTest.swift in Sources */,
+				7DDF2B99246C1012002EBA42 /* FakeTrackHistoryDao.swift in Sources */,
+				7DDF2B94246C0F3A002EBA42 /* TrackHistoryPagerTest.swift in Sources */,
 				7D5A2B1F232A71F700B56000 /* PlayHistoryCacheTest.swift in Sources */,
 				7D5559C0245C449F00EA07FE /* ArtistDetailViewControllerTest.swift in Sources */,
+				7DDF2B96246C0F3A002EBA42 /* HistoryViewControllerTest.swift in Sources */,
 				7DD05B9923D28FDD0020EDD0 /* FakeSearchAPI.swift in Sources */,
 				7DD271F323C5BBE7006B543F /* ListenLaterViewModelTest.swift in Sources */,
 				7D849A0E24397EED003D5A53 /* ArtistSearchViewControllerTest.swift in Sources */,
@@ -891,6 +950,7 @@
 				7DB158892319575C00F86A9E /* OnboardingCoordinatorTest.swift in Sources */,
 				7D5A2B172325169900B56000 /* FakeData.swift in Sources */,
 				7DF11A22232C803E00C1072B /* Wilt.xcdatamodeld in Sources */,
+				7DDF2B95246C0F3A002EBA42 /* HistoryViewModelTest.swift in Sources */,
 				7DD271F523C5BBF8006B543F /* ListenLaterStoreTest.swift in Sources */,
 				7DB1588C2319EDE300F86A9E /* FakeSpotifyAuthoriser.swift in Sources */,
 				7D233B302330472800EC95B6 /* ProfileViewModelTest.swift in Sources */,

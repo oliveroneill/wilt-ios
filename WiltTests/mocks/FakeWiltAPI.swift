@@ -20,15 +20,26 @@ final class FakeWiltAPI: WiltAPI {
     var topArtistCalls = [(timeRange: String, index: Int)]()
     var topTrackCalls = [(timeRange: String, index: Int)]()
     var getArtistActivityCalls = [String]()
+    private let getTrackHistoryAnythingResult: Result<[TrackHistoryData], Error>?
+    private let getTrackHistoryBeforeResult: [Int64:Result<[TrackHistoryData], Error>]
+    private let getTrackHistoryAfterResult: [Int64:Result<[TrackHistoryData], Error>]
+    var getTrackHistoryBeforeCalls = [(limit: Int, before: Int64)]()
+    var getTrackHistoryAfterCalls = [(limit: Int, after: Int64)]()
 
     init(topArtistPerWeekResult: [Timespan:Result<[TopArtistData], Error>] = [:],
          topArtistResult: [TopSomethingRequest:Result<TopArtistInfo, Error>] = [:],
          topTrackResult: [TopSomethingRequest:Result<TopTrackInfo, Error>] = [:],
-         topArtistPerWeekAnythingResponse: Result<[TopArtistData], Error>? = nil) {
+         topArtistPerWeekAnythingResponse: Result<[TopArtistData], Error>? = nil,
+         getTrackHistoryBeforeResult: [Int64:Result<[TrackHistoryData], Error>] = [:],
+         getTrackHistoryAfterResult: [Int64:Result<[TrackHistoryData], Error>] = [:],
+         getTrackHistoryAnythingResult: Result<[TrackHistoryData], Error>? = nil) {
         self.topArtistPerWeekResult = topArtistPerWeekResult
         self.topArtistPerWeekAnythingResponse = topArtistPerWeekAnythingResponse
         self.topArtistResult = topArtistResult
         self.topTrackResult = topTrackResult
+        self.getTrackHistoryBeforeResult = getTrackHistoryBeforeResult
+        self.getTrackHistoryAfterResult = getTrackHistoryAfterResult
+        self.getTrackHistoryAnythingResult = getTrackHistoryAnythingResult
     }
 
     func topArtistsPerWeek(from: Int64, to: Int64,
@@ -49,7 +60,6 @@ final class FakeWiltAPI: WiltAPI {
         if let result = topArtistResult[TopSomethingRequest(timeRange: timeRange, index: index)] {
             completion(result)
         }
-
     }
 
     func topTrack(timeRange: String, index: Int,
@@ -66,5 +76,27 @@ final class FakeWiltAPI: WiltAPI {
         if let result = getArtistActivityResult {
             completion(result)
         }
+    }
+
+    func getTrackHistory(limit: Int, after: Int64, completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
+        getTrackHistoryAfterCalls.append((limit: limit, after: after))
+        guard let response = getTrackHistoryAnythingResult else {
+            if let result = getTrackHistoryAfterResult[after] {
+                completion(result)
+            }
+            return
+        }
+        completion(response)
+    }
+
+    func getTrackHistory(limit: Int, before: Int64, completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
+            getTrackHistoryBeforeCalls.append((limit: limit, before: before))
+        guard let response = getTrackHistoryAnythingResult else {
+            if let result = getTrackHistoryBeforeResult[before] {
+                completion(result)
+            }
+            return
+        }
+        completion(response)
     }
 }

@@ -22,7 +22,7 @@ final class MainAppViewController: UITabBarController {
             selectedImage: nil
         )
         item.setIcon(
-            icon: .emoji(.clock),
+            icon: .emoji(.musicEighthNote),
             textColor: .lightGray,
             selectedTextColor: view.tintColor
         )
@@ -57,6 +57,21 @@ final class MainAppViewController: UITabBarController {
             selectedTextColor: view.tintColor
         )
         item.tag = 2
+        return item
+    }()
+
+    private lazy var historyTabItem: UITabBarItem = {
+        let item = UITabBarItem(
+            title: "History",
+            image: nil,
+            selectedImage: nil
+        )
+        item.setIcon(
+            icon: .emoji(.clock),
+            textColor: .lightGray,
+            selectedTextColor: view.tintColor
+        )
+        item.tag = 3
         return item
     }()
 
@@ -140,6 +155,18 @@ final class MainAppViewController: UITabBarController {
         return listenLaterViewController
     }
 
+    private func setupHistoryController(container: NSPersistentContainer,
+                                        api: WiltAPI) throws -> HistoryViewController {
+        let viewModel = HistoryViewModel(
+            historyDao: try TrackHistoryCache(viewContext: container.viewContext),
+            api: api
+        )
+        viewModel.delegate = self
+        let historyViewController = HistoryViewController(viewModel: viewModel)
+        historyViewController.tabBarItem = historyTabItem
+        return historyViewController
+    }
+
     private func setupTabs(container: NSPersistentContainer,
                            api: WiltAPI) throws {
         tabs = [
@@ -165,6 +192,14 @@ final class MainAppViewController: UITabBarController {
                     api: api
                 ),
                 title: "feed_title".localized,
+                leftBarButton: nil
+            ),
+            (
+                controller: try setupHistoryController(
+                    container: container,
+                    api: api
+                ),
+                title: "History",
                 leftBarButton: nil
             ),
         ]
@@ -200,7 +235,7 @@ extension MainAppViewController: UITabBarControllerDelegate {
     }
 }
 
-extension MainAppViewController: FeedViewModelDelegate, ProfileViewModelDelegate, ListenLaterViewModelDelegate {
+extension MainAppViewController: FeedViewModelDelegate, ProfileViewModelDelegate, ListenLaterViewModelDelegate, HistoryViewModelDelegate {
     func showDetail(artist: TopArtistData) {
         controllerDelegate?.showDetail(artist: artist)
     }

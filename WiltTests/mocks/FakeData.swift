@@ -108,4 +108,95 @@ enum FakeData {
             )
         }
     }
+
+    static let historyItems: [TrackHistoryData] = [
+        TrackHistoryData(
+            songName: "Angelina",
+            artistName: "Pinegrove",
+            date: formatter.date(from: "2019-02-25")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+        TrackHistoryData(
+            songName: "715 Creeks",
+            artistName: "Bon Iver",
+            date: formatter.date(from: "2018-12-25")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+        TrackHistoryData(
+            songName: "Turned Off",
+            artistName: "Death Grips",
+            date: formatter.date(from: "2018-10-21")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+        TrackHistoryData(
+            songName: "Making Breakfast",
+            artistName: "Twin Peaks",
+            date: formatter.date(from: "2018-09-01")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+        TrackHistoryData(
+            songName: "Dirty Laundry",
+            artistName: "Danny Brown",
+            date: formatter.date(from: "2018-06-11")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+        TrackHistoryData(
+            songName: "Death Sounds 2",
+            artistName: "Show Me The Body",
+            date: formatter.date(from: "2018-06-01")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+        TrackHistoryData(
+            songName: "Apprehension",
+            artistName: "Manchester Orchestra",
+            date: formatter.date(from: "2018-04-08")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+        TrackHistoryData(
+            songName: "4AEM",
+            artistName: "Grimes",
+            date: formatter.date(from: "2018-03-09")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+        TrackHistoryData(
+            songName: "Final Countdown",
+            artistName: "Europe",
+            date: formatter.date(from: "2018-02-19")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+        TrackHistoryData(
+            songName: "Do It",
+            artistName: "Beastie Boys",
+            date: formatter.date(from: "2018-01-30")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+        TrackHistoryData(
+            songName: "Black Nails",
+            artistName: "Tierra Whack",
+            date: formatter.date(from: "2018-01-10")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        ),
+    ]
 }

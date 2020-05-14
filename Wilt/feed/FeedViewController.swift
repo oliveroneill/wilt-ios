@@ -1,6 +1,6 @@
 import Foundation
 
-/// A controller for displaying the user's play history as a feed, with infinite
+/// A controller for displaying the user's aggregated play history per week as a feed, with infinite
 /// scrolling and caching implemented
 final class FeedViewController: UITableViewController {
     private let viewModel: FeedViewModel
