@@ -62,7 +62,7 @@ final class MainAppViewController: UITabBarController {
 
     private lazy var historyTabItem: UITabBarItem = {
         let item = UITabBarItem(
-            title: "History",
+            title: "history_tab_title".localized,
             image: nil,
             selectedImage: nil
         )
