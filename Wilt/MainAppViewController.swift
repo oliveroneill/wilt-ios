@@ -199,7 +199,7 @@ final class MainAppViewController: UITabBarController {
                     container: container,
                     api: api
                 ),
-                title: "history_title".localized,
+                title: "history_tab_title".localized,
                 leftBarButton: nil
             ),
         ]

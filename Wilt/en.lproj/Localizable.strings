@@ -57,5 +57,4 @@ Spotify play history and user info will be stored and periodically updated. To o
 "artist_detail_title" = "Artist Activity";
 "artist_detail_chart_title" = "Number of Plays Per Month";
 "history_tab_title" = "History";
-"history_title" = "History";
 "track_history_loading_txt" = "Loading your latest listens...";
