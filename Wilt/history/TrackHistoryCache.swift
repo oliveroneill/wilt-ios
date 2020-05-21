@@ -11,6 +11,7 @@ protocol TrackHistoryDao: class {
     /// - Parameter items: The items to upsert
     /// - Throws: If the operation fails
     func batchInsert(items: [TrackHistoryData]) throws
+    func setArtistQuery(artistQuery: String?) throws
 }
 
 /// An implementation of TrackHistoryDao using CoreData and
@@ -36,7 +37,9 @@ final class TrackHistoryCache: NSObject, TrackHistoryDao {
             fetchRequest: fetchRequest,
             managedObjectContext: viewContext,
             sectionNameKeyPath: nil,
-            cacheName: "track_history_cache"
+            // Using the cache seemed to break when updating the search query,
+            // so I've disabled it
+            cacheName: nil
         )
         fetchedResultsController.delegate = self
         return fetchedResultsController
@@ -44,7 +47,7 @@ final class TrackHistoryCache: NSObject, TrackHistoryDao {
 
     /// The items in cache. These will be read out in batches of 10
     var items: [TrackHistoryData] {
-        return fetchedResultsController.fetchedObjects!.lazy.map { $0.toData() }
+        fetchedResultsController.fetchedObjects!.lazy.map { $0.toData() }
     }
     /// Set this to receive updates when the cache changes
     var onDataChange: (() -> Void)?
@@ -122,6 +125,28 @@ final class TrackHistoryCache: NSObject, TrackHistoryDao {
             item.trackID = $0.trackID
             updateContext.insert(item)
         }
+    }
+
+    func setArtistQuery(artistQuery: String?) throws {
+        if let query = artistQuery {
+            // We don't want to pick up "the" if searching for "t" or "th",
+            // we'll only match if they type the full word
+            var avoidUselessWordQuery = ""
+            if query.lowercased() == "t" || query.lowercased() == "th" {
+                avoidUselessWordQuery = " AND NOT artistName LIKE[c] '* the *'"
+            }
+            // Look for the query at the start of the string or at the start of
+            // any word in the string
+            fetchedResultsController.fetchRequest.predicate = NSPredicate(
+                format: "artistName LIKE[c] '" + query + "*'"
+                + " OR artistName LIKE[c] '* " + query + "*'"
+                + avoidUselessWordQuery
+            )
+        } else {
+            fetchedResultsController.fetchRequest.predicate = nil
+        }
+        try fetchedResultsController.performFetch()
+        onDataChange?()
     }
 }
 

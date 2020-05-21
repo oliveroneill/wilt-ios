@@ -90,6 +90,15 @@ final class MainAppViewController: UITabBarController {
         return item
     }()
 
+    private lazy var historySearchController: UISearchController = {
+        let searchController = UISearchController()
+        searchController.searchBar.placeholder = "listen_later_search_placeholder_text".localized
+        searchController.isActive = true
+        searchController.dimsBackgroundDuringPresentation = false
+        navigationItem.hidesSearchBarWhenScrolling = false
+        return searchController
+    }()
+
     /// Create the main app controller
     ///
     /// - Parameters:
@@ -164,6 +173,7 @@ final class MainAppViewController: UITabBarController {
         viewModel.delegate = self
         let historyViewController = HistoryViewController(viewModel: viewModel)
         historyViewController.tabBarItem = historyTabItem
+        historySearchController.searchResultsUpdater = viewModel
         return historyViewController
     }
 
@@ -232,6 +242,11 @@ extension MainAppViewController: UITabBarControllerDelegate {
         }
         title = tabs[item.tag].title
         navigationItem.leftBarButtonItem = tabs[item.tag].leftBarButton
+        if tabs[item.tag].controller is HistoryViewController {
+            navigationItem.searchController = historySearchController
+        } else {
+            navigationItem.searchController = nil
+        }
     }
 }
 

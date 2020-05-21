@@ -27,9 +27,13 @@ final class TrackHistoryPagerTest: XCTestCase {
             externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
             trackID: "not_a_real_track_id"
         )
-        pager.loadEarlierPage(earliestItem: earliestItem) { _ in }
+        pager.loadEarlierPage(
+            earliestItem: earliestItem,
+            artistSearchQuery: nil
+        ) { _ in }
         XCTAssertEqual(1, api.getTrackHistoryBeforeCalls.count)
         XCTAssertEqual(1551052800, api.getTrackHistoryBeforeCalls.first?.before)
+        XCTAssertNil(api.getTrackHistoryBeforeCalls.first?.artistSearchQuery)
     }
 
     func testLoadEarlierPageUsesPageSize() {
@@ -47,7 +51,10 @@ final class TrackHistoryPagerTest: XCTestCase {
             externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
             trackID: "not_a_real_track_id"
         )
-        pager.loadEarlierPage(earliestItem: earliestItem) { _ in }
+        pager.loadEarlierPage(
+            earliestItem: earliestItem,
+            artistSearchQuery: nil
+        ) { _ in }
         XCTAssertEqual(
             expectedPageSize,
             api.getTrackHistoryBeforeCalls.first?.limit
@@ -90,7 +97,7 @@ final class TrackHistoryPagerTest: XCTestCase {
         let exp = expectation(
             description: "Should respond when insert completes"
         )
-        pager.loadLaterPage(latestItem: item) {
+        pager.loadLaterPage(latestItem: item, artistSearchQuery: nil) {
             defer { exp.fulfill() }
             guard case let .success(upsertCount) = $0 else {
                 XCTFail()
@@ -129,7 +136,7 @@ final class TrackHistoryPagerTest: XCTestCase {
             description: "Should respond with error"
         )
         // Then
-        pager.loadLaterPage(latestItem: item) {
+        pager.loadLaterPage(latestItem: item, artistSearchQuery: nil) {
             defer { exp.fulfill() }
             guard case let .failure(error) = $0 else {
                 XCTFail()
@@ -164,7 +171,10 @@ final class TrackHistoryPagerTest: XCTestCase {
             description: "Should respond with error"
         )
         // Then
-        pager.loadEarlierPage(earliestItem: item) {
+        pager.loadEarlierPage(
+            earliestItem: item,
+            artistSearchQuery: nil
+        ) {
             defer { exp.fulfill() }
             guard case let .failure(error) = $0 else {
                 XCTFail()
@@ -180,10 +190,59 @@ final class TrackHistoryPagerTest: XCTestCase {
     }
 
     func testOnZeroItemsLoaded() {
-        pager.onZeroItemsLoaded {_ in }
+        pager.onZeroItemsLoaded(artistSearchQuery: nil) {_ in }
         // I should mock the date somehow, but I think if I just test that it
         // still actually makes a request then that should be good enough for
         // now...
         XCTAssertEqual(1, api.getTrackHistoryBeforeCalls.count)
+    }
+
+    func testLoadEarlierPageUsesSearchQuery() {
+        let artistQuery = "Pin"
+        let item = TrackHistoryData(
+            songName: "Angelina",
+            artistName: "Pinegrove",
+            date: FakeData.formatter.date(from: "2019-02-25")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        )
+        pager.loadEarlierPage(
+            earliestItem: item,
+            artistSearchQuery: artistQuery
+        ) { _ in }
+        XCTAssertEqual(
+            artistQuery,
+            api.getTrackHistoryBeforeCalls.first?.artistSearchQuery
+        )
+    }
+
+    func testLoadLaterPageUsesSearchQuery() {
+        let artistQuery = "Pin"
+        let item = TrackHistoryData(
+            songName: "Angelina",
+            artistName: "Pinegrove",
+            date: FakeData.formatter.date(from: "2019-02-25")!,
+            imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+            trackID: "not_a_real_track_id"
+        )
+        pager.loadLaterPage(
+            latestItem: item,
+            artistSearchQuery: artistQuery
+        ) { _ in }
+        XCTAssertEqual(
+            artistQuery,
+            api.getTrackHistoryAfterCalls.first?.artistSearchQuery
+        )
+    }
+
+    func testOnZeroItemsLoadedUsesSeachQuery() {
+        let artistQuery = "Pin"
+        pager.onZeroItemsLoaded(artistSearchQuery: artistQuery) {_ in }
+        XCTAssertEqual(
+            artistQuery,
+            api.getTrackHistoryBeforeCalls.first?.artistSearchQuery
+        )
     }
 }

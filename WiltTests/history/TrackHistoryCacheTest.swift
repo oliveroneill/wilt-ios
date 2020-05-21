@@ -89,6 +89,77 @@ final class TrackHistoryCacheTest: XCTestCase {
         XCTAssertEqual(FakeData.historyItems, cache.items)
     }
 
+    func testItemsWithQuery() throws {
+        let expected = [
+            TrackHistoryData(
+                songName: "Angelina",
+                artistName: "Pinegrove",
+                date: FakeData.formatter.date(from: "2019-02-25")!,
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                trackID: "not_a_real_track_id"
+            ),
+            TrackHistoryData(
+                songName: "Making Breakfast",
+                artistName: "Twin Peaks",
+                date: FakeData.formatter.date(from: "2018-09-01")!,
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                trackID: "not_a_real_track_id"
+            ),
+        ]
+        try cache.setArtistQuery(artistQuery: "P")
+        XCTAssertEqual(expected, cache.items)
+    }
+
+    func testItemsWithQueryIsCaseInsensitive() throws {
+        let expected = [
+            TrackHistoryData(
+                songName: "Angelina",
+                artistName: "Pinegrove",
+                date: FakeData.formatter.date(from: "2019-02-25")!,
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                trackID: "not_a_real_track_id"
+            ),
+            TrackHistoryData(
+                songName: "Making Breakfast",
+                artistName: "Twin Peaks",
+                date: FakeData.formatter.date(from: "2018-09-01")!,
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                trackID: "not_a_real_track_id"
+            ),
+        ]
+        // Lowercase p
+        try cache.setArtistQuery(artistQuery: "p")
+        XCTAssertEqual(expected, cache.items)
+    }
+
+    func testItemsWithQueryIgnoringThe() throws {
+        let expected = [
+            TrackHistoryData(
+                songName: "Making Breakfast",
+                artistName: "Twin Peaks",
+                date: FakeData.formatter.date(from: "2018-09-01")!,
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                trackID: "not_a_real_track_id"
+            ),
+            // Ignores "Show Me The Body"
+            TrackHistoryData(
+                songName: "Black Nails",
+                artistName: "Tierra Whack",
+                date: FakeData.formatter.date(from: "2018-01-10")!,
+                imageURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                externalURL: URL(string: "http://notarealimageurl.notreal.net")!,
+                trackID: "not_a_real_track_id"
+            ),
+        ]
+        try cache.setArtistQuery(artistQuery: "T")
+        XCTAssertEqual(expected, cache.items)
+    }
+
     func testBatchInsert() {
         let newItems = [
             TrackHistoryData(

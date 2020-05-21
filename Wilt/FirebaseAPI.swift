@@ -9,9 +9,9 @@ protocol WiltAPI: ProfileAPI, ArtistActivityAPI {
                   completion: @escaping (Result<TopTrackInfo, Error>) -> Void)
     func getArtistActivity(artistName: String,
                            completion: @escaping (Result<[ArtistActivity], Error>) -> Void)
-    func getTrackHistory(limit: Int, after: Int64,
+    func getTrackHistory(limit: Int, after: Int64, artistSearchQuery: String?,
                          completion: @escaping (Result<[TrackHistoryData], Error>) -> Void)
-    func getTrackHistory(limit: Int, before: Int64,
+    func getTrackHistory(limit: Int, before: Int64, artistSearchQuery: String?,
                          completion: @escaping (Result<[TrackHistoryData], Error>) -> Void)
 }
 
@@ -167,28 +167,33 @@ final class FirebaseAPI: WiltAPI {
 
     func getTrackHistory(limit: Int,
                          after: Int64,
+                         artistSearchQuery: String?,
                          completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
         getTrackHistory(
             limit: limit,
             before: nil,
             after: after,
+            artistSearchQuery: artistSearchQuery,
             completion: completion
         )
     }
 
     func getTrackHistory(limit: Int,
                          before: Int64,
+                         artistSearchQuery: String?,
                          completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
         getTrackHistory(
             limit: limit,
             before: before,
             after: nil,
+            artistSearchQuery: artistSearchQuery,
             completion: completion
         )
     }
 
     private func getTrackHistory(limit: Int,
                                  before: Int64?, after: Int64?,
+                                 artistSearchQuery: String?,
                                  completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
         guard before == nil || after == nil else {
             fatalError("Either before or after must be specified")
@@ -199,6 +204,7 @@ final class FirebaseAPI: WiltAPI {
         let data: [String:Any] = [
             "after": after as Any,
             "before": before as Any,
+            "artist_search_query": artistSearchQuery as Any,
             "limit": limit
         ]
         NetworkActivityUtil.showNetworkIndicator()

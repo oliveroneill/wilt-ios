@@ -98,6 +98,7 @@ final class HistoryViewControllerTest: KIFTestCase {
             var items: [TrackHistoryData] = []
             var onDataChange: (() -> Void)?
             func batchInsert(items: [TrackHistoryData]) throws {}
+            func setArtistQuery(artistQuery: String?) throws {}
         }
         let dao = ChangingItemsDao()
         // Start with an empty dataset

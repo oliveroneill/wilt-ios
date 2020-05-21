@@ -25,12 +25,13 @@ struct HistoryItemViewModel: Equatable {
 }
 
 /// View model for displaying the user's music listening history in a feed
-final class HistoryViewModel {
+final class HistoryViewModel: NSObject {
     private let historyDao: TrackHistoryDao
     private let pager: TrackHistoryPager
     private let backgroundQueue = DispatchQueue(
         label: "com.oliveroneill.wilt.HistoryViewModel.backgroundQueue"
     )
+    private var artistSearchQuery: String?
     /// Keep track of the state to avoid transitioning to the same state twice
     private var state: HistoryViewState?
     weak var delegate: HistoryViewModelDelegate?
@@ -48,7 +49,7 @@ final class HistoryViewModel {
     }()
     /// The items that should be displayed on the feed as cells
     var items: [HistoryItemViewModel] {
-        return historyDao.items.lazy.map {
+        historyDao.items.lazy.map {
             HistoryItemViewModel(
                 songName: $0.songName,
                 artistName: $0.artistName,
@@ -73,6 +74,7 @@ final class HistoryViewModel {
             dao: historyDao,
             pageSize: 10
         )
+        super.init()
         historyDao.onDataChange = { [weak self] in
             self?.onRowsUpdated?()
         }
@@ -165,7 +167,9 @@ final class HistoryViewModel {
         backgroundQueue.async { [weak self] in
             guard let self = self else { return }
             guard let earliestItem = earliestItem else {
-                self.pager.onZeroItemsLoaded { [weak self] in
+                self.pager.onZeroItemsLoaded(
+                    artistSearchQuery: self.artistSearchQuery
+                ) { [weak self] in
                     self?.handleInsertResult(
                         insertCountResult: $0,
                         isItemsEmpty: true
@@ -173,7 +177,10 @@ final class HistoryViewModel {
                 }
                 return
             }
-            self.pager.loadEarlierPage(earliestItem: earliestItem) { [weak self] in
+            self.pager.loadEarlierPage(
+                earliestItem: earliestItem,
+                artistSearchQuery: self.artistSearchQuery
+            ) { [weak self] in
                 self?.handleInsertResult(
                     insertCountResult: $0,
                     onErrorState: .errorAtBottom
@@ -187,7 +194,9 @@ final class HistoryViewModel {
         backgroundQueue.async { [weak self] in
             guard let self = self else { return }
             guard let latestItem = latestItem else {
-                self.pager.onZeroItemsLoaded { [weak self] in
+                self.pager.onZeroItemsLoaded(
+                    artistSearchQuery: self.artistSearchQuery
+                ) { [weak self] in
                     self?.handleInsertResult(
                         insertCountResult: $0,
                         isItemsEmpty: true
@@ -195,9 +204,29 @@ final class HistoryViewModel {
                 }
                 return
             }
-            self.pager.loadLaterPage(latestItem: latestItem) { [weak self] in
+            self.pager.loadLaterPage(
+                latestItem: latestItem,
+                artistSearchQuery: self.artistSearchQuery
+            ) { [weak self] in
                 self?.handleInsertResult(insertCountResult: $0)
             }
+        }
+    }
+}
+
+extension HistoryViewModel: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        if text.isEmpty {
+            artistSearchQuery = nil
+        } else {
+            artistSearchQuery = text
+        }
+        do {
+            try historyDao.setArtistQuery(artistQuery: artistSearchQuery)
+        } catch {
+            // TODO: actually tell the user that the search is failing
+            updateState(state: .errorAtTop)
         }
     }
 }

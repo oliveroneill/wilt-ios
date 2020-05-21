@@ -480,4 +480,98 @@ final class HistoryViewModelTest: XCTestCase {
             }
         }
     }
+
+    func testUpdateSearchResultsUpdatesDao() {
+        let expectedQuery = "Pin"
+        let dao = FakeTrackHistoryDao(items: [])
+        viewModel = HistoryViewModel(
+            historyDao: dao,
+            api: FakeWiltAPI(getTrackHistoryAnythingResult: .success([]))
+        )
+        let controller = UISearchController()
+        controller.searchBar.text = expectedQuery
+        viewModel.updateSearchResults(for: controller)
+        XCTAssertEqual([expectedQuery], dao.setArtistQueryCalls)
+        // Have to fulfill expectation since it's not used in this test... Ugly
+        exp.fulfill()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testUpdateSearchResultsUpdatesDaoForEmptyText() {
+        let expectedQuery = ""
+        let dao = FakeTrackHistoryDao(items: [])
+        viewModel = HistoryViewModel(
+            historyDao: dao,
+            api: FakeWiltAPI(getTrackHistoryAnythingResult: .success([]))
+        )
+        let controller = UISearchController()
+        controller.searchBar.text = expectedQuery
+        viewModel.updateSearchResults(for: controller)
+        XCTAssertEqual([nil], dao.setArtistQueryCalls)
+        // Have to fulfill expectation since it's not used in this test... Ugly
+        exp.fulfill()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testUpdateSearchResultsChangesApiCall() {
+        let expectedQuery = "Pin"
+        let api = FakeWiltAPI(getTrackHistoryAnythingResult: .success([]))
+        viewModel = HistoryViewModel(
+            historyDao: FakeTrackHistoryDao(items: []),
+            api: api
+        )
+        viewModel.onViewUpdate = {
+            if $0 == HistoryViewState.empty {
+                XCTAssertEqual(
+                    expectedQuery,
+                    api.getTrackHistoryBeforeCalls.last?.artistSearchQuery
+                )
+                self.exp.fulfill()
+            }
+        }
+        let controller = UISearchController()
+        controller.searchBar.text = expectedQuery
+        viewModel.updateSearchResults(for: controller)
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testUpdateSearchResultsChangesApiCallOnEmptyString() {
+        let expectedQuery = ""
+        let api = FakeWiltAPI(getTrackHistoryAnythingResult: .success([]))
+        viewModel = HistoryViewModel(
+            historyDao: FakeTrackHistoryDao(items: []),
+            api: api
+        )
+        viewModel.onViewUpdate = {
+            if $0 == HistoryViewState.empty {
+                XCTAssertEqual(
+                    nil,
+                    api.getTrackHistoryBeforeCalls.last?.artistSearchQuery
+                )
+                self.exp.fulfill()
+            }
+        }
+        let controller = UISearchController()
+        controller.searchBar.text = expectedQuery
+        viewModel.updateSearchResults(for: controller)
+        viewModel.onViewAppeared()
+        waitForExpectations(timeout: 1) {
+            if let error = $0 {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
 }

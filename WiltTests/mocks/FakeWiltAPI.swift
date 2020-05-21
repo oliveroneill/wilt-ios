@@ -23,8 +23,8 @@ final class FakeWiltAPI: WiltAPI {
     private let getTrackHistoryAnythingResult: Result<[TrackHistoryData], Error>?
     private let getTrackHistoryBeforeResult: [Int64:Result<[TrackHistoryData], Error>]
     private let getTrackHistoryAfterResult: [Int64:Result<[TrackHistoryData], Error>]
-    var getTrackHistoryBeforeCalls = [(limit: Int, before: Int64)]()
-    var getTrackHistoryAfterCalls = [(limit: Int, after: Int64)]()
+    var getTrackHistoryBeforeCalls = [(limit: Int, before: Int64, artistSearchQuery: String?)]()
+    var getTrackHistoryAfterCalls = [(limit: Int, after: Int64, artistSearchQuery: String?)]()
 
     init(topArtistPerWeekResult: [Timespan:Result<[TopArtistData], Error>] = [:],
          topArtistResult: [TopSomethingRequest:Result<TopArtistInfo, Error>] = [:],
@@ -78,8 +78,11 @@ final class FakeWiltAPI: WiltAPI {
         }
     }
 
-    func getTrackHistory(limit: Int, after: Int64, completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
-        getTrackHistoryAfterCalls.append((limit: limit, after: after))
+    func getTrackHistory(limit: Int, after: Int64, artistSearchQuery: String?,
+                         completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
+        getTrackHistoryAfterCalls.append(
+            (limit: limit, after: after, artistSearchQuery: artistSearchQuery)
+        )
         guard let response = getTrackHistoryAnythingResult else {
             if let result = getTrackHistoryAfterResult[after] {
                 completion(result)
@@ -89,8 +92,11 @@ final class FakeWiltAPI: WiltAPI {
         completion(response)
     }
 
-    func getTrackHistory(limit: Int, before: Int64, completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
-            getTrackHistoryBeforeCalls.append((limit: limit, before: before))
+    func getTrackHistory(limit: Int, before: Int64, artistSearchQuery: String?,
+                         completion: @escaping (Result<[TrackHistoryData], Error>) -> Void) {
+            getTrackHistoryBeforeCalls.append(
+                (limit: limit, before: before, artistSearchQuery: artistSearchQuery)
+        )
         guard let response = getTrackHistoryAnythingResult else {
             if let result = getTrackHistoryBeforeResult[before] {
                 completion(result)

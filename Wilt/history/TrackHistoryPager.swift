@@ -16,37 +16,48 @@ final class TrackHistoryPager {
         self.pageSize = pageSize
     }
 
-    func onZeroItemsLoaded(completionHandler: @escaping PagerCompletionHandler) {
+    func onZeroItemsLoaded(artistSearchQuery: String?,
+                           completionHandler: @escaping PagerCompletionHandler) {
         let end = Date().timeIntervalSince1970
         getTrackHistory(
             before: Int64(end),
+            artistSearchQuery: artistSearchQuery,
             completionHandler: completionHandler,
             firstLoad: true
         )
     }
 
     func loadLaterPage(latestItem: TrackHistoryData,
+                       artistSearchQuery: String?,
                        completionHandler: @escaping PagerCompletionHandler) {
         let after = latestItem.date.timeIntervalSince1970
         getTrackHistory(
             after: Int64(after),
+            artistSearchQuery: artistSearchQuery,
             completionHandler: completionHandler
         )
     }
 
     func loadEarlierPage(earliestItem: TrackHistoryData,
+                         artistSearchQuery: String?,
                          completionHandler: @escaping PagerCompletionHandler) {
         let before = earliestItem.date.timeIntervalSince1970
         getTrackHistory(
             before: Int64(before),
+            artistSearchQuery: artistSearchQuery,
             completionHandler: completionHandler
         )
     }
 
     private func getTrackHistory(before: Int64,
+                                 artistSearchQuery: String?,
                                  completionHandler: @escaping PagerCompletionHandler,
                                  firstLoad: Bool = false) {
-        api.getTrackHistory(limit: pageSize, before: before) { [weak self] in
+        api.getTrackHistory(
+            limit: pageSize,
+            before: before,
+            artistSearchQuery: artistSearchQuery
+        ) { [weak self] in
             guard let self = self else { return }
             self.handleResponse(
                 result: $0,
@@ -57,9 +68,14 @@ final class TrackHistoryPager {
     }
 
     private func getTrackHistory(after: Int64,
+                                 artistSearchQuery: String?,
                                  completionHandler: @escaping PagerCompletionHandler,
                                  firstLoad: Bool = false) {
-        api.getTrackHistory(limit: pageSize, after: after) { [weak self] in
+        api.getTrackHistory(
+            limit: pageSize,
+            after: after,
+            artistSearchQuery: artistSearchQuery
+        ) { [weak self] in
             guard let self = self else { return }
             self.handleResponse(
                 result: $0,
