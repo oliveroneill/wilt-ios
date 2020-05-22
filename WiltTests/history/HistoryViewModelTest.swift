@@ -11,6 +11,10 @@ final class HistoryViewModelTest: XCTestCase {
     }
     private let error = HistoryViewModelTestError.testError
 
+    override class func setUp() {
+        NSTimeZone.default = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
+    }
+
     override func setUp() {
         viewModel = HistoryViewModel(
             historyDao: FakeTrackHistoryDao(items: FakeData.historyItems),
@@ -63,21 +67,21 @@ final class HistoryViewModelTest: XCTestCase {
             HistoryItemViewModel(
                 songName: "Angelina",
                 artistName: "Pinegrove",
-                dateText: "25 Feb 2019 11:00",
+                dateText: "25 Feb 2019 00:00",
                 imageURL: URL(string: "http://notarealimageurl1.notreal.net")!,
                 externalURL: URL(string: "http://notarealurl1.notreal.net")!
             ),
             HistoryItemViewModel(
                 songName: "715 Creeks",
                 artistName: "Bon Iver",
-                dateText: "5 Dec 2018 11:16",
+                dateText: "5 Dec 2018 00:16",
                 imageURL: URL(string: "http://notarealimageurl2.notreal.net")!,
                 externalURL: URL(string: "http://notarealurl2.notreal.net")!
             ),
             HistoryItemViewModel(
                 songName: "Turned Off",
                 artistName: "Death Grips",
-                dateText: "21 Oct 2018 11:00",
+                dateText: "21 Oct 2018 00:00",
                 imageURL: URL(string: "http://notarealimageurl3.notreal.net")!,
                 externalURL: URL(string: "http://notarealurl3.notreal.net")!
             ),

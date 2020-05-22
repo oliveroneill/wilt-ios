@@ -15,6 +15,10 @@ final class HistoryViewControllerTest: KIFTestCase {
     }
     private let error = HistoryViewControllerTestError.testError
 
+    override class func setUp() {
+        NSTimeZone.default = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
+    }
+
     /// Seup the controller under test. By default these tests will have
     /// a controller that will respond to expected API calls with empty data.
     ///
