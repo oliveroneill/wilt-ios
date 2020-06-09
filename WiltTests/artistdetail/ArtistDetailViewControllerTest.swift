@@ -106,6 +106,23 @@ final class ArtistDetailViewControllerTest: KIFTestCase {
         expect(self.window).to(haveValidSnapshot())
     }
 
+    func testLoadedWithOnlyTwoMonths() {
+        let activity = [
+            ArtistActivity(
+                date: Date(year: 2012, month: 5, day: 1, hour: 0, minute: 0),
+                numberOfPlays: 324
+            ),
+            ArtistActivity(
+                date: Date(year: 2012, month: 6, day: 1, hour: 0, minute: 0),
+                numberOfPlays: 25
+            ),
+        ]
+        setupController(apiResponse: .success(activity))
+        tester().waitForAnimationsToFinish()
+        // expect(self.window).to(recordSnapshot())
+        expect(self.window).to(haveValidSnapshot())
+    }
+
     func testError() {
         setupController(apiResponse: .failure(error))
         tester().waitForAnimationsToFinish()
