@@ -187,21 +187,6 @@ class ArtistDetailViewController: UITableViewController {
         viewModel.onDoneButtonTapped()
     }
 
-    /// A custom formatter for labelling bars based on string values
-    private class CustomXAxisLabelFormatter: IAxisValueFormatter {
-        private let values: [String]
-
-        /// Initialise the formatter
-        /// - Parameter values: X-axis labels where the index will be its x value
-        init(values: [String]) {
-            self.values = values
-        }
-
-        func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-            values[Int(value)]
-        }
-    }
-
     private func updateState(state: ArtistDetailViewModelState) {
         chartErrorMessageLabel.isHidden = true
         switch state {
@@ -230,9 +215,10 @@ class ArtistDetailViewController: UITableViewController {
         })
         dataSet.colors = [UIColor(red: 0, green: 0.5, blue: 1, alpha: 1)]
         dataSet.drawValuesEnabled = false
-        chart.xAxis.valueFormatter = CustomXAxisLabelFormatter(
+        chart.xAxis.valueFormatter = IndexAxisValueFormatter(
             values: activity.map { $0.dateText }
         )
+        chart.xAxis.granularity = 1
         chart.data = BarChartData(dataSet: dataSet)
         chart.dragXEnabled = true
         chart.setScaleEnabled(false)
