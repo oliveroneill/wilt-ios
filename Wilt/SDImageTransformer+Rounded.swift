@@ -4,13 +4,9 @@ enum SDImageTransformers {
     static var roundCornerTransformer: SDImageTransformer = {
         return SDImagePipelineTransformer(
             transformers: [
-                SDImageCroppingTransformer(
-                    rect: CGRect(
-                        origin: .zero,
-                        // Fix the height and width since the images out of
-                        // Spotify aren't consistent sizes
-                        size: CGSize(width: 640, height: 640)
-                    )
+                SDImageResizingTransformer(
+                    size: CGSize(width: 100, height: 100),
+                    scaleMode: .aspectFill
                 ),
                 SDImageRoundCornerTransformer(
                     // This will ensure that the image comes out as a circle
