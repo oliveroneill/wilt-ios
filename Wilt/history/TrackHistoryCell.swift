@@ -5,27 +5,6 @@ import SwiftIcons
 /// A single table view for the play history feed. See `HistoryViewController`
 final class TrackHistoryCell: UITableViewCell {
     static let reuseIdentifier = "trackHistoryCell"
-    private lazy var roundCornerTransformer: SDImageTransformer = {
-        return SDImagePipelineTransformer(
-            transformers: [
-                SDImageCroppingTransformer(
-                    rect: CGRect(
-                        origin: .zero,
-                        // Fix the height and width since the images out of
-                        // Spotify aren't consistent sizes
-                        size: CGSize(width: 640, height: 640)
-                    )
-                ),
-                SDImageRoundCornerTransformer(
-                    // This will ensure that the image comes out as a circle
-                    radius: CGFloat.greatestFiniteMagnitude,
-                    corners: .allCorners,
-                    borderWidth: 0,
-                    borderColor: nil
-                )
-            ]
-        )
-    }()
     /// Set this when the view is being reused
     var viewModel: HistoryItemViewModel? {
         didSet {
@@ -36,7 +15,9 @@ final class TrackHistoryCell: UITableViewCell {
                 artistImageView.sd_setImage(
                     with: viewModel.imageURL,
                     placeholderImage: nil,
-                    context: [.imageTransformer: roundCornerTransformer]
+                    context: [
+                        .imageTransformer: SDImageTransformers.roundCornerTransformer
+                    ]
                 )
             }
         }

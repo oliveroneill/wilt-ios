@@ -4,27 +4,6 @@ import SwiftIcons
 
 /// The table view cell for displaying the artist name and photo.
 final class ArtistDetailTitleCell: UITableViewCell {
-    private lazy var roundCornerTransformer: SDImageTransformer = {
-        return SDImagePipelineTransformer(
-            transformers: [
-                SDImageCroppingTransformer(
-                    rect: CGRect(
-                        origin: .zero,
-                        // Fix the height and width since the images out of
-                        // Spotify aren't consistent sizes
-                        size: CGSize(width: 640, height: 640)
-                    )
-                ),
-                SDImageRoundCornerTransformer(
-                    // This will ensure that the image comes out as a circle
-                    radius: CGFloat.greatestFiniteMagnitude,
-                    corners: .allCorners,
-                    borderWidth: 0,
-                    borderColor: nil
-                )
-            ]
-        )
-    }()
     /// The view data that should be displayed in the cell. Once this is set the view will update itself
     var viewModel: ArtistInfo? {
         didSet {
@@ -33,7 +12,9 @@ final class ArtistDetailTitleCell: UITableViewCell {
                 artistImageView.sd_setImage(
                     with: viewModel.imageURL,
                     placeholderImage: nil,
-                    context: [.imageTransformer: roundCornerTransformer]
+                    context: [
+                        .imageTransformer: SDImageTransformers.roundCornerTransformer
+                    ]
                 )
             }
         }

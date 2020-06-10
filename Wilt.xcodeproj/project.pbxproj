@@ -13,6 +13,7 @@
 		7D233B36233226F300EC95B6 /* ProfileCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B35233226F300EC95B6 /* ProfileCacheTest.swift */; };
 		7D233B38233384EE00EC95B6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B37233384EE00EC95B6 /* SettingsViewController.swift */; };
 		7D233B3A2334C6DF00EC95B6 /* SettingsViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B392334C6DF00EC95B6 /* SettingsViewControllerTest.swift */; };
+		7D2AD5E02490E4A100D28C62 /* SDImageTransformer+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2AD5DF2490E4A100D28C62 /* SDImageTransformer+Rounded.swift */; };
 		7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */; };
 		7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */; };
 		7D47CCA722FB88C900A4D96E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D47CCA622FB88C900A4D96E /* Assets.xcassets */; };
@@ -132,6 +133,7 @@
 		7D233B35233226F300EC95B6 /* ProfileCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCacheTest.swift; sourceTree = "<group>"; };
 		7D233B37233384EE00EC95B6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7D233B392334C6DF00EC95B6 /* SettingsViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTest.swift; sourceTree = "<group>"; };
+		7D2AD5DF2490E4A100D28C62 /* SDImageTransformer+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDImageTransformer+Rounded.swift"; sourceTree = "<group>"; };
 		7D47CC9922FB88C700A4D96E /* Wilt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wilt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D47CCA422FB88C700A4D96E /* Wilt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wilt.xcdatamodel; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				7D809136232DFFE4006FE0FA /* profile */,
 				7DB15891231A516F00F86A9E /* onboarding */,
 				7DD05B8223D03A6D0020EDD0 /* search */,
+				7D2AD5DF2490E4A100D28C62 /* SDImageTransformer+Rounded.swift */,
 				7D5A2AF6231A554D00B56000 /* LoggedInCoordinator.swift */,
 				7D5A2AF8231A573800B56000 /* MainAppViewController.swift */,
 				7D233B37233384EE00EC95B6 /* SettingsViewController.swift */,
@@ -878,6 +881,7 @@
 				7DD05B9323D195820020EDD0 /* UISearchBar+Loading.swift in Sources */,
 				7DB1586A230D6C8700F86A9E /* Utils.swift in Sources */,
 				7DD271EE23C52CDB006B543F /* ListenLaterViewModel.swift in Sources */,
+				7D2AD5E02490E4A100D28C62 /* SDImageTransformer+Rounded.swift in Sources */,
 				7DA898BC232E4C1300204823 /* ProfileCardView.swift in Sources */,
 				7DD05B8623D03B950020EDD0 /* ArtistResultsTableViewController.swift in Sources */,
 				7D5559D724616FF600EA07FE /* HistoryViewModel.swift in Sources */,
