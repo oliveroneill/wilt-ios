@@ -102,7 +102,7 @@ final class ArtistSearchViewModel {
         }
     }
 
-    /// Debounce the current action and only send it if it's been 0.2 seconds since the last
+    /// Debounce the current action and only send it if it's been 0.1 seconds since the last
     /// action
     /// - Parameter callback: The action to perform
     private func debounce(callback: @escaping (() -> Void)) {
