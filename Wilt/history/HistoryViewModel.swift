@@ -27,6 +27,8 @@ struct HistoryItemViewModel: Equatable {
 }
 
 /// View model for displaying the user's music listening history in a feed
+/// TODO: using earliest and latest item for paging breaks since search will throw off what the earliest
+/// really is.
 final class HistoryViewModel: NSObject {
     private let historyDao: TrackHistoryDao
     private let pager: TrackHistoryPager
