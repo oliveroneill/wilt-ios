@@ -32,7 +32,7 @@ final class WiltAppCoordinator: Coordinator {
         // We need to return this response back to the SpotifyAuthoriser,
         // which should be stored in the first child coordinator in the ideal
         // case
-        if let coordinator = childCoordinators.first as? OnboardingCoordinator {
+        if let coordinator = childCoordinators.last as? OnboardingCoordinator {
             coordinator.spotifyAuthComplete(
                 application: application,
                 url: url,
@@ -65,7 +65,7 @@ final class WiltAppCoordinator: Coordinator {
 
 extension WiltAppCoordinator: OnboardingCoordinatorDelegate {
     func loggedIn(userID: String) {
-        childCoordinators.first?.dismiss()
+        childCoordinators.last?.dismiss()
         showContent(database: database)
     }
 }
@@ -81,7 +81,7 @@ extension WiltAppCoordinator: LoggedInCoordinatorDelegate {
 
     func logOut() {
         defer {
-            childCoordinators.first?.dismiss()
+            childCoordinators.last?.dismiss()
             showOnboarding()
         }
         do {
