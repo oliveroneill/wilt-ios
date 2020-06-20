@@ -106,6 +106,7 @@ final class OnboardingViewController: UIViewController {
         signUpButton.setTitle("try_again_text".localized, for: .normal)
         signUpButton.isHidden = false
         errorView.isHidden = false
+        onboardingView.isHidden = true
     }
 
     private func displayLoadingSpinner() {
