@@ -1,3 +1,5 @@
+import UIKit
+
 /// Add an extension to display a loading spinner in place of the search icon.
 /// There's a lot of hacky stuff in here, but I think it looks pretty good
 extension UISearchBar {

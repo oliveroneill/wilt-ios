@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 extension String {
     /// Get the localized string using self as the id

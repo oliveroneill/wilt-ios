@@ -39,20 +39,21 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>spotify</string>
-    </array>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>com.oliveroneill.wilt</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>wilt</string>
-            </array>
-        </dict>
-    </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>spotify</string>
+		<string>spotify-action</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.oliveroneill.wilt</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wilt</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

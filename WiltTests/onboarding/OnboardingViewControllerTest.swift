@@ -7,21 +7,20 @@ import KIF
 
 final class OnboardingViewControllerTest: KIFTestCase {
     private var controller: OnboardingViewController!
-    private var authoriser: FakeAuthoriser!
+    private var delegate: FakeOnboardingDelegate!
 
     override func setUp() {
         setupController()
     }
 
     private func setupController(
-        authoriser: FakeAuthoriser = FakeAuthoriser(),
-        authenticator: FakeAuthenticator = FakeAuthenticator()
+        delegate: FakeOnboardingDelegate = FakeOnboardingDelegate(showLoginResult: .success("123"))
     ) {
-        self.authoriser = authoriser
         let viewModel = OnboardingViewModel(
-            userAuthenticator: authenticator,
-            spotifyAuthoriser: authoriser
+            userAuthenticator: FakeAuthenticator()
         )
+        self.delegate = delegate
+        viewModel.delegate = delegate
         controller = OnboardingViewController(viewModel: viewModel)
         guard let window = UIApplication.shared.keyWindow else {
             XCTFail("Unexpected nil window")
@@ -49,7 +48,7 @@ final class OnboardingViewControllerTest: KIFTestCase {
 
     func testSignInButton() {
         tester().tapView(withAccessibilityLabel: "sign_in_text".localized)
-        XCTAssertEqual(1, authoriser.authoriseCallCount)
+        XCTAssertEqual(1, delegate.showLoginCallCount)
     }
 
     func testAuthenticatingScreen() {
@@ -59,10 +58,10 @@ final class OnboardingViewControllerTest: KIFTestCase {
     }
 
     func testErrorScreen() {
-        let mockAuthoriser = FakeAuthoriser(
-            authoriseResult: .failure(FakeError.testError)
+        let delegate = FakeOnboardingDelegate(
+            showLoginResult: .failure(FakeError.testError)
         )
-        setupController(authoriser: mockAuthoriser)
+        setupController(delegate: delegate)
         tester().tapView(withAccessibilityLabel: "sign_in_text".localized)
         // expect(self.controller.view).to(recordSnapshot())
         expect(self.controller.view).to(haveValidSnapshot())

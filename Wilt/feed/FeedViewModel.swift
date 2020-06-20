@@ -1,3 +1,5 @@
+import Foundation
+
 /// The state that the feed view can be in
 ///
 /// - displayingRows: Displaying play history content

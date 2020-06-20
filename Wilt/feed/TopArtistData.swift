@@ -1,3 +1,5 @@
+import Foundation
+
 /// Errors that occur when parsing the response from Wilt API
 ///
 /// - unexpectedNil: A value was nil when it shouldn't be

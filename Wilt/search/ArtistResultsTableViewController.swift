@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 /// A view controller for displaying search results
 class ArtistResultsTableViewController: UITableViewController {

@@ -1,3 +1,5 @@
+import UIKit
+
 /// Utility for hiding and displaying the activity indicator
 enum NetworkActivityUtil {
     static func showNetworkIndicator() {

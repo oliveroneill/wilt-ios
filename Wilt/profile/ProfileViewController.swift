@@ -1,3 +1,5 @@
+import UIKit
+
 /// View controller for the profile screen. This will use a collection view
 /// to display cards about the user
 final class ProfileViewController: UIViewController {

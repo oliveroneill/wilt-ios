@@ -1,3 +1,5 @@
+import Foundation
+
 /// Called when the next page load operation is complete. This will signal
 /// success or failure of the load based on the Result. On success, you'll
 /// receive the total number of items inserted or updated in cache

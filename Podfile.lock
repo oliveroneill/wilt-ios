@@ -184,6 +184,7 @@ PODS:
     - SDWebImage/Core (= 5.5.2)
   - SDWebImage/Core (5.5.2)
   - Shimmer (1.0.2)
+  - SpotifyLogin (0.1.6)
   - SwiftDate (6.1.0)
   - SwiftIcons (2.3.2)
 
@@ -199,6 +200,7 @@ DEPENDENCIES:
   - Nimble-Snapshots
   - SDWebImage
   - Shimmer
+  - SpotifyLogin (from `https://github.com/oliveroneill/SpotifyLogin.git`)
   - SwiftDate
   - SwiftIcons
 
@@ -237,6 +239,13 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Keys:
     :path: Pods/CocoaPodsKeys
+  SpotifyLogin:
+    :git: https://github.com/oliveroneill/SpotifyLogin.git
+
+CHECKOUT OPTIONS:
+  SpotifyLogin:
+    :commit: 47b74b0490b02bb65f2fb1b6e71fd93533abc1d7
+    :git: https://github.com/oliveroneill/SpotifyLogin.git
 
 SPEC CHECKSUMS:
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
@@ -267,9 +276,10 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
+  SpotifyLogin: 7ac1f609a908b7e7bfad215204b967248c9b69ef
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
   SwiftIcons: e652cfd2676441c462ad57b6e92977faf577e590
 
-PODFILE CHECKSUM: d25a3d4ebe3e08ff18d4bbcf450f2e416318419c
+PODFILE CHECKSUM: b207438524643274f0bebc150fc704fb632f5e99
 
 COCOAPODS: 1.6.1

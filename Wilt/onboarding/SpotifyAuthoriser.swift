@@ -1,6 +1,7 @@
 import Keys
 
 import Foundation
+import SpotifyLogin
 
 /// Authoriser for Spotify Web API. This mostly just exists for mocking.
 /// I would have made this a more generic authorisation flow but since
@@ -11,7 +12,8 @@ protocol SpotifyAuthoriser {
     /// Authorise the app to use Spotify for this user
     ///
     /// - Parameter onComplete: Called on authorisation completion
-    func authorise(onComplete: @escaping ((Result<String, Error>) -> Void))
+    func authorise(from: UIViewController,
+                   onComplete: @escaping ((Result<String, Error>) -> Void))
 
     /// Called via the AppDelegate when the Spotify app returns the result
     /// of the authorisation flow. See AppDelegate's `application open` function
@@ -26,27 +28,22 @@ final class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
     private let canceledURL = URL(
         string: "wilt://spotify-login?error=user_canceled&error_description=User%20aborted"
     )!
-    private lazy var sessionManager: SPTSessionManager = {
-        // cocoapods-keys is used to store secrets
-        let keys = WiltKeys()
-        let spotifyClientID = keys.spotifyClientID
-        let spotifyRedirectURL = URL(string: keys.spotifyRedirectURI)!
-        var configuration = SPTConfiguration(
-            clientID: spotifyClientID,
-            redirectURL: spotifyRedirectURL
-        )
-        return SPTSessionManager(configuration: configuration, delegate: self)
-    }()
     private var onAuthorisationComplete: ((Result<String, Error>) -> Void)?
 
-    func authorise(onComplete: @escaping ((Result<String, Error>) -> Void)) {
+    func authorise(from: UIViewController,
+                   onComplete: @escaping ((Result<String, Error>) -> Void)) {
+        let keys = WiltKeys()
+        SpotifyLogin.shared.configure(
+            clientID: keys.spotifyClientID,
+            redirectURL: URL(string: keys.spotifyRedirectURI)!
+        )
         onAuthorisationComplete = onComplete
-        let requestedScopes: SPTScope = [
+        let requestedScopes: [Scope] = [
             .userReadEmail,
             .userReadRecentlyPlayed,
-            .userTopRead
+            .userReadTop
         ]
-        sessionManager.initiateSession(with: requestedScopes, options: .default)
+        SpotifyLoginPresenter.login(from: from, scopes: requestedScopes)
     }
 
     /// This will be called once Spotify returns and we've made it back
@@ -61,11 +58,19 @@ final class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
             onAuthorisationComplete?(.failure(SpotifyAuthoriserError.userAbort))
             return
         }
-        sessionManager.application(
-            application,
-            open: url,
-            options: options
-        )
+        _ = SpotifyLogin.shared.applicationOpenURL(url) { [weak self] in
+            if case let .failure(error) = $0 {
+                self?.onAuthorisationComplete?(.failure(error))
+            } else if case let .success(code) = $0 {
+                guard code.count > 0 else {
+                    self?.onAuthorisationComplete?(
+                        .failure(SpotifyAuthoriserError.noCodeGiven)
+                    )
+                    return
+                }
+                self?.onAuthorisationComplete?(.success(code))
+            }
+        }
     }
 }
 
@@ -77,26 +82,4 @@ final class SpotifyAppAuthoriser: NSObject, SpotifyAuthoriser {
 enum SpotifyAuthoriserError: Error {
     case noCodeGiven
     case userAbort
-}
-
-extension SpotifyAppAuthoriser: SPTSessionManagerDelegate {
-    func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {}
-
-    func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
-        onAuthorisationComplete?(.failure(error))
-    }
-
-    func sessionManager(manager: SPTSessionManager, shouldRequestAccessTokenWith code: String) -> Bool {
-        // There seems to be a bug when using Spotify with the web view,
-        // if the user presses the Cancel button then we'll receive a
-        // shouldRequestAccessToken with an empty code
-        guard code.count > 0 else {
-            onAuthorisationComplete?(
-                .failure(SpotifyAuthoriserError.noCodeGiven)
-            )
-            return false
-        }
-        onAuthorisationComplete?(.success(code))
-        return false
-    }
 }

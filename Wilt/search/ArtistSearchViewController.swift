@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 /// A search controller for allowing the user to search for an artist to add to their list
 class ArtistSearchViewController: UITableViewController {

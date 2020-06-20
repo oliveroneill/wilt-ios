@@ -9,7 +9,8 @@ final class FakeAuthoriser: SpotifyAuthoriser {
         self.authoriseResult = authoriseResult
     }
 
-    func authorise(onComplete: @escaping ((Result<String, Error>) -> Void)) {
+    func authorise(from: UIViewController,
+                   onComplete: @escaping ((Result<String, Error>) -> Void)) {
         authoriseCallCount += 1
         if let result = authoriseResult {
             onComplete(result)

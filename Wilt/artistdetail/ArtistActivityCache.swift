@@ -1,3 +1,5 @@
+import Foundation
+
 /// A protocol for requests made for artist activity graph
 protocol ArtistActivityAPI {
     func getArtistActivity(artistName: String,

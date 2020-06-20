@@ -1,3 +1,5 @@
+import Foundation
+
 enum ArtistSearchState {
     case loading
     case loaded([ArtistViewModel])

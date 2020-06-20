@@ -1,3 +1,5 @@
+import UIKit
+
 /// A wrapper around a dao for accessing the "listen later" database, for adding notifications to be triggered
 /// for new items.
 final class ListenLaterNotifyingStore: ListenLaterDao {

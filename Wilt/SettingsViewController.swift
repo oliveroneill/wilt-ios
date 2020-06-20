@@ -1,3 +1,5 @@
+import UIKit
+
 /// View for displaying settings but also doing a bit of double duty for
 /// displaying some info about the app
 final class SettingsViewController: UITableViewController {

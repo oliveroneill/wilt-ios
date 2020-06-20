@@ -4,10 +4,11 @@ import XCTest
 
 final class OnboardingViewModelTest: XCTestCase {
     func testOnViewAppeared() {
+        let delegate = FakeOnboardingDelegate()
         let viewModel = OnboardingViewModel(
-            userAuthenticator: FakeAuthenticator(),
-            spotifyAuthoriser: FakeAuthoriser()
+            userAuthenticator: FakeAuthenticator()
         )
+        viewModel.delegate = delegate
         var state: OnboardingViewState?
         viewModel.onViewUpdate = {
             state = $0
@@ -17,12 +18,12 @@ final class OnboardingViewModelTest: XCTestCase {
     }
 
     func testOnSignInButtonPressedChangesState() {
-        let mockAuthoriser = FakeAuthoriser()
+        let delegate = FakeOnboardingDelegate(showLoginResult: .success("1234"))
         let mockAuthenticator = FakeAuthenticator()
         let viewModel = OnboardingViewModel(
-            userAuthenticator: mockAuthenticator,
-            spotifyAuthoriser: mockAuthoriser
+            userAuthenticator: mockAuthenticator
         )
+        viewModel.delegate = delegate
         var state: OnboardingViewState?
         viewModel.onViewUpdate = {
             state = $0
@@ -32,14 +33,14 @@ final class OnboardingViewModelTest: XCTestCase {
     }
 
     func testOnSignInButtonPressedCallsAuthorise() {
-        let mockAuthoriser = FakeAuthoriser()
+        let delegate = FakeOnboardingDelegate()
         let mockAuthenticator = FakeAuthenticator()
         let viewModel = OnboardingViewModel(
-            userAuthenticator: mockAuthenticator,
-            spotifyAuthoriser: mockAuthoriser
+            userAuthenticator: mockAuthenticator
         )
+        viewModel.delegate = delegate
         viewModel.onSignInButtonPressed()
-        XCTAssertEqual(1, mockAuthoriser.authoriseCallCount)
+        XCTAssertEqual(1, delegate.showLoginCallCount)
         // Ensure we didn't attempt to login since the fake authoriser
         // will not return anything by default
         XCTAssertEqual(0, mockAuthenticator.signUpCalls.count)
@@ -48,12 +49,12 @@ final class OnboardingViewModelTest: XCTestCase {
 
     func testOnSignInButtonPressedAndAuthoriseSucceeds() {
         let expected = "a_spotify_token_for_tests"
-        let mockAuthoriser = FakeAuthoriser(authoriseResult: .success(expected))
+        let delegate = FakeOnboardingDelegate(showLoginResult: .success(expected))
         let mockAuthenticator = FakeAuthenticator()
         let viewModel = OnboardingViewModel(
-            userAuthenticator: mockAuthenticator,
-            spotifyAuthoriser: mockAuthoriser
+            userAuthenticator: mockAuthenticator
         )
+        viewModel.delegate = delegate
         viewModel.onSignInButtonPressed()
         XCTAssertEqual([expected], mockAuthenticator.signUpCalls)
         // Ensure we didn't attempt to login since the fake authenticator
@@ -63,12 +64,12 @@ final class OnboardingViewModelTest: XCTestCase {
 
     func testOnSignInButtonPressedAndAuthoriseFails() {
         let expected = FakeError.testError
-        let mockAuthoriser = FakeAuthoriser(authoriseResult: .failure(expected))
+        let delegate = FakeOnboardingDelegate(showLoginResult: .failure(expected))
         let mockAuthenticator = FakeAuthenticator()
         let viewModel = OnboardingViewModel(
-            userAuthenticator: mockAuthenticator,
-            spotifyAuthoriser: mockAuthoriser
+            userAuthenticator: mockAuthenticator
         )
+        viewModel.delegate = delegate
         viewModel.onSignInButtonPressed()
         // Ensure we don't continue since we failed
         XCTAssertEqual(0, mockAuthenticator.signUpCalls.count)
@@ -77,88 +78,70 @@ final class OnboardingViewModelTest: XCTestCase {
 
     func testOnSignInButtonPressedAndAuthoriseSucceedsAndSignUpSucceeds() {
         let expected = "sign_up_custom_token"
-        let mockAuthoriser = FakeAuthoriser(authoriseResult: .success("1234"))
+        let delegate = FakeOnboardingDelegate(showLoginResult: .success("1234"))
         let mockAuthenticator = FakeAuthenticator(
             signUpResult: .success(expected)
         )
         let viewModel = OnboardingViewModel(
-            userAuthenticator: mockAuthenticator,
-            spotifyAuthoriser: mockAuthoriser
+            userAuthenticator: mockAuthenticator
         )
+        viewModel.delegate = delegate
         viewModel.onSignInButtonPressed()
         XCTAssertEqual([expected], mockAuthenticator.loginCalls)
     }
 
     func testOnSignInButtonPressedAndAuthoriseSucceedsAndSignUpFails() {
         let expected = FakeError.testError
-        let mockAuthoriser = FakeAuthoriser(authoriseResult: .success("1234"))
+        let delegate = FakeOnboardingDelegate(showLoginResult: .success("1234"))
         let mockAuthenticator = FakeAuthenticator(
             signUpResult: .failure(expected)
         )
         let viewModel = OnboardingViewModel(
-            userAuthenticator: mockAuthenticator,
-            spotifyAuthoriser: mockAuthoriser
+            userAuthenticator: mockAuthenticator
         )
+        viewModel.delegate = delegate
         viewModel.onSignInButtonPressed()
         XCTAssertEqual(0, mockAuthenticator.loginCalls.count)
     }
 
     func testOnSignInButtonPressedAndAuthSucceedsSignUpSucceedsAndLoginSucceeds() {
         let expected = "your_username"
-        let mockAuthoriser = FakeAuthoriser(authoriseResult: .success("1234"))
+        let delegate = FakeOnboardingDelegate(showLoginResult: .success("1234"))
         let mockAuthenticator = FakeAuthenticator(
             signUpResult: .success("346451"),
             loginResult: .success(expected)
         )
-        final class TestDelegate: OnboardingViewModelDelegate {
-            var userID: String?
-            func loggedIn(userID: String) {
-                self.userID = userID
-            }
-            func showInfo() {}
-        }
-        let delegate = TestDelegate()
         let viewModel = OnboardingViewModel(
-            userAuthenticator: mockAuthenticator,
-            spotifyAuthoriser: mockAuthoriser
+            userAuthenticator: mockAuthenticator
         )
         viewModel.delegate = delegate
         viewModel.onSignInButtonPressed()
-        XCTAssertEqual(expected, delegate.userID)
+        XCTAssertEqual([expected], delegate.loggedInCalls)
     }
 
     func testOnSignInButtonPressedAndAuthSucceedsSignUpSucceedsAndLoginFails() {
-        let mockAuthoriser = FakeAuthoriser(authoriseResult: .success("1234"))
+        let delegate = FakeOnboardingDelegate(showLoginResult: .success("1234"))
         let mockAuthenticator = FakeAuthenticator(
             signUpResult: .success("346451"),
             loginResult: .failure(FakeError.testError)
         )
-        final class TestDelegate: OnboardingViewModelDelegate {
-            var userID: String?
-            func loggedIn(userID: String) {
-                self.userID = userID
-            }
-            func showInfo() {}
-        }
-        let delegate = TestDelegate()
         let viewModel = OnboardingViewModel(
-            userAuthenticator: mockAuthenticator,
-            spotifyAuthoriser: mockAuthoriser
+            userAuthenticator: mockAuthenticator
         )
         viewModel.delegate = delegate
         viewModel.onSignInButtonPressed()
-        XCTAssertNil(delegate.userID)
+        XCTAssertEqual(0, delegate.loggedInCalls.count)
     }
 
     func testOnSignInButtonPressedChangesToFailState() {
-        let mockAuthoriser = FakeAuthoriser(authoriseResult: .success("1234"))
+        let delegate = FakeOnboardingDelegate(showLoginResult: .success("1234"))
         let mockAuthenticator = FakeAuthenticator(
             signUpResult: .failure(FakeError.testError)
         )
         let viewModel = OnboardingViewModel(
-            userAuthenticator: mockAuthenticator,
-            spotifyAuthoriser: mockAuthoriser
+            userAuthenticator: mockAuthenticator
         )
+        viewModel.delegate = delegate
         var state: OnboardingViewState?
         viewModel.onViewUpdate = {
             state = $0
@@ -168,20 +151,12 @@ final class OnboardingViewModelTest: XCTestCase {
     }
 
     func testOnInfoButtonPressed() {
-        final class TestDelegate: OnboardingViewModelDelegate {
-            var infoCalls = 0
-            func loggedIn(userID: String) {}
-            func showInfo() {
-                infoCalls += 1
-            }
-        }
-        let delegate = TestDelegate()
+        let delegate = FakeOnboardingDelegate(showLoginResult: .success("1234"))
         let viewModel = OnboardingViewModel(
-            userAuthenticator: FakeAuthenticator(),
-            spotifyAuthoriser: FakeAuthoriser()
+            userAuthenticator: FakeAuthenticator()
         )
         viewModel.delegate = delegate
         viewModel.onInfoButtonPressed()
-        XCTAssertEqual(1, delegate.infoCalls)
+        XCTAssertEqual(1, delegate.showInfoCallCount)
     }
 }

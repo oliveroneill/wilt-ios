@@ -1,3 +1,5 @@
+import Foundation
+
 /// View model for displaying the user's list of artists they want to listen to
 /// TODO: These artists should really be stored on the server
 final class ListenLaterViewModel {

@@ -20,6 +20,7 @@ def wilt_dependencies
   pod 'MaterialComponents/Chips'
   pod 'SwiftIcons'
   pod 'Charts'
+  pod 'SpotifyLogin', :git => 'https://github.com/oliveroneill/SpotifyLogin.git'
 end
 
 # Uncomment the next line to define a global platform for your project

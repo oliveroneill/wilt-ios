@@ -1,3 +1,5 @@
+import UIKit
+
 /// The state that the history feed view can be in
 ///
 /// - displayingRows: Displaying play history content

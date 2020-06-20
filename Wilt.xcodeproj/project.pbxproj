@@ -14,6 +14,7 @@
 		7D233B38233384EE00EC95B6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B37233384EE00EC95B6 /* SettingsViewController.swift */; };
 		7D233B3A2334C6DF00EC95B6 /* SettingsViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D233B392334C6DF00EC95B6 /* SettingsViewControllerTest.swift */; };
 		7D2AD5E02490E4A100D28C62 /* SDImageTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2AD5DF2490E4A100D28C62 /* SDImageTransformers.swift */; };
+		7D3088F2249DBB3400826E5D /* FakeOnboardingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3088F1249DBB3400826E5D /* FakeOnboardingDelegate.swift */; };
 		7D47CC9D22FB88C700A4D96E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */; };
 		7D47CCA522FB88C700A4D96E /* Wilt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D47CCA322FB88C700A4D96E /* Wilt.xcdatamodeld */; };
 		7D47CCA722FB88C900A4D96E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D47CCA622FB88C900A4D96E /* Assets.xcassets */; };
@@ -64,7 +65,6 @@
 		7DB1586C2310CC1C00F86A9E /* OnboardingViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1586B2310CC1C00F86A9E /* OnboardingViewControllerTest.swift */; };
 		7DB1586F23120F6F00F86A9E /* KIFUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1586E23120F6F00F86A9E /* KIFUtil.swift */; };
 		7DB1587C2313E33700F86A9E /* SpotifyAuthoriser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */; };
-		7DB1587D2314028C00F86A9E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB158722312960C00F86A9E /* SpotifyiOS.framework */; };
 		7DB1587F2315EED700F86A9E /* OnboardingViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1587E2315EED700F86A9E /* OnboardingViewModelTest.swift */; };
 		7DB1588123169D5E00F86A9E /* FirebaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1588023169D5E00F86A9E /* FirebaseAPI.swift */; };
 		7DB1588323169E0D00F86A9E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1588223169E0D00F86A9E /* GoogleService-Info.plist */; };
@@ -134,6 +134,7 @@
 		7D233B37233384EE00EC95B6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7D233B392334C6DF00EC95B6 /* SettingsViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTest.swift; sourceTree = "<group>"; };
 		7D2AD5DF2490E4A100D28C62 /* SDImageTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDImageTransformers.swift; sourceTree = "<group>"; };
+		7D3088F1249DBB3400826E5D /* FakeOnboardingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeOnboardingDelegate.swift; sourceTree = "<group>"; };
 		7D47CC9922FB88C700A4D96E /* Wilt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wilt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D47CC9C22FB88C700A4D96E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D47CCA422FB88C700A4D96E /* Wilt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wilt.xcdatamodel; sourceTree = "<group>"; };
@@ -189,7 +190,6 @@
 		7DB1586B2310CC1C00F86A9E /* OnboardingViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllerTest.swift; sourceTree = "<group>"; };
 		7DB1586D23120AF600F86A9E /* WiltTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WiltTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7DB1586E23120F6F00F86A9E /* KIFUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIFUtil.swift; sourceTree = "<group>"; };
-		7DB158722312960C00F86A9E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		7DB1587823129B5900F86A9E /* Wilt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wilt-Bridging-Header.h"; sourceTree = "<group>"; };
 		7DB1587B2313E33700F86A9E /* SpotifyAuthoriser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthoriser.swift; sourceTree = "<group>"; };
 		7DB1587E2315EED700F86A9E /* OnboardingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModelTest.swift; sourceTree = "<group>"; };
@@ -239,7 +239,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DB1587D2314028C00F86A9E /* SpotifyiOS.framework in Frameworks */,
 				A8853DE7A8B060739C6FFBCA /* Pods_Wilt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,7 +289,6 @@
 			isa = PBXGroup;
 			children = (
 				7DBF9C5623C1AB470064C345 /* SnapshotHelper.swift */,
-				7DB158722312960C00F86A9E /* SpotifyiOS.framework */,
 				7D47CC9B22FB88C700A4D96E /* Wilt */,
 				7D47CCB322FB88CA00A4D96E /* WiltTests */,
 				7D47CCBE22FB88CA00A4D96E /* WiltUITests */,
@@ -476,6 +474,7 @@
 				7DB1586B2310CC1C00F86A9E /* OnboardingViewControllerTest.swift */,
 				7DB1587E2315EED700F86A9E /* OnboardingViewModelTest.swift */,
 				7DB158882319575C00F86A9E /* OnboardingCoordinatorTest.swift */,
+				7D3088F1249DBB3400826E5D /* FakeOnboardingDelegate.swift */,
 			);
 			path = onboarding;
 			sourceTree = "<group>";
@@ -700,6 +699,7 @@
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Shimmer/Shimmer.framework",
+				"${BUILT_PRODUCTS_DIR}/SpotifyLogin/SpotifyLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftIcons/SwiftIcons.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -718,6 +718,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Shimmer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpotifyLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIcons.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -768,6 +769,7 @@
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Shimmer/Shimmer.framework",
+				"${BUILT_PRODUCTS_DIR}/SpotifyLogin/SpotifyLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftIcons/SwiftIcons.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -786,6 +788,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Shimmer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpotifyLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIcons.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -949,6 +952,7 @@
 				7DD05B9523D2866B0020EDD0 /* ArtistSearchViewModelTest.swift in Sources */,
 				7DB1586C2310CC1C00F86A9E /* OnboardingViewControllerTest.swift in Sources */,
 				7D5559C62460243F00EA07FE /* ArtistActivityCacheTest.swift in Sources */,
+				7D3088F2249DBB3400826E5D /* FakeOnboardingDelegate.swift in Sources */,
 				7D5A2B032322682F00B56000 /* FeedViewControllerTest.swift in Sources */,
 				7D233B36233226F300EC95B6 /* ProfileCacheTest.swift in Sources */,
 				7DB158892319575C00F86A9E /* OnboardingCoordinatorTest.swift in Sources */,

@@ -1,3 +1,5 @@
+import Foundation
+
 /// Set of artist info available when intialising detail screen
 struct ArtistInfo: Equatable {
     let name: String

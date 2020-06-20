@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 /// A controller for displaying the user's aggregated play history per week as a feed, with infinite
 /// scrolling and caching implemented

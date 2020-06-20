@@ -1,3 +1,5 @@
+import Foundation
+
 /// Requests per-song play history data from Wilt in pages
 final class TrackHistoryPager {
     private let api: WiltAPI

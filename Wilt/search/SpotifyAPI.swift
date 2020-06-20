@@ -1,3 +1,5 @@
+import Foundation
+
 /// Structs to outline the JSON format of the response from the Spotify Web API
 /// See: https://developer.spotify.com/documentation/web-api/reference/search/search/
 struct SpotifyAPISearchResult: Decodable, Equatable {

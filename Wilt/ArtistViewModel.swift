@@ -1,3 +1,5 @@
+import Foundation
+
 /// View model for a single artist view
 struct ArtistViewModel: Equatable {
     let artistName: String

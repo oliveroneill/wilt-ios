@@ -1,4 +1,5 @@
 import CoreData
+import UIKit
 
 /// A coordinator to handle the flow once the user is logged in
 final class LoggedInCoordinator: Coordinator {

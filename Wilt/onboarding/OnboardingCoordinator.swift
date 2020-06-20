@@ -21,10 +21,7 @@ final class OnboardingCoordinator: Coordinator {
     }
 
     func start() {
-        let viewModel = OnboardingViewModel(
-            userAuthenticator: auth,
-            spotifyAuthoriser: spotifyAuthoriser
-        )
+        let viewModel = OnboardingViewModel(userAuthenticator: auth)
         let controller = OnboardingViewController(viewModel: viewModel)
         viewModel.delegate = self
         navigationController.pushViewController(controller, animated: false)
@@ -48,6 +45,13 @@ final class OnboardingCoordinator: Coordinator {
 }
 
 extension OnboardingCoordinator: OnboardingViewModelDelegate {
+    func showLogin(onComplete: @escaping ((Result<String, Error>) -> Void)) {
+        spotifyAuthoriser.authorise(
+            from: navigationController,
+            onComplete: onComplete
+        )
+    }
+
     func showInfo() {
         let controller = SettingsViewController(loggedIn: false)
         controller.delegate = self
